@@ -1,0 +1,26 @@
+\ProvidesFile{abnt-brazilian.lbx}
+\InheritBibliographyExtras{brazilian}
+
+% no preposition between month and year in longdates
+\DeclareBibliographyExtras{
+  \protected\def\mkbibdatelong#1#2#3{%
+    \iffieldundef{#3}
+      {}
+      {\stripzeros{\thefield{#3}}%
+       \iffieldundef{#2}{}{\addspace}}%
+    \iffieldundef{#2}
+      {}
+      {\mkbibmonth{\thefield{#2}}%
+       \iffieldundef{#1}{}{\addspace}}%
+    \thefield{#1}}%
+}
+
+\DeclareBibliographyStrings{%
+  volume 		= {{volume}{v\adddot}},
+  number 		= {{número}{n\adddot}},
+  pages 		= {{p\'aginas}{p\adddot}},
+  involumes     = {{in}{in}},
+  in            = {{in}{in}},
+  inseries      = {{in}{in}}
+}
+\endinput
