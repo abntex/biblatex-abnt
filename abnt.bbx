@@ -65,16 +65,18 @@
 % DeclareFieldFormat
 % ----------
 
-% Don't use quotes in titles and use bold or italics for the main titles,
-% depending on what the user chose.
-\DeclareFieldFormat
-  [article, inbook, incollection, inproceedings, patent, thesis, unpublished]
-  {title}{#1\isdot}
+% Use bold or italics for the main titles, depending on what the user chose.
 \DeclareFieldFormat{journaltitle}{\iftoggle{bftitles}{\mkbibbold{#1}}{\mkbibemph{#1}}}
 \DeclareFieldFormat{issuetitle}{\iftoggle{bftitles}{\mkbibbold{#1}}{\mkbibemph{#1}}}
 \DeclareFieldFormat{maintitle}{\iftoggle{bftitles}{\mkbibbold{#1}}{\mkbibemph{#1}}}
 \DeclareFieldFormat{booktitle}{\iftoggle{bftitles}{\mkbibbold{#1}}{\mkbibemph{#1}}}
 \DeclareFieldFormat{citetitle}{\iftoggle{bftitles}{\mkbibbold{#1}}{\mkbibemph{#1}}}
+\DeclareFieldFormat{title}{\iftoggle{bftitles}{\mkbibbold{#1}}{\mkbibemph{#1}}}
+
+% Use normal text for these entries.
+\DeclareFieldFormat
+  [article, inbook, incollection, inproceedings, patent, thesis, unpublished]
+  {title}{#1\isdot}
 
 % Add "n." and "v." abbreviations and always make them, along with "p.", always lowercase,
 % even if preceded by a period. E.g.: "London: Routledge, 2009. p. 235–250."
