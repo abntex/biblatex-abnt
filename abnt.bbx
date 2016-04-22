@@ -1,0 +1,270 @@
+\ProvidesFile{abnt.bbx}[\abx@bbxid]
+\DeclareLanguageMapping{brazilian}{abnt-brazilian}
+
+\RequireBibliographyStyle{standard}
+\ExecuteBibliographyOptions{firstinits=true}
+
+
+% ----------
+% Options
+% ----------
+
+% Option to make titles bold.
+\newtoggle{bftitles}
+\DeclareBibliographyOption{bftitles}[true]{
+  \settoggle{bftitles}{#1}}
+
+% Option to use small caps in the bibliography.
+\newtoggle{scbib}
+\DeclareBibliographyOption{scbib}[true]{
+  \settoggle{scbib}{#1}
+  % Uncomment this to keep the first authos' names in uppercase and use
+  % small caps just for the rest (editors etc.)
+  % \DeclareNameAlias{author}{LAST-first} 
+  \DeclareNameAlias{default}{last-first-sc}
+  \DeclareFieldFormat{volume}{\MakeLowercase{\bibstring{volume}~\textsc{##1}}}}
+
+
+% ----------
+% DeclareNameFormat
+% ----------
+
+% Make last names uppercase.
+\DeclareNameAlias{default}{LAST-first}
+
+\DeclareNameFormat{LAST-first}{%
+  \nameparts{#1}%
+  \ifgiveninits
+    {\usebibmacro{name:family-given}
+      {\MakeUppercase{\namepartfamily}}
+      {\namepartgiveni}
+      {\namepartprefix}
+      {\namepartsuffix}}
+    {\usebibmacro{name:family-given}
+      {\MakeUppercase{\namepartfamily}}
+      {\namepartgiven}
+      {\namepartprefix}
+      {\namepartsuffix}}%
+  \usebibmacro{name:andothers}}
+
+% Name format using small caps.
+\DeclareNameFormat{last-first-sc}{%
+  \nameparts{#1}%
+  \ifgiveninits
+    {\usebibmacro{name:family-given}
+      {\textsc{\namepartfamily}}
+      {\namepartgiveni}
+      {\namepartprefix}
+      {\namepartsuffix}}
+    {\usebibmacro{name:family-given}
+      {\textsc{\namepartfamily}}
+      {\namepartgiven}
+      {\namepartprefix}
+      {\namepartsuffix}}%
+  \usebibmacro{name:andothers}}
+
+
+% ----------
+% DeclareFieldFormat
+% ----------
+
+% Use bold or italics for the main titles, depending on what the user chose.
+\DeclareFieldFormat{journaltitle}{\iftoggle{bftitles}{\mkbibbold{#1}}{\mkbibemph{#1}}}
+\DeclareFieldFormat{issuetitle}{\iftoggle{bftitles}{\mkbibbold{#1}}{\mkbibemph{#1}}}
+\DeclareFieldFormat{maintitle}{\iftoggle{bftitles}{\mkbibbold{#1}}{\mkbibemph{#1}}}
+\DeclareFieldFormat{booktitle}{\iftoggle{bftitles}{\mkbibbold{#1}}{\mkbibemph{#1}}}
+\DeclareFieldFormat{citetitle}{\iftoggle{bftitles}{\mkbibbold{#1}}{\mkbibemph{#1}}}
+\DeclareFieldFormat{title}{\iftoggle{bftitles}{\mkbibbold{#1}}{\mkbibemph{#1}}}
+
+% Use normal text for these entries.
+\DeclareFieldFormat
+  [article, inbook, incollection, inproceedings, patent, thesis, unpublished]
+  {title}{#1\isdot}
+
+% Add "n." and "v." abbreviations and always make them, along with "p.", always lowercase,
+% even if preceded by a period. E.g.: "London: Routledge, 2009. p. 235–250."
+\DeclareFieldFormat[article,periodical]{number}{\MakeLowercase{\bibstring{number}}~#1}
+\DeclareFieldFormat[article,periodical]{volume}{\MakeLowercase{\bibstring{volume}}~#1}
+\DeclareFieldFormat{pages}{\MakeLowercase{\mkpageprefix[bookpagination]{#1}}}
+  
+
+% ----------
+% renewcommand
+% ----------
+
+% Clean the bibliography page.
+\renewcommand{\bibsetup}{\thispagestyle{empty}}
+
+% Add semicolons between multiple authors.
+\renewcommand*{\multinamedelim}{\addsemicolon\addspace}
+\renewcommand*{\finalnamedelim}{\addsemicolon\addspace}
+\renewcommand*{\nameyeardelim}{\addcomma\addspace}
+
+% Use a period to separate the backref from what comes before
+% E.g.: "1973. p. 33–79. Ver p. 2."
+\renewcommand*{\bibpagerefpunct}{\addperiod\addspace}
+
+
+% ----------
+% renewbibmacro
+% ----------
+  
+% Always use a period after the year.
+\renewbibmacro*{date}{\printdate\addperiod}
+
+% Remove "in:" from articles.
+\renewbibmacro{in:}{\ifentrytype{article}{}{\printtext{\bibstring{in}\intitlepunct}}}
+
+% Use a comma after journal volumes.
+\renewbibmacro*{volume+number+eid}{%
+  \printfield{volume}%
+  \setunit*{\addcomma\addspace}%
+  \printfield{number}%
+  \setunit{\addcomma\space}%
+  \printfield{eid}}
+
+% Don't use parenthesis around the date.
+\renewbibmacro*{issue+date}{%
+  \iffieldundef{issue}
+    {\usebibmacro{date}}
+    {\printfield{issue}%
+     \setunit*{\addspace}%
+     \usebibmacro{date}}%
+  \newunit}
+
+% Add a comma after journal names and remove the date.
+\renewbibmacro*{journal+issuetitle}{%
+  \usebibmacro{journal}%
+  \setunit*{\addcomma\addspace}%
+  \iffieldundef{series}
+    {}
+    {\newunit
+     \printfield{series}%
+     \setunit{\addspace}}%
+  \usebibmacro{volume+number+eid}%
+  \newunit}
+  
+% Use "DOE, J. (Ed.)" instead of "Ed. by DOE, J."
+\renewbibmacro*{editor+others}{%
+  \ifboolexpr{
+    test \ifuseeditor
+    and
+    not test {\ifnameundef{editor}}
+  }
+    {\printnames{editor}%
+     \setunit{\addperiod\space}%
+     \printtext[parens]{\usebibmacro{editor+othersstrg}}%
+     \clearname{editor}}
+    {}}
+
+% Remove the parenthesis around the backref.
+\renewbibmacro*{pageref}{%
+  \iflistundef{pageref}
+    {}
+	{\printtext{% \printtext[parens]{
+	  \ifnumgreater{\value{pageref}}{1}
+	    {\bibstring{backrefpages}\ppspace}
+	    {\bibstring{backrefpage}\ppspace}%
+	  \printlist[pageref][-\value{listtotal}]{pageref}}}}
+
+
+% ----------
+% Drivers
+% ----------
+
+% Add issue+date and issue to articles.
+\DeclareBibliographyDriver{article}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/translator+others}%
+  \setunit{\labelnamepunct}\newblock
+  \usebibmacro{title}%
+  \newunit
+  \printlist{language}%
+  \newunit\newblock
+  \usebibmacro{byauthor}%
+  \newunit\newblock
+  \usebibmacro{bytranslator+others}%
+  \newunit\newblock
+  \printfield{version}%
+  \newunit\newblock
+  \usebibmacro{in:}%
+  \usebibmacro{journal+issuetitle}%
+  \newunit
+  \usebibmacro{byeditor+others}%
+  \newunit
+  \usebibmacro{note+pages}%
+  \setunit{\addcomma\addspace}%
+  \usebibmacro{issue+date}%
+  \setunit{\addcolon\space}%
+  \usebibmacro{issue}%
+  \newunit\newblock
+  \iftoggle{bbx:isbn}
+    {\printfield{issn}}
+    {}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \iftoggle{bbx:related}
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}
+    {}%
+  \usebibmacro{finentry}}
+
+% Print the author before the title for the main book in incollection entries.
+% TODO: the same is probably needed for inbook entries.
+\DeclareBibliographyDriver{incollection}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/translator+others}%
+  \setunit{\labelnamepunct}\newblock
+  \usebibmacro{title}%
+  \newunit
+  \printlist{language}%
+  \newunit\newblock
+  \usebibmacro{byauthor}%
+  \newunit\newblock
+  \usebibmacro{in:}%
+  \usebibmacro{editor+others}%
+  \newunit\newblock
+  \usebibmacro{maintitle+booktitle}%
+  \newunit\newblock
+  \printfield{edition}%
+  \newunit
+  \iffieldundef{maintitle}
+    {\printfield{volume}%
+     \printfield{part}}
+    {}%
+  \newunit
+  \printfield{volumes}%
+  \newunit\newblock
+  \usebibmacro{series+number}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \usebibmacro{publisher+location+date}%
+  \newunit\newblock
+  \usebibmacro{chapter+pages}%
+  \newunit\newblock
+  \iftoggle{bbx:isbn}
+    {\printfield{isbn}}
+    {}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \iftoggle{bbx:related}
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}
+    {}%
+  \usebibmacro{finentry}}
+  
+
+\endinput
