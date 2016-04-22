@@ -15,25 +15,12 @@
   \settoggle{bftitles}{#1}}
 
 % Option to use small caps in the bibliography.
-\DeclareNameFormat{last-first-sc}{%
-  \nameparts{#1}%
-  \ifgiveninits
-    {\usebibmacro{name:family-given}
-      {\textsc{\namepartfamily}}
-      {\namepartgiveni}
-      {\namepartprefix}
-      {\namepartsuffix}}
-    {\usebibmacro{name:family-given}
-      {\textsc{\namepartfamily}}
-      {\namepartgiven}
-      {\namepartprefix}
-      {\namepartsuffix}}%
-  \usebibmacro{name:andothers}}
-
 \newtoggle{scbib}
 \DeclareBibliographyOption{scbib}[true]{
   \settoggle{scbib}{#1}
-  %\DeclareNameAlias{author}{LAST-first}
+  % Uncomment this to keep the first authos' names in uppercase and use
+  % small caps just for the rest (editors etc.)
+  % \DeclareNameAlias{author}{LAST-first} 
   \DeclareNameAlias{default}{last-first-sc}
   \DeclareFieldFormat{volume}{\MakeLowercase{\bibstring{volume}~\textsc{##1}}}}
 
@@ -42,7 +29,9 @@
 % DeclareNameFormat
 % ----------
 
-% Make last names uppercase
+% Make last names uppercase.
+\DeclareNameAlias{default}{LAST-first}
+
 \DeclareNameFormat{LAST-first}{%
   \nameparts{#1}%
   \ifgiveninits
@@ -58,7 +47,21 @@
       {\namepartsuffix}}%
   \usebibmacro{name:andothers}}
 
-\DeclareNameAlias{default}{LAST-first}
+% Name format using small caps.
+\DeclareNameFormat{last-first-sc}{%
+  \nameparts{#1}%
+  \ifgiveninits
+    {\usebibmacro{name:family-given}
+      {\textsc{\namepartfamily}}
+      {\namepartgiveni}
+      {\namepartprefix}
+      {\namepartsuffix}}
+    {\usebibmacro{name:family-given}
+      {\textsc{\namepartfamily}}
+      {\namepartgiven}
+      {\namepartprefix}
+      {\namepartsuffix}}%
+  \usebibmacro{name:andothers}}
 
 
 % ----------
@@ -92,7 +95,7 @@
 % Clean the bibliography page.
 \renewcommand{\bibsetup}{\thispagestyle{empty}}
 
-% Add semicolons between multiple authors
+% Add semicolons between multiple authors.
 \renewcommand*{\multinamedelim}{\addsemicolon\addspace}
 \renewcommand*{\finalnamedelim}{\addsemicolon\addspace}
 \renewcommand*{\nameyeardelim}{\addcomma\addspace}
@@ -100,14 +103,14 @@
 % Use a period to separate the backref from what comes before
 % E.g.: "1973. p. 33–79. Ver p. 2."
 \renewcommand*{\bibpagerefpunct}{\addperiod\addspace}
-  
-% Always use a period after the year
- \renewbibmacro*{date}{\printdate\addperiod}
 
 
 % ----------
 % renewbibmacro
 % ----------
+  
+% Always use a period after the year.
+\renewbibmacro*{date}{\printdate\addperiod}
 
 % Remove "in:" from articles.
 \renewbibmacro{in:}{\ifentrytype{article}{}{\printtext{\bibstring{in}\intitlepunct}}}
