@@ -3,6 +3,27 @@
 
 
 % ----------
+% DeclareNameFormat
+% ----------
+
+\DeclareNameFormat{full}{%
+  \nameparts{#1}%
+  \usebibmacro{name:given-family}
+    {\namepartfamily}
+    {\namepartgiven}
+    {\namepartprefix}
+    {\namepartsuffix}}
+
+\DeclareNameFormat{LAST}{%
+  \nameparts{#1}%
+  \usebibmacro{name:family-given}
+        {\iftoggle{sccite}
+  	    	{\textsc{\MakeLowercase{\namepartfamily}}}
+  			{\MakeUppercase{\namepartfamily}}}
+		{}{}{}}
+
+
+% ----------
 % DeclareCiteCommand
 % ----------
 
@@ -97,5 +118,15 @@
        {\usebibmacro{prenote}}
        {}%
      \usebibmacro{citeyear}}}
+
+\renewbibmacro*{cite}{%
+  \iffieldundef{shorthand}
+    {\ifthenelse{\ifnameundef{labelname}\OR\iffieldundef{labelyear}}
+       {\usebibmacro{cite:label}%
+        \setunit{\nonameyeardelim}}
+       {\printnames[LAST]{labelname}%
+        \setunit{\nameyeardelim}}%
+     \usebibmacro{cite:labelyear+extrayear}}
+    {\usebibmacro{cite:shorthand}}}
 
 \endinput
