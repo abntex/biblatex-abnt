@@ -1,0 +1,68 @@
+\documentclass[a4paper]{article}
+\usepackage[brazil]{babel}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{color}
+%\usepackage{hyperref}
+
+\usepackage[
+	safeinputenc,
+    backend=biber,
+    style=abnt,
+    %hyperref,
+    %backref,
+    %bftitles,	% Uncomment for bold titles
+    %scbib 		% Uncomment to use small caps in the bibliography
+]{biblatex}
+\usepackage[brazil]{babel}
+\usepackage[autostyle]{csquotes}
+
+\addbibresource{abntex2-doc-abnt-10520.bib}
+\addbibresource{abntex2-doc-abnt-6023.bib}
+\addbibresource{abntex2-doc-test.bib}
+\addbibresource{abntex2-doc.bib}
+
+\newcommand{\citeonline}{\textcite}
+
+\begin{document}
+
+	\section*{Comandos implementados}
+
+	\begin{enumerate}[label=]
+
+		\item \textbf{\textbackslash cite:} \cite{10520-2002:6.3-1}
+
+		\item \textbf{\textbackslash cite*:} \cite*{10520-2002:6.3-1}
+
+		\item \textbf{\textbackslash textcite:} \textcite{10520-2002:6.3-1}
+
+		\item \textbf{\textbackslash textcite*:} \textcite*{10520-2002:6.3-1}
+	
+	\end{enumerate}
+
+
+	\begin{refsection}[abntex2-doc-abnt-10520.bib]
+	\nocite{*}
+	\printbibliography[title=abntex2-doc-abnt-10520.bib]
+	\end{refsection}
+	
+	\begin{refsection}[abntex2-doc-abnt-6023.bib]
+	\nocite{*}
+	\printbibliography[title=abntex2-doc-abnt-6023.bib]
+	\end{refsection}
+	
+	\begin{refsection}[abntex2-doc-test.bib]
+	\nocite{*}
+	\printbibliography[title=abntex2-doc-test.bib]
+	\end{refsection}
+	
+	\begin{refsection}[abntex2-doc.bib]
+	\nocite{*}
+	\printbibliography[title=abntex2-doc.bib]
+	\end{refsection}
+
+
+\end{document}
