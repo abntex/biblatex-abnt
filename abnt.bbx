@@ -17,59 +17,38 @@
 % Option to use small caps in the bibliography.
 \newtoggle{scbib}
 \DeclareBibliographyOption{scbib}[true]{
-  \settoggle{scbib}{#1}
-  % Uncomment this to keep the first authos' names in uppercase and use
-  % small caps just for the rest (editors etc.)
-  % \DeclareNameAlias{author}{LAST-first} 
-  \DeclareNameAlias{default}{last-first-sc}
-  \DeclareFieldFormat{volume}{\MakeLowercase{\bibstring{volume}~\textsc{##1}}}}
+  \settoggle{scbib}{#1}}
+
+% Option to use small caps in the citations.
+\newtoggle{sccite}
+\DeclareBibliographyOption{sccite}[true]{
+  \settoggle{sccite}{#1}}
 
 
 % ----------
 % DeclareNameFormat
 % ----------
 
-% Make last names uppercase.
-\DeclareNameAlias{default}{LAST-first}
-
 \DeclareNameFormat{LAST-first}{%
   \nameparts{#1}%
   \ifgiveninits
     {\usebibmacro{name:family-given}
-      {\MakeUppercase{\namepartfamily}}
+      {\iftoggle{scbib}
+	    {\textsc{\namepartfamily}}
+		{\MakeUppercase{\namepartfamily}}}
       {\namepartgiveni}
       {\namepartprefix}
       {\namepartsuffix}}
     {\usebibmacro{name:family-given}
-      {\MakeUppercase{\namepartfamily}}
+      {\iftoggle{scbib}
+	    {\textsc{\namepartfamily}}
+		{\MakeUppercase{\namepartfamily}}}
       {\namepartgiven}
       {\namepartprefix}
       {\namepartsuffix}}%
   \usebibmacro{name:andothers}}
 
-% Name format using small caps.
-\DeclareNameFormat{last-first-sc}{%
-  \nameparts{#1}%
-  \ifgiveninits
-    {\usebibmacro{name:family-given}
-      {\textsc{\namepartfamily}}
-      {\namepartgiveni}
-      {\namepartprefix}
-      {\namepartsuffix}}
-    {\usebibmacro{name:family-given}
-      {\textsc{\namepartfamily}}
-      {\namepartgiven}
-      {\namepartprefix}
-      {\namepartsuffix}}%
-  \usebibmacro{name:andothers}}
-
-\DeclareNameFormat{full}{%
-  \nameparts{#1}%
-  \usebibmacro{name:given-family}
-          {\namepartfamily}
-          {\namepartgiven}
-          {\namepartprefix}
-          {\namepartsuffix}}
+\DeclareNameAlias{default}{LAST-first}
 
 
 % ----------
@@ -97,7 +76,7 @@
   
 
 % ----------
-% renewcommand
+% newcommand
 % ----------
 
 % Clean the bibliography page.
@@ -114,7 +93,7 @@
 
 
 % ----------
-% renewbibmacro
+% newbibmacro
 % ----------
   
 % Always use a period after the year.
@@ -174,6 +153,17 @@
 	    {\bibstring{backrefpages}\ppspace}
 	    {\bibstring{backrefpage}\ppspace}%
 	  \printlist[pageref][-\value{listtotal}]{pageref}}}}
+	  
+
+\newbibmacro*{cite}{%
+  \iffieldundef{shorthand}
+    {\ifthenelse{\ifnameundef{labelname}\OR\iffieldundef{labelyear}}
+       {\usebibmacro{cite:label}%
+        \setunit{\nonameyeardelim}}
+       {\printnames{labelname}%
+        \setunit{\nameyeardelim}}%
+     \usebibmacro{cite:labelyear+extrayear}}
+    {\usebibmacro{cite:shorthand}}}
 
 
 % ----------
