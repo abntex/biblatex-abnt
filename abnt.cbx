@@ -3,6 +3,16 @@
 
 
 % ----------
+% Options
+% ----------
+
+% Option to use small caps in the citations.
+\newtoggle{sccite}
+\DeclareBibliographyOption{sccite}[true]{
+  \settoggle{sccite}{#1}}
+
+
+% ----------
 % DeclareNameFormat
 % ----------
 
@@ -21,6 +31,13 @@
   	    	{\textsc{\MakeLowercase{\namepartfamily}}}
   			{\MakeUppercase{\namepartfamily}}}
 		{}{}{}}
+		
+
+% ----------
+% DeclareFieldFormat
+% ----------
+
+\DeclareFieldFormat{citetitle}{\mkbibemph{#1}}
 
 
 % ----------
@@ -69,6 +86,28 @@
      {}}
   {\usebibmacro{textcite:postnote}}
 
+\DeclareCiteCommand{\citetitle}[\mkbibparens]
+  {\boolfalse{citetracker}%
+   \boolfalse{pagetracker}%
+   \usebibmacro{prenote}}
+  {\ifciteindex
+     {\indexfield{indextitle}}
+     {}%
+   \printfield[citetitle]{labeltitle}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand*{\citetitle}
+  {\boolfalse{citetracker}%
+   \boolfalse{pagetracker}%
+   \usebibmacro{prenote}}
+  {\ifciteindex
+     {\indexfield{indextitle}}
+     {}%
+   \printfield[citetitle]{title}\nopunct}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
 
 % ----------
 % newbibmacro
@@ -77,7 +116,7 @@
 \newbibmacro*{cite:author}{%
   \printtext[bibhyperref]{\printfield{author}}}
 
-\newbibmacro*{textcite}{%
+\renewbibmacro*{textcite}{%
   \ifnameundef{labelname}
     {\iffieldundef{shorthand}
        {\usebibmacro{cite:label}%
@@ -123,10 +162,15 @@
   \iffieldundef{shorthand}
     {\ifthenelse{\ifnameundef{labelname}\OR\iffieldundef{labelyear}}
        {\usebibmacro{cite:label}%
-        \setunit{\nonameyeardelim}}
+        \setunit{\nameyeardelim}}
        {\printnames[LAST]{labelname}%
         \setunit{\nameyeardelim}}%
      \usebibmacro{cite:labelyear+extrayear}}
     {\usebibmacro{cite:shorthand}}}
+
+\renewbibmacro*{cite:label}{%
+  \iffieldundef{label}
+    {\printtext[bibhyperref]{\printfield[uppercase]{labeltitle}}}
+    {\printtext[bibhyperref]{\printfield{label}}}}
 
 \endinput
