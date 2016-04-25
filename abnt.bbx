@@ -2,7 +2,6 @@
 \DeclareLanguageMapping{brazilian}{abnt-brazilian}
 
 \RequireBibliographyStyle{standard}
-\ExecuteBibliographyOptions{firstinits=true}
 
 
 % ----------
@@ -18,11 +17,6 @@
 \newtoggle{scbib}
 \DeclareBibliographyOption{scbib}[true]{
   \settoggle{scbib}{#1}}
-
-% Option to use small caps in the citations.
-\newtoggle{sccite}
-\DeclareBibliographyOption{sccite}[true]{
-  \settoggle{sccite}{#1}}
 
 
 % ----------
@@ -65,7 +59,7 @@
 
 % Use normal text for these entries.
 \DeclareFieldFormat
-  [article, inbook, incollection, inproceedings, patent, thesis, unpublished]
+  [article, inbook, incollection, bookinbook, inproceedings, patent, thesis, unpublished]
   {title}{#1\isdot}
 
 % Add "n." and "v." abbreviations and always make them, along with "p.", always lowercase,
@@ -73,6 +67,9 @@
 \DeclareFieldFormat[article,periodical]{number}{\MakeLowercase{\bibstring{number}}~#1}
 \DeclareFieldFormat[article,periodical]{volume}{\MakeLowercase{\bibstring{volume}}~#1}
 \DeclareFieldFormat{pages}{\MakeLowercase{\mkpageprefix[bookpagination]{#1}}}
+\DeclareFieldFormat{url}{Disponível em\addcolon\space\url{#1}}
+
+\DeclareFieldFormat{uppercase}{\MakeUppercase{#1}}
   
 
 % ----------
@@ -125,7 +122,7 @@
   \setunit*{\addcomma\addspace}%
   \iffieldundef{series}
     {}
-    {\newunit
+    {\newunit%
      \printfield{series}%
      \setunit{\addspace}}%
   \usebibmacro{volume+number+eid}%
@@ -144,6 +141,13 @@
      \clearname{editor}}
     {}}
 
+% For @bookinbook entries: use the bookauthor when available,
+% else use editor+others.
+\newbibmacro*{bookauthor/editor+others}{%
+  \ifnameundef{bookauthor}{%
+    \usebibmacro{editor+others}}
+	{\printnames{bookauthor}}}
+
 % Remove the parenthesis around the backref.
 \renewbibmacro*{pageref}{%
   \iflistundef{pageref}
@@ -154,7 +158,6 @@
 	    {\bibstring{backrefpage}\ppspace}%
 	  \printlist[pageref][-\value{listtotal}]{pageref}}}}
 	  
-
 \newbibmacro*{cite}{%
   \iffieldundef{shorthand}
     {\ifthenelse{\ifnameundef{labelname}\OR\iffieldundef{labelyear}}
@@ -165,6 +168,22 @@
      \usebibmacro{cite:labelyear+extrayear}}
     {\usebibmacro{cite:shorthand}}}
 
+\renewbibmacro*{title}{%
+  \ifboolexpr{
+    test {\iffieldundef{title}}
+    and
+    test {\iffieldundef{subtitle}}
+  }
+    {}
+    {\printtext[title]{%
+	   \iffieldundef{author}{
+	     \printfield[uppercase]{title}}
+		 {\printfield[titlecase]{title}}
+       \setunit{\subtitlepunct}%
+       \printfield[titlecase]{subtitle}}%
+     \newunit}%
+  \printfield{titleaddon}}
+  
 
 % ----------
 % Drivers
@@ -218,16 +237,57 @@
 \DeclareBibliographyDriver{incollection}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
-  \usebibmacro{author/translator+others}%
+  \usebibmacro{author}%
   \setunit{\labelnamepunct}\newblock
   \usebibmacro{title}%
-  \newunit
-  \printlist{language}%
-  \newunit\newblock
-  \usebibmacro{byauthor}%
   \newunit\newblock
   \usebibmacro{in:}%
   \usebibmacro{editor+others}%
+  \newunit\newblock
+  \usebibmacro{maintitle+booktitle}%
+  \newunit\newblock
+  \printfield{edition}%
+  \newunit
+  \iffieldundef{maintitle}
+    {\printfield{volume}%
+     \printfield{part}}
+    {}%
+  \newunit
+  \printfield{volumes}%
+  \newunit\newblock
+  \usebibmacro{series+number}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \usebibmacro{publisher+location+date}%
+  \newunit\newblock
+  \usebibmacro{chapter+pages}%
+  \newunit\newblock
+  \iftoggle{bbx:isbn}
+    {\printfield{isbn}}
+    {}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \iftoggle{bbx:related}
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}
+    {}%
+  \usebibmacro{finentry}}
+
+\DeclareBibliographyDriver{bookinbook}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author}%
+  \setunit{\labelnamepunct}\newblock
+  \usebibmacro{title}%
+  \newunit\newblock
+  \usebibmacro{in:}%
+  \usebibmacro{bookauthor/editor+others}%
   \newunit\newblock
   \usebibmacro{maintitle+booktitle}%
   \newunit\newblock
