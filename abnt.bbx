@@ -60,7 +60,7 @@
 % Use normal text for these entries.
 \DeclareFieldFormat
   [article, inbook, incollection, bookinbook, inproceedings, patent, thesis, unpublished]
-  {title}{#1\isdot}
+  {title}{#1\addperiod}
 
 % Add "n." and "v." abbreviations and always make them, along with "p.", always lowercase,
 % even if preceded by a period. E.g.: "London: Routledge, 2009. p. 235–250."
@@ -70,6 +70,7 @@
 \DeclareFieldFormat{url}{Disponível em\addcolon\space\url{#1}}
 
 \DeclareFieldFormat{uppercase}{\MakeUppercase{#1}}
+\DeclareFieldFormat{noformat}{\normalfont{#1}}
   
 
 % ----------
@@ -83,6 +84,8 @@
 \renewcommand*{\multinamedelim}{\addsemicolon\addspace}
 \renewcommand*{\finalnamedelim}{\addsemicolon\addspace}
 \renewcommand*{\nameyeardelim}{\addcomma\addspace}
+
+\renewcommand*{\subtitlepunct}{\addcolon\addspace}
 
 % Use a period to separate the backref from what comes before
 % E.g.: "1973. p. 33–79. Ver p. 2."
@@ -176,13 +179,41 @@
   }
     {}
     {\printtext[title]{%
-	   \iffieldundef{author}{
-	     \printfield[uppercase]{title}}
+	   \ifnameundef{author}{
+	     \unspace\printfield[noformat]{title}}
 		 {\printfield[titlecase]{title}}
-       \setunit{\subtitlepunct}%
-       \printfield[titlecase]{subtitle}}%
+       \normalfont{\setunit{\subtitlepunct}%
+       \printfield[noformat]{subtitle}}}%
      \newunit}%
   \printfield{titleaddon}}
+
+\newbibmacro*{location}{%
+  \printlist{location}%
+  %\setunit*{\addcomma\space}%
+  \newunit}
+
+\newbibmacro*{publisher+location+date}{%
+  \addperiod\addspace
+  \iflistundef{location}{%
+    \iflistundef{publisher}{%
+	  \brackettext{%
+	    s.l.
+		\addcolon\addspace
+		s.n.}}
+	  {\brackettext{%
+		s.l.
+		\addcomma\addspace
+        s.n.}}}
+    {\iflistundef{publisher}{%
+	  \printlist{location}
+      \addcomma\addspace
+	  \brackettext{s.n.}}
+	  {\printlist{location}
+	  \addcolon\addspace
+	  \printlist{publisher}}}
+  \setunit*{\addcomma\space}%
+  \usebibmacro{date}%
+  \newunit}
   
 
 % ----------
@@ -207,6 +238,8 @@
   \newunit\newblock
   \usebibmacro{in:}%
   \usebibmacro{journal+issuetitle}%
+  \setunit{\addcomma\addspace}%
+  \usebibmacro{location}%
   \newunit
   \usebibmacro{byeditor+others}%
   \newunit
