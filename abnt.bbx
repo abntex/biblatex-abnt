@@ -1,7 +1,25 @@
+%% Copyright 2016 Daniel Marques
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%% 
+%% The Current Maintainer of this work is Daniel Marques.
+
 \ProvidesFile{abnt.bbx}[\abx@bbxid]
 \DeclareLanguageMapping{brazilian}{abnt-brazilian}
 
 \RequireBibliographyStyle{standard}
+
+% I don't know what this does, but it has to do with the dashed
+% option I copied from authorstyle.bbx, so I added it too.
+\InitializeBibliographyStyle{\global\undef\bbx@lasthash}
 
 
 % ----------
@@ -10,13 +28,49 @@
 
 % Option to make titles bold.
 \newtoggle{bftitles}
-\DeclareBibliographyOption{bftitles}[true]{
+\DeclareBibliographyOption{bftitles}[true]{%
   \settoggle{bftitles}{#1}}
 
 % Option to use small caps in the bibliography.
 \newtoggle{scbib}
-\DeclareBibliographyOption{scbib}[true]{
+\DeclareBibliographyOption{scbib}[true]{%
   \settoggle{scbib}{#1}}
+
+% Option to hide "[S.l.: sn]".
+\newtoggle{noslsn}
+\DeclareBibliographyOption{noslsn}[true]{%
+  \settoggle{noslsn}{#1}}
+
+\DeclareBibliographyOption[boolean]{dashed}[true]{%
+  \ifstrequal{#1}{true}
+    {\ExecuteBibliographyOptions{pagetracker}%
+     \renewbibmacro*{bbx:savehash}{\savefield{fullhash}{\bbx@lasthash}}}
+    {\renewbibmacro*{bbx:savehash}{}}}
+
+
+% ----------
+% newcommand
+% ----------
+
+% A command to make the first word in a sentence uppercase,
+% used for the title when a book has no author.
+\newcommand\FirstWordUpper[1]{\@firstwordupper#1 \@nil}
+\newcommand\@firstwordupper{}
+\def\@firstwordupper#1 #2\@nil{\MakeUppercase{#1} #2\unskip}
+
+% This has to do with the dashed option
+\newbool{bbx@inset}
+
+% TODO: This replaces repeated authors' names.
+% It still doesn't conform to the norms (although it
+% looks much better.)
+\renewcommand*{\bibnamedash}{%
+  \ifdimless{\leftmargin}{0.75em}
+    {\mbox{\textemdash\space}}
+    {\makebox[\leftmargin][l]{%
+       \ifdimless{\leftmargin}{1.25em}
+         {\textendash}
+         {\textemdash}}}}
 
 
 % ----------
@@ -57,20 +111,23 @@
 \DeclareFieldFormat{citetitle}{\iftoggle{bftitles}{\mkbibbold{#1}}{\mkbibemph{#1}}}
 \DeclareFieldFormat{title}{\iftoggle{bftitles}{\mkbibbold{#1}}{\mkbibemph{#1}}}
 
-% Use normal text for these entries.
+% Use normal text for the title in these entries.
 \DeclareFieldFormat
   [article, inbook, incollection, bookinbook, inproceedings, patent, thesis, unpublished]
   {title}{#1\addperiod}
 
-% Add "n." and "v." abbreviations and always make them, along with "p.", always lowercase,
+% Add "n." and "v." abbreviations and make them, along with "p.", always lowercase,
 % even if preceded by a period. E.g.: "London: Routledge, 2009. p. 235–250."
 \DeclareFieldFormat[article,periodical]{number}{\MakeLowercase{\bibstring{number}}~#1}
 \DeclareFieldFormat[article,periodical]{volume}{\MakeLowercase{\bibstring{volume}}~#1}
 \DeclareFieldFormat{pages}{\MakeLowercase{\mkpageprefix[bookpagination]{#1}}}
-\DeclareFieldFormat{url}{Disponível em\addcolon\space\url{#1}}
+\DeclareFieldFormat{url}{Disponível em\addcolon\space\url{<#1>}}
 
 \DeclareFieldFormat{uppercase}{\MakeUppercase{#1}}
+\DeclareFieldFormat{upperfirst}{\normalfont\FirstWordUpper{#1}}
 \DeclareFieldFormat{noformat}{\normalfont{#1}}
+
+\DeclareListFormat{uppercase}{\MakeUppercase{#1}}
   
 
 % ----------
@@ -133,15 +190,14 @@
   
 % Use "DOE, J. (Ed.)" instead of "Ed. by DOE, J."
 \renewbibmacro*{editor+others}{%
-  \ifboolexpr{
+  \ifboolexpr{%
     test \ifuseeditor
     and
     not test {\ifnameundef{editor}}
   }
     {\printnames{editor}%
      \setunit{\addperiod\space}%
-     \printtext[parens]{\usebibmacro{editor+othersstrg}}%
-     \clearname{editor}}
+     \printtext[parens]{\usebibmacro{editor+othersstrg}}}
     {}}
 
 % For @bookinbook entries: use the bookauthor when available,
@@ -155,72 +211,129 @@
 \renewbibmacro*{pageref}{%
   \iflistundef{pageref}
     {}
-	{\printtext{% \printtext[parens]{
+	{\printtext{% \printtext[parens]{%
 	  \ifnumgreater{\value{pageref}}{1}
 	    {\bibstring{backrefpages}\ppspace}
 	    {\bibstring{backrefpage}\ppspace}%
 	  \printlist[pageref][-\value{listtotal}]{pageref}}}}
-	  
-\newbibmacro*{cite}{%
-  \iffieldundef{shorthand}
-    {\ifthenelse{\ifnameundef{labelname}\OR\iffieldundef{labelyear}}
-       {\usebibmacro{cite:label}%
-        \setunit{\nonameyeardelim}}
-       {\printnames{labelname}%
-        \setunit{\nameyeardelim}}%
-     \usebibmacro{cite:labelyear+extrayear}}
-    {\usebibmacro{cite:shorthand}}}
 
+% Use normalfont for subtitle and also
+% for the title when there is no author.
 \renewbibmacro*{title}{%
-  \ifboolexpr{
-    test {\iffieldundef{title}}
-    and
-    test {\iffieldundef{subtitle}}
-  }
-    {}
-    {\printtext[title]{%
-	   \ifnameundef{author}{
-	     \unspace\printfield[noformat]{title}}
-		 {\printfield[titlecase]{title}}
-       \normalfont{\setunit{\subtitlepunct}%
-       \printfield[noformat]{subtitle}}}%
-     \newunit}%
-  \printfield{titleaddon}}
-
-\newbibmacro*{location}{%
-  \printlist{location}%
-  %\setunit*{\addcomma\space}%
-  \newunit}
-
-\newbibmacro*{publisher+location+date}{%
-  \addperiod\addspace
-  \iflistundef{location}{%
-    \iflistundef{publisher}{%
-	  \brackettext{%
-	    s.l.
-		\addcolon\addspace
-		s.n.}}
-	  {\brackettext{%
-		s.l.
-		\addcomma\addspace
-        s.n.}}}
-    {\iflistundef{publisher}{%
-	  \printlist{location}
-      \addcomma\addspace
-	  \brackettext{s.n.}}
-	  {\printlist{location}
-	  \addcolon\addspace
-	  \printlist{publisher}}}
-  \setunit*{\addcomma\space}%
-  \usebibmacro{date}%
-  \newunit}
+	\ifboolexpr{%
+		test {\iffieldundef{title}}
+		and
+		test {\iffieldundef{subtitle}}
+	}
+    	{}
+    	{\printtext[title]{%
+			\ifboolexpr{%
+				test {\ifnameundef{author}}
+				and
+				test {\iflistundef{organization}}
+				and
+				test {\ifnameundef{editor}}
+			}
+				{\printfield[upperfirst]{title}}
+				{\printfield[titlecase]{title}}
+			\normalfont{\setunit{\subtitlepunct}%
+			\printfield[noformat]{subtitle}}}%
+		\clearname{editor}
+		\newunit}%
+	\printfield{titleaddon}}
   
+\newbibmacro*{publisher}{%
+	\iflistundef{publisher}
+		{\printtext[brackets]{\bibstring{sinenomine}}}
+	  	{\printlist{publisher}}}
+  
+\newbibmacro*{location}{%
+	\iflistundef{location}
+		{\printtext[brackets]{\bibstring{sineloco}}}
+	  	{\printlist{location}}}
+		
+\renewbibmacro*{location+date}{%
+	\usebibmacro{location}
+	\setunit*{\addcomma\space}%
+	\usebibmacro{date}%
+	\newunit
+}
+		
+% Add s.l. and s.n. when fields are missing.
+\renewbibmacro*{publisher+location+date}{%
+	\ifboolexpr{%
+		test {\iflistundef{publisher}}
+		and
+		test {\iflistundef{location}}
+	}
+		{\iftoggle{noslsn}{}{\printtext[brackets]{\bibstring{sineloco}
+				\setunit*{\addcolon\addnbspace}\bibstring{sinenomine}}}}
+		{\usebibmacro{location}
+		\setunit*{\addcolon\addspace}
+		\usebibmacro{publisher}}
+	\setunit*{\addcomma\space}%
+	\usebibmacro{date}%
+	\newunit}
+
+\newbibmacro*{author/editor+others/organization}{%
+	\ifboolexpr{%
+		test {\ifnameundef{author}}
+		and
+		test {\ifnameundef{editor}}
+	}
+	{\printlist[uppercase]{organization}}
+	{\usebibmacro{author/editor+others}}}
+  
+% ----------
+% Most of these next macros were copied from authoryear.bbx
+% to support the dashed option, thread carefully.
+
+\renewbibmacro*{author}{%
+  \ifboolexpr{
+    test \ifuseauthor
+    and
+    not test {\ifnameundef{author}}
+  }
+    {\usebibmacro{bbx:dashcheck}
+       {\bibnamedash}
+       {\usebibmacro{bbx:savehash}%
+        \printnames{author}%
+        \iffieldundef{authortype}
+          {\setunit{\addspace}}
+          {\setunit{\addcomma\space}}}%
+     \iffieldundef{authortype}
+       {}
+       {\usebibmacro{authorstrg}%
+        \setunit{\addspace}}}%
+    {\global\undef\bbx@lasthash}}
+
+\newbibmacro*{bbx:savehash}{%
+  \savefield{fullhash}{\bbx@lasthash}}
+
+\newbibmacro*{bbx:dashcheck}[2]{%
+  \ifboolexpr{
+    test {\iffieldequals{fullhash}{\bbx@lasthash}}
+    and
+    not test \iffirstonpage
+    and
+    (
+       not bool {bbx@inset}
+       or
+       test {\iffieldequalstr{entrysetcount}{1}}
+    )
+  }
+    {#1}
+    {#2}}
+
+\renewbibmacro*{begrelated}{%
+  \booltrue{bbx@inset}}
+
 
 % ----------
 % Drivers
 % ----------
 
-% Add issue+date and issue to articles.
+% TODO: Create "section" field and add it here.
 \DeclareBibliographyDriver{article}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
@@ -237,9 +350,11 @@
   \printfield{version}%
   \newunit\newblock
   \usebibmacro{in:}%
-  \usebibmacro{journal+issuetitle}%
+  \usebibmacro{journal}%
   \setunit{\addcomma\addspace}%
-  \usebibmacro{location}%
+  \printlist{location}%
+  \setunit{\addcomma\addspace}%
+  \usebibmacro{volume+number+eid}%
   \newunit
   \usebibmacro{byeditor+others}%
   \newunit
@@ -251,6 +366,55 @@
   \newunit\newblock
   \iftoggle{bbx:isbn}
     {\printfield{issn}}
+    {}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \iftoggle{bbx:related}
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}
+    {}%
+  \usebibmacro{finentry}}
+
+% TODO: Add the reprintfrom (bibtex reprinted-from) field.
+\DeclareBibliographyDriver{book}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/editor+others/organization}%
+  \setunit{\labelnamepunct}\newblock
+  \usebibmacro{maintitle+title}%
+  \newunit
+  \printlist{language}%
+  \newunit\newblock
+  \usebibmacro{byauthor}%
+  \newunit\newblock
+  \usebibmacro{byeditor+others}%
+  \newunit\newblock
+  \printfield{edition}%
+  \newunit
+  \iffieldundef{maintitle}
+    {\printfield{volume}%
+     \printfield{part}}
+    {}%
+  \newunit
+  \printfield{volumes}%
+  \newunit\newblock
+  \usebibmacro{series+number}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \usebibmacro{publisher+location+date}%
+  \newunit\newblock
+  \usebibmacro{chapter+pages}%
+  \newunit
+  \printfield{pagetotal}%
+  \newunit\newblock
+  \iftoggle{bbx:isbn}
+    {\printfield{isbn}}
     {}%
   \newunit\newblock
   \usebibmacro{doi+eprint+url}%
@@ -312,6 +476,8 @@
     {}%
   \usebibmacro{finentry}}
 
+% @bookinbook here is pretty much the same as @incollection
+% except that it also accepts the "bookauthor" field.
 \DeclareBibliographyDriver{bookinbook}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
@@ -356,6 +522,65 @@
      \usebibmacro{related}}
     {}%
   \usebibmacro{finentry}}
+
+% TODO: For now there is no way to make just part of the
+% organization name uppercase (C.f. 10520-2002:6.3-6)
+\DeclareBibliographyDriver{manual}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/editor+others/organization}%
+  \setunit{\labelnamepunct}\newblock
+  \usebibmacro{title}%
+  \newunit
+  \printlist{language}%
+  \newunit\newblock
+  \usebibmacro{byauthor}%
+  \newunit\newblock
+  \usebibmacro{byeditor}%
+  \newunit\newblock
+  \printfield{edition}%
+  \newunit\newblock
+  \usebibmacro{series+number}%
+  \newunit\newblock
+  \printfield{type}%
+  \newunit
+  \printfield{version}%
+  \newunit
+  \printfield{note}%
+  \newunit\newblock
+  \usebibmacro{location+date}%
+  \newunit\newblock
+  \usebibmacro{chapter+pages}%
+  \newunit
+  \printfield{pagetotal}%
+  \newunit\newblock
+  \iftoggle{bbx:isbn}
+    {\printfield{isbn}}
+    {}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \iftoggle{bbx:related}
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}
+    {}%
+  \usebibmacro{finentry}}
+  
+% TODO: Add driver for @proceedings.
+% TODO: Add driver for @inproceedings.
+% TODO: Add driver for @inbook.
+
+% I copied this from authoryear.bbx for the dashed option.
+\DeclareBibliographyDriver{set}{%
+  \booltrue{bbx@inset}%
+  \entryset{}{}%
+  \newunit\newblock
+  \usebibmacro{setpageref}%
+  \finentry}
   
 
 \endinput
