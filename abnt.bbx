@@ -41,11 +41,13 @@
 \DeclareBibliographyOption{noslsn}[true]{%
   \settoggle{noslsn}{#1}}
 
-\DeclareBibliographyOption[boolean]{dashed}[true]{%
+% This is the dashed option from authorstyle.bbx,
+% I changed it's name and made it default.
+\DeclareBibliographyOption[boolean]{repeatauthors}[true]{%
   \ifstrequal{#1}{true}
+    {\renewbibmacro*{bbx:savehash}{}}}
     {\ExecuteBibliographyOptions{pagetracker}%
      \renewbibmacro*{bbx:savehash}{\savefield{fullhash}{\bbx@lasthash}}}
-    {\renewbibmacro*{bbx:savehash}{}}}
 
 
 % ----------
@@ -61,16 +63,8 @@
 % This has to do with the dashed option
 \newbool{bbx@inset}
 
-% TODO: This replaces repeated authors' names.
-% It still doesn't conform to the norms (although it
-% looks much better.)
-\renewcommand*{\bibnamedash}{%
-  \ifdimless{\leftmargin}{0.75em}
-    {\mbox{\textemdash\space}}
-    {\makebox[\leftmargin][l]{%
-       \ifdimless{\leftmargin}{1.25em}
-         {\textendash}
-         {\textemdash}}}}
+% This replaces repeated authors' names.
+\renewcommand*{\bibnamedash}{\underline{\hspace*{4em}}\addperiod\addspace}
 
 
 % ----------
