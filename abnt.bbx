@@ -49,6 +49,25 @@
     {\ExecuteBibliographyOptions{pagetracker}%
      \renewbibmacro*{bbx:savehash}{\savefield{fullhash}{\bbx@lasthash}}}
 
+% Option to use the original dashes instead of underscores.
+\DeclareBibliographyOption[boolean]{usedashes}[true]{%
+  \ifstrequal{#1}{true}
+    {\renewcommand*{\bibnamedash}{%
+	   \ifdimless{\leftmargin}{0.75em}
+	     {\mbox{\textemdash\space}}
+	     {\makebox[\leftmargin][l]{%
+	        \ifdimless{\leftmargin}{1.25em}
+	          {\textendash}
+	          {\textemdash}}}}}{}}
+
+% Option to use hanging indentation.
+\setlength{\bibhang}{0pt}
+\DeclareBibliographyOption{indent}[true]{%
+	\ifstrequal{#1}{true}
+	{\setlength{\bibhang}{\ifnumequal{\parindent}{0}{1em}{\parindent}}}
+    {}}
+
+
 
 % ----------
 % newcommand
@@ -277,7 +296,7 @@
 	}
 	{\printlist[uppercase]{organization}}
 	{\usebibmacro{author/editor+others}}}
-  
+
 % ----------
 % Most of these next macros were copied from authoryear.bbx
 % to support the dashed option, thread carefully.
