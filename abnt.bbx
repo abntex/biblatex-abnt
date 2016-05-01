@@ -88,11 +88,14 @@
     \field{author}
     \field{editor}
     \field{organization}
+    \field{orgsubtitle}
     \field{sorttitle}
+    \field{issuetitle}
     \field{title}
     \field{subtitle}
   }
   \sort{
+    \field{orgsubtitle}
     \field{sorttitle}
     \field{title}
     \field{subtitle}
@@ -124,7 +127,16 @@
       \step[fieldsource=reprinted-from,fieldtarget=reprintfrom]
       \step[fieldsource=urlaccessdate,fieldtarget=urldate]
       \step[fieldsource=pagename,fieldtarget=bookpagination]
+      \step[fieldsource=section,fieldtarget=usera]
+      \step[fieldsource=orgsubtitle,fieldtarget=userb]
+      \step[fieldsource=furtherresp,fieldtarget=userc]
+      \step[typesource=journalpart,typetarget=supperiodical]
     }
+	\map{
+	      \pertype{patent}% Use the organization as sourcekey for patents
+	      \step[fieldsource=organization, final]
+	      \step[fieldset=sortkey, origfieldval]
+	}
   }
 }
 
@@ -174,23 +186,32 @@
 % ----------
 
 \DeclareNameFormat{LAST-first}{%
-  \nameparts{#1}%
-  \ifgiveninits
-    {\usebibmacro{name:family-given}
-      {\iftoggle{scbib}
-	    {\textsc{\namepartfamily}}
-		{\MakeUppercase{\namepartfamily}}}
-      {\namepartgiveni}
-      {\namepartprefix}
-      {\namepartsuffix}}
-    {\usebibmacro{name:family-given}
-      {\iftoggle{scbib}
-	    {\textsc{\namepartfamily}}
-		{\MakeUppercase{\namepartfamily}}}
-      {\namepartgiven}
-      {\namepartprefix}
-      {\namepartsuffix}}%
-  \usebibmacro{name:andothers}}
+	\nameparts{#1}%
+	\ifgiveninits{%
+		\usebibmacro{name:family-given}{%
+			\iftoggle{scbib}{%
+				\textsc{\namepartfamily}%
+			}{%
+				\MakeUppercase{\namepartfamily}
+			}
+		}
+		{\namepartgiveni}
+		{\namepartprefix}
+		{\namepartsuffix}
+	}{%
+		\usebibmacro{name:family-given}{%
+			\iftoggle{scbib}{%
+				\textsc{\namepartfamily}
+			}{%
+				\MakeUppercase{\namepartfamily}
+			}
+		}
+		{\namepartgiven}
+		{\namepartprefix}
+		{\namepartsuffix}
+	}
+	\usebibmacro{name:andothers}
+}
 
 \DeclareNameAlias{default}{LAST-first}
 
@@ -216,14 +237,13 @@
 
 % Use normal text for the title in these entries.
 \DeclareFieldFormat
-  [article, inbook, incollection, bookinbook, inproceedings, patent, unpublished]
+  [article, inbook, incollection, bookinbook, inproceedings, unpublished]
   {title}{#1}
 
 % Add "n." and "v." abbreviations and make them, along with "p.", always lowercase,
 % even if preceded by a period. E.g.: "London: Routledge, 2009. p. 235–250."
 \DeclareFieldFormat*{number}{\MakeLowercase{\bibstring{number}}~#1}
-% In books this is the series number, followed by a dot.
-\DeclareFieldFormat[book]{number}{\addcomma\addspace #1}
+\DeclareFieldFormat[book, proceedings, inproceedings]{number}{\addcomma\addspace #1}
 
 \DeclareFieldFormat*{volume}{\MakeLowercase{\bibstring{volume}}~#1}
 \DeclareFieldFormat*{chapter}{\MakeLowercase{\bibstring{chapter}~#1}}
@@ -335,13 +355,29 @@
 				and
 				test {\iffieldundef{eventtitle}}
 			}
-				{\printfield[upperfirst]{title}}
+				{\unspace\printfield[upperfirst]{title}}
 				{\printfield[titlecase]{title}}
-			\normalfont{\setunit{\subtitlepunct}%
-			\printfield[noformat]{subtitle}}}%
+			\normalfont{\setunit*{\subtitlepunct}%
+			\printfield[noformat]{subtitle}
+			\setunit{\addperiod\addspace}
+			\printfield{userc}}}% userc = furtherresp
 		\clearname{editor}
 		\newunit}%
 	\printfield{titleaddon}}
+
+\newbibmacro*{booktitle}{%
+  \ifboolexpr{
+    test {\iffieldundef{booktitle}}
+    and
+    test {\iffieldundef{booksubtitle}}
+  }
+    {}
+    {\printtext[booktitle]{%
+       \printfield[titlecase]{booktitle}%
+       \setunit{\subtitlepunct}%
+       \printfield[noformat]{booksubtitle}}%
+     \newunit}%
+  \printfield{booktitleaddon}}
   
 \newbibmacro*{publisher}{%
 	\iflistundef{publisher}
@@ -405,6 +441,11 @@
 	{\usebibmacro{organization}}
 	{\usebibmacro{author/editor+others}}}
 
+\newbibmacro*{editor+others/organization}{%
+	\ifnameundef{editor}
+		{\usebibmacro{organization}}
+		{\usebibmacro{editor+others}}}
+
 \newbibmacro*{author/organization}{%
 	\ifnameundef{author}
 	{\usebibmacro{organization}}
@@ -426,9 +467,13 @@
     \iflistundef{organization}
         {\global\undef\bbx@lasthash}
         {\usebibmacro{bbx:dashcheck}
-           {\bibnamedash}
+           {\bibnamedash%
+			\setunit*{\addperiod\addspace}%
+			\printfield{userb}}
            {\savelist{organization}{\bbx@lasthash}%
-            \printlist[upperfirst]{organization}}}%
+            \printlist[upperfirst]{organization}%
+			\setunit*{\addperiod\addspace}%
+			\printfield{userb}}}%
 }
 
 \newbibmacro*{mathesis}{%
@@ -461,6 +506,48 @@
 	  	{\usebibmacro{author/editor+others/organization}}
 	    {\bibnamedash}}
 }
+
+\newbibmacro*{periodical}{%
+  \iffieldundef{title}%
+    {}
+    {\iffieldundef{issue}{%
+		\printtext[title]{%
+	       \unspace\printfield[upperfirst]{title}%
+	       \setunit{\subtitlepunct}%
+	       \printfield[noformat]{subtitle}}
+	}
+	{\printtext[title]{%
+       \printfield[titlecase]{title}%
+       \setunit{\subtitlepunct}%
+       \printfield[noformat]{subtitle}}}
+	}
+}
+
+\renewbibmacro*{issue}{%
+  \iffieldundef{issuetitle}
+    {}
+    {\printtext[issuetitle]{%
+       \printfield[upperfirst]{issuetitle}%
+       \setunit*{\subtitlepunct}%
+       \printfield[noformat]{issuesubtitle}}}}
+
+\renewbibmacro*{title+issuetitle}{%
+  \usebibmacro{issue}
+  \setunit*{\addperiod\addspace}%
+  \usebibmacro{periodical}%
+  \setunit*{\addperiod\addspace}%
+  \usebibmacro{location}
+  \setunit*{\addcolon\addspace}
+  \usebibmacro{publisher}
+  \setunit*{\addcomma\addspace}
+  \printfield{volume}%
+  \setunit*{\addcomma\addspace}
+  \printfield{number}%
+  \setunit*{\addcomma\space}%
+  \printfield{pages}%
+  \setunit*{\addcomma\space}%
+  \usebibmacro{date}%
+  \newunit}
 
 % ----------
 % Most of these next macros were copied from authoryear.bbx
@@ -532,16 +619,22 @@
   \newunit\newblock
   \usebibmacro{in:}%
   \usebibmacro{journal}%
+  \setunit*{\addspace\textendash\addspace}
+  \printfield{usera}% section
   \setunit{\addcomma\addspace}%
+  \printlist{publisher}%
+  \setunit*{\addcomma\addspace}%
   \printlist{location}%
-  \setunit{\addcomma\addspace}%
+  \setunit*{\addcomma\addspace}%
   \usebibmacro{volume+number+eid}%
+  \setunit{\addcomma\addspace}%
+  \printfield{pages}
+  \setunit{\addcomma\addspace}%
+  \usebibmacro{date}
   \newunit
   \usebibmacro{byeditor+others}%
   \newunit
-  \usebibmacro{note+pages}%
-  \setunit{\addcomma\addspace}%
-  \usebibmacro{issue+date}%
+  \printfield{note}%
   \setunit{\addcolon\space}%
   \usebibmacro{issue}%
   \newunit\newblock
@@ -561,7 +654,6 @@
     {}%
   \usebibmacro{finentry}}
 
-% TODO: Add the reprintfrom (bibtex reprinted-from) field.
 \DeclareBibliographyDriver{book}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
@@ -597,6 +689,70 @@
   \iftoggle{bbx:isbn}
     {\printfield{isbn}}
     {}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \iftoggle{bbx:related}
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}
+    {}%
+  \usebibmacro{finentry}}
+
+\DeclareBibliographyDriver{periodical}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{editor+others/organization}%
+  \setunit{\labelnamepunct}\newblock
+  \usebibmacro{title}%
+  \newunit\newblock
+  \usebibmacro{publisher+location+date}%
+  \newunit
+  \printlist{language}%
+  \newunit\newblock
+  \usebibmacro{byeditor}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \iftoggle{bbx:isbn}
+    {\printfield{issn}}
+    {}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \iftoggle{bbx:related}
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}
+    {}%
+  \usebibmacro{finentry}}
+  
+\DeclareBibliographyDriver{supperiodical}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/editor+others/organization}%
+  \setunit{\labelnamepunct}\newblock
+  \usebibmacro{title+issuetitle}%
+  \newunit
+  \printlist{language}%
+  \newunit\newblock
+  \usebibmacro{byauthor}%
+  \newunit\newblock
+  \usebibmacro{byeditor+others}%
+  \newunit\newblock
+  \printfield{howpublished}%
+  \newunit\newblock
+  \printfield{type}%
+  \newunit
+  \printfield{version}%
+  \newunit
+  \printfield{note}%
   \newunit\newblock
   \usebibmacro{doi+eprint+url}%
   \newunit\newblock
@@ -799,7 +955,7 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{organization/eventtitle}%
-  \setunit{\labelnamepunct}\newblock
+  \setunit*{\addcomma\addspace}
   \printfield{number}%
   \setunit*{\adddot\addcomma\addspace}
   \printeventdate%
@@ -818,8 +974,8 @@
     {}%
   \newunit\newblock
   \printfield{note}%
-  \newunit\newblock
-  \usebibmacro{organization}
+  %\newunit\newblock
+  %\printlist{organization}% This has to be printed conditionally
   \newunit\newblock
   \usebibmacro{chapter+pages}%
   \newunit
@@ -840,11 +996,11 @@
      \usebibmacro{related}}
     {}%
   \usebibmacro{finentry}}
-  
-\DeclareBibliographyDriver{misc}{%
+
+\DeclareBibliographyDriver{inproceedings}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
-  \usebibmacro{author/editor+others/organization}%
+  \usebibmacro{author/translator+others}%
   \setunit{\labelnamepunct}\newblock
   \usebibmacro{title}%
   \newunit
@@ -852,17 +1008,45 @@
   \newunit\newblock
   \usebibmacro{byauthor}%
   \newunit\newblock
+  \usebibmacro{in:}%
+  \ifnameundef{editor}
+  	{\printlist[uppercase]{organization}}
+	{\printname{editor}}
+  \setunit*{\addcomma\addspace}
+  \printfield{number}%
+  \setunit*{\adddot\addcomma\addspace}
+  \printeventdate%
+  \setunit{\addcomma\addspace}
+  \printfield{venue}%
+  \newunit\newblock
+  \usebibmacro{maintitle+booktitle}%
+  \newunit
+  \printfield{location}
+  \setunit*{\addcolon\addspace}
+  \printfield{publisher}
+  \setunit*{\addcomma\addspace}
+  \usebibmacro{date}%
+  \newunit\newblock
   \usebibmacro{byeditor+others}%
   \newunit\newblock
-  \printfield{howpublished}%
+  \iffieldundef{maintitle}
+    {\printfield{volume}%
+     \printfield{part}}
+    {}%
+  \newunit
+  \printfield{volumes}%
   \newunit\newblock
-  \printfield{type}%
-  \newunit
-  \printfield{version}%
-  \newunit
+  \usebibmacro{series+number}%
+  %\newunit\newblock
+  %\printlist{organization}% This has to be printed conditionally
+  \newunit\newblock
+  \usebibmacro{chapter+pages}%
+  \newunit\newblock
   \printfield{note}%
   \newunit\newblock
-  \usebibmacro{organization+location+date}%
+  \iftoggle{bbx:isbn}
+    {\printfield{isbn}}
+    {}%
   \newunit\newblock
   \usebibmacro{doi+eprint+url}%
   \newunit\newblock
@@ -958,8 +1142,86 @@
     {}%
   \usebibmacro{finentry}}
   
-% TODO: Add driver for @inproceedings.
-% TODO: Add driver for @inbook.
+\DeclareBibliographyDriver{patent}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \iflistundef{organization}
+    {\usebibmacro{author/editor+others}
+	\clearnames{author}}
+    {\usebibmacro{organization}}%
+  \setunit{\labelnamepunct}\newblock
+  \ifnameundef{author}
+    {\printnames[given-family]{editor}}
+    {\printnames[given-family]{author}}
+  \newunit
+  \usebibmacro{title}%
+  \newunit
+  \printlist{language}%
+  \newunit\newblock
+  \usebibmacro{byauthor}%
+  \newunit\newblock
+  \usebibmacro{byeditor+others}%
+  \newunit\newblock
+  \printlist{location}
+  \setunit*{\addcomma\addspace}
+  \usebibmacro{date}%
+  \setunit*{\addcomma\addspace}
+  \printfield{number}%
+  \setunit*{\addcomma\addspace}
+  \printfield{howpublished}%
+  \newunit\newblock
+  \printfield{type}%
+  \newunit
+  \printfield{version}%
+  \newunit
+  \printfield{note}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \iftoggle{bbx:related}
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}
+    {}%
+  \usebibmacro{finentry}}
+  
+\DeclareBibliographyDriver{misc}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/editor+others/organization}%
+  \setunit{\labelnamepunct}\newblock
+  \usebibmacro{title}%
+  \newunit
+  \printlist{language}%
+  \newunit\newblock
+  \usebibmacro{byauthor}%
+  \newunit\newblock
+  \usebibmacro{byeditor+others}%
+  \newunit\newblock
+  \printfield{howpublished}%
+  \newunit\newblock
+  \printfield{type}%
+  \newunit
+  \printfield{version}%
+  \newunit
+  \printfield{note}%
+  \newunit\newblock
+  \usebibmacro{organization+location+date}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \iftoggle{bbx:related}
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}
+    {}%
+  \usebibmacro{finentry}}
 
 % I copied this from authoryear.bbx for the dashed option.
 \DeclareBibliographyDriver{set}{%
