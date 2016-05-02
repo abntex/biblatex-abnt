@@ -42,6 +42,8 @@
 \newtoggle{noslsn}
 \DeclareBibliographyOption{noslsn}[true]{%
   \settoggle{noslsn}{#1}}
+\DeclareEntryOption[boolean]{noslsn}[true]{%
+  \settoggle{noslsn}{#1}}
 
 % This is the dashed option from authorstyle.bbx,
 % I changed it's name and made it default.
@@ -88,15 +90,21 @@
     \field{author}
     \field{editor}
     \field{organization}
-    \field{orgsubtitle}
     \field{sorttitle}
     \field{issuetitle}
     \field{title}
     \field{subtitle}
   }
   \sort{
-    \field{orgsubtitle}
+    \field{userb}% orgsubtitle
     \field{sorttitle}
+    \field{issuetitle}
+    \field{title}
+    \field{subtitle}
+  }
+  \sort{
+    \field{sorttitle}
+    \field{issuetitle}
     \field{title}
     \field{subtitle}
   }
@@ -264,8 +272,15 @@
 \DeclareFieldFormat{upperfirst}{\iftoggle{scbib}{\normalfont\FirstWordSC{#1}}{\normalfont\FirstWordUpper{#1}}}
 \DeclareFieldFormat{noformat}{\normalfont{#1}}
 
-\DeclareListFormat{uppercase}{\iftoggle{scbib}{\textsc{#1}}{\MakeUppercase{#1}}}
-\DeclareListFormat{upperfirst}{\iftoggle{scbib}{\normalfont\FirstWordSC{#1}}{\normalfont\FirstWordUpper{#1}}}
+\DeclareListFormat{uppercase}{%
+  \usebibmacro{list:delim}{#1}%
+  \iftoggle{scbib}{\textsc{#1}}{\MakeUppercase{#1}}\isdot
+  \usebibmacro{list:andothers}}
+  
+\DeclareListFormat{upperfirst}{%
+  \usebibmacro{list:delim}{#1}%
+  \iftoggle{scbib}{\normalfont\FirstWordSC{#1}}{\normalfont\FirstWordUpper{#1}}\isdot
+  \usebibmacro{list:andothers}}
 
 
 % ----------
@@ -351,7 +366,7 @@
 				and
 				test {\ifnameundef{editor}}
 				and
-				test {\iflistundef{organization}}
+				test {\ifcsundef{savedorg}}
 				and
 				test {\iffieldundef{eventtitle}}
 			}
@@ -360,10 +375,30 @@
 			\normalfont{\setunit*{\subtitlepunct}%
 			\printfield[noformat]{subtitle}
 			\setunit{\addperiod\addspace}
-			\printfield{userc}}}% userc = furtherresp
+			\ifboolexpr{%
+				test {\iffieldundef{maintitle}}
+				and
+				test {\iffieldundef{booktitle}}
+			}
+				{\printfield{userc}}{}}}% userc = furtherresp
 		\clearname{editor}
 		\newunit}%
 	\printfield{titleaddon}}
+
+\newbibmacro*{maintitle+booktitle}{%
+  \iffieldundef{maintitle}
+    {}
+    {\usebibmacro{maintitle}%
+     \newunit\newblock
+     \iffieldundef{volume}
+       {}
+       {\printfield{volume}%
+        \printfield{part}%
+        \setunit{\addcolon\space}}}%
+  \usebibmacro{booktitle}%
+  \newunit
+  \printfield{userc}
+  \newunit}
 
 \newbibmacro*{booktitle}{%
   \ifboolexpr{
@@ -381,12 +416,12 @@
   
 \newbibmacro*{publisher}{%
 	\iflistundef{publisher}
-		{\printtext[brackets]{\bibstring{sinenomine}}}
+		{\iftoggle{noslsn}{}{\printtext[brackets]{\bibstring{sinenomine}}}}
 	  	{\printlist{publisher}}}
   
 \newbibmacro*{location}{%
 	\iflistundef{location}
-		{\printtext[brackets]{\bibstring{sineloco}}}
+		{\iftoggle{noslsn}{}{\printtext[brackets]{\bibstring{sineloco}}}}
 	  	{\printlist{location}}}
 		
 \renewbibmacro*{location+date}{%
@@ -466,7 +501,8 @@
 \newbibmacro*{organization}{%
     \iflistundef{organization}
         {\global\undef\bbx@lasthash}
-        {\usebibmacro{bbx:dashcheck}
+        {\savelistcs*{organization}{savedorg}%
+		\usebibmacro{bbx:dashcheck}%
            {\bibnamedash%
 			\setunit*{\addperiod\addspace}%
 			\printfield{userb}}
@@ -974,8 +1010,8 @@
     {}%
   \newunit\newblock
   \printfield{note}%
-  %\newunit\newblock
-  %\printlist{organization}% This has to be printed conditionally
+  \newunit\newblock
+  \printlist{organization}% This has to be printed conditionally
   \newunit\newblock
   \usebibmacro{chapter+pages}%
   \newunit
@@ -1037,8 +1073,8 @@
   \printfield{volumes}%
   \newunit\newblock
   \usebibmacro{series+number}%
-  %\newunit\newblock
-  %\printlist{organization}% This has to be printed conditionally
+  \newunit\newblock
+  \printlist{organization}% This has to be printed conditionally
   \newunit\newblock
   \usebibmacro{chapter+pages}%
   \newunit\newblock
@@ -1187,13 +1223,13 @@
      \usebibmacro{related}}
     {}%
   \usebibmacro{finentry}}
-  
-\DeclareBibliographyDriver{misc}{%
+
+\DeclareBibliographyDriver{report}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/editor+others/organization}%
   \setunit{\labelnamepunct}\newblock
-  \usebibmacro{title}%
+  \usebibmacro{maintitle+title}%
   \newunit
   \printlist{language}%
   \newunit\newblock
@@ -1201,15 +1237,78 @@
   \newunit\newblock
   \usebibmacro{byeditor+others}%
   \newunit\newblock
-  \printfield{howpublished}%
+  \printfield{edition}%
+  \newunit
+  \iffieldundef{maintitle}
+    {\printfield{volume}%
+     \printfield{part}}
+    {}%
+  \newunit
+  \printfield{volumes}%
   \newunit\newblock
-  \printfield{type}%
+  \usebibmacro{publisher+location+date}%
+  \newunit\newblock
+  \usebibmacro{chapter+pages}%
   \newunit
-  \printfield{version}%
-  \newunit
+  \printfield{pagetotal}%
+  \newunit\newblock
+  \usebibmacro{series+number}%
+  \newunit\newblock
   \printfield{note}%
   \newunit\newblock
-  \usebibmacro{organization+location+date}%
+  \iftoggle{bbx:isbn}
+    {\printfield{isbn}}
+    {}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \iftoggle{bbx:related}
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}
+    {}%
+  \usebibmacro{finentry}}
+  
+\DeclareBibliographyDriver{misc}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/editor+others/organization}%
+  \setunit{\labelnamepunct}\newblock
+  \usebibmacro{maintitle+title}%
+  \newunit
+  \printlist{language}%
+  \newunit\newblock
+  \usebibmacro{byauthor}%
+  \newunit\newblock
+  \usebibmacro{byeditor+others}%
+  \newunit\newblock
+  \printfield{edition}%
+  \newunit
+  \iffieldundef{maintitle}
+    {\printfield{volume}%
+     \printfield{part}}
+    {}%
+  \newunit
+  \printfield{volumes}%
+  \newunit\newblock
+  \usebibmacro{publisher+location+date}%
+  \newunit\newblock
+  \usebibmacro{chapter+pages}%
+  \newunit
+  \printfield{pagetotal}%
+  \newunit\newblock
+  \printfield{howpublished}%
+  \newunit\newblock
+  \usebibmacro{series+number}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \iftoggle{bbx:isbn}
+    {\printfield{isbn}}
+    {}%
   \newunit\newblock
   \usebibmacro{doi+eprint+url}%
   \newunit\newblock
