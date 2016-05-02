@@ -51,9 +51,11 @@
 \DeclareBibliographyOption[boolean]{repeatauthors}[true]{%
   \settoggle{repeatauthors}{#1}
   \ifstrequal{#1}{true}
-    {\renewbibmacro*{bbx:savehash}{}}}
+    {\renewbibmacro*{bbx:savehash}{}
+	\renewbibmacro*{saveorghash}{}}
     {\ExecuteBibliographyOptions{pagetracker}%
-     \renewbibmacro*{bbx:savehash}{\savefield{fullhash}{\bbx@lasthash}}}
+     \renewbibmacro*{bbx:savehash}{\savefield{fullhash}{\bbx@lasthash}}
+	 \renewbibmacro*{saveorghash}{\savelist{organization}{\bbx@lasthash}}}}
 
 % Option to use the original dashes instead of underscores.
 \DeclareBibliographyOption[boolean]{usedashes}[true]{%
@@ -138,6 +140,8 @@
       \step[fieldsource=section,fieldtarget=usera]
       \step[fieldsource=orgsubtitle,fieldtarget=userb]
       \step[fieldsource=furtherresp,fieldtarget=userc]
+      \step[fieldsource=illustrated,fieldtarget=userd]
+      \step[fieldsource=dimensions,fieldtarget=usere]
       \step[typesource=journalpart,typetarget=supperiodical]
     }
 	\map{
@@ -253,14 +257,25 @@
 \DeclareFieldFormat*{number}{\MakeLowercase{\bibstring{number}}~#1}
 \DeclareFieldFormat[book, proceedings, inproceedings]{number}{\addcomma\addspace #1}
 
-\DeclareFieldFormat*{volume}{\MakeLowercase{\bibstring{volume}}~#1}
+\DeclareNumChars*{,-/}% Strings with these characters will still be considered numbers.
+
+\DeclareFieldFormat*{volume}{
+	\ifinteger{#1}
+		{\addspace \MakeLowercase{\bibstring{volume}}~#1}
+		{\addspace #1\isdot}}
+
 \DeclareFieldFormat*{chapter}{\MakeLowercase{\bibstring{chapter}~#1}}
-\DeclareFieldFormat{edition}{#1\adddot\addspace\bibstring{edition}}
+\DeclareFieldFormat{edition}{
+	\ifinteger{#1}
+		{\addspace #1\adddot\addspace\bibstring{edition}}
+		{\addspace #1\isdot}}
 
 \DeclareFieldFormat*{pages}{\MakeLowercase{\mkpageprefix[bookpagination]{#1}}}
 \DeclareFieldFormat*{pagetotal}{\MakeLowercase{\mkpagetotal[bookpagination]{#1}}}
 % Always use "f." for the pagination in thesis.
 \DeclareFieldFormat[thesis]{pagetotal}{\MakeLowercase{#1 \bibstring{sheet}}}
+
+\DeclareFieldFormat{userd}{\addspace #1\isdot}
 
 \DeclareFieldFormat{url}{\bibstring{url}\addcolon\space\url{<#1>}}
 \DeclareFieldFormat{urldate}{\bibstring{urlseen}\addcolon\space #1}
@@ -381,7 +396,6 @@
 				test {\iffieldundef{booktitle}}
 			}
 				{\printfield{userc}}{}}}% userc = furtherresp
-		\clearname{editor}
 		\newunit}%
 	\printfield{titleaddon}}
 
@@ -497,7 +511,8 @@
     {}
     {\setunit*{\addperiod\addspace}%
      \usebibmacro{urldate}}}
-	 
+
+\newbibmacro*{saveorghash}{\savelist{organization}{\bbx@lasthash}}
 \newbibmacro*{organization}{%
     \iflistundef{organization}
         {\global\undef\bbx@lasthash}
@@ -506,10 +521,11 @@
            {\bibnamedash%
 			\setunit*{\addperiod\addspace}%
 			\printfield{userb}}
-           {\savelist{organization}{\bbx@lasthash}%
+           {\usebibmacro{saveorghash}%
             \printlist[upperfirst]{organization}%
 			\setunit*{\addperiod\addspace}%
-			\printfield{userb}}}%
+			\printfield{userb}}
+		\clearlist{organization}}%
 }
 
 \newbibmacro*{mathesis}{%
@@ -704,21 +720,27 @@
   \usebibmacro{byeditor+others}%
   \newunit\newblock
   \printfield{edition}%
+  \newunit\newblock
+  \usebibmacro{publisher+location+date}%
   \newunit
   \iffieldundef{maintitle}
     {\printfield{volume}%
      \printfield{part}}
     {}%
-  \newunit
+  \newunit\newblock
   \printfield{volumes}%
   \newunit\newblock
-  \usebibmacro{publisher+location+date}%
-  \newunit\newblock
   \usebibmacro{chapter+pages}%
+  \setunit*{\addcomma\addspace}
+  \printfield{userd}% illustrated
+  \setunit*{\addcomma\addspace}
+  \printfield{usere}% dimensions
   \newunit
   \printfield{pagetotal}%
   \newunit\newblock
   \usebibmacro{series+number}%
+  \newunit\newblock
+  \printfield{howpublished}%
   \newunit\newblock
   \printfield{note}%
   \newunit\newblock
@@ -1299,6 +1321,8 @@
   \usebibmacro{chapter+pages}%
   \newunit
   \printfield{pagetotal}%
+  \setunit*{\addcomma\addspace}
+  \printfield{usere}% dimensions
   \newunit\newblock
   \printfield{howpublished}%
   \newunit\newblock
