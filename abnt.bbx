@@ -98,7 +98,7 @@
     \field{subtitle}
   }
   \sort{
-    \field{userb}% orgsubtitle
+    \field{orgsubtitle}
     \field{sorttitle}
     \field{issuetitle}
     \field{title}
@@ -137,11 +137,7 @@
       \step[fieldsource=reprinted-from,fieldtarget=reprintfrom]
       \step[fieldsource=urlaccessdate,fieldtarget=urldate]
       \step[fieldsource=pagename,fieldtarget=bookpagination]
-      \step[fieldsource=section,fieldtarget=usera]
-      \step[fieldsource=orgsubtitle,fieldtarget=userb]
-      \step[fieldsource=furtherresp,fieldtarget=userc]
-      \step[fieldsource=illustrated,fieldtarget=userd]
-      \step[fieldsource=dimensions,fieldtarget=usere]
+      \step[fieldsource=year-presented,fieldtarget=eventdate]
       \step[typesource=journalpart,typetarget=supperiodical]
     }
 	\map{
@@ -149,8 +145,44 @@
 	      \step[fieldsource=organization, final]
 	      \step[fieldset=sortkey, origfieldval]
 	}
+    \map[overwrite=false]{
+      \pertype{phdthesis}
+      \step[fieldset=bookpagination, fieldvalue={sheet}]
+    }
+    \map[overwrite=false]{
+      \pertype{mastersthesis}
+      \step[fieldset=bookpagination, fieldvalue={sheet}]
+    }
   }
 }
+
+\DeclareDatamodelFields[type=field,datatype=literal]{
+	section,
+	illustrated,
+	dimensions,
+	orgsubtitle,
+	furtherresp,
+}
+
+\DeclareDatamodelEntryfields[monography]{
+  location,
+  author,
+  chapter
+  pages,
+  pagetotal,
+  bookpagination,
+  institution,
+  title,
+  type,
+  note,
+  isbn,
+  doi,
+  eprint,
+  url,
+  addendum,
+  pubstate,
+  pageref,
+  date}
 
 
 % ----------
@@ -240,17 +272,17 @@
 % ----------
 
 % Use bold or italics for the main titles, depending on what the user chose.
-\DeclareFieldFormat{journaltitle}{\iftoggle{bftitles}{\mkbibbold{#1}}{\mkbibemph{#1}}}
-\DeclareFieldFormat{issuetitle}{\iftoggle{bftitles}{\mkbibbold{#1}}{\mkbibemph{#1}}}
-\DeclareFieldFormat{maintitle}{\iftoggle{bftitles}{\mkbibbold{#1}}{\mkbibemph{#1}}}
-\DeclareFieldFormat{booktitle}{\iftoggle{bftitles}{\mkbibbold{#1}}{\mkbibemph{#1}}}
-\DeclareFieldFormat{citetitle}{\iftoggle{bftitles}{\mkbibbold{#1}}{\mkbibemph{#1}}}
-\DeclareFieldFormat*{title}{\iftoggle{bftitles}{\mkbibbold{#1}}{\mkbibemph{#1}}}
+\DeclareFieldFormat{journaltitle}{\iftoggle{bftitles}{\addspace\mkbibbold{#1}}{\addspace\mkbibemph{#1}}}
+\DeclareFieldFormat{issuetitle}{\iftoggle{bftitles}{\addspace\mkbibbold{#1}}{\addspace\mkbibemph{#1}}}
+\DeclareFieldFormat{maintitle}{\iftoggle{bftitles}{\addspace\mkbibbold{#1}}{\addspace\mkbibemph{#1}}}
+\DeclareFieldFormat{booktitle}{\iftoggle{bftitles}{\addspace\mkbibbold{#1}}{\addspace\mkbibemph{#1}}}
+\DeclareFieldFormat{citetitle}{\iftoggle{bftitles}{\addspace\mkbibbold{#1}}{\addspace\mkbibemph{#1}}}
+\DeclareFieldFormat*{title}{\iftoggle{bftitles}{\addspace\mkbibbold{#1}}{\addspace\mkbibemph{#1}}}
 
 % Use normal text for the title in these entries.
 \DeclareFieldFormat
   [article, inbook, incollection, bookinbook, inproceedings, unpublished]
-  {title}{#1}
+  {title}{\addspace #1}
 
 % Add "n." and "v." abbreviations and make them, along with "p.", always lowercase,
 % even if preceded by a period. E.g.: "London: Routledge, 2009. p. 235–250."
@@ -273,15 +305,17 @@
 \DeclareFieldFormat*{pages}{\MakeLowercase{\mkpageprefix[bookpagination]{#1}}}
 \DeclareFieldFormat*{pagetotal}{\MakeLowercase{\mkpagetotal[bookpagination]{#1}}}
 % Always use "f." for the pagination in thesis.
-\DeclareFieldFormat[thesis]{pagetotal}{\MakeLowercase{#1 \bibstring{sheet}}}
+%\DeclareFieldFormat[thesis]{pagetotal}{\MakeLowercase{#1 \bibstring{sheet}}}
 
-\DeclareFieldFormat{userd}{\addspace #1\isdot}
+\DeclareFieldFormat{illustrated}{\addspace #1\isdot}
 
 \DeclareFieldFormat{url}{\bibstring{url}\addcolon\space\url{<#1>}}
 \DeclareFieldFormat{urldate}{\bibstring{urlseen}\addcolon\space #1}
 
 \DeclareFieldFormat{mathesis}{\bibstring{mathesis}}
 \DeclareFieldFormat{phdthesis}{\bibstring{phdthesis}}
+
+\DeclareFieldFormat[monography]{type}{\bibstring{monography}\addspace\printtext[parens]{#1}}
 
 \DeclareFieldFormat{uppercase}{\MakeUppercase{#1}}
 \DeclareFieldFormat{upperfirst}{\iftoggle{scbib}{\normalfont\FirstWordSC{#1}}{\normalfont\FirstWordUpper{#1}}}
@@ -346,7 +380,9 @@
   }
     {\printnames{editor}%
      \setunit{\addperiod\space}%
-     \printtext[parens]{\usebibmacro{editor+othersstrg}}}
+     \printtext[parens]{\usebibmacro{editor+othersstrg}}%
+	 \savenamecs*{editor}{saveded}%
+     \clearname{editor}}
     {}}
 
 % For @bookinbook entries: use the bookauthor when available,
@@ -379,7 +415,7 @@
 			\ifboolexpr{%
 				test {\ifnameundef{author}}
 				and
-				test {\ifnameundef{editor}}
+				test {\ifcsundef{saveded}}
 				and
 				test {\ifcsundef{savedorg}}
 				and
@@ -395,11 +431,11 @@
 				and
 				test {\iffieldundef{booktitle}}
 			}
-				{\printfield{userc}}{}}}% userc = furtherresp
+				{\printfield{furtherresp}}{}}}
 		\newunit}%
 	\printfield{titleaddon}}
 
-\newbibmacro*{maintitle+booktitle}{%
+\renewbibmacro*{maintitle+booktitle}{%
   \iffieldundef{maintitle}
     {}
     {\usebibmacro{maintitle}%
@@ -411,7 +447,7 @@
         \setunit{\addcolon\space}}}%
   \usebibmacro{booktitle}%
   \newunit
-  \printfield{userc}
+  \printfield{furtherresp}
   \newunit}
 
 \newbibmacro*{booktitle}{%
@@ -437,6 +473,11 @@
 	\iflistundef{location}
 		{\iftoggle{noslsn}{}{\printtext[brackets]{\bibstring{sineloco}}}}
 	  	{\printlist{location}}}
+  
+\newbibmacro*{venue}{%
+	\iffieldundef{venue}
+		{\iftoggle{noslsn}{}{\printtext[brackets]{\bibstring{sineloco}}}}
+	  	{\printfield{venue}}}
 		
 \renewbibmacro*{location+date}{%
 	\usebibmacro{location}
@@ -520,11 +561,11 @@
 		\usebibmacro{bbx:dashcheck}%
            {\bibnamedash%
 			\setunit*{\addperiod\addspace}%
-			\printfield{userb}}
+			\printfield{orgsubtitle}}
            {\usebibmacro{saveorghash}%
             \printlist[upperfirst]{organization}%
 			\setunit*{\addperiod\addspace}%
-			\printfield{userb}}
+			\printfield{orgsubtitle}}
 		\clearlist{organization}}%
 }
 
@@ -549,14 +590,15 @@
 	\ifboolexpr{%
 		test {\ifnameundef{author}}
 	  	and
-	  	test {\ifnameundef{editor}}
+	  	test {\ifcsundef{saveded}}
 	  	and
-	  	test {\iflistundef{organization}}
+	  	test {\ifcsundef{savedorg}}
 	}
 		{}
 		{\iftoggle{repeatauthors}
-	  	{\usebibmacro{author/editor+others/organization}}
-	    {\bibnamedash}}
+	  		{\usebibmacro{author/editor+others/organization}}
+	    	{\bibnamedash}%
+		}
 }
 
 \newbibmacro*{periodical}{%
@@ -653,7 +695,6 @@
 % Drivers
 % ----------
 
-% TODO: Create "section" field and add it here.
 \DeclareBibliographyDriver{article}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
@@ -672,7 +713,7 @@
   \usebibmacro{in:}%
   \usebibmacro{journal}%
   \setunit*{\addspace\textendash\addspace}
-  \printfield{usera}% section
+  \printfield{section}
   \setunit{\addcomma\addspace}%
   \printlist{publisher}%
   \setunit*{\addcomma\addspace}%
@@ -732,11 +773,11 @@
   \newunit\newblock
   \usebibmacro{chapter+pages}%
   \setunit*{\addcomma\addspace}
-  \printfield{userd}% illustrated
-  \setunit*{\addcomma\addspace}
-  \printfield{usere}% dimensions
-  \newunit
   \printfield{pagetotal}%
+  \setunit*{\addcomma\addspace}
+  \printfield{illustrated}
+  \setunit*{\addcomma\addspace}
+  \printfield{dimensions}
   \newunit\newblock
   \usebibmacro{series+number}%
   \newunit\newblock
@@ -851,6 +892,8 @@
   \printfield{note}%
   \newunit\newblock
   \usebibmacro{chapter+pages}%
+  \newunit
+  \printfield{pagetotal}%
   \newunit\newblock
   \iftoggle{bbx:isbn}
     {\printfield{isbn}}
@@ -898,6 +941,8 @@
   \usebibmacro{publisher+location+date}%
   \newunit\newblock
   \usebibmacro{chapter+pages}%
+  \newunit
+  \printfield{pagetotal}%
   \newunit\newblock
   \iftoggle{bbx:isbn}
     {\printfield{isbn}}
@@ -986,12 +1031,12 @@
   \usebibmacro{location+date}%
   \newunit\newblock
   \usebibmacro{chapter+pages}%
+  \newunit
+  \printfield{pagetotal}%
   \newunit\newblock
   \usebibmacro{series+number}%
   \newunit
   \printfield{note}%
-  \newunit
-  \printfield{pagetotal}%
   \newunit\newblock
   \iftoggle{bbx:isbn}
     {\printfield{isbn}}
@@ -1018,7 +1063,7 @@
   \setunit*{\adddot\addcomma\addspace}
   \printeventdate%
   \setunit{\addcomma\addspace}
-  \printfield{venue}%
+  \usebibmacro{venue}%
   \newunit
   \usebibmacro{maintitle+title}%
   \newunit\newblock
@@ -1068,22 +1113,25 @@
   \newunit\newblock
   \usebibmacro{in:}%
   \ifnameundef{editor}
-  	{\printlist[uppercase]{organization}}
+  	{\printlist[uppercase]{organization}
+	\clearlist{organization}}
 	{\printname{editor}}
   \setunit*{\addcomma\addspace}
   \printfield{number}%
   \setunit*{\adddot\addcomma\addspace}
   \printeventdate%
   \setunit{\addcomma\addspace}
-  \printfield{venue}%
+  \usebibmacro{venue}%
   \newunit\newblock
   \usebibmacro{maintitle+booktitle}%
   \newunit
-  \printfield{location}
-  \setunit*{\addcolon\addspace}
-  \printfield{publisher}
-  \setunit*{\addcomma\addspace}
-  \usebibmacro{date}%
+  \ifboolexpr{
+    test {\iffieldundef{booktitle}}
+    and
+    test {\iffieldundef{maintitle}}
+  }
+  {}
+  {\usebibmacro{publisher+location+date}}%
   \newunit\newblock
   \usebibmacro{byeditor+others}%
   \newunit\newblock
@@ -1096,7 +1144,7 @@
   \newunit\newblock
   \usebibmacro{series+number}%
   \newunit\newblock
-  \printlist{organization}% This has to be printed conditionally
+  \printlist{organization}
   \newunit\newblock
   \usebibmacro{chapter+pages}%
   \newunit\newblock
@@ -1136,6 +1184,47 @@
   \printlist{institution}%
   \setunit*{\addcomma\addspace}
   \printlist{location}%
+  \setunit*{\addcomma\addspace}
+  \printeventdate%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \iftoggle{bbx:isbn}
+    {\printfield{isbn}}
+    {}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \iftoggle{bbx:related}
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}
+    {}%
+  \usebibmacro{finentry}}
+
+\DeclareBibliographyDriver{monography}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author}%
+  \setunit{\labelnamepunct}\newblock
+  \usebibmacro{title}%
+  \newunit
+  \usebibmacro{date}%
+  \newunit\newblock
+  \usebibmacro{chapter+pages}%
+  \newunit
+  \printfield{pagetotal}%
+  \newunit\newblock
+  \printfield{type}%
+  \setunit*{\addspace\textendash\addspace}
+  \printlist{institution}%
+  \setunit*{\addcomma\addspace}
+  \printlist{location}%
+  \setunit*{\addcomma\addspace}
+  \printeventdate%
   \newunit\newblock
   \printfield{note}%
   \newunit\newblock
@@ -1268,7 +1357,7 @@
   \newunit
   \printfield{volumes}%
   \newunit\newblock
-  \usebibmacro{publisher+location+date}%
+  \usebibmacro{location+date}%
   \newunit\newblock
   \usebibmacro{chapter+pages}%
   \newunit
@@ -1322,7 +1411,7 @@
   \newunit
   \printfield{pagetotal}%
   \setunit*{\addcomma\addspace}
-  \printfield{usere}% dimensions
+  \printfield{dimensions}
   \newunit\newblock
   \printfield{howpublished}%
   \newunit\newblock
