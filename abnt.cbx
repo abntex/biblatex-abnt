@@ -38,6 +38,12 @@
     {\namepartprefix}
     {\namepartsuffix}}
 
+\DeclareNameFormat{last}{%
+	\nameparts{#1}%
+	\usebibmacro{name:family-given}
+		{\namepartfamily}
+		{}{}{}}
+
 \DeclareNameFormat{LAST}{%
   \nameparts{#1}%
   \usebibmacro{name:family-given}
@@ -57,6 +63,19 @@
 % ----------
 % DeclareCiteCommand
 % ----------
+
+\DeclareCiteCommand{\apud}[\mkbibparens]
+	{\iffieldundef{prenote}
+		{}
+		{\iftoggle{sccite}
+		{\textsc{\printfield[lowercase]{prenote}}}
+		{\printfield[uppercase]{prenote}}
+	\addspace\bibstring{apud}\addspace}}
+	{\usebibmacro{citeindex}%
+	\usebibmacro{cite}}
+	{\addspace\bibstring{apud}\addspace}
+	{\usebibmacro{postnote}}
+  
 
 \DeclareCiteCommand{\cite}[\mkbibparens]
   {\usebibmacro{prenote}}
@@ -142,7 +161,7 @@
           {}%
         \usebibmacro{cite:labelyear+extrayear}}
        {\usebibmacro{cite:shorthand}}}
-    {\printnames{labelname}%
+    {\printnames[last]{labelname}%
      \setunit{%
        \global\booltrue{cbx:parens}%
        \addspace\bibopenparen}%
