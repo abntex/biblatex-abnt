@@ -74,6 +74,8 @@
     {\ExecuteBibliographyOptions{pagetracker}%
      \renewbibmacro*{bbx:savehash}{\savefield{fullhash}{\bbx@lasthash}}
 	 \renewbibmacro*{saveorghash}{\savelist{organization}{\bbx@lasthash}}}}
+\DeclareEntryOption[boolean]{repeatauthors}[true]{%
+  \settoggle{repeatauthors}{#1}}% TODO: This isn't working as it should.
 
 % Option to use the original dashes instead of underscores.
 \DeclareBibliographyOption[boolean]{usedashes}[true]{%
@@ -153,7 +155,6 @@
       \step[fieldsource=conference-number,fieldtarget=number]
       \step[fieldsource=org-short,fieldtarget=shortauthor]
       \step[fieldsource=urlaccessdate,fieldtarget=urldate]
-      \step[fieldsource=pagename,fieldtarget=bookpagination]
       \step[fieldsource=year-presented,fieldtarget=eventyear]
       \step[typesource=journalpart,typetarget=supperiodical]
     }
@@ -367,6 +368,14 @@
 \DeclareFieldFormat{relatedstring:reprintfrom}{\addspace #1\addcolon\addspace}
 \DeclareFieldFormat{relatedstring:default}{\addspace #1\addcolon\addspace}
 
+\DeclareFieldFormat{origlanguage}{%
+    \ifbibstring{#1}
+      {\bibxstring{#1}}
+      {\ifbibstring{from#1}
+         {\bibxstring{from#1}}
+         {#1}}
+}
+
 \DeclareListFormat{uppercase}{%
   \usebibmacro{list:delim}{#1}%
   \iftoggle{scbib}{\textsc{#1}}{\MakeUppercase{#1}}\isdot
@@ -413,20 +422,6 @@
      \setunit{\addspace}}%
   \usebibmacro{volume+number+eid}%
   \newunit}
-  
-% Use "DOE, J. (Ed.)" instead of "Ed. by DOE, J."
-\renewbibmacro*{editor+others}{%
-  \ifboolexpr{%
-    test \ifuseeditor
-    and
-    not test {\ifnameundef{editor}}
-  }
-    {\printnames{editor}%
-     \setunit{\addperiod\space}%
-     \printtext[parens]{\usebibmacro{editor+othersstrg}}%
-	 \savenamecs*{editor}{saveded}%
-     \clearname{editor}}
-    {}}
 
 % For @bookinbook entries: use the bookauthor when available,
 % else use editor+others.
@@ -452,8 +447,7 @@
 		test {\iffieldundef{title}}
 		and
 		test {\iffieldundef{subtitle}}
-	}
-    	{}
+	}{}
     	{\printtext[title]{%
 			\ifboolexpr{%
 				test {\ifnameundef{author}}
@@ -465,12 +459,25 @@
 				test {\iffieldundef{eventtitle}}
 			}
 				{\unspace\printfield[upperfirst]{title}}
-				{\printfield[titlecase]{title}}
+				{\iffieldundef{maintitle}
+					{\printfield[titlecase]{title}}
+					{\printfield[noformat]{title}}}
 			\normalfont{\setunit*{\subtitlepunct}%
 			\printfield[noformat]{subtitle}
 			\setunit{\addperiod\addspace}}}
 		\newunit}%
 	\printfield{titleaddon}}
+
+\newbibmacro*{inmaintitle}{%
+	\iffieldundef{maintitle}{}{%
+		\usebibmacro{in:}
+		\iftoggle{repeatauthors}
+			{\addspace\usebibmacro{author/editor+others}}
+			{\addspace\bibnamedash}
+		\newunit\newblock
+		\usebibmacro{maintitle}
+	}
+}
 
 \renewbibmacro*{maintitle+booktitle}{%
   \iffieldundef{maintitle}
@@ -562,14 +569,18 @@
 	\usebibmacro{date}%
 	\newunit}
 
-\newbibmacro*{author/editor+others/organization}{%
-	\ifboolexpr{%
-		test {\ifnameundef{author}}
-		and
-		test {\ifnameundef{editor}}
-	}
-	{\usebibmacro{organization}}
-	{\usebibmacro{author/editor+others}}}
+\renewbibmacro*{editor+others}{%
+  \ifboolexpr{%
+    test \ifuseeditor
+    and
+    not test {\ifnameundef{editor}}
+  }
+    {\printnames{editor}%
+     \setunit{\addperiod\space}%
+     \printtext[parens]{\usebibmacro{editor+othersstrg}}%
+	 \savenamecs*{editor}{saveded}%
+     \clearname{editor}}
+    {\usebibmacro{organization}}}
 
 \newbibmacro*{editor+others/organization}{%
 	\ifnameundef{editor}
@@ -595,14 +606,16 @@
 
 \newbibmacro*{saveorghash}{\savelist{organization}{\bbx@lasthash}}
 \newbibmacro*{organization}{%
-    \iflistundef{organization}
-        {\global\undef\bbx@lasthash}
+	\iflistundef{organization}
+		{\global\undef\bbx@lasthash}
         {\savelistcs*{organization}{savedorg}%
 		\usebibmacro{bbx:dashcheck}%
-           {\bibnamedash%
+			{\iftoggle{repeatauthors}
+				{\printlist[upperfirst]{organization}}
+				{\bibnamedash}%
 			\setunit*{\addperiod\addspace}%
 			\printfield{orgsubtitle}}
-           {\usebibmacro{saveorghash}%
+			{\usebibmacro{saveorghash}%
             \printlist[upperfirst]{organization}%
 			\setunit*{\addperiod\addspace}%
 			\printfield{orgsubtitle}}
@@ -637,7 +650,7 @@
 		{}
 		{\ifnameundef{bookauthor}
 			{\iftoggle{repeatauthors}
-				{\usebibmacro{author/editor+others/organization}}
+				{\usebibmacro{author/editor+others}}
 				{\bibnamedash}}
 			{\printnames{bookauthor}}}
 }
@@ -667,23 +680,52 @@
        \printfield[noformat]{issuesubtitle}}}}
 
 \renewbibmacro*{author}{%
-  \ifboolexpr{
-    test \ifuseauthor
-    and
-    not test {\ifnameundef{author}}
-  }
-    {\usebibmacro{bbx:dashcheck}
-       {\bibnamedash}
-       {\usebibmacro{bbx:savehash}%
-        \printnames{author}%
-        \iffieldundef{authortype}
-          {\setunit{\addspace}}
-          {\setunit{\addcomma\space}}}%
-     \iffieldundef{authortype}
-       {}
-       {\usebibmacro{authorstrg}%
-        \setunit{\addspace}}}%
-    {\global\undef\bbx@lasthash}}
+	\ifboolexpr{
+		test \ifuseauthor
+		and
+		not test {\ifnameundef{author}}
+	}{%
+		\usebibmacro{bbx:dashcheck}{%
+			\iftoggle{repeatauthors}{%
+				\printnames{author}%
+				\iffieldundef{authortype}{%
+					\setunit{\addspace}
+				}{%
+					\setunit{\addcomma\space}
+				}%
+			}{%
+				\bibnamedash
+			}%
+		}{%
+			\usebibmacro{bbx:savehash}%
+			\printnames{author}%
+			\iffieldundef{authortype}{%
+				\setunit{\addspace}
+			}{%
+				\setunit{\addcomma\space}
+			}%
+		}%
+		\iffieldundef{authortype}
+			{}
+			{\usebibmacro{authorstrg}%
+			\setunit{\addspace}}
+	}{%
+		\global\undef\bbx@lasthash
+	}
+}
+
+\renewbibmacro*{byeditor+others}{%
+  \ifnameundef{editor}
+    {}
+    {\usebibmacro{byeditor+othersstrg}%
+     \setunit{\addspace}%
+     \printnames[byeditor]{editor}%
+     \clearname{editor}%
+     \newunit}%
+  \usebibmacro{byeditorx}%
+  \usebibmacro{bytranslator+others}
+  \newunit\newblock
+  \printfield{furtherresp}}
 
 \renewbibmacro*{related:reprintfrom}[1]{%
   \entrydata*{#1}{%
@@ -705,6 +747,18 @@
           \renewbibmacro*{date}{\printdate}}%
        \renewbibmacro*{pageref}{}}
       {\thefield{entrytype}}}}
+	  
+\newbibmacro*{language}{%
+	\ifboolexpr{%
+		test {\iflistundef{language}}
+		and
+		test {\iffieldundef{origlanguage}}
+	}
+	{}
+	{%
+		\printtext{\printlist{language}\addspace\printfield{origlanguage}}
+	}
+}
 
 \newbibmacro*{bbx:savehash}{%
   \savefield{fullhash}{\bbx@lasthash}}
@@ -802,28 +856,20 @@
 \DeclareBibliographyDriver{book}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
-  \usebibmacro{author/editor+others/organization}%
-  \setunit{\labelnamepunct}\newblock
-  \usebibmacro{maintitle+title}%
-  \newunit
-  \printlist{language}%
+  \usebibmacro{author/editor+others}%
   \newunit\newblock
-  \usebibmacro{byauthor}%
+  \usebibmacro{title}%
   \newunit\newblock
-  \usebibmacro{byeditor+others}%
-  \newunit
-  \usebibmacro{bytranslator+others}%
-  \newunit
-  \printfield{furtherresp}
+  \usebibmacro{inmaintitle}
+  \newunit\newblock
+  \usebibmacro{byeditor+others}
   \newunit\newblock
   \printfield{edition}%
   \newunit\newblock
   \usebibmacro{publisher+location+date}%
-  \newunit
-  \iffieldundef{maintitle}
-    {\printfield{volume}%
-     \printfield{part}}
-    {}%
+  \newunit\newblock
+  \printfield{volume}%
+  \printfield{part}
   \newunit\newblock
   \printfield{volumes}%
   \newunit\newblock
@@ -838,6 +884,8 @@
   \usebibmacro{series+number}%
   \newunit\newblock
   \printfield{howpublished}%
+  \newunit\newblock
+  \usebibmacro{language}
   \newunit\newblock
   \printfield{note}%
   \newunit\newblock
@@ -897,7 +945,7 @@
 \DeclareBibliographyDriver{supperiodical}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
-  \usebibmacro{author/editor+others/organization}%
+  \usebibmacro{author/editor+others}%
   \setunit{\labelnamepunct}\newblock
   \usebibmacro{issue}
   \setunit*{\addperiod\addspace}%
@@ -950,7 +998,7 @@
 \DeclareBibliographyDriver{inbook}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
-  \usebibmacro{author/editor+others/organization}%
+  \usebibmacro{author/editor+others}%
   \setunit{\labelnamepunct}\newblock
   \usebibmacro{title}%
   \newunit
@@ -997,8 +1045,6 @@
     {}%
   \usebibmacro{finentry}}
 
-% Print the author before the title for the main book in incollection entries.
-% TODO: the same is probably needed for inbook entries.
 \DeclareBibliographyDriver{incollection}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
@@ -1106,7 +1152,7 @@
 \DeclareBibliographyDriver{manual}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
-  \usebibmacro{author/editor+others/organization}%
+  \usebibmacro{author/editor+others}%
   \setunit{\labelnamepunct}\newblock
   \usebibmacro{maintitle+title}%
   \newunit
@@ -1353,7 +1399,7 @@
 \DeclareBibliographyDriver{booklet}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
-  \usebibmacro{author/editor+others/organization}%
+  \usebibmacro{author/editor+others}%
   \setunit{\labelnamepunct}\newblock
   \usebibmacro{maintitle+title}%
   \newunit
@@ -1448,7 +1494,7 @@
 \DeclareBibliographyDriver{report}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
-  \usebibmacro{author/editor+others/organization}%
+  \usebibmacro{author/editor+others}%
   \setunit{\labelnamepunct}\newblock
   \usebibmacro{maintitle+title}%
   \newunit
@@ -1498,7 +1544,7 @@
 \DeclareBibliographyDriver{misc}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
-  \usebibmacro{author/editor+others/organization}%
+  \usebibmacro{author/editor+others}%
   \setunit{\labelnamepunct}\newblock
   \usebibmacro{maintitle+title}%
   \newunit
