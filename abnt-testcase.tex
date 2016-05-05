@@ -5,6 +5,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{microtype}
 \usepackage{enumitem}
+\usepackage{examplep}
 %\usepackage{hyperref}
 
 \usepackage[
@@ -32,22 +33,18 @@
 \addbibresource{abntex2-doc-test.bib}
 \addbibresource{abntex2-doc.bib}
 
-\newcommand{\citeonline}{\textcite}
-
 \begin{document}
 
 	\section*{Comandos implementados}
-
-	\begin{enumerate}[label=]
-
-		\item \textbf{\textbackslash cite:} \cite{10520-2002:6.3-8}
-
-		\item \textbf{\textbackslash cite*:} \cite*{10520-2002:6.3-1}
-
-		\item \textbf{\textbackslash textcite:} \textcite{10520-2002:6.3-1}
-		\item \textbf{\textbackslash textcite*:} \textcite*{10520-2002:6.3-1}
 	
-	\end{enumerate}
+	\begin{description}[leftmargin=!,labelwidth=16em,itemsep=7pt]
+	    \item [\PVerb{\cite{santos1994}}] \cite{santos1994}
+	    \item [\PVerb{\cite*{santos1994}}] \cite*{santos1994}
+	    \item [\PVerb{\textcite{santos1994}}] \textcite{santos1994}
+	    \item [\PVerb{\textcite*{santos1994}}] \textcite*{santos1994}
+	    \item [\PVerb{\apud{gomes1998, santos1994}}] \apud{gomes1998, santos1994}
+	    \item [\PVerb{\apud[gomes][]{santos1994}}] \apud[gomes][]{santos1994}
+	\end{description}
 
 	\nocite{*}
 	\printbibliography
