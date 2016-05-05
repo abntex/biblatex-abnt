@@ -35,12 +35,40 @@
 \NewBibliographyString{sheet}
 \NewBibliographyString{sheets}
 
+\NewBibliographyString{organizer}
+\NewBibliographyString{byorganizer}
+\NewBibliographyString{byorganizerfo}
+
+\NewBibliographyString{photographer}
+\NewBibliographyString{byphotographer}
+
+\NewBibliographyString{artisticdirector}
+\NewBibliographyString{byartisticdirector}
+
+\NewBibliographyString{recorder}
+\NewBibliographyString{byrecorder}
+
+\NewBibliographyString{interviewer}
+\NewBibliographyString{byinterviewer}
+
+\NewBibliographyString{generalorganizer}
+\NewBibliographyString{bygeneralorganizer}
+\NewBibliographyString{bygeneralorganizerfo}
+
 \NewBibliographyString{bycoeditor}
 \NewBibliographyString{bydirector}
 \NewBibliographyString{bygeneraldirector}
+\NewBibliographyString{bycoordinator}
+\NewBibliographyString{byproducer}
+\NewBibliographyString{byscreenwriter}
+\NewBibliographyString{byinterpreter}
+\NewBibliographyString{byillustrator}
+\NewBibliographyString{bytechnicalreviser}
 
 \NewBibliographyString{illustrated}
 \NewBibliographyString{monography}
+
+\NewBibliographyString{recensionof}
 
 \DeclareBibliographyStrings{%
   volume 			= {{volume}{v\adddot}},
@@ -56,12 +84,119 @@
   urlseen			= {{acesso em}{acesso em}},
   sheet				= {{folha}{f.}},
   sheets		 	= {{folhas}{f.}},
+  illustrated		= {{ilustrado}{il.}},
+  monography		= {{monografia}{monografia}},
+  phdthesis			= {{tese (doutorado)}{tese (doutorado)}},
+  mathesis			= {{tese (mestrado)}{tese (mestrado)}},
+  reprintfrom       = {{separata de}{separata de}},
+  recensionof       = {{recensão de}{recensão de}},
   bycoeditor    	= {{co-editor}{co-editor}},
   bydirector	    = {{direção de}{direção de}},
   bygeneraldirector	= {{direção geral de}{direção geral de}},
-  illustrated		= {{ilustrado}{il.}},
-  monography		= {{monografia}{monografia}},
-  phdthesis			= {{Tese (Doutorado)}{Tese (Doutorado)}},
-  mathesis			= {{Tese (Mestrado)}{Tese (Mestrado)}},
+  bycoordinator		= {{coordenação de}{coordenação de}},
+  byproducer		= {{produção de}{produção de}},
+  byscreenwriter	= {{roteiro de}{roteiro de}},
+  byinterpreter		= {{interpretação de}{interpretação de}},
+  byillustrator		= {{ilustrações de}{ilustrações de}},
+  photographer		= {{fotógrafo}{fot.}},
+  byphotographer	= {{fotografia de}{fotografia de}},
+  recorder			= {{gravador}{gravador}},
+  byrecorder		= {{gravação de}{gravação de}},
+  interviewer		= {{entrevistador}{entrevistador}},
+  byinterviewer		= {{entrevista por}{entrevista por}},
+  artisticdirector		= {{diretor artístico}{dir. art.}},
+  byartisticdirector		= {{direção artística de}{direção artística de}},
+  organizer			= {{organização}{org\adddot}},
+  generalorganizer			= {{organização geral}{org\adddot geral}},
+  byorganizer		= {{organização de}{organização de}}
+  bygeneralorganizer		= {{organização geral de}{organização geral de}}
+  byauthor         = {{por}{por}},
+  byeditor         = {{edição de}{edição de}},
+  bycompiler       = {{compilação de}{compilação de}},
+  byredactor       = {{redigido por}{redigido por}},
+  byreviser        = {{revisão de}{revisão de}},
+  bytechnicalreviser = {{revisão técnica de}{revisão técnica de}},
+  byreviewer       = {{resenha de}{resenha de}},
+  byfounder        = {{fundado por}{fundado por}},
+  bycontinuator    = {{continuado por}{continuado por}},
+  bycollaborator   = {{em colabora\c{a}\~o com}{em colabora\c{a}\~o com}},
+  bytranslator     = {{tradução \lbx@lfromlang\ de}{tradução \lbx@lfromlang\ de}},
+  bycommentator    = {{comentário de}{comentário de}},
+  byannotator      = {{notas de}{notas de}},
+  withcommentator  = {{coment\'ario de}{coment\'ario de}},
+  withannotator    = {{notas de}{notas de}},
+  withintroduction = {{introdu\c{c}\~ao de}{introdu\c{c}\~ao de}},
+  withforeword     = {{pref\'acio de}{pref\'acio de}},
+  withafterword    = {{posf\'acio de}{posf\'acio de}},
+  byorganizerfo	   = {{organização e prefácio de}{organização e prefácio de}},
+  bygeneralorganizerfo	   = {{organização geral e prefácio de}{organização geral e prefácio de}},
+  byeditortr       = {{edição e tradução \lbx@lfromlang\ de}%
+                      {edição e tradução \lbx@lfromlang\ de}},
+  byeditorco       = {{edição e comentário de}%
+                      {edição e comentário de}},
+  byeditoran       = {{edição e notas de}%
+                      {edição e notas de}},
+  byeditorin       = {{edição e introdução de}%
+                      {edição e introdução de}},
+  byeditorfo       = {{edição e prefácio de}%
+                      {edição e prefácio de}},
+  byeditoraf       = {{edição e posfácio de}%
+                      {edição e posfácio de}},
+  byeditortrco     = {{edição, tradução \lbx@lfromlang\ e comentário de}%
+                      {edição, tradução \lbx@lfromlang\ e comentário de}},
+  byeditortran     = {{edição, tradução \lbx@lfromlang\ e notas de}%
+                      {edição, tradução \lbx@lfromlang\ e notas de}},
+  byeditortrin     = {{edição, tradução \lbx@lfromlang\ e introdução de}%
+                      {edição, tradução \lbx@lfromlang\ e introdução de}},
+  byeditortrfo     = {{edição, tradução \lbx@lfromlang\ e prefácio de}%
+                      {edição, tradução \lbx@lfromlang\ e prefácio de}},
+  byeditortraf     = {{edição, tradução \lbx@lfromlang\ e posfácio de}%
+                      {edição, tradução \lbx@lfromlang\ e posfácio de}},
+  byeditorcoin     = {{edição, comentário e introdução de}%
+                      {edição, comentário e introdução de}},
+  byeditorcofo     = {{edição, comentário e prefácio de}%
+                      {edição, comentário e prefácio de}},
+  byeditorcoaf     = {{edição, comentário e posfácio de}%
+                      {edição, comentário e posfácio de}},
+  byeditoranin     = {{edição, notas e introdução de}%
+                      {edição, notas e introdução de}},
+  byeditoranfo     = {{edição, notas e prefácio de}%
+                      {edição, notas e prefácio de}},
+  byeditoranaf     = {{edição, notas e posfácio de}%
+                      {edição, notas e posfácio de}},
+  byeditortrcoin   = {{edição, tradução \lbx@lfromlang, comentário e introdução de}%
+                      {edição, tradução \lbx@lfromlang, comentário e introdução de}},
+  byeditortrcofo   = {{edição, tradução \lbx@lfromlang, comentário e prefácio de}%
+                      {edição, tradução \lbx@lfromlang, comentário e prefácio de}},
+  byeditortrcoaf   = {{edição, tradução \lbx@lfromlang, comentário e posfácio de}%
+                      {edição, tradução \lbx@lfromlang, comentário e posfácio de}},
+  byeditortranin   = {{edição, tradução \lbx@lfromlang, notas e introdução de}%
+                      {edição, tradução \lbx@lfromlang, notas e introdução de}},
+  byeditortranfo   = {{edição, tradução \lbx@lfromlang, notas e prefácio de}%
+                      {edição, tradução \lbx@lfromlang, notas e prefácio de}},
+  byeditortranaf   = {{edição, tradução \lbx@lfromlang, notas e posfácio de}%
+                      {edição, tradução \lbx@lfromlang, notas e posfácio de}},
+  bytranslatorco   = {{tradução \lbx@lfromlang\ e comentário de}%
+                      {tradução \lbx@lfromlang\ e comentário de}},
+  bytranslatoran   = {{tradução \lbx@lfromlang\ e notas de}%
+                      {tradução \lbx@lfromlang\ e notas de}},
+  bytranslatorin   = {{tradução \lbx@lfromlang\ e introdução de}%
+                      {tradução \lbx@lfromlang\ e introdução de}},
+  bytranslatorfo   = {{tradução \lbx@lfromlang\ e prefácio de}%
+                      {tradução \lbx@lfromlang\ e prefácio de}},
+  bytranslatoraf   = {{tradução \lbx@lfromlang\ e posfácio de}%
+                      {tradução \lbx@lfromlang\ e posfácio de}},
+  bytranslatorcoin = {{tradução \lbx@lfromlang, comentário e introdução de}%
+                      {tradução \lbx@lfromlang, comentário e introdução de}},
+  bytranslatorcofo = {{tradução \lbx@lfromlang, comentário e prefácio de}%
+                      {tradução \lbx@lfromlang, comentário e prefácio de}},
+  bytranslatorcoaf = {{tradução \lbx@lfromlang, comentário e posfácio de}%
+                      {tradução \lbx@lfromlang, comentário e posfácio de}},
+  bytranslatoranin = {{tradução \lbx@lfromlang, notas e introdução de}%
+                      {tradução \lbx@lfromlang, notas e introdução de}},
+  bytranslatoranfo = {{tradução \lbx@lfromlang, notas e prefácio de}%
+                      {tradução \lbx@lfromlang, notas e prefácio de}},
+  bytranslatoranaf = {{tradução \lbx@lfromlang, notas e posfácio de}%
+                      {tradução \lbx@lfromlang, notas e posfácio de}},
 }
 \endinput
