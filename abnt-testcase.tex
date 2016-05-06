@@ -14,11 +14,12 @@
     style=abnt,
     %hyperref,         % Uncomment to turn citations into links
     %backref,          % Uncomment for back references (E.g. "Cit. on p. 1")
-    %repeatauthors,    % Uncomment to repeat authors' names (instead of underscore)
-    %usedashes,        % Uncomment to use biblatex standard dashes instead of underscores
-    %indent,           % Uncomment to use hanging indentation in the bibliography
+    %ignoretitlecase,  % Uncomment to leave titles as they are typed in the .bib file
+    %repeatauthors,    % Uncomment to repeat authors' names (instead of using an underscore)
     %giveninits,       % Uncomment to use initials for first names
-    %bftitles,         % Uncomment for bold titles
+    %usedashes,        % Uncomment to use biblatex standard dashes instead of underscores
+    %bftitles,         % Uncomment to print titles in bold
+    %indent,           % Uncomment to use hanging indentation in the bibliography
     %scbib,            % Uncomment to use small caps in the bibliography
     %sccite,           % Uncomment to use small caps in the citations
     %noslsn,           % Uncomment to hide [s.l] and [s.n]
@@ -37,13 +38,19 @@
 
 	\section*{Comandos implementados}
 	
-	\begin{description}[leftmargin=!,labelwidth=16em,itemsep=7pt]
+	\SetLabelAlign{parright}{\strut\smash{\parbox[t]{\labelwidth}{\raggedleft#1}}}
+	\setlist[description]{style=nextline}
+	
+	\begin{description}
 	    \item [\PVerb{\cite{santos1994}}] \cite{santos1994}
 	    \item [\PVerb{\cite*{santos1994}}] \cite*{santos1994}
 	    \item [\PVerb{\textcite{santos1994}}] \textcite{santos1994}
+	    \item [\PVerb{\textcites{santos1994}{gomes1998}{silva1996}}] \textcites{santos1994}{gomes1998}{silva1996}
 	    \item [\PVerb{\textcite*{santos1994}}] \textcite*{santos1994}
-	    \item [\PVerb{\apud{gomes1998, santos1994}}] \apud{gomes1998, santos1994}
-	    \item [\PVerb{\apud[gomes][]{santos1994}}] \apud[gomes][]{santos1994}
+	    \item [\PVerb{\apud{gomes1998}{santos1994}}] \apud{gomes1998}{santos1994}
+	    \item [\PVerb{\apud{silva1996}{gomes1998}{santos1994}}] \apud{silva1996}{gomes1998}{santos1994}
+	    \item [\PVerb{\apud[p.~12]{gomes1998}[p.~200]{santos1994}}] \apud[p.~12]{gomes1998}[p.~200]{santos1994}
+	    \item [\PVerb{\apud[batman][]{santos1994}}] \apud[batman][]{santos1994}
 	\end{description}
 
 	\nocite{*}
