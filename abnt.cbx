@@ -109,6 +109,10 @@
   {\multicitedelim}
   {\usebibmacro{postnote}}
 
+\DeclareMultiCiteCommand{\cites}[\mkbibparens]
+	{\cite}
+	{\setunit{\multicitedelim}}
+
 \DeclareCiteCommand*{\cite}[\mkbibparens]
   {\usebibmacro{prenote}}
   {\usebibmacro{citeindex}%
