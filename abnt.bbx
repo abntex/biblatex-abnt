@@ -63,6 +63,13 @@
   \settoggle{nosl}{#1}
   \settoggle{nosn}{#1}}
 
+% Option to ignore title case
+\DeclareBibliographyOption[boolean]{ignoretitlecase}[true]{%
+	\ifstrequal{#1}{true}
+		{\DeclareFieldFormat*{titlecase}{##1}}
+		{\DeclareFieldFormat*{titlecase}{\MakeSentenceCase{##1}}}
+}
+
 % This is the dashed option from authorstyle.bbx,
 % I changed it's name and made it default.
 \newtoggle{repeatauthors}
@@ -75,7 +82,7 @@
      \renewbibmacro*{bbx:savehash}{\savefield{fullhash}{\bbx@lasthash}}
 	 \renewbibmacro*{saveorghash}{\savelist{organization}{\bbx@lasthash}}}}
 \DeclareEntryOption[boolean]{repeatauthors}[true]{%
-  \settoggle{repeatauthors}{#1}}% TODO: This isn't working as it should.
+  \settoggle{repeatauthors}{#1}}
 
 % Option to use the original dashes instead of underscores.
 \DeclareBibliographyOption[boolean]{usedashes}[true]{%

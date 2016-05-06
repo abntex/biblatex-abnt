@@ -15,6 +15,31 @@
 \ProvidesFile{abnt.cbx}[\abx@cbxid]
 \RequireCitationStyle{authoryear}
 
+\newcommand{\addapud}{%
+  \renewcommand*{\multicitedelim}{%
+    \ifnumequal{\value{multicitecount}}{\value{multicitetotal}}
+      {\space\bibstring{apud}}
+      {\addsemicolon}%
+    \space}%
+  \renewcommand*{\textcitedelim}{%
+    \ifnumequal{\value{multicitecount}}{\value{multicitetotal}}
+      {\addspace\bibstring{apud}}
+      {\addsemicolon}%
+    \space}%
+}
+
+\newcommand{\addand}{%
+  \renewcommand*{\multicitedelim}{%
+    \ifnumequal{\value{multicitecount}}{\value{multicitetotal}}
+      {\space\bibstring{and}}
+      {\addsemicolon}%
+    \space}%
+  \renewcommand*{\textcitedelim}{%
+    \ifnumequal{\value{multicitecount}}{\value{multicitetotal}}
+      {\addspace\bibstring{and}}
+      {\addsemicolon}%
+    \space}%
+}
 
 % ----------
 % Options
@@ -64,19 +89,19 @@
 % DeclareCiteCommand
 % ----------
 
-\DeclareCiteCommand{\apud}[\mkbibparens]
+\DeclareMultiCiteCommand{\apud}[\addapud\mkbibparens]
+	{\@apud}
+	{\setunit{\multicitedelim}}
+
+\DeclareCiteCommand{\@apud}
 	{\iffieldundef{prenote}
 		{}
-		{\iftoggle{sccite}
-		{\textsc{\printfield[lowercase]{prenote}}}
-		{\printfield[uppercase]{prenote}}
-	\addspace\bibstring{apud}\addspace}}
+		{\printfield[uppercase]{prenote}\addspace\bibstring{apud}\addspace}}
 	{\usebibmacro{citeindex}%
 	\usebibmacro{cite}}
-	{\addspace\bibstring{apud}\addspace}
+	{\setunit{\multicitedelim}}
 	{\usebibmacro{postnote}}
   
-
 \DeclareCiteCommand{\cite}[\mkbibparens]
   {\usebibmacro{prenote}}
   {\usebibmacro{citeindex}%
@@ -84,8 +109,6 @@
   {\multicitedelim}
   {\usebibmacro{postnote}}
 
-% Add parenthesis when using \cite*
-% E.g.: "\cite*{author95}" prints "(1995)"
 \DeclareCiteCommand*{\cite}[\mkbibparens]
   {\usebibmacro{prenote}}
   {\usebibmacro{citeindex}%
