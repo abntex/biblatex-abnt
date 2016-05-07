@@ -4,6 +4,7 @@ Uma substituição em `biblatex`/`biber` para os estilos `bibtex` do pacote [`ab
 
 Em geral é possível usar o mesmo arquivo `.bib` utilizado pelo `abntex2cite`, e para a maior parte das entradas mais simples nenhuma mudança é necessária; estas são as principais exceções:
 
+- Não consegui entender por que, mas os exemplos do `abntex2cite` usam `{\'\i}` para o caractere "í", enquanto o normal me parece ser `{\'i}` (para outras letras com acento agudo o `abntex2cite` usa o formato normal). Isso pode causar alguns problemas, o ideal é usar `{\'i}` (ou aproveitar os recursos do biber e usar a codificação utf-8). Caso isso não seja possível por algum motivo, chamar o biblatex com a opção `safeinputenc` pode resolver alguns problemas (mas também causa alguns outros, interferindo, por exemplo, na capitalização automática de palavras acentuadas).
 - Os campos de datas devem seguir o formato usado pelo `biblatex`, `yyyy-mm-dd`. Cf. seção 2.2.1 do [manual](http://mirrors.ctan.org/macros/latex/contrib/biblatex/doc/biblatex.pdf).
 - O mesmo vale para os campos de partes de datas, como `month` e `year`.
 - O `biblatex` diferencia os campos `pages` (e.g. "p. 12-18") e `pagetotal` (e.g. "347 p.").

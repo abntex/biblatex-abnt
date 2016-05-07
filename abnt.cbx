@@ -96,7 +96,10 @@
 \DeclareCiteCommand{\@apud}
 	{\iffieldundef{prenote}
 		{}
-		{\printfield[uppercase]{prenote}\addspace\bibstring{apud}\addspace}}
+		{\iftoggle{sccite}
+  	    	{\textsc{\MakeLowercase{\printfield{prenote}}}}
+			{\printfield[uppercase]{prenote}}
+		\addspace\bibstring{apud}\addspace}}
 	{\usebibmacro{citeindex}%
 	\usebibmacro{cite}}
 	{\setunit{\multicitedelim}}
