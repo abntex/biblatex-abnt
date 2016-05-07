@@ -17,7 +17,7 @@
 
 \RequireBibliographyStyle{standard}
 
-\ExecuteBibliographyOptions{urldate=long,pagetracker}
+\ExecuteBibliographyOptions{block=none,urldate=long,pagetracker}
 
 % I don't know what this does, but it has to do with the dashed
 % option I copied from authorstyle.bbx, so I added it too.
@@ -72,24 +72,24 @@
 
 % This is the dashed option from authorstyle.bbx,
 % I changed it's name and made it default.
-\newtoggle{repeatauthors}
-\DeclareBibliographyOption[boolean]{repeatauthors}[true]{%
-  \settoggle{repeatauthors}{#1}
+\newtoggle{repeatfields}
+\DeclareBibliographyOption[boolean]{repeatfields}[true]{%
+  \settoggle{repeatfields}{#1}
   \ifstrequal{#1}{true}
     {\renewbibmacro*{bbx:savehash}{}
 	\renewbibmacro*{saveorghash}{}}
     {\ExecuteBibliographyOptions{pagetracker}%
      \renewbibmacro*{bbx:savehash}{\savefield{fullhash}{\bbx@lasthash}}
 	 \renewbibmacro*{saveorghash}{\savelist{organization}{\bbx@lasthash}}}}
-\DeclareEntryOption[boolean]{repeatauthors}[true]{%
-  \settoggle{repeatauthors}{#1}}
+\DeclareEntryOption[boolean]{repeatfields}[true]{%
+  \settoggle{repeatfields}{#1}}
 
 % Option to use the original dashes instead of underscores.
 \DeclareBibliographyOption[boolean]{usedashes}[true]{%
   \ifstrequal{#1}{true}
     {\renewcommand*{\bibnamedash}{%
 	   \ifdimless{\leftmargin}{0.75em}
-	     {\mbox{\textemdash\space}}
+	     {\mbox{\textemdash\addspace}}
 	     {\makebox[\leftmargin][l]{%
 	        \ifdimless{\leftmargin}{1.25em}
 	          {\textendash}
@@ -356,8 +356,8 @@
 
 \DeclareFieldFormat{illustrated}{\addspace #1\isdot}
 
-\DeclareFieldFormat{url}{\bibstring{url}\addcolon\space\url{<#1>}}
-\DeclareFieldFormat{urldate}{\bibstring{urlseen}\addcolon\space #1}
+\DeclareFieldFormat{url}{\bibstring{url}\addcolon\addspace\url{<#1>}}
+\DeclareFieldFormat{urldate}{\bibstring{urlseen}\addcolon\addspace #1}
 
 \DeclareFieldFormat*{note}{\addspace #1\addperiod\addspace}
 
@@ -407,7 +407,7 @@
   \printfield{volume}%
   \setunit*{\addcomma\addspace}%
   \printfield{number}%
-  \setunit{\addcomma\space}%
+  \setunit{\addcomma\addspace}%
   \printfield{eid}}
 
 % Don't use parenthesis around the date.
@@ -448,43 +448,49 @@
 	    {\bibstring{backrefpage}\ppspace}%
 	  \printlist[pageref][-\value{listtotal}]{pageref}}}}
 
-% Use normalfont for subtitle and also
-% for the title when there is no author.
+\renewbibmacro*{titleiskey}[2]{%
+\ifboolexpr{%
+	test {\ifnameundef{author}}
+	and
+	test {\ifcsundef{saveded}}
+	and
+	test {\ifcsundef{savedorg}}
+	and
+	test {\iffieldundef{eventtitle}}
+}
+    {#1}
+    {#2}}
+
 \renewbibmacro*{title}{%
 	\ifboolexpr{%
 		test {\iffieldundef{title}}
 		and
 		test {\iffieldundef{subtitle}}
-	}{}
-    	{\printtext[title]{%
-			\ifboolexpr{%
-				test {\ifnameundef{author}}
-				and
-				test {\ifcsundef{saveded}}
-				and
-				test {\ifcsundef{savedorg}}
-				and
-				test {\iffieldundef{eventtitle}}
-			}
-				{\unspace\printfield[upperfirst]{title}}
-				{\iffieldundef{maintitle}
-					{\printfield[titlecase]{title}}
-					{\printfield[noformat]{title}}}
-			\normalfont{\setunit*{\subtitlepunct}%
-			\printfield[noformat]{subtitle}
-			\setunit{\addperiod\addspace}}}
-		\newunit}%
+	}{\global\undef\bbx@lasttitle}%
+    	{\usebibmacro{bbx:titledashcheck}%
+			{\unspace\bibnamedash}%
+			{\usebibmacro{bbx:savetitle}%
+			\printtext[title]{%
+				\usebibmacro{titleiskey}%
+					{\unspace\printfield[upperfirst]{title}}%
+					{\iffieldundef{maintitle}%
+						{\printfield[titlecase]{title}}%
+						{\printfield[noformat]{title}}}%
+				\normalfont{\setunit*{\subtitlepunct}%
+				\printfield[noformat]{subtitle}%
+				\setunit{\addperiod\addspace}}}%
+		\newunit}}%
 	\printfield{titleaddon}}
 
 \newbibmacro*{inmaintitle}{%
 	\iffieldundef{maintitle}{}{%
-		\usebibmacro{in:}
-		\iftoggle{repeatauthors}
-			{\addspace\usebibmacro{author/editor+others}}
-			{\addspace\bibnamedash}
-		\newunit\newblock
-		\usebibmacro{maintitle}
-	}
+		\usebibmacro{in:}%
+		\iftoggle{repeatfields}%
+			{\addspace\usebibmacro{author/editor+others}}%
+			{\addspace\bibnamedash}%
+		\newunit\newblock%
+		\usebibmacro{maintitle}%
+	}%
 }
 
 \renewbibmacro*{maintitle+booktitle}{%
@@ -496,7 +502,7 @@
        {}
        {\printfield{volume}%
         \printfield{part}%
-        \setunit{\addcolon\space}}}%
+        \setunit{\addcolon\addspace}}}%
   \usebibmacro{booktitle}%
   \newunit}
 
@@ -531,7 +537,7 @@
 		
 \renewbibmacro*{location+date}{%
 	\usebibmacro{location}
-	\setunit*{\addcomma\space}%
+	\setunit*{\addcomma\addspace}%
 	\usebibmacro{date}%
 	\newunit
 }
@@ -573,37 +579,9 @@
 			{\usebibmacro{location}
 			\setunit*{\addcolon\addspace}
 			\usebibmacro{publisher}}}
-	\setunit*{\addcomma\space}%
+	\setunit*{\addcomma\addspace}%
 	\usebibmacro{date}%
 	\newunit}
-
-\renewbibmacro*{editor+others}{%
-  \ifboolexpr{%
-    test \ifuseeditor
-    and
-    not test {\ifnameundef{editor}}
-  }
-    {\printnames{editor}%
-     \setunit{\addperiod\space}%
-     \printtext[parens]{\usebibmacro{editor+othersstrg}}%
-	 \savenamecs*{editor}{saveded}%
-     \clearname{editor}}
-    {\usebibmacro{organization}}}
-
-\newbibmacro*{editor+others/organization}{%
-	\ifnameundef{editor}
-		{\usebibmacro{organization}}
-		{\usebibmacro{editor+others}}}
-
-\newbibmacro*{author/organization}{%
-	\ifnameundef{author}
-	{\usebibmacro{organization}}
-	{\usebibmacro{author}}}
-
-\newbibmacro*{organization/eventtitle}{%
-	\iffieldundef{eventtitle}
-	{\usebibmacro{organization}}
-	{\printfield[uppercase]{eventtitle}}}
 
 \newbibmacro*{url+urldate}{%
   \usebibmacro{url}%
@@ -611,22 +589,6 @@
     {}
     {\setunit*{\addperiod\addspace}%
      \usebibmacro{urldate}}}
-
-\newbibmacro*{saveorghash}{\savelist{organization}{\bbx@lasthash}}
-\newbibmacro*{organization}{%
-	\iflistundef{organization}
-		{\global\undef\bbx@lasthash}
-        {\savelistcs*{organization}{savedorg}%
-		\usebibmacro{bbx:dashcheck}%
-			{\bibnamedash
-			\setunit*{\addperiod\addspace}%
-			\printfield{nameaddon}}
-			{\usebibmacro{saveorghash}%
-            \printlist[upperfirst]{organization}%
-			\setunit*{\addperiod\addspace}%
-			\printfield{nameaddon}}
-		\clearlist{organization}}%
-}
 
 \newbibmacro*{mathesis}{%
 	\iffieldundef{type}{%
@@ -655,7 +617,7 @@
 	}
 		{}
 		{\ifnameundef{bookauthor}
-			{\iftoggle{repeatauthors}
+			{\iftoggle{repeatfields}
 				{\usebibmacro{author/editor+others}}
 				{\bibnamedash}}
 			{\printnames{bookauthor}}}
@@ -685,6 +647,19 @@
        \setunit*{\subtitlepunct}%
        \printfield[noformat]{issuesubtitle}}}}
 
+\newbibmacro*{organization}{%
+	\iflistundef{organization}
+		{\global\undef\bbx@lastorg}
+        {\usebibmacro{bbx:dashcheck}%
+			{\bibnamedash}
+			{\usebibmacro{bbx:saveorg}%
+			\printlist[upperfirst]{organization}}
+		\savelistcs*{organization}{savedorg}
+		\clearlist{organization}
+		\newunit\newblock%
+		\printfield{nameaddon}}%
+}
+
 \renewbibmacro*{author}{%
 	\ifboolexpr{
 		test \ifuseauthor
@@ -692,61 +667,68 @@
 		not test {\ifnameundef{author}}
 	}{%
 		\usebibmacro{bbx:dashcheck}{%
-			\iftoggle{repeatauthors}{%
-				\printnames{author}%
-				\iffieldundef{authortype}{%
-					\setunit{\addspace}
-				}{%
-					\setunit{\addcomma\space}
-				}%
-			}{%
-				\bibnamedash
-			}%
+			\bibnamedash
 		}{%
 			\usebibmacro{bbx:savehash}%
 			\printnames{author}%
-			\iffieldundef{authortype}{%
-				\setunit{\addspace}
-			}{%
-				\setunit{\addcomma\space}
-			}%
 		}%
-		\iffieldundef{authortype}
-			{}
-			{\usebibmacro{authorstrg}%
-			\setunit{\addspace}}
-		\newunit
+		\addspace
+		\usebibmacro{authorstrg}
+		\newunit\newblock
 		\printfield{nameaddon}
 	}{%
 		\global\undef\bbx@lasthash
 	}
 }
 
-\newbibmacro*{editor}{%
-  \ifboolexpr{
-    test \ifuseeditor
-    and
-    not test {\ifnameundef{editor}}
-  }
-    {\printnames{editor}%
-     \setunit{\addcomma\space}%
-     \usebibmacro{editorstrg}%
-     \clearname{editor}
-	 \newunit
-	 \printfield{nameaddon}}
-    {}}
+\renewbibmacro*{editor+others}{%
+	\ifboolexpr{
+		test \ifuseeditor
+		and
+		not test {\ifnameundef{editor}}%
+	}{%
+		\usebibmacro{bbx:dashcheck}{%
+			\bibnamedash%
+		}{%
+			\usebibmacro{bbx:savehash}%
+			\printnames{editor}%
+			\setunit{\addperiod\addspace}%
+        	\printtext[parens]{\usebibmacro{editor+othersstrg}}%
+		}%
+   	 	\savenamecs*{editor}{saveded}%
+        \clearname{editor}%
+	}{%
+		\global\undef\bbx@lasthash%
+		\usebibmacro{organization}%
+	}
+}
+
+\newbibmacro*{editor+others/organization}{%
+	\ifnameundef{editor}
+		{\usebibmacro{organization}}
+		{\usebibmacro{editor+others}}}
+
+\newbibmacro*{author/organization}{%
+	\ifnameundef{author}
+	{\usebibmacro{organization}}
+	{\usebibmacro{author}}}
+
+\newbibmacro*{organization/eventtitle}{%
+	\iffieldundef{eventtitle}
+	{\usebibmacro{organization}}
+	{\printfield[uppercase]{eventtitle}}}
 
 \renewbibmacro*{byeditor+others}{%
-  \ifnameundef{editor}
-    {}
+  \ifnameundef{editor}%
+    {}%
     {\usebibmacro{byeditor+othersstrg}%
-     \setunit{\addspace}%
+     \setunit*{\addspace}%
      \printnames[byeditor]{editor}%
      \clearname{editor}%
      \newunit}%
   \usebibmacro{byeditorx}%
-  \usebibmacro{bytranslator+others}
-  \newunit\newblock
+  \usebibmacro{bytranslator+others}%
+  \newunit\newblock%
   \printfield{furtherresp}}
 
 \renewbibmacro*{related:reprintfrom}[1]{%
@@ -782,9 +764,6 @@
 	}
 }
 
-\newbibmacro*{bbx:savehash}{%
-  \savefield{fullhash}{\bbx@lasthash}}
-
 \newbibmacro{journal+section}{%
 	\usebibmacro{journal}
 	\iffieldundef{section}
@@ -793,16 +772,27 @@
 		\printfield{section}}
 }
 
+\newbibmacro*{bbx:savehash}{%
+  \savefield{fullhash}{\bbx@lasthash}}
+
+\newbibmacro*{bbx:saveorg}{%
+  \savelist{organization}{\bbx@lastorg}}
+
+\newbibmacro*{bbx:savetitle}{%
+  \savefield{title}{\bbx@lasttitle}}
+
+\newtoggle{isdashed}
+
 \renewbibmacro*{bbx:dashcheck}[2]{%
   \ifboolexpr{
-    (test {\iflistequals{organization}{\bbx@lasthash}}
-    or
-    test {\iffieldequals{fullhash}{\bbx@lasthash}}
+    (test {\iffieldequals{fullhash}{\bbx@lasthash}}
+	or
+	test {\iflistequals{organization}{\bbx@lastorg}}
     )
     and
     not test \iffirstonpage
 	and
-	not test {\iftoggle{repeatauthors}}
+	not test {\iftoggle{repeatfields}}
     and
     (
        not bool {bbx@inset}
@@ -810,8 +800,13 @@
        test {\iffieldequalstr{entrysetcount}{1}}
     )
   }
-    {#1}
-    {#2}}
+    {\settoggle{isdashed}{true}#1}
+    {\settoggle{isdashed}{false}#2}}
+
+\renewbibmacro*{bbx:titledashcheck}[2]{%
+  \iftoggle{isdashed}
+  	{\iffieldequals{title}{\bbx@lasttitle}{#1}{#2}}
+  	{#2}}
 
 \renewbibmacro*{begrelated}{%
   \booltrue{bbx@inset}}
@@ -858,7 +853,7 @@
   \usebibmacro{date}
   \newunit
   \printfield{note}%
-  \setunit{\addcolon\space}%
+  \setunit{\addcolon\addspace}%
   \usebibmacro{issue}%
   \newunit\newblock
   \iftoggle{bbx:isbn}
@@ -881,12 +876,12 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/editor+others}%
-  \newunit\newblock
+  \setunit{\labelnamepunct}\newblock
   \usebibmacro{title}%
   \newunit\newblock
-  \usebibmacro{inmaintitle}
+  \usebibmacro{inmaintitle}%
   \newunit\newblock
-  \usebibmacro{byeditor+others}
+  \usebibmacro{byeditor+others}%
   \newunit\newblock
   \printfield{edition}%
   \newunit\newblock
@@ -982,9 +977,9 @@
   \printfield{volume}%
   \setunit*{\addcomma\addspace}
   \printfield{number}%
-  \setunit*{\addcomma\space}%
+  \setunit*{\addcomma\addspace}%
   \printfield{pages}%
-  \setunit*{\addcomma\space}%
+  \setunit*{\addcomma\addspace}%
   \usebibmacro{date}%
   \newunit
   \printlist{language}%
