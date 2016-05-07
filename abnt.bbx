@@ -17,7 +17,7 @@
 
 \RequireBibliographyStyle{standard}
 
-\ExecuteBibliographyOptions{urldate=long}
+\ExecuteBibliographyOptions{urldate=long,pagetracker}
 
 % I don't know what this does, but it has to do with the dashed
 % option I copied from authorstyle.bbx, so I added it too.
@@ -125,7 +125,7 @@
     \field{subtitle}
   }
   \sort{
-    \field{orgsubtitle}
+    \field{nameaddon}
     \field{sorttitle}
     \field{issuetitle}
     \field{title}
@@ -191,7 +191,6 @@
 	section,
 	illustrated,
 	dimensions,
-	orgsubtitle,
 	furtherresp,
 	reprinted-text,
 }
@@ -371,6 +370,8 @@
 \DeclareFieldFormat{lowercase}{\MakeLowercase{#1}}
 \DeclareFieldFormat{upperfirst}{\iftoggle{scbib}{\normalfont\FirstWordSC{#1}}{\normalfont\FirstWordUpper{#1}}}
 \DeclareFieldFormat{noformat}{\normalfont{#1}}
+
+\DeclareFieldFormat{nameaddon}{\addspace #1}
 
 \DeclareFieldFormat{relatedstring:reprintfrom}{\addspace #1\addcolon\addspace}
 \DeclareFieldFormat{relatedstring:default}{\addspace #1\addcolon\addspace}
@@ -617,15 +618,13 @@
 		{\global\undef\bbx@lasthash}
         {\savelistcs*{organization}{savedorg}%
 		\usebibmacro{bbx:dashcheck}%
-			{\iftoggle{repeatauthors}
-				{\printlist[upperfirst]{organization}}
-				{\bibnamedash}%
+			{\bibnamedash
 			\setunit*{\addperiod\addspace}%
-			\printfield{orgsubtitle}}
+			\printfield{nameaddon}}
 			{\usebibmacro{saveorghash}%
             \printlist[upperfirst]{organization}%
 			\setunit*{\addperiod\addspace}%
-			\printfield{orgsubtitle}}
+			\printfield{nameaddon}}
 		\clearlist{organization}}%
 }
 
@@ -716,10 +715,26 @@
 			{}
 			{\usebibmacro{authorstrg}%
 			\setunit{\addspace}}
+		\newunit
+		\printfield{nameaddon}
 	}{%
 		\global\undef\bbx@lasthash
 	}
 }
+
+\newbibmacro*{editor}{%
+  \ifboolexpr{
+    test \ifuseeditor
+    and
+    not test {\ifnameundef{editor}}
+  }
+    {\printnames{editor}%
+     \setunit{\addcomma\space}%
+     \usebibmacro{editorstrg}%
+     \clearname{editor}
+	 \newunit
+	 \printfield{nameaddon}}
+    {}}
 
 \renewbibmacro*{byeditor+others}{%
   \ifnameundef{editor}
@@ -786,6 +801,8 @@
     )
     and
     not test \iffirstonpage
+	and
+	not test {\iftoggle{repeatauthors}}
     and
     (
        not bool {bbx@inset}
