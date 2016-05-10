@@ -55,14 +55,6 @@
 % DeclareNameFormat
 % ----------
 
-\DeclareNameFormat{full}{%
-  \nameparts{#1}%
-  \usebibmacro{name:given-family}
-    {\namepartfamily}
-    {\namepartgiven}
-    {\namepartprefix}
-    {\namepartsuffix}}
-
 \DeclareNameFormat{last}{%
 	\nameparts{#1}%
 	\usebibmacro{name:family-given}
@@ -88,6 +80,10 @@
 % ----------
 % DeclareCiteCommand
 % ----------
+
+% TODO: This still needs a lot of work. It doesn't support prenotes and postnotes and doesn't
+% differentiate years when the bibliography is ambiguous (e.g. 2016b).
+\newcommand*{\textapud}[2]{\citeauthor{#1} (\citeyear{#1} apud \citeauthor{#2}, \citeyear{#2})}
 
 \DeclareMultiCiteCommand{\apud}[\addapud\mkbibparens]
 	{\@apud}
@@ -124,7 +120,9 @@
   {\usebibmacro{postnote}}
 
 \DeclareCiteCommand{\textcite}
-  {\boolfalse{cbx:parens}}
+  {\boolfalse{cbx:parens}%
+  \renewcommand*{\finalnamedelim}{\addspace\bibstring{and}\addspace}%
+  \renewcommand*{\multinamedelim}{\addcomma\addspace}}
   {\usebibmacro{citeindex}%
    \iffirstcitekey
      {\setcounter{textcitetotal}{1}}
@@ -137,7 +135,9 @@
   {\usebibmacro{textcite:postnote}}
 
 \DeclareCiteCommand*{\textcite}
-  {\boolfalse{cbx:parens}}
+  {\boolfalse{cbx:parens}%
+  \renewcommand*{\finalnamedelim}{\addspace\bibstring{and}\addspace}%
+  \renewcommand*{\multinamedelim}{\addcomma\addspace}}
   {\usebibmacro{citeindex}%
    \iffirstcitekey
      {\setcounter{textcitetotal}{1}}

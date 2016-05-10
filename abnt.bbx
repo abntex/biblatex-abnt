@@ -269,7 +269,7 @@
 	}{%
 		\usebibmacro{name:family-given}{%
 			\iftoggle{scbib}{%
-				\textsc{\namepartfamily}%
+				\textsc{\MakeLowercase{\namepartfamily}}%
 			}{%
 				\MakeUppercase{\namepartfamily}%
 			}%
@@ -281,15 +281,23 @@
 	\usebibmacro{name:andothers}%
 }%
 
+\DeclareNameFormat{full}{%
+  \nameparts{#1}%
+  \usebibmacro{name:given-family}
+    {\namepartfamily}
+    {\namepartgiven}
+    {\namepartprefix}
+    {\namepartsuffix}}
+
 \DeclareNameAlias{default}{LAST-first}%
 
-\DeclareNameAlias{byauthor}{given-family}%
+\DeclareNameAlias{byauthor}{full}%
 \DeclareNameAlias{bybookauthor}{byauthor}%
-\DeclareNameAlias{byeditor}{given-family}%
+\DeclareNameAlias{byeditor}{full}%
 \DeclareNameAlias{byeditora}{byeditor}%
 \DeclareNameAlias{byeditorb}{byeditor}%
 \DeclareNameAlias{byeditorc}{byeditor}%
-\DeclareNameAlias{bytranslator}{given-family}%
+\DeclareNameAlias{bytranslator}{full}%
 
 \DeclareNameAlias{withcommentator}{given-family}%
 \DeclareNameAlias{withannotator}{given-family}%
@@ -357,7 +365,7 @@
 
 \DeclareFieldFormat[monography]{type}{\bibstring{monography}\addspace\printtext[parens]{#1}}%
 
-\DeclareFieldFormat{uppercase}{\smartuppercase{#1}}%
+\DeclareFieldFormat{uppercase}{\iftoggle{scbib}{\textsc{\smartlowercase{#1}}}{\smartuppercase{#1}}}%
 \DeclareFieldFormat{lowercase}{\smartlowercase{#1}}%
 \DeclareFieldFormat{upperfirst}{\iftoggle{scbib}{\normalfont\FirstWordSC{#1}}{\normalfont\FirstWordUpper{#1}}}%
 \DeclareFieldFormat{noformat}{\normalfont{#1}}%
@@ -432,7 +440,7 @@
 	    {\bibstring{backrefpage}\ppspace}%
 	  \printlist[pageref][-\value{listtotal}]{pageref}}}}%
 
-\renewbibmacro*{titleiskey}[2]{%
+\newbibmacro*{titleiskey}[2]{%
 \ifboolexpr{%
 	test {\ifnameundef{author}}%
 	and
@@ -450,10 +458,13 @@
 		test {\iffieldundef{title}}%
 		and
 		test {\iffieldundef{subtitle}}%
-	}{\global\undef\bbx@lasttitle}%
+	}
+		{\global\undef\bbx@lasttitle
+		\global\undef\bbx@lastsubtitle}%
     	{\usebibmacro{bbx:titledashcheck}%
 			{\unspace\bibnamedash}%
 			{\usebibmacro{bbx:savetitle}%
+			\usebibmacro{bbx:savesubtitle}%
 			\printtext[title]{%
 				\usebibmacro{titleiskey}%
 					{\unspace\printfield[upperfirst]{title}}%
@@ -490,6 +501,12 @@
   \usebibmacro{booktitle}%
   \newunit}%
 
+\newbibmacro*{maintitle/booktitle}{%
+  \iffieldundef{maintitle}%
+    {\usebibmacro{booktitle}}%
+    {\usebibmacro{maintitle}}
+}%
+
 \renewbibmacro*{booktitle}{%
   \ifboolexpr{
     test {\iffieldundef{booktitle}}%
@@ -503,6 +520,20 @@
        \printfield[noformat]{booksubtitle}}%
      \newunit}%
   \printfield{booktitleaddon}}%
+
+\renewbibmacro*{maintitle}{%
+  \ifboolexpr{
+    test {\iffieldundef{maintitle}}
+    and
+    test {\iffieldundef{mainsubtitle}}
+  }
+    {}
+    {\printtext[maintitle]{%
+       \printfield[titlecase]{maintitle}%
+       \normalfont{\setunit*{\subtitlepunct}}%
+       \printfield[noformat]{mainsubtitle}}%
+     \newunit}%
+  \printfield{maintitleaddon}}
   
 \newbibmacro*{publisher}{%
 	\iflistundef{publisher}%
@@ -567,7 +598,7 @@
 	\usebibmacro{date}%
 	\newunit}%
 
-\newbibmacro*{url+urldate}{%
+\renewbibmacro*{url+urldate}{%
   \usebibmacro{url}%
   \iffieldundef{urlyear}%
     {}%
@@ -601,9 +632,9 @@
 	}%
 		{}%
 		{\ifboolexpr{%
-		test {\ifnameundef{bookauthor}}%
-	  	or
-	  	test {\ifnamesequal{author}{bookauthor}}%
+			test {\ifnameundef{bookauthor}}%
+	  		or
+	  		test {\ifnamesequal{author}{bookauthor}}%
 		}%
 			{\iftoggle{repeatfields}%
 				{\usebibmacro{author/editor+others}}%
@@ -698,6 +729,33 @@
 	}%
 }%
 
+\newbibmacro*{in:editor+others}{%
+	\usebibmacro{in:}
+	\addspace
+	\ifnameundef{editor}{%
+		\printlist[uppercase]{organization}
+	}{%
+		\printnames{editor}%
+		\setunit*{\addperiod\addspace}%
+        \printtext[parens]{\usebibmacro{editor+othersstrg}}%
+		\clearname{editor}%
+	}
+}
+  
+\newbibmacro*{in:eventtitle/organization/editor}{%
+	\usebibmacro{in:}%
+	\iffieldundef{eventtitle}{%
+		\ifnameundef{editor}{%
+			\printlist[uppercase]{organization}%
+			\clearlist{organization}
+		}{%
+			\printname{editor}
+		}%
+	}{%
+		\printfield[uppercase]{eventtitle}
+	}
+}
+
 \newbibmacro*{editor+others/organization}{%
 	\ifnameundef{editor}%
 		{\usebibmacro{organization}}%
@@ -774,9 +832,12 @@
 \newbibmacro*{bbx:savetitle}{%
   \savefield{title}{\bbx@lasttitle}}%
 
+\newbibmacro*{bbx:savesubtitle}{%
+  \savefield{subtitle}{\bbx@lastsubtitle}}%
+
 \newtoggle{isdashed}%
 
-\renewbibmacro*{bbx:dashcheck}[2]{%
+\newbibmacro*{bbx:dashcheck}[2]{%
   \ifboolexpr{
     (test {\iffieldequals{fullhash}{\bbx@lasthash}}%
 	or
@@ -796,10 +857,19 @@
     {\settoggle{isdashed}{true}#1}%
     {\settoggle{isdashed}{false}#2}}%
 
-\renewbibmacro*{bbx:titledashcheck}[2]{%
-  \iftoggle{isdashed}%
-  	{\iffieldequals{title}{\bbx@lasttitle}{#1}{#2}}%
-  	{#2}}%
+\newbibmacro*{bbx:titledashcheck}[2]{%
+	\iftoggle{isdashed}{%
+		\ifboolexpr{
+			test {\iffieldequals{title}{\bbx@lasttitle}}
+			and
+			test {\iffieldequals{subtitle}{\bbx@lastsubtitle}}
+		}
+			{#1}
+			{#2}
+	}{%
+		#2
+	}
+}%
 
 \renewbibmacro*{begrelated}{%
   \booltrue{bbx@inset}}%
@@ -881,7 +951,7 @@
   \printfield{volumes}%
   \newunit\newblock
   \usebibmacro{chapter+pages}%
-  \setunit*{\addcomma\addspace}%
+  \newunit\newblock
   \printfield{pagetotal}%
   \setunit*{\addcomma\addspace}%
   \printfield{illustrated}%
@@ -929,9 +999,11 @@
   \newunit\newblock
   \printfield{volume}%
   \printfield{part}%
+  \setunit{\addcomma\addspace}
+  \printfield{chapter}%
+  \setunit*{\addcomma\addspace}
+  \printfield{pages}
   \newunit\newblock
-  \usebibmacro{chapter+pages}%
-  \setunit*{\addcomma\addspace}%
   \printfield{pagetotal}%
   \setunit*{\addcomma\addspace}%
   \printfield{illustrated}%
@@ -971,7 +1043,150 @@
   \newunit
   \usebibmacro{inbookauthor+others}%
   \newunit\newblock
-  \usebibmacro{maintitle}%
+  \usebibmacro{maintitle/booktitle}%
+  \newunit
+  \usebibmacro{byeditor+others}%
+  \newunit\newblock
+  \printfield{edition}%
+  \newunit\newblock
+  \usebibmacro{publisher+location+date}%
+  \newunit
+  \printfield{volume}%
+  \printfield{part}%
+  \setunit*{\addcomma\addspace}
+  \usebibmacro{chapter+pages}%
+  \newunit\newblock
+  \usebibmacro{series+number}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \iftoggle{bbx:isbn}%
+    {\printfield{isbn}}%
+    {}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \iftoggle{bbx:related}%
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}%
+    {}%
+  \usebibmacro{finentry}}%
+
+\DeclareBibliographyDriver{mvcollection}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{editor+others}%
+  \setunit{\labelnamepunct}\newblock
+  \usebibmacro{title}%
+  \newunit\newblock
+  \usebibmacro{inmaintitle}%
+  \newunit\newblock
+  \usebibmacro{byeditor+others}%
+  \newunit\newblock
+  \printfield{edition}%
+  \newunit\newblock
+  \usebibmacro{publisher+location+date}%
+  \newunit\newblock
+  \printfield{volumes}%
+  \newunit\newblock
+  \usebibmacro{chapter+pages}%
+  \newunit\newblock
+  \printfield{pagetotal}%
+  \setunit*{\addcomma\addspace}%
+  \printfield{illustrated}%
+  \setunit*{\addcomma\addspace}%
+  \printfield{dimensions}%
+  \newunit\newblock
+  \usebibmacro{series+number}%
+  \newunit\newblock
+  \printfield{howpublished}%
+  \newunit\newblock
+  \usebibmacro{language}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \iftoggle{bbx:isbn}%
+    {\printfield{isbn}}%
+    {}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \iftoggle{bbx:related}%
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}%
+    {}%
+  \usebibmacro{finentry}}%
+
+\DeclareBibliographyDriver{collection}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{editor+others}%
+  \setunit{\labelnamepunct}\newblock
+  \usebibmacro{title}%
+  \newunit\newblock
+  \usebibmacro{inmaintitle}%
+  \newunit\newblock
+  \usebibmacro{byeditor+others}%
+  \newunit\newblock
+  \printfield{edition}%
+  \newunit\newblock
+  \usebibmacro{publisher+location+date}%
+  \newunit\newblock
+  \printfield{volume}%
+  \printfield{part}%
+  \setunit{\addcomma\addspace}
+  \printfield{chapter}%
+  \setunit*{\addcomma\addspace}
+  \printfield{pages}
+  \newunit\newblock
+  \printfield{pagetotal}%
+  \setunit*{\addcomma\addspace}%
+  \printfield{illustrated}%
+  \setunit*{\addcomma\addspace}%
+  \printfield{dimensions}%
+  \newunit\newblock
+  \usebibmacro{series+number}%
+  \newunit\newblock
+  \printfield{howpublished}%
+  \newunit\newblock
+  \usebibmacro{language}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \iftoggle{bbx:isbn}%
+    {\printfield{isbn}}%
+    {}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \iftoggle{bbx:related}%
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}%
+    {}%
+  \usebibmacro{finentry}}%
+
+\DeclareBibliographyDriver{incollection}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author}%
+  \setunit{\labelnamepunct}\newblock
+  \usebibmacro{title}%
+  \newunit\newblock
+  \usebibmacro{in:editor+others}%
+  \newunit\newblock
+  \usebibmacro{maintitle/booktitle}%
   \newunit
   \usebibmacro{byeditor+others}%
   \newunit\newblock
@@ -1090,55 +1305,6 @@
     {}%
   \usebibmacro{finentry}}%
 
-\DeclareBibliographyDriver{incollection}{%
-  \usebibmacro{bibindex}%
-  \usebibmacro{begentry}%
-  \usebibmacro{author}%
-  \setunit{\labelnamepunct}\newblock
-  \usebibmacro{title}%
-  \newunit\newblock
-  \usebibmacro{in:}%
-  \usebibmacro{editor+others}%
-  \newunit\newblock
-  \usebibmacro{maintitle+booktitle}%
-  \newunit
-  \usebibmacro{byeditor+others}%
-  \newunit\newblock
-  \printfield{edition}%
-  \newunit
-  \iffieldundef{maintitle}%
-    {\printfield{volume}%
-     \printfield{part}}%
-    {}%
-  \newunit
-  \printfield{volumes}%
-  \newunit\newblock
-  \usebibmacro{series+number}%
-  \newunit\newblock
-  \printfield{note}%
-  \newunit\newblock
-  \usebibmacro{publisher+location+date}%
-  \newunit\newblock
-  \usebibmacro{chapter+pages}%
-  \newunit
-  \printfield{pagetotal}%
-  \newunit\newblock
-  \iftoggle{bbx:isbn}%
-    {\printfield{isbn}}%
-    {}%
-  \newunit\newblock
-  \usebibmacro{doi+eprint+url}%
-  \newunit\newblock
-  \usebibmacro{addendum+pubstate}%
-  \setunit{\bibpagerefpunct}\newblock
-  \usebibmacro{pageref}%
-  \newunit\newblock
-  \iftoggle{bbx:related}%
-    {\usebibmacro{related:init}%
-     \usebibmacro{related}}%
-    {}%
-  \usebibmacro{finentry}}%
-
 % TODO: For now there is no way to make just part of the
 % organization name uppercase (C.f. 10520-2002:6.3-6)
 \DeclareBibliographyDriver{manual}{%
@@ -1243,11 +1409,7 @@
   \newunit\newblock
   \usebibmacro{byauthor}%
   \newunit\newblock
-  \usebibmacro{in:}%
-  \ifnameundef{editor}%
-  	{\printlist[uppercase]{organization}%
-	\clearlist{organization}}%
-	{\printname{editor}}%
+  \usebibmacro{in:eventtitle/organization/editor}%
   \setunit*{\addcomma\addspace}%
   \printfield{number}%
   \setunit*{\adddot\addcomma\addspace}%
