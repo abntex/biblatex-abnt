@@ -13,6 +13,7 @@
 %% The Current Maintainer of this work is Daniel Marques.
 
 \ProvidesFile{abnt.bbx}[\abx@bbxid]
+\RequireBiber[3]
 \DeclareLanguageMapping{brazilian}{abnt-brazilian}%
 
 \RequireBibliographyStyle{standard}%
@@ -236,6 +237,11 @@
 \newcommand\@firstwordsc{}%
 \def\@firstwordsc#1 #2\@nil{\textsc{#1} #2\unskip}%
 
+% A command to print the first word in a sentence in lowercase and in small caps.
+\newcommand\FirstWordLCSC[1]{\@firstwordlcsc#1 \@nil}%
+\newcommand\@firstwordlcsc{}%
+\def\@firstwordlcsc#1 #2\@nil{\textsc{\MakeLowercase{#1}} #2\unskip}%
+
 % This has to do with the dashed option
 \newbool{bbx@inset}%
 
@@ -367,7 +373,17 @@
 
 \DeclareFieldFormat{uppercase}{\iftoggle{scbib}{\textsc{\smartlowercase{#1}}}{\smartuppercase{#1}}}%
 \DeclareFieldFormat{lowercase}{\smartlowercase{#1}}%
-\DeclareFieldFormat{upperfirst}{\iftoggle{scbib}{\normalfont\FirstWordSC{#1}}{\normalfont\FirstWordUpper{#1}}}%
+\DeclareFieldFormat{upperfirst}{%
+	\iftoggle{scbib}{%
+		\ifgiveninits{%
+			\normalfont\FirstWordSC{#1}%
+		}{%
+			\normalfont\FirstWordLCSC{#1}%
+		}%
+	}{%
+		\normalfont\FirstWordUpper{#1}%
+	}%
+}%
 \DeclareFieldFormat{noformat}{\normalfont{#1}}%
 
 \DeclareFieldFormat{nameaddon}{\addspace #1}%
@@ -389,9 +405,19 @@
   \usebibmacro{list:andothers}}%
   
 \DeclareListFormat{upperfirst}{%
-  \usebibmacro{list:delim}{#1}%
-  \iftoggle{scbib}{\normalfont\FirstWordSC{#1}}{\normalfont\FirstWordUpper{#1}}\isdot
-  \usebibmacro{list:andothers}}%
+	\usebibmacro{list:delim}{#1}%
+		\iftoggle{scbib}{%
+			\ifgiveninits{%
+				\normalfont\FirstWordSC{#1}%
+			}{%
+				\normalfont\FirstWordLCSC{#1}%
+			}%
+		}{%
+			\normalfont\FirstWordUpper{#1}%
+		}%
+		\isdot%
+	\usebibmacro{list:andothers}
+}%
 
 
 % ----------
