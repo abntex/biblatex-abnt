@@ -4,9 +4,6 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{microtype}
-\usepackage{enumitem}
-\usepackage{examplep}
-%\usepackage{hyperref}
 
 \usepackage[
     backend=biber,
@@ -33,27 +30,6 @@
 \addbibresource{abntex2-doc.bib}
 
 \begin{document}
-
-    % TODO: Textapud
-
-	\section*{Comandos implementados}
-	
-	\SetLabelAlign{parright}{\strut\smash{\parbox[t]{\labelwidth}{\raggedleft#1}}}
-	\setlist[description]{style=nextline}
-	
-	\begin{description}
-	    \item [\PVerb{\cite{santos1994}}] \cite{santos1994}
-	    \item [\PVerb{\parencite{santos1994}}] \parencite{santos1994}
-	    \item [\PVerb{\cites{santos1994}{gomes1998}{silva1996}}] \cites{santos1994}{gomes1998}{silva1996}
-	    \item [\PVerb{\cite*{santos1994}}] \cite*{santos1994}
-	    \item [\PVerb{\textcite{santos1994}}] \textcite{santos1994}
-	    \item [\PVerb{\textcites{santos1994}{gomes1998}{silva1996}}] \textcites{santos1994}{gomes1998}{silva1996}
-	    \item [\PVerb{\textcite*{santos1994}}] \textcite*{santos1994}
-	    \item [\PVerb{\apud{gomes1998}{santos1994}}] \apud{gomes1998}{santos1994}
-	    \item [\PVerb{\apud[p.~12]{gomes1998}[p.~200]{santos1994}}] \apud[p.~12]{gomes1998}[p.~200]{santos1994}
-	    \item [\PVerb{\apud[batman][]{santos1994}}] \apud[batman][]{santos1994}
-	    \item [\PVerb{\textapud[p.~12]{silva1996}[p.~200]{santos1994}}] \textapud[p.~12]{silva1996}[p.~200]{santos1994}
-	\end{description}
 
 	\nocite{*}
 	\printbibliography

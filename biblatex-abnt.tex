@@ -1,0 +1,493 @@
+\documentclass[a4paper]{article}
+\usepackage[brazil]{babel}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{examplep}
+\usepackage{hyperref}
+
+\usepackage{parskip}
+\setlength{\parskip}{1.2\baselineskip}
+
+\usepackage{titlesec}
+\newcommand{\subsectionbreak}{\clearpage}
+
+\usepackage[
+    backend=biber,
+    style=abnt,
+    %hyperref,         % Uncomment to turn citations into links
+    %backref,          % Uncomment for back references (E.g. "Cit. on p. 1")
+    %repeatfields,     % Uncomment to repeat fields instead of using an underscore
+    %usedashes,        % Uncomment to use biblatex standard dashes instead of underscores
+    giveninits,       % Uncomment to use initials for first names
+    %bftitles,         % Uncomment to print titles in bold
+    %indent,           % Uncomment to use hanging indentation in the bibliography
+    %scbib,            % Uncomment to use small caps in the bibliography
+    %sccite,           % Uncomment to use small caps in the citations
+    %noslsn,           % Uncomment to hide [s.l], [s.n] and [s.l.: s.n.]
+    %nosl,             % Uncomment to hide just [s.l]
+    %nosn,             % Uncomment to hide just [s.n]
+]{biblatex}
+\usepackage[brazil]{babel}
+\usepackage[autostyle]{csquotes}
+
+\addbibresource{biblatex-abnt.bib}
+
+\DeclareBibliographyCategory{singleentries}
+
+\newcommand{\singlecite}[1]{%
+  \addtocategory{singleentries}{#1}%
+  \defbibcheck{key#1}{
+    \iffieldequalstr{entrykey}{#1}
+      {}
+      {\skipentry}}%
+  \printbibliography[heading=none,check=key#1]%
+}
+
+\title{biblatex-abnt}
+\author{Daniel B. Marques}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\clearpage
+\section{Comandos}
+
+\begin{description}[style=nextline]
+    \item [\PVerb{\cite{bosi08}}] \cite{bosi08}
+    \item [\PVerb{\textcite{bosi08}}] \textcite{bosi08}
+    \item [\PVerb{\cite*{bosi08}}] \cite*{bosi08}
+    \item [\PVerb{\textcite*{bosi08}}] \textcite*{bosi08}
+    \item [\PVerb{\cites{moretti09}{mann09}{amaral15}}] \cites{moretti09}{mann09}{amaral15}
+    \item [\PVerb{\textcites{moretti09}{mann09}{amaral15}}] \textcites{moretti09}{mann09}{amaral15}
+    \item [\PVerb{\apud{assis08}{bosi08}}] \apud{assis08}{bosi08}
+    \item [\PVerb{\apud[p.~12]{assis08}[p.~200]{bosi08}}] \apud[p.~12]{assis08}[p.~200]{bosi08}
+    \item [\PVerb{\apud[batman][]{bosi08}}] \apud[batman][]{bosi08}
+    \item [\PVerb{\textapud[p.~200]{assis08}[p.~12]{bosi08}}] \textapud[p.~200]{assis08}[p.~12]{bosi08}
+\end{description}
+
+
+\clearpage
+\section{Opções}
+
+As opções a seguir podem ser usadas ao chamar o pacote \texttt{biblatex}:
+
+\begin{description}
+    \item [hyperref] Transforma as citações em links que levam à bibliografia
+    \item [backref] Aponta, na bibliografia, as páginas em que a entrada foi citada
+    \item [repeatfields] Imprime os campos repetidos na bibliografia, em vez de substituí-los por traços sublineares
+    \item [usedashes] Usa os traços padrão do \texttt{biblatex} em vez de traços sublineares nos campos repetidos
+    \item [giveninits] Abrevia os primeiros nomes na bibliografia
+    \item [bftitles] Usa negrito para os títulos na bibliografia
+    \item [indent] Indenta as entradas da bibliografia
+    \item [scbib] Imprime os nomes em versalete na bibliografia
+    \item [sccite] Imprime os nomes em versalete nas citações
+    \item [noslsn] Oculta as abreviações [s.l], [s.n] e [s.l.: s.n.] na bibliografia
+    \item [nosl] Oculta apenas as abreviações [s.l.]
+    \item [nosn] Oculta apenas as abreviações [s.n.]
+\end{description}
+
+E.g.: \verb"\usepackage[backend=biber, style=abnt, bftitles]{biblatex}"
+
+As opções \texttt{repeatfields}, \texttt{nosl}, \texttt{nosn} e \texttt{noslsn} também podem ser usadas apenas em entradas específicas. E.g.:
+
+\begin{verbatim}
+    @mvbook{assis08,
+        author = {Machado de Assis},
+        title = {Obra completa em quatro volumes},
+        year = {2008},
+        options = {repeatfields, noslsn=false}
+    }
+\end{verbatim}
+
+
+	
+\clearpage
+\section{Entradas comuns}
+
+A lista completa de campos e entradas pode ser encontrada no manual do \texttt{biblatex}. Estes são alguns exemplos de situações comuns:
+
+\begingroup
+\let\clearpage\relax
+\subsection{@mvbook}
+\endgroup
+
+Um livro abrangendo múltiplos volumes:
+	
+\begin{verbatim}
+    @mvbook{assis08,
+        author = {Machado de Assis},
+        title = {Obra completa em quatro volumes},
+        year = {2008},
+        editor = {Aluizio Leite and Ana Lima Cecilio and Heloisa Jahn},
+        editortype = {organizer},
+        edition = {2},
+        volumes = {4},
+        publisher = {Nova Fronteira},
+        location = {Rio de Janeiro},
+        series = {Biblioteca luso-brasileira. Série brasileira},
+    }
+\end{verbatim}
+
+\singlecite{assis08}
+	
+\subsection{@book}
+
+Um único livro. Pode ser um dos volumes de um livro que abrange múltiplos volumes:
+	
+\begin{verbatim}
+    @book{assis08:1,
+        volume = {1},
+        title = {Fortuna crítica/Romance},
+        pagetotal = {1340},
+        author = {Machado de Assis},
+        maintitle = {Obra completa em quatro volumes},
+        year = {2008},
+        editor = {Aluizio Leite and Ana Lima Cecilio and Heloisa Jahn},
+        editortype = {organizer},
+        edition = {2},
+        publisher = {Nova Fronteira},
+        location = {Rio de Janeiro},
+        series = {Biblioteca luso-brasileira. Série brasileira},
+    }
+\end{verbatim}
+
+\noindent
+Também é possível usar o campo \texttt{crossref} para herdar as informações de outra entrada:
+	
+\begin{verbatim}
+    @book{assis08:1,
+        crossref = {assis08},
+        volume = {1},
+        title = {Fortuna crítica/Romance},
+        pagetotal = {1340},
+    }
+\end{verbatim}
+
+\singlecite{assis08:1}
+	
+\subsection{@bookinbook}
+	
+Uma obra originalmente publicada por si só, mas citada como parte de outro livro:
+
+\begin{verbatim}
+    @bookinbook{assis08:1b,
+        title = {Esaú e Jacó},
+        pages = {1073-1226},
+        volume = {1},
+        booktitle = {Fortuna crítica/Romance},
+        pagetotal = {1340},
+        author = {Machado de Assis},
+        maintitle = {Obra completa em quatro volumes},
+        year = {2008},
+        editor = {Aluizio Leite and Ana Lima Cecilio and Heloisa Jahn},
+        editortype = {organizer},
+        edition = {2},
+        publisher = {Nova Fronteira},
+        location = {Rio de Janeiro},
+        series = {Biblioteca luso-brasileira. Série brasileira},
+    }
+\end{verbatim}
+
+\noindent
+Ou:
+	
+\begin{verbatim}
+    @bookinbook{assis08:1b,
+        crossref = {assis08:1},
+        title = {Esaú e Jacó},
+        pages = {1073-1226},
+    }
+\end{verbatim}
+
+\singlecite{assis08:1b}
+	
+\subsection{@inbook}
+
+Uma parte de um livro que forma uma unidade independente, com seu próprio título:
+	
+\begin{verbatim}
+    @inbook{bosi08,
+        title = {Uma figura machadiana},
+        author = {Alfredo Bosi},
+        pages = {179-189},
+        volume = {1},
+        booktitle = {Fortuna crítica/Romance},
+        pagetotal = {1340},
+        bookauthor = {Machado de Assis},
+        maintitle = {Obra completa em quatro volumes},
+        year = {2008},
+        editor = {Aluizio Leite and Ana Lima Cecilio and Heloisa Jahn},
+        editortype = {organizer},
+        edition = {2},
+        publisher = {Nova Fronteira},
+        location = {Rio de Janeiro},
+        series = {Biblioteca luso-brasileira. Série brasileira},
+    }
+\end{verbatim}
+
+\noindent
+Ou:
+	
+\begin{verbatim}
+    @inbook{bosi08,
+        crossref = {assis08:1},
+        title = {Uma figura machadiana},
+        author = {Alfredo Bosi},
+        pages = {179-189},
+    }
+\end{verbatim}
+
+\singlecite{bosi08}
+	
+\subsection{@suppbook}
+
+Uma parte suplementar de um livro, com um título genérico, como ``prefácio'' ou ``introdução'':
+	
+\begin{verbatim}
+    @suppbook{leite08,
+        title = {Nota Editorial},
+        author = {Aluizio Leite and Ana Lima Cecilio and Heloisa Jahn},
+        pages = {1-5},
+        volume = {1},
+        booktitle = {Fortuna crítica/Romance},
+        pagetotal = {1340},
+        bookauthor = {Machado de Assis},
+        maintitle = {Obra completa em quatro volumes},
+        year = {2008},
+        editor = {Aluizio Leite and Ana Lima Cecilio and Heloisa Jahn},
+        editortype = {organizer},
+        edition = {2},
+        publisher = {Nova Fronteira},
+        location = {Rio de Janeiro},
+        series = {Biblioteca luso-brasileira. Série brasileira},
+    }
+\end{verbatim}
+
+\noindent
+Ou:
+	
+\begin{verbatim}
+    @suppbook{leite08,
+        crossref = {assis08:1},
+        title = {Nota Editorial},
+        author = {Aluizio Leite and Ana Lima Cecilio and Heloisa Jahn},
+        pages = {1-5},
+    }
+\end{verbatim}
+
+\singlecite{leite08}
+	
+\subsection{@mvcollection}
+
+Uma coleção abrangendo diversos volumes, cada um composto por diversas contribuições independentes, com seus próprios autor e títulos. A obra como um todo não possui um autor, mas geralmente possui um editor:
+	
+\begin{verbatim}
+    @mvcollection{moretti09,
+        editor = {Franco Moretti},
+        editortype = {organizer},
+        translator = {Denise Bottmann},
+        title = {O Romance},
+        volumes = {5},
+        publisher = {Cosac Naify},
+        location = {São Paulo},
+        year = {2009},
+    }
+\end{verbatim}
+
+\singlecite{moretti09}
+	
+\subsection{@collection}
+
+Uma única coleção composta por diversas contribuições independentes. Pode ser um dos volumes de uma coleção que abrange múltiplos volumes:
+	
+\begin{verbatim}
+    @collection{moretti09:1,
+        volume = {1},
+        title = {A cultura do romance},
+        pagetotal = {1120},
+        illustrated = {40 ils.},
+        editor = {Franco Moretti},
+        editortype = {organizer},
+        translator = {Denise Bottmann},
+        maintitle = {O Romance},
+        publisher = {Cosac Naify},
+        location = {São Paulo},
+        year = {2009},
+    }
+\end{verbatim}
+
+\noindent
+Ou:
+	
+\begin{verbatim}
+    @collection{moretti09:1,
+        crossref = {moretti09},
+        volume = {1},
+        title = {A cultura do romance},
+        pagetotal = {1120},
+        illustrated = {40 ils.},
+    }
+\end{verbatim}
+
+\singlecite{moretti09:1}
+	
+\subsection{@incollection}
+
+Uma contribuição a uma coleção, formando uma unidade independente com autor e título próprios:
+	
+\begin{verbatim}
+    @incollection{mann09,
+        author = {Thomas Mann},
+        title = {Bilse e eu},
+        pages = {217},
+        volume = {1},
+        booktitle = {A cultura do romance},
+        pagetotal = {1120},
+        illustrated = {40 ils.},
+        editor = {Franco Moretti},
+        editortype = {organizer},
+        translator = {Denise Bottmann},
+        maintitle = {O Romance},
+        publisher = {Cosac Naify},
+        location = {São Paulo},
+        year = {2009},
+    }
+\end{verbatim}
+
+\noindent
+Ou:
+	
+\begin{verbatim}
+    @incollection{mann09,
+        crossref = {moretti09:1},
+        author = {Thomas Mann},
+        title = {Bilse e eu},
+        pages = {217},
+    }
+\end{verbatim}
+
+\singlecite{mann09}
+	
+\subsection{@suppcollection}
+
+Uma parte suplementar de uma coleção, com um título genérico, como ``prefácio'' ou ``introdução'':
+	
+\begin{verbatim}
+    @suppcollection{moretti09:1b,
+        title = {Apresentação geral},
+        author = {Franco Moretti},
+        pages = {217},
+        volume = {1},
+        booktitle = {A cultura do romance},
+        pagetotal = {1120},
+        illustrated = {40 ils.},
+        editor = {Franco Moretti},
+        editortype = {organizer},
+        translator = {Denise Bottmann},
+        maintitle = {O Romance},
+        publisher = {Cosac Naify},
+        location = {São Paulo},
+        year = {2009},
+    }
+\end{verbatim}
+
+\noindent
+Ou:
+	
+\begin{verbatim}
+    @suppcollection{moretti09:1b,
+        crossref = {moretti09:1},
+        title = {Apresentação geral},
+        author = {Franco Moretti},
+    }
+\end{verbatim}
+
+\singlecite{moretti09:1b}
+
+\subsection{@article}
+
+Um artigo científico/acadêmico: 
+	
+\begin{verbatim}
+    @article{negrão14,
+        title = {Brazilian Portuguese as a transatlantic language},
+        subtitle = {agents of linguistic contact},
+        author = {Esmeralda Vailati Negrão and Evani Viotti},
+        journal = {Interdisciplinary Journal of Portuguese Diaspora Studies},
+        volume = {3},
+        pages = {135-154},
+        year = {2014},
+    }
+\end{verbatim}
+
+\singlecite{negrão14}
+
+\subsection{@mastersthesis}
+
+Uma dissertação de mestrado:
+	
+\begin{verbatim}
+    @mastersthesis{eliseu84,
+        title = {Verbos ergativos do Português},
+        subtitle = {descrição e análise},
+        author = {André Manuel Godinho Simões Eliseu},
+        type = {Dissertação (Mestrado em Linguística)},
+        institution = {Universidade de Lisboa},
+        location = {Lisboa},
+        eventyear = {1985},
+    }
+\end{verbatim}
+
+\singlecite{eliseu84}
+
+\subsection{@phdthesis}
+
+Uma tese de doutorado:
+	
+\begin{verbatim}
+    @phdthesis{amaral15,
+        title = {A alternância transitivo-intransitiva no português brasileiro},
+        subtitle = {fenômenos semânticos},
+        author = {Luana Lopes Amaral},
+        type = {Tese (Doutorado em Linguística)},
+        institution = {Universidade Federal de Minas Gerais},
+        location = {Belo Horizonte},
+        eventyear = {2015},
+    }
+\end{verbatim}
+
+\singlecite{amaral15}
+
+\subsection{@inproceedings}
+
+Resumos ou anais de eventos:
+	
+\begin{verbatim}
+    @inproceedings{negrão13,
+        title = {A emergência da sintaxe do português brasileiro},
+        subtitle = {absolutas, alçamento do possuidor e passivas},
+        author = {Esmeralda Vailati Negrão and Evani Viotti},
+        eventtitle = {Encontro nacional do gt de teoria da gramática da ANPOLL},
+        number = {28},
+        venue = {Florianópolis},
+        eventyear = {2013},
+        booktitle = {Caderno de Resumos},
+        publisher = {},
+        location = {Campinas},
+        year = {2013},
+    }
+\end{verbatim}
+
+\singlecite{negrão13}
+
+\clearpage
+\nocite{*}
+\printbibliography
+
+\end{document}

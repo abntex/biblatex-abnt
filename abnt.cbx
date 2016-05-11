@@ -44,6 +44,8 @@
     \space}%
 }
 
+\DeclareFieldFormat{uppercasecite}{\iftoggle{sccite}{\textsc{\smartlowercase{#1}}}{\smartuppercase{#1}}}
+
 % ----------
 % Options
 % ----------
@@ -114,9 +116,7 @@
 \DeclareCiteCommand{\@apud}
 	{\iffieldundef{prenote}
 		{}
-		{\iftoggle{sccite}
-  	    	{\textsc{\MakeLowercase{\printfield{prenote}}}}
-			{\printfield[uppercase]{prenote}}
+		{\printfield[uppercasecite]{prenote}
 		\addspace\bibstring{apud}\addspace}}
 	{\usebibmacro{citeindex}%
 	\usebibmacro{cite}}
@@ -273,7 +273,7 @@
 
 \renewbibmacro*{cite:label}{%
   \iffieldundef{label}
-    {\printtext[bibhyperref]{\printfield[uppercase]{labeltitle}}}
+    {\printtext[bibhyperref]{\printfield[uppercasecite]{labeltitle}}}
     {\printtext[bibhyperref]{\printfield{label}}}}
 
 \endinput
