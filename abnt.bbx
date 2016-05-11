@@ -214,6 +214,8 @@
 % newcommand
 % ----------
 
+\newcommand{\abntnum}[1]{\ifrmnum{#1}{\rmntonum{#1}}{#1}}
+
 % Add semicolons between multiple authors.
 \renewcommand*{\multinamedelim}{\addsemicolon\addspace}%
 \renewcommand*{\finalnamedelim}{\addsemicolon\addspace}%
@@ -334,7 +336,7 @@
 % even if preceded by a period. E.g.: "London: Routledge, 2009. p. 235–250."
 \DeclareFieldFormat*{number}{%
 	\ifnumerals{#1}%
-		{\addspace \MakeLowercase{\bibstring{number}}~#1}%
+		{\addspace \MakeLowercase{\bibstring{number}}~\abntnum{#1}}%
 		{\addspace #1\isdot}}%
 
 \DeclareFieldFormat[book, proceedings, inproceedings, misc]{number}{\addcomma\addspace #1}%
