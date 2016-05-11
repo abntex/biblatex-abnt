@@ -1,0 +1,521 @@
+\documentclass[a4paper]{article}
+\usepackage[brazil]{babel}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{examplep}
+\usepackage{hyperref}
+
+\usepackage{parskip}
+\setlength{\parskip}{1.2\baselineskip}
+
+\usepackage{titlesec}
+\newcommand{\subsectionbreak}{\clearpage}
+
+\usepackage[
+    backend=biber,
+    style=abnt,
+    %hyperref,         % Uncomment to turn citations into links
+    %backref,          % Uncomment for back references (E.g. ``Cit. on p. 1")
+    %repeatfields,     % Uncomment to repeat fields instead of using an underscore
+    %usedashes,        % Uncomment to use biblatex standard dashes instead of underscores
+    giveninits,       % Uncomment to use initials for first names
+    %bftitles,         % Uncomment to print titles in bold
+    %indent,           % Uncomment to use hanging indentation in the bibliography
+    %scbib,            % Uncomment to use small caps in the bibliography
+    %sccite,           % Uncomment to use small caps in the citations
+    %noslsn,           % Uncomment to hide [s.l], [s.n] and [s.l.: s.n.]
+    %nosl,             % Uncomment to hide just [s.l]
+    %nosn,             % Uncomment to hide just [s.n]
+]{biblatex}
+\usepackage[brazil]{babel}
+\usepackage[autostyle]{csquotes}
+
+\addbibresource{biblatex-abnt.bib}
+
+\DeclareBibliographyCategory{singleentries}
+
+\newcommand{\singlecite}[1]{%
+  \addtocategory{singleentries}{#1}%
+  \defbibcheck{key#1}{
+    \iffieldequalstr{entrykey}{#1}
+      {}
+      {\skipentry}}%
+  \printbibliography[heading=none,check=key#1]%
+}
+
+\title{biblatex-abnt}
+\author{Daniel B. Marques}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\clearpage
+\section{Comandos}
+
+\begin{description}[style=nextline]
+    \item [\PVerb{\cite{bosi08}}] \cite{bosi08}
+    \item [\PVerb{\textcite{bosi08}}] \textcite{bosi08}
+    \item [\PVerb{\cite*{bosi08}}] \cite*{bosi08}
+    \item [\PVerb{\textcite*{bosi08}}] \textcite*{bosi08}
+    \item [\PVerb{\cites{moretti09}{mann09}{amaral15}}] \cites{moretti09}{mann09}{amaral15}
+    \item [\PVerb{\textcites{moretti09}{mann09}{amaral15}}] \textcites{moretti09}{mann09}{amaral15}
+    \item [\PVerb{\apud{assis08}{bosi08}}] \apud{assis08}{bosi08}
+    \item [\PVerb{\apud[p.~12]{assis08}[p.~200]{bosi08}}] \apud[p.~12]{assis08}[p.~200]{bosi08}
+    \item [\PVerb{\apud[batman][]{bosi08}}] \apud[batman][]{bosi08}
+    \item [\PVerb{\textapud[p.~200]{assis08}[p.~12]{bosi08}}] \textapud[p.~200]{assis08}[p.~12]{bosi08}
+\end{description}
+
+
+\clearpage
+\section{Opções}
+
+As opções a seguir podem ser usadas ao chamar o pacote \texttt{biblatex}:
+
+\begin{description}
+    \item [hyperref] Transforma as citações em links que levam à bibliografia
+    \item [backref] Aponta, na bibliografia, as páginas em que a entrada foi citada
+    \item [repeatfields] Imprime os campos repetidos na bibliografia, em vez de substituí-los por traços sublineares
+    \item [usedashes] Usa os traços padrão do \texttt{biblatex} em vez de traços sublineares nos campos repetidos
+    \item [giveninits] Abrevia os primeiros nomes na bibliografia
+    \item [bftitles] Usa negrito para os títulos na bibliografia
+    \item [indent] Indenta as entradas da bibliografia
+    \item [scbib] Imprime os nomes em versalete na bibliografia
+    \item [sccite] Imprime os nomes em versalete nas citações
+    \item [noslsn] Oculta as abreviações [s.l], [s.n] e [s.l.: s.n.] na bibliografia
+    \item [nosl] Oculta apenas as abreviações [s.l.]
+    \item [nosn] Oculta apenas as abreviações [s.n.]
+\end{description}
+
+E.g.: \verb"\usepackage[backend=biber, style=abnt, bftitles]{biblatex}"
+
+As opções \texttt{repeatfields}, \texttt{nosl}, \texttt{nosn} e \texttt{noslsn} também podem ser usadas apenas em entradas específicas. E.g.:
+
+\begin{verbatim}
+    @mvbook{assis08,
+        author = {Machado de Assis},
+        title = {Obra completa em quatro volumes},
+        year = {2008},
+        options = {repeatfields, noslsn=false}
+    }
+\end{verbatim}
+
+
+	
+\clearpage
+\section{Entradas comuns}
+
+A lista completa de campos e entradas pode ser encontrada no manual do \texttt{biblatex}. Estes são alguns exemplos de situações comuns:
+
+\begingroup
+\let\clearpage\relax
+\subsection{@mvbook}
+\endgroup
+
+Um livro abrangendo múltiplos volumes:
+	
+\begin{verbatim}
+    @mvbook{assis08,
+        author = {Machado de Assis},
+        title = {Obra completa em quatro volumes},
+        year = {2008},
+        editor = {Aluizio Leite and Ana Lima Cecilio and Heloisa Jahn},
+        editortype = {organizer},
+        edition = {2},
+        volumes = {4},
+        publisher = {Nova Fronteira},
+        location = {Rio de Janeiro},
+        series = {Biblioteca luso-brasileira. Série brasileira},
+    }
+\end{verbatim}
+
+\singlecite{assis08}
+	
+\subsection{@book}
+
+Um único livro. Pode ser um dos volumes de um livro que abrange múltiplos volumes:
+	
+\begin{verbatim}
+    @book{assis08:1,
+        volume = {1},
+        title = {Fortuna crítica/Romance},
+        pagetotal = {1340},
+        author = {Machado de Assis},
+        maintitle = {Obra completa em quatro volumes},
+        year = {2008},
+        editor = {Aluizio Leite and Ana Lima Cecilio and Heloisa Jahn},
+        editortype = {organizer},
+        edition = {2},
+        publisher = {Nova Fronteira},
+        location = {Rio de Janeiro},
+        series = {Biblioteca luso-brasileira. Série brasileira},
+    }
+\end{verbatim}
+
+\noindent
+Também é possível usar o campo \texttt{crossref} para herdar as informações de outra entrada:
+	
+\begin{verbatim}
+    @book{assis08:1,
+        crossref = {assis08},
+        volume = {1},
+        title = {Fortuna crítica/Romance},
+        pagetotal = {1340},
+    }
+\end{verbatim}
+
+\singlecite{assis08:1}
+	
+\subsection{@bookinbook}
+	
+Uma obra originalmente publicada por si só, mas citada como parte de outro livro:
+
+\begin{verbatim}
+    @bookinbook{assis08:1b,
+        title = {Esaú e Jacó},
+        pages = {1073-1226},
+        volume = {1},
+        booktitle = {Fortuna crítica/Romance},
+        pagetotal = {1340},
+        author = {Machado de Assis},
+        maintitle = {Obra completa em quatro volumes},
+        year = {2008},
+        editor = {Aluizio Leite and Ana Lima Cecilio and Heloisa Jahn},
+        editortype = {organizer},
+        edition = {2},
+        publisher = {Nova Fronteira},
+        location = {Rio de Janeiro},
+        series = {Biblioteca luso-brasileira. Série brasileira},
+    }
+\end{verbatim}
+
+\noindent
+Ou:
+	
+\begin{verbatim}
+    @bookinbook{assis08:1b,
+        crossref = {assis08:1},
+        title = {Esaú e Jacó},
+        pages = {1073-1226},
+    }
+\end{verbatim}
+
+\singlecite{assis08:1b}
+	
+\subsection{@inbook}
+
+Uma parte de um livro que forma uma unidade independente, com seu próprio título:
+	
+\begin{verbatim}
+    @inbook{bosi08,
+        title = {Uma figura machadiana},
+        author = {Alfredo Bosi},
+        pages = {179-189},
+        volume = {1},
+        booktitle = {Fortuna crítica/Romance},
+        pagetotal = {1340},
+        bookauthor = {Machado de Assis},
+        maintitle = {Obra completa em quatro volumes},
+        year = {2008},
+        editor = {Aluizio Leite and Ana Lima Cecilio and Heloisa Jahn},
+        editortype = {organizer},
+        edition = {2},
+        publisher = {Nova Fronteira},
+        location = {Rio de Janeiro},
+        series = {Biblioteca luso-brasileira. Série brasileira},
+    }
+\end{verbatim}
+
+\noindent
+Ou:
+	
+\begin{verbatim}
+    @inbook{bosi08,
+        crossref = {assis08:1},
+        title = {Uma figura machadiana},
+        author = {Alfredo Bosi},
+        pages = {179-189},
+    }
+\end{verbatim}
+
+\singlecite{bosi08}
+	
+\subsection{@suppbook}
+
+Uma parte suplementar de um livro, com um título genérico, como ``prefácio'' ou ``introdução'':
+	
+\begin{verbatim}
+    @suppbook{leite08,
+        title = {Nota Editorial},
+        author = {Aluizio Leite and Ana Lima Cecilio and Heloisa Jahn},
+        pages = {1-5},
+        volume = {1},
+        booktitle = {Fortuna crítica/Romance},
+        pagetotal = {1340},
+        bookauthor = {Machado de Assis},
+        maintitle = {Obra completa em quatro volumes},
+        year = {2008},
+        editor = {Aluizio Leite and Ana Lima Cecilio and Heloisa Jahn},
+        editortype = {organizer},
+        edition = {2},
+        publisher = {Nova Fronteira},
+        location = {Rio de Janeiro},
+        series = {Biblioteca luso-brasileira. Série brasileira},
+    }
+\end{verbatim}
+
+\noindent
+Ou:
+	
+\begin{verbatim}
+    @suppbook{leite08,
+        crossref = {assis08:1},
+        title = {Nota Editorial},
+        author = {Aluizio Leite and Ana Lima Cecilio and Heloisa Jahn},
+        pages = {1-5},
+    }
+\end{verbatim}
+
+\singlecite{leite08}
+	
+\subsection{@mvcollection}
+
+Uma coleção abrangendo diversos volumes, cada um composto por diversas contribuições independentes, com seus próprios autor e títulos. A obra como um todo não possui um autor, mas geralmente possui um editor:
+	
+\begin{verbatim}
+    @mvcollection{moretti09,
+        editor = {Franco Moretti},
+        editortype = {organizer},
+        translator = {Denise Bottmann},
+        title = {O Romance},
+        volumes = {5},
+        publisher = {Cosac Naify},
+        location = {São Paulo},
+        year = {2009},
+    }
+\end{verbatim}
+
+\singlecite{moretti09}
+	
+\subsection{@collection}
+
+Uma única coleção composta por diversas contribuições independentes. Pode ser um dos volumes de uma coleção que abrange múltiplos volumes:
+	
+\begin{verbatim}
+    @collection{moretti09:1,
+        volume = {1},
+        title = {A cultura do romance},
+        pagetotal = {1120},
+        illustrated = {40 ils.},
+        editor = {Franco Moretti},
+        editortype = {organizer},
+        translator = {Denise Bottmann},
+        maintitle = {O Romance},
+        publisher = {Cosac Naify},
+        location = {São Paulo},
+        year = {2009},
+    }
+\end{verbatim}
+
+\noindent
+Ou:
+	
+\begin{verbatim}
+    @collection{moretti09:1,
+        crossref = {moretti09},
+        volume = {1},
+        title = {A cultura do romance},
+        pagetotal = {1120},
+        illustrated = {40 ils.},
+    }
+\end{verbatim}
+
+\singlecite{moretti09:1}
+	
+\subsection{@incollection}
+
+Uma contribuição a uma coleção, formando uma unidade independente com autor e título próprios:
+	
+\begin{verbatim}
+    @incollection{mann09,
+        author = {Thomas Mann},
+        title = {Bilse e eu},
+        pages = {217},
+        volume = {1},
+        booktitle = {A cultura do romance},
+        pagetotal = {1120},
+        illustrated = {40 ils.},
+        editor = {Franco Moretti},
+        editortype = {organizer},
+        translator = {Denise Bottmann},
+        maintitle = {O Romance},
+        publisher = {Cosac Naify},
+        location = {São Paulo},
+        year = {2009},
+    }
+\end{verbatim}
+
+\noindent
+Ou:
+	
+\begin{verbatim}
+    @incollection{mann09,
+        crossref = {moretti09:1},
+        author = {Thomas Mann},
+        title = {Bilse e eu},
+        pages = {217},
+    }
+\end{verbatim}
+
+\singlecite{mann09}
+	
+\subsection{@suppcollection}
+
+Uma parte suplementar de uma coleção, com um título genérico, como ``prefácio'' ou ``introdução'':
+	
+\begin{verbatim}
+    @suppcollection{moretti09:1b,
+        title = {Apresentação geral},
+        author = {Franco Moretti},
+        pages = {217},
+        volume = {1},
+        booktitle = {A cultura do romance},
+        pagetotal = {1120},
+        illustrated = {40 ils.},
+        editor = {Franco Moretti},
+        editortype = {organizer},
+        translator = {Denise Bottmann},
+        maintitle = {O Romance},
+        publisher = {Cosac Naify},
+        location = {São Paulo},
+        year = {2009},
+    }
+\end{verbatim}
+
+\noindent
+Ou:
+	
+\begin{verbatim}
+    @suppcollection{moretti09:1b,
+        crossref = {moretti09:1},
+        title = {Apresentação geral},
+        author = {Franco Moretti},
+    }
+\end{verbatim}
+
+\singlecite{moretti09:1b}
+
+\subsection{@article}
+
+Um artigo científico/acadêmico: 
+	
+\begin{verbatim}
+    @article{negrão14,
+        title = {Brazilian Portuguese as a transatlantic language},
+        subtitle = {agents of linguistic contact},
+        author = {Esmeralda Vailati Negrão and Evani Viotti},
+        journal = {Interdisciplinary Journal of Portuguese Diaspora Studies},
+        volume = {3},
+        pages = {135-154},
+        year = {2014},
+    }
+\end{verbatim}
+
+\singlecite{negrão14}
+
+\subsection{@thesis}
+
+Uma dissertação de mestrado:
+	
+\begin{verbatim}
+    @thesis{eliseu84,
+        title = {Verbos ergativos do Português},
+        subtitle = {descrição e análise},
+        author = {André Manuel Godinho Simões Eliseu},
+        type = {Dissertação (Mestrado em Linguística)},
+        institution = {Universidade de Lisboa},
+        location = {Lisboa},
+        eventyear = {1985},
+    }
+\end{verbatim}
+
+\singlecite{eliseu84}
+
+Uma tese de doutorado:
+	
+\begin{verbatim}
+    @thesis{amaral15,
+        title = {A alternância transitivo-intransitiva no português brasileiro},
+        subtitle = {fenômenos semânticos},
+        author = {Luana Lopes Amaral},
+        type = {Tese (Doutorado em Linguística)},
+        institution = {Universidade Federal de Minas Gerais},
+        location = {Belo Horizonte},
+        eventyear = {2015},
+    }
+\end{verbatim}
+
+\singlecite{amaral15}
+
+\subsection{@inproceedings}
+
+Resumos ou anais de eventos:
+	
+\begin{verbatim}
+    @inproceedings{negrão13,
+        title = {A emergência da sintaxe do português brasileiro},
+        subtitle = {absolutas, alçamento do possuidor e passivas},
+        author = {Esmeralda Vailati Negrão and Evani Viotti},
+        eventtitle = {Encontro nacional do gt de teoria da gramática da ANPOLL},
+        number = {28},
+        venue = {Florianópolis},
+        eventyear = {2013},
+        booktitle = {Caderno de Resumos},
+        publisher = {},
+        location = {Campinas},
+        year = {2013},
+    }
+\end{verbatim}
+
+\singlecite{negrão13}
+
+
+\clearpage
+\section{Compatibilidade com o pacote \texttt{abntex2cite}}
+
+Em geral é possível usar o mesmo arquivo \verb`.bib` utilizado pelo \verb`abntex2cite`, e para a maior parte das entradas mais simples nenhuma mudança é necessária; estas são as principais exceções:
+
+\begin{itemize}
+    \item Não consegui entender por que, mas os exemplos do \verb`abntex2cite` usam \verb`{\'\i}` para o caractere ``í'', enquanto o normal me parece ser \verb`{\'i}` (para outras letras com acento agudo o \verb`abntex2cite` usa o formato normal). Isso pode causar alguns problemas, o ideal é usar \verb`{\'i}` (ou aproveitar os recursos do biber e usar a codificação utf-8). Caso isso não seja possível por algum motivo, chamar o biblatex com a opção \verb`safeinputenc` pode resolver alguns problemas (mas também causa alguns outros, interferindo, por exemplo, na capitalização automática de palavras acentuadas).
+    \item Os campos de datas (\verb`date`, \verb`year`, \verb`month` etc.) devem seguir o formato usado pelo \verb`biblatex`, \verb`yyyy-mm-dd`. Cf. seção 2.2.1 do manual.
+    \item O \verb`biblatex` diferencia os campos \verb`pages` (e.g. ``p. 12-18'') e \verb`pagetotal` (e.g. ``347 p.'').
+    \item Quando o primeiro campo impresso é o título, a primeira palavra é automaticamente impressa em maiúsculas. Para que mais de uma palavra seja impressa em maiúsculas, coloque-as entre chaves ou separadas por um no breaking space (\verb`~`).
+    \item Quando o primeiro campo impresso é a organização, todo o campo é impresso em maiúsculas. Para que a capitalização de uma palavra não seja alterada, coloque-a entre chaves (e.g. \verb`{pAlaVRa}`).
+    \item Pode-se incluir no campo \verb`options` as opções \verb`nosl` (para não mostrar a abreviação ``[s.l]''), \verb`nosn` (para não mostrar ``[s.n.]'') ou \verb`noslsn` (para não mostrar nenhuma das duas abreviações) (e.g. \verb`options = {noslsn}`); essa configuração tem efeito em cada entrada específica. Pode-se também incluir essas opções ao chamar o \verb`biblatex` para nunca mostrar as abreviações, e então abrir exceções para entradas específicas (e.g. \verb`options = {noslsn=false}`).
+    \item Para periódicos, deve se utilizar entradas \verb`@periodical`. Usando-se \verb`@book`, como no \verb`abntex2cite`, o ISSN não aparece.
+    \item Para teses de mestrado e doutorado, o campo \verb`pagetotal` é automaticamente formatado em folhas, como requer a norma (e.g. ``347 f.''). Para usar páginas também nessas entradas, use \verb`bookpagination = {page}`. Para usar folhas em outras entradas, use \verb`bookpagination = {sheet}`.
+    \item Ao modificar o campo \verb`type` em teses de mestrado e doutorado, deve-se preenchê-lo com todo o texto desejado (e.g. ``Tese (Doutorado em Nutrição)'').
+    \item Ao utilizar o campo \verb`illustrated`, deve-se preenchê-lo com todo o texto desejado (e.g. ``il.'').
+    \item Além do campo \verb`organization`, há o campo \verb`nameaddon`, de modo que organizações como ``BRASIL. Supremo Tribunal de Justiça'' e ``BRASIL. Supremo Tribunal Federal'' podem ter uma mesma organização, diferenciando-se por esse campo. Isso permite que a primeira parte, ``BRASIL'', não seja repetida várias vezes seguidas (e.g. ``\underline{\hspace*{4em}}. Supremo Tribunal Federal'').
+    \item O \verb`abntex2cite` às vezes usa o campo \verb`type` como um complemento da organização (um exemplo é a entrada \verb`brasil1988`). Com o \verb`biblatex-abnt` deve-se usar o campo \verb`nameaddon` em vez de \verb`type`. Embora nesse caso (``Constituição (1988)'') o campo \verb`type` faça mais sentido semanticamente, colocá-lo nessa posição causaria problemas na organização alfabética da bibliografia, já que o campo \verb`type` às vezes apareceria antes do título e às vezes depois.
+    \item A recomendação do manual do \verb`biblatex` (seção 2.3.3) é de que, para autores corporativos, utilize-se os campos \verb`author` e \verb`editor`, colocando o nome da organização entre chaves. Essa opção tem a vantagem de permitir que se misture autores corporativos e autores comuns (e.g. \verb`editor = {{National` \verb`Aeronautics and Space Administration} and Doe, John}`).
+    \item Quando o nome do autor, editor ou organização for muito grande para usar nas citações, pode-se acrescentar os campos \verb`shortauthor` e \verb`shorteditor` (e.g. \verb`author = {National Aeronautics and Space Administration},` \verb`shortauthor = {NASA}` imprimirá ``NASA'' nas citações e ``National Aeronautics and Space Administration'' na bibliografia). O campo \verb`org-short`, usado pelo \verb`abntex2cite`, é automaticamente convertido para \verb`shortauthor`.
+    \item O separador ``de'' faz com que tudo o que vem depois dele seja considerado um único sobrenome (e.g. na entrada \verb`alves1995` o nome \verb`Roque de Brito` \verb`Alves` é impresso como ``BRITO ALVES, Roque de''). Cf. \url{http://tex.stackexchange.com/q/308625/102699}.
+    \item Quando os campos \verb`number`, \verb`volume`, \verb`chapter` e \verb`edition` contém apenas números, eles são formatados automaticamente (e.g. \verb`edition = {5}` imprime ``5. ed.''). Quando esses campos contém letras, deve-se preencher todo o conteúdo desejado (e.g. \verb`edition = {5th. ed}` imprime ``5th. ed.''). Os caracteres \verb`.,-/` podem ser usados e o campo ainda será considerado como contendo apenas números.
+    \item Em entradas dos tipos \verb`phdthesis`, \verb`mastersthesis` e \verb`monography`, há a data de publicação, que aparece logo após o título, e a data da defesa, que aparece por último. O \verb`abntex2cite` às vezes usa o campo \verb`year-presented` para diferenciar entre as duas datas e às vezes muda as opções do pacote para mostrar uma mesma data em uma ou outra posição. No \verb`biblatex-abnt` pode-se usar os campos de datas usuais para a data de publicação, que aparece após o título, e os campos \verb`eventdate`, \verb`eventmonth` e \verb`eventyear` para a data da defesa, que aparece no final. O campo \verb`year-presented`, usado pelo \verb`abntex2cite`, é automaticamente convertido para \verb`eventyear`. (Cf. entradas \verb`morgado1990`, \verb`morgadob1990` e \verb`morgadoc1990` no arquivo \verb`abnt-testcase.tex`.)
+    \item Em vez dos campos \verb`reprinted-from` e \verb`reprinted-text`, utilizados pelo \verb`abntex2cite`, usa-se o campo \verb`related` para citar uma entrada relacionada e o campo \verb`relatedtype` para especificar a natureza dessa relação. O campo \verb`reprinted-from` é automaticamente convertido para \verb`related`; esse campo deve conter a chave da obra relacionada. O campo \verb`relatedtype` pode conter algumas opções: \verb`relatedtype={reprintfrom}` imprime ``Separata de'' (esse texto também é usado como padrão quando se escreve qualquer coisa no campo \verb`reprinted-text`, usado no \verb`abntex2cite`); \verb`recensionof` imprime ``Recensão de''; \verb`reviewof` imprime ``Resenha de''; \verb`reprintof` imprime ``Reimpressão de''; \verb`translationof` imprime ``Tradução de''. Outras possibilidades podem ser encontradas no arquivo \verb`brazilian.lbx`, incluso na instalação padrão do \verb`biblatex`.
+    \item As entradas \verb`inbook` e \verb`incollection`, no \verb`biblatex`, não se comportam como no \verb`bibtex`. Entradas \verb`inbook` também podem ter um \verb`bookauthor`; elas estão para as entradas \verb`book` assim como as entradas \verb`incollection` estão para as entradas \verb`collection` (Cf. seção 2.3.1 do manual do \verb`biblatex`). No \verb`biblatex-abnt` é possível definir um \verb`bookauthor` para entradas \verb`inbook`, mas, caso isso não seja feito, essas entradas se comportarão como as entradas \verb`inbook` do \verb`bibtex`.
+    \item É possível usar o campo \verb`furtherresp` como no \verb`abntex2cite`, mas é preferível usar os campos \verb`editora`, \verb`editoratype`, \verb`editorb`, \verb`editorbtype` etc. (e.g. \verb`editora = {Ismael Cardim},  editoratype={coeditor}` imprimirá ``Co-edição de Ismael Cardim'' na bibliografia; cf. entradas \verb`houaiss1996`, \verb`koogan1998`, \verb`ceravi1983`, \verb`riofilme1998` e pesquise pelo campo \verb`editoratype` para mais exemplos). Todas as opções para o campo \verb`editortype` podem ser encontradas no arquivo \verb`abnt-brazilian.lbx`. Usar esses campos em lugar do campo \verb`furtherresp` assegurará que as entradas sejam impressas de forma consistente, embora as entradas da própria ABNT não o sejam.
+    \item Para tradutores pode-se usar o campo \verb`translator`.
+\end{itemize}
+
+\clearpage
+\nocite{*}
+\printbibliography
+
+\end{document}
