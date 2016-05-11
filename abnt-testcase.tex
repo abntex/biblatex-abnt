@@ -18,8 +18,8 @@
     %giveninits,       % Uncomment to use initials for first names
     %bftitles,         % Uncomment to print titles in bold
     %indent,           % Uncomment to use hanging indentation in the bibliography
-    %scbib,            % Uncomment to use small caps in the bibliography
-    %sccite,           % Uncomment to use small caps in the citations
+    scbib,            % Uncomment to use small caps in the bibliography
+    sccite,           % Uncomment to use small caps in the citations
     %noslsn,           % Uncomment to hide [s.l], [s.n] and [s.l.: s.n.]
     %nosl,             % Uncomment to hide just [s.l]
     %nosn,             % Uncomment to hide just [s.n]
@@ -43,15 +43,16 @@
 	
 	\begin{description}
 	    \item [\PVerb{\cite{santos1994}}] \cite{santos1994}
+	    \item [\PVerb{\parencite{santos1994}}] \parencite{santos1994}
 	    \item [\PVerb{\cites{santos1994}{gomes1998}{silva1996}}] \cites{santos1994}{gomes1998}{silva1996}
 	    \item [\PVerb{\cite*{santos1994}}] \cite*{santos1994}
 	    \item [\PVerb{\textcite{santos1994}}] \textcite{santos1994}
 	    \item [\PVerb{\textcites{santos1994}{gomes1998}{silva1996}}] \textcites{santos1994}{gomes1998}{silva1996}
 	    \item [\PVerb{\textcite*{santos1994}}] \textcite*{santos1994}
 	    \item [\PVerb{\apud{gomes1998}{santos1994}}] \apud{gomes1998}{santos1994}
-	    \item [\PVerb{\apud{silva1996}{gomes1998}{santos1994}}] \apud{silva1996}{gomes1998}{santos1994}
 	    \item [\PVerb{\apud[p.~12]{gomes1998}[p.~200]{santos1994}}] \apud[p.~12]{gomes1998}[p.~200]{santos1994}
 	    \item [\PVerb{\apud[batman][]{santos1994}}] \apud[batman][]{santos1994}
+	    \item [\PVerb{\textapud[p.~12]{silva1996}[p.~200]{santos1994}}] \textapud[p.~12]{silva1996}[p.~200]{santos1994}
 	\end{description}
 
 	\nocite{*}

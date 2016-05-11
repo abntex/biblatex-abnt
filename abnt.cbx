@@ -13,7 +13,10 @@
 %% The Current Maintainer of this work is Daniel Marques.
 
 \ProvidesFile{abnt.cbx}[\abx@cbxid]
+\RequireBiber[3]
 \RequireCitationStyle{authoryear}
+
+\RequirePackage{xparse}
 
 \newcommand{\addapud}{%
   \renewcommand*{\multicitedelim}{%
@@ -81,9 +84,28 @@
 % DeclareCiteCommand
 % ----------
 
-% TODO: This still needs a lot of work. It doesn't support prenotes and postnotes and doesn't
-% differentiate years when the bibliography is ambiguous (e.g. 2016b).
-\newcommand*{\textapud}[2]{\citeauthor{#1} (\citeyear{#1} apud \citeauthor{#2}, \citeyear{#2})}
+\NewDocumentCommand{\textapud}{o o m o o m}{%
+ \citelastname{#3}  
+ \mkbibparens{%
+  \IfNoValueTF{#2}
+   {%
+    \IfNoValueTF{#1}
+     {\citeyear{#3}}
+     {\citeyear[#1]{#3}}%
+   }
+   {%
+    \citeyear[#1][#2]{#3}%
+   }   
+  \IfNoValueTF{#5}
+   {%
+    \IfNoValueTF{#4}
+     {\plaincite[\blx@imc@bibxstring{apud}][]{#6}}
+     {\plaincite[\blx@imc@bibxstring{apud}][#4]{#6}}%
+   }
+   {%
+    \cite[\blx@imc@bibxstring{apud} #4][#5]{#6}%
+   }%   
+  }}
 
 \DeclareMultiCiteCommand{\apud}[\addapud\mkbibparens]
 	{\@apud}
@@ -102,6 +124,13 @@
 	{\usebibmacro{postnote}}
   
 \DeclareCiteCommand{\cite}[\mkbibparens]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \usebibmacro{cite}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+  
+\DeclareCiteCommand{\plaincite}
   {\usebibmacro{prenote}}
   {\usebibmacro{citeindex}%
    \usebibmacro{cite}}
@@ -168,6 +197,17 @@
      {\indexfield{indextitle}}
      {}%
    \printfield[citetitle]{title}\nopunct}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\citelastname}
+  {\boolfalse{citetracker}%
+   \boolfalse{pagetracker}%
+   \usebibmacro{prenote}}
+  {\ifciteindex
+     {\indexnames{labelname}}
+     {}%
+   \printnames[last]{labelname}}
   {\multicitedelim}
   {\usebibmacro{postnote}}
 
