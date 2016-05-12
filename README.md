@@ -1,3 +1,5 @@
+#biblatex-abnt
+
 Version 1.0
 
 Permission is granted to copy, distribute and/or modify this software under
@@ -6,8 +8,6 @@ the terms of the LaTeX Project Public License, version
 maintainer is Philip Kime (Â© 2016).
 
 ----------
-
-#biblatex-abnt
 
 Estilo para `biblatex` compatível com as normas da ABNT.
 
