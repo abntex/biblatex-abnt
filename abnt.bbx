@@ -216,9 +216,12 @@
 
 \newcommand{\abntnum}[1]{\ifrmnum{#1}{\rmntonum{#1}}{#1}}
 
-% Add semicolons between multiple authors.
-\renewcommand*{\multinamedelim}{\addsemicolon\addspace}%
-\renewcommand*{\finalnamedelim}{\addsemicolon\addspace}%
+% Use "John Doe, Jack Roe and Joe Blow" for byeditor+others,
+% "Doe; Roe; Blow" everywhere else.
+\newtoggle{byeditor+others}
+\renewcommand*{\multinamedelim}{\iftoggle{byeditor+others}{\addcomma\addspace}{\addsemicolon\addspace}}%
+\renewcommand*{\finalnamedelim}{\iftoggle{byeditor+others}{\addspace\bibstring{and}\addspace}{\addsemicolon\addspace}}%
+
 \renewcommand*{\nameyeardelim}{\addcomma\addspace}%
 
 \renewcommand*{\subtitlepunct}{\addcolon\addspace}%
@@ -403,7 +406,16 @@
 
 \DeclareListFormat{uppercase}{%
   \usebibmacro{list:delim}{#1}%
-  \iftoggle{scbib}{\textsc{#1}}{\smartuppercase{#1}}\isdot
+		\iftoggle{scbib}{%
+			\ifgiveninits{%
+				\normalfont\smartuppercase{#1}%
+			}{%
+				\normalfont\smartlcsc{#1}%
+			}%
+		}{%
+			\normalfont\FirstWordUpper{#1}%
+		}%
+		\isdot%
   \usebibmacro{list:andothers}}%
   
 \DeclareListFormat{upperfirst}{%
@@ -800,6 +812,7 @@
 	{\printfield[uppercase]{eventtitle}}}%
 
 \renewbibmacro*{byeditor+others}{%
+  \toggletrue{byeditor+others}
   \ifnameundef{editor}%
     {}%
     {\usebibmacro{byeditor+othersstrg}%
@@ -808,7 +821,8 @@
      \clearname{editor}%
      \newunit}%
   \usebibmacro{byeditorx}%
-  \usebibmacro{bytranslator+others}}%
+  \usebibmacro{bytranslator+others}}
+  \togglefalse{byeditor+others}%
 
 \renewbibmacro*{related:reprintfrom}[1]{%
   \entrydata*{#1}{%
@@ -1805,6 +1819,13 @@
    \bgroup 
    \traceparam{#1}%
    \MakeLowercase{\paramL}%
+   \egroup
+}
+
+\def\smartlcsc#1{%
+   \bgroup 
+   \traceparam{#1}%
+   \textsc{\MakeLowercase{\paramL}}%
    \egroup
 }
   
