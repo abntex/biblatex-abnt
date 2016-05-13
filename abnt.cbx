@@ -12,7 +12,7 @@
 %% 
 %% The Current Maintainer of this work is Daniel B. Marques.
 
-\ProvidesFile{abnt.cbx}[2016/05/12\space v1.0\space ABNT biblatex citation style]
+\ProvidesFile{abnt.cbx}[2016/05/12\space v1.1\space ABNT biblatex citation style]
 \RequireBiber[3]
 \RequireCitationStyle{authoryear}
 
@@ -114,7 +114,8 @@
 	{\setunit{\multicitedelim}}
 
 \DeclareCiteCommand{\@apud}
-	{\iffieldundef{prenote}
+	{\usebibmacro{cite:init}%
+	\iffieldundef{prenote}
 		{}
 		{\printfield[uppercasecite]{prenote}
 		\addspace\bibstring{apud}\addspace}}
@@ -124,14 +125,16 @@
 	{\usebibmacro{postnote}}
   
 \DeclareCiteCommand{\cite}[\mkbibparens]
-  {\usebibmacro{prenote}}
+  {\usebibmacro{cite:init}%
+  \usebibmacro{prenote}}
   {\usebibmacro{citeindex}%
    \usebibmacro{cite}}
-  {\multicitedelim}
+  {}
   {\usebibmacro{postnote}}
   
 \DeclareCiteCommand{\plaincite}
-  {\usebibmacro{prenote}}
+  {\usebibmacro{cite:init}%
+  \usebibmacro{prenote}}
   {\usebibmacro{citeindex}%
    \usebibmacro{cite}}
   {\multicitedelim}
@@ -142,14 +145,16 @@
 	{\setunit{\multicitedelim}}
 
 \DeclareCiteCommand*{\cite}[\mkbibparens]
-  {\usebibmacro{prenote}}
+  {\usebibmacro{cite:init}%
+  \usebibmacro{prenote}}
   {\usebibmacro{citeindex}%
-   \usebibmacro{citeyear}}
-  {\multicitedelim}
+   \usebibmacro{citeyearpunct}}
+  {}
   {\usebibmacro{postnote}}
 
 \DeclareCiteCommand{\textcite}
-  {\boolfalse{cbx:parens}%
+  {\usebibmacro{cite:init}%
+  \boolfalse{cbx:parens}%
   \renewcommand*{\finalnamedelim}{\addspace\bibstring{and}\addspace}%
   \renewcommand*{\multinamedelim}{\addcomma\addspace}}
   {\usebibmacro{citeindex}%
@@ -164,7 +169,8 @@
   {\usebibmacro{textcite:postnote}}
 
 \DeclareCiteCommand*{\textcite}
-  {\boolfalse{cbx:parens}%
+  {\usebibmacro{cite:init}%
+  \boolfalse{cbx:parens}%
   \renewcommand*{\finalnamedelim}{\addspace\bibstring{and}\addspace}%
   \renewcommand*{\multinamedelim}{\addcomma\addspace}}
   {\usebibmacro{citeindex}%
@@ -179,7 +185,8 @@
   {\usebibmacro{textcite:postnote}}
 
 \DeclareCiteCommand{\citetitle}[\mkbibparens]
-  {\boolfalse{citetracker}%
+  {\usebibmacro{cite:init}%
+  \boolfalse{citetracker}%
    \boolfalse{pagetracker}%
    \usebibmacro{prenote}}
   {\ifciteindex
@@ -190,7 +197,8 @@
   {\usebibmacro{postnote}}
 
 \DeclareCiteCommand*{\citetitle}
-  {\boolfalse{citetracker}%
+  {\usebibmacro{cite:init}%
+  \boolfalse{citetracker}%
    \boolfalse{pagetracker}%
    \usebibmacro{prenote}}
   {\ifciteindex
@@ -201,7 +209,8 @@
   {\usebibmacro{postnote}}
 
 \DeclareCiteCommand{\citelastname}
-  {\boolfalse{citetracker}%
+  {\usebibmacro{cite:init}%
+  \boolfalse{citetracker}%
    \boolfalse{pagetracker}%
    \usebibmacro{prenote}}
   {\ifciteindex
@@ -215,6 +224,9 @@
 % ----------
 % newbibmacro
 % ----------
+
+\newbibmacro*{cite:init}{%
+  \global\undef\cbx@lasthash}
 
 \newbibmacro*{cite:author}{%
   \printtext[bibhyperref]{\printfield{author}}}
@@ -261,19 +273,64 @@
        {}%
      \usebibmacro{citeyear}}}
 
-\renewbibmacro*{cite}{%
-  \iffieldundef{shorthand}
-    {\ifthenelse{\ifnameundef{labelname}\OR\iffieldundef{labelyear}}
-       {\usebibmacro{cite:label}%
-        \setunit{\nameyeardelim}}
-       {\printnames[LAST]{labelname}%
-        \setunit{\nameyeardelim}}%
-     \usebibmacro{cite:labelyear+extrayear}}
-    {\usebibmacro{cite:shorthand}}}
+\newbibmacro*{cite}{%
+  \iffieldequals{fullhash}{\cbx@lasthash}
+% Multiple cites in one command
+   {\setunit{\compcitedelim}%
+    \usebibmacro{cite:plabelyear+extrayear}}%
+% Single cite
+   {\ifthenelse{\ifnameundef{labelname}\OR\iffieldequalstr{entrytype}{patent}}
+% No author/editor
+     {\usebibmacro{cite:noname}%
+       \setunit{\nameyeardelim}%
+       \usebibmacro{cite:plabelyear+extrayear}%
+       \savefield{fullhash}{\cbx@lasthash}}
+% Normal cite
+     {\ifnameundef{shortauthor}
+        {\printnames[LAST][-\value{listtotal}]{labelname}}%
+        {\printnames[LAST]{shortauthor}}%
+      \setunit{\nameyeardelim}%
+      \usebibmacro{cite:plabelyear+extrayear}%
+      \savefield{fullhash}{\cbx@lasthash}}}%
+   \setunit{\multicitedelim}}
+   
+\def\citeresetabnt{\global\let\cbx@abnt@names\@empty}
+\citeresetabnt
+\def\cbx@abnt@ifnamesaved{%
+  \xifinlist{\thefield{fullhash}}{\cbx@abnt@names}
+    {\@firstoftwo}
+    {\@secondoftwo}}
 
 \renewbibmacro*{cite:label}{%
   \iffieldundef{label}
     {\printtext[bibhyperref]{\printfield[uppercasecite]{labeltitle}}}
     {\printtext[bibhyperref]{\printfield{label}}}}
+
+\newbibmacro*{cite:plabelyear+extrayear}{%
+  \iffieldundef{labelyear}
+    {}
+    {\printtext[bibhyperref]{%
+       \printfield[noformat]{origyear}\setunit*{\addslash}%
+       \printfield{labelyear}\printfield{extrayear}}}%
+       \iffieldundef{issue}
+         {}
+         {\addcomma\addspace\printfield{issue}}}
+
+\newbibmacro*{cite:shorthand}{%
+  \ifciteseen
+    {\printfield{shorthand}}
+    {\printnames[labelname][-\value{listtotal}]{labelname}%
+     \setunit{\nameyeardelim}%
+     \printfield{title}\space\printfield{shorthand}}}
+  
+\newbibmacro*{citeyearpunct}{%
+  \iffieldundef{labelyear}
+    {\usebibmacro{cite:init}}
+    {\iffieldequals{fullhash}{\cbx@lasthash}
+       {\setunit{\compcitedelim}%
+        \usebibmacro{cite:plabelyear+extrayear}}
+       {\usebibmacro{cite:plabelyear+extrayear}%
+        \savefield{fullhash}{\cbx@lasthash}}}%
+  \setunit{\multicitedelim}}
 
 \endinput
