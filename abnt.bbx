@@ -1801,7 +1801,7 @@
 \def\traceparamD#1{%
    \expandafter\addto\expandafter\paramL\expandafter
    {\expandafter\noexpand\csname ll:\detokenize{#1}\endcsname}%
-   \expandafter\def\csname ll:\detokenize{#1}\endcsname{#1}%
+   \expandafter\def\csname ll:\detokenize{#1}\endcsname{\normalfont #1}%
    \traceparamA
 }
 \def\traceparamE\end{}
