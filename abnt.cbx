@@ -12,7 +12,7 @@
 %% 
 %% The Current Maintainer of this work is Daniel B. Marques.
 
-\ProvidesFile{abnt.cbx}[2016/05/12\space v1.1\space ABNT biblatex citation style]
+\ProvidesFile{abnt.cbx}[2016/05/12\space v1.0.1\space ABNT biblatex citation style]
 \RequireBiber[3]
 \RequireCitationStyle{authoryear}
 
@@ -273,7 +273,7 @@
        {}%
      \usebibmacro{citeyear}}}
 
-\newbibmacro*{cite}{%
+\renewbibmacro*{cite}{%
   \iffieldequals{fullhash}{\cbx@lasthash}
 % Multiple cites in one command
    {\setunit{\compcitedelim}%
@@ -316,7 +316,7 @@
          {}
          {\addcomma\addspace\printfield{issue}}}
 
-\newbibmacro*{cite:shorthand}{%
+\renewbibmacro*{cite:shorthand}{%
   \ifciteseen
     {\printfield{shorthand}}
     {\printnames[labelname][-\value{listtotal}]{labelname}%
