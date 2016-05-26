@@ -406,12 +406,12 @@
   \usebibmacro{list:delim}{#1}%
 		\iftoggle{scbib}{%
 			\ifgiveninits{%
-				\normalfont\smartuppercase{#1}%
+				\normalfont\smartsc{#1}%
 			}{%
 				\normalfont\smartlcsc{#1}%
 			}%
 		}{%
-			\normalfont\FirstWordUpper{#1}%
+			\normalfont\smartuppercase{#1}%
 		}%
 		\isdot%
   \usebibmacro{list:andothers}}%
@@ -1826,6 +1826,13 @@
    \textsc{\MakeLowercase{\paramL}}%
    \egroup
 }
-  
+ 
+\def\smartsc#1{%
+   \bgroup 
+   \traceparam{#1}%
+   \textsc{\paramL}%
+   \egroup
+}
+ 
 
 \endinput
