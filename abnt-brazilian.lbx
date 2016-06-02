@@ -9,7 +9,7 @@
 %% version 2005/12/01 or later.
 %%
 %% This work has the LPPL maintenance status `maintained'.
-%% 
+%%
 %% The Current Maintainer of this work is Daniel B. Marques.
 
 \ProvidesFile{abnt.lbx}
@@ -19,12 +19,12 @@
 \DeclareBibliographyExtras{
   \protected\def\mkbibdatelong#1#2#3{%
     \iffieldundef{#3}
-      {}
-      {\stripzeros{\thefield{#3}}%
+          {}
+          {\stripzeros{\thefield{#3}}%
        \iffieldundef{#2}{}{\addspace}}%
     \iffieldundef{#2}
-      {}
-      {\mkbibmonth{\thefield{#2}}%
+          {}
+          {\mkbibmonth{\thefield{#2}}%
        \iffieldundef{#1}{}{\addspace}}%
     \thefield{#1}}%
 }
@@ -74,176 +74,178 @@
 \NewBibliographyString{apud}
 
 \DeclareBibliographyStrings{%
-  apud				= {{apud}{apud}},
-  volume 			= {{volume}{v\adddot}},
-  volumes           = {{volumes}{v\adddot}},
-  number 			= {{número}{n\adddot}},
-  pages 			= {{p\'aginas}{p\adddot}},
-  involumes    		= {{in}{in}},
-  in           		= {{in}{in}},
-  inseries     		= {{in}{in}},
-  sineloco    	    = {{sine loco}{s\adddot l\adddot}},
-  sinenomine  	    = {{sine nomine}{s\adddot n\adddot}},
-  url				= {{disponível em}{disponível em}},
-  urlseen			= {{acesso em}{acesso em}},
-  sheet				= {{folha}{f.}},
-  sheets		 	= {{folhas}{f.}},
-  illustrated		= {{ilustrado}{il.}},
-  monography		= {{monografia}{monografia}},
-  phdthesis			= {{Tese (Doutorado)}{Tese (Doutorado)}},
-  mathesis			= {{Tese (Mestrado)}{Tese (Mestrado)}},
-  reprintfrom       = {{separata de}{separata de}},
-  recensionof       = {{recensão de}{recensão de}},
-  bycoeditor    	= {{co-edição de}{co-edição de}},
-  bydirector	    = {{direção de}{direção de}},
-  bygeneraldirector	= {{direção geral de}{direção geral de}},
-  bycoordinator		= {{coordenação de}{coordenação de}},
-  byproducer		= {{produção de}{produção de}},
-  byscreenwriter	= {{roteiro de}{roteiro de}},
-  byinterpreter		= {{interpretação de}{interpretação de}},
-  byillustrator		= {{ilustrações de}{ilustrações de}},
-  photographer		= {{fotógrafo}{fot.}},
-  byphotographer	= {{fotografia de}{fotografia de}},
-  recorder			= {{gravador}{gravador}},
-  byrecorder		= {{gravação de}{gravação de}},
-  interviewer		= {{entrevistador}{entrevistador}},
-  byinterviewer		= {{entrevista por}{entrevista por}},
-  artisticdirector		= {{diretor artístico}{dir. art.}},
-  byartisticdirector		= {{direção artística de}{direção artística de}},
-  organizer			= {{organização}{org\adddot}},
-  organizers			= {{organização}{org\adddot}},
-  generalorganizer			= {{organização geral}{org\adddot geral}},
-  byorganizer		= {{organização de}{organização de}},
-  bygeneralorganizer		= {{organização geral de}{organização geral de}},
-  byauthor         = {{por}{por}},
-  byeditor         = {{edição de}{edição de}},
-  bycompiler       = {{compilação de}{compilação de}},
-  byredactor       = {{redigido por}{redigido por}},
-  byreviser        = {{revisão de}{revisão de}},
-  bytechnicalreviser = {{revisão técnica de}{revisão técnica de}},
-  byreviewer       = {{resenha de}{resenha de}},
-  byfounder        = {{fundado por}{fundado por}},
-  bycontinuator    = {{continuado por}{continuado por}},
-  bycollaborator   = {{em colabora\c{a}\~o com}{em colabora\c{a}\~o com}},
-  bytranslator     = {{tradução \lbx@lfromlang\ de}{tradução \lbx@lfromlang\ de}},
-  bycommentator    = {{comentário de}{comentário de}},
-  byannotator      = {{notas de}{notas de}},
-  withcommentator  = {{coment\'ario de}{coment\'ario de}},
-  withannotator    = {{notas de}{notas de}},
-  withintroduction = {{introdu\c{c}\~ao de}{introdu\c{c}\~ao de}},
-  withforeword     = {{pref\'acio de}{pref\'acio de}},
-  withafterword    = {{posf\'acio de}{posf\'acio de}},
-  byorganizerfo	   = {{organização e prefácio de}{organização e prefácio de}},
-  bygeneralorganizerfo	   = {{organização geral e prefácio de}{organização geral e prefácio de}},
-  byeditortr       = {{edição e tradução \lbx@lfromlang\ de}%
-                      {edição e tradução \lbx@lfromlang\ de}},
-  byeditorco       = {{edição e comentário de}%
-                      {edição e comentário de}},
-  byeditoran       = {{edição e notas de}%
-                      {edição e notas de}},
-  byeditorin       = {{edição e introdução de}%
-                      {edição e introdução de}},
-  byeditorfo       = {{edição e prefácio de}%
-                      {edição e prefácio de}},
-  byeditoraf       = {{edição e posfácio de}%
-                      {edição e posfácio de}},
-  byeditortrco     = {{edição, tradução \lbx@lfromlang\ e comentário de}%
-                      {edição, tradução \lbx@lfromlang\ e comentário de}},
-  byeditortran     = {{edição, tradução \lbx@lfromlang\ e notas de}%
-                      {edição, tradução \lbx@lfromlang\ e notas de}},
-  byeditortrin     = {{edição, tradução \lbx@lfromlang\ e introdução de}%
-                      {edição, tradução \lbx@lfromlang\ e introdução de}},
-  byeditortrfo     = {{edição, tradução \lbx@lfromlang\ e prefácio de}%
-                      {edição, tradução \lbx@lfromlang\ e prefácio de}},
-  byeditortraf     = {{edição, tradução \lbx@lfromlang\ e posfácio de}%
-                      {edição, tradução \lbx@lfromlang\ e posfácio de}},
-  byeditorcoin     = {{edição, comentário e introdução de}%
-                      {edição, comentário e introdução de}},
-  byeditorcofo     = {{edição, comentário e prefácio de}%
-                      {edição, comentário e prefácio de}},
-  byeditorcoaf     = {{edição, comentário e posfácio de}%
-                      {edição, comentário e posfácio de}},
-  byeditoranin     = {{edição, notas e introdução de}%
-                      {edição, notas e introdução de}},
-  byeditoranfo     = {{edição, notas e prefácio de}%
-                      {edição, notas e prefácio de}},
-  byeditoranaf     = {{edição, notas e posfácio de}%
-                      {edição, notas e posfácio de}},
-  byeditortrcoin   = {{edição, tradução \lbx@lfromlang, comentário e introdução de}%
-                      {edição, tradução \lbx@lfromlang, comentário e introdução de}},
-  byeditortrcofo   = {{edição, tradução \lbx@lfromlang, comentário e prefácio de}%
-                      {edição, tradução \lbx@lfromlang, comentário e prefácio de}},
-  byeditortrcoaf   = {{edição, tradução \lbx@lfromlang, comentário e posfácio de}%
-                      {edição, tradução \lbx@lfromlang, comentário e posfácio de}},
-  byeditortranin   = {{edição, tradução \lbx@lfromlang, notas e introdução de}%
-                      {edição, tradução \lbx@lfromlang, notas e introdução de}},
-  byeditortranfo   = {{edição, tradução \lbx@lfromlang, notas e prefácio de}%
-                      {edição, tradução \lbx@lfromlang, notas e prefácio de}},
-  byeditortranaf   = {{edição, tradução \lbx@lfromlang, notas e posfácio de}%
-                      {edição, tradução \lbx@lfromlang, notas e posfácio de}},
-  bytranslatorco   = {{tradução \lbx@lfromlang\ e comentário de}%
-                      {tradução \lbx@lfromlang\ e comentário de}},
-  bytranslatoran   = {{tradução \lbx@lfromlang\ e notas de}%
-                      {tradução \lbx@lfromlang\ e notas de}},
-  bytranslatorin   = {{tradução \lbx@lfromlang\ e introdução de}%
-                      {tradução \lbx@lfromlang\ e introdução de}},
-  bytranslatorfo   = {{tradução \lbx@lfromlang\ e prefácio de}%
-                      {tradução \lbx@lfromlang\ e prefácio de}},
-  bytranslatoraf   = {{tradução \lbx@lfromlang\ e posfácio de}%
-                      {tradução \lbx@lfromlang\ e posfácio de}},
-  bytranslatorcoin = {{tradução \lbx@lfromlang, comentário e introdução de}%
-                      {tradução \lbx@lfromlang, comentário e introdução de}},
-  bytranslatorcofo = {{tradução \lbx@lfromlang, comentário e prefácio de}%
-                      {tradução \lbx@lfromlang, comentário e prefácio de}},
-  bytranslatorcoaf = {{tradução \lbx@lfromlang, comentário e posfácio de}%
-                      {tradução \lbx@lfromlang, comentário e posfácio de}},
-  bytranslatoranin = {{tradução \lbx@lfromlang, notas e introdução de}%
-                      {tradução \lbx@lfromlang, notas e introdução de}},
-  bytranslatoranfo = {{tradução \lbx@lfromlang, notas e prefácio de}%
-                      {tradução \lbx@lfromlang, notas e prefácio de}},
-  bytranslatoranaf = {{tradução \lbx@lfromlang, notas e posfácio de}%
-                      {tradução \lbx@lfromlang, notas e posfácio de}},
-  langamerican     = {{versão americana}{versão americana}},
-  langbrazilian    = {{versão brasileira}{versão brasileira}},
-  langcatalan      = {{versão catalã}{versão catalã}},
-  langcroatian     = {{versão croata}{versão croata}},
-  langczech        = {{versão tcheca}{versão tcheca}},
-  langdanish       = {{versão dinamarquesa}{versão dinamarquesa}},
-  langdutch        = {{versão holandesa}{versão holandesa}},
-  langenglish      = {{versão inglesa}{versão inglesa}},
-  langfinnish      = {{versão finlandesa}{versão finlandesa}},
-  langfrench       = {{versão francesa}{versão francesa}},
-  langgerman       = {{versão alem\~a}{versão alem\~a}},
-  langgreek        = {{versão grega}{versão grega}},
-  langitalian      = {{versão italiana}{versão italiana}},
-  langlatin        = {{versão latina}{versão latina}},
-  langnorwegian    = {{versão norueguesa}{versão norueguesa}},
-  langpolish       = {{versão polonesa}{versão polonesa}},
-  langportuguese   = {{versão portuguesa}{versão portuguesa}},
-  langrussian      = {{versão russa}{versão russa}},
-  langslovene      = {{versão eslovena}{versão eslovena}},
-  langspanish      = {{versão espanhola}{versão espanhola}},
-  langswedish      = {{versão sueca}{versão sueca}},
-  fromamerican     = {{do original ingl\^es}{do original ingl\^es}},
-  frombrazilian    = {{do original portugu{\^e}s}{do original portugu{\^e}s}},
-  fromcatalan      = {{do original catalão}{do original catalão}},
-  fromcroatian     = {{do original croata}{do original croata}},
-  fromczech        = {{do original tcheco}{do original tcheco}},
-  fromdanish       = {{do original dinamarqu\^es}{do original dinamarqu\^es}},
-  fromdutch        = {{do original holand{\^e}s}{do original holand{\^e}s}},
-  fromenglish      = {{do original ingl\^es}{do original ingl\^es}},
-  fromfinnish      = {{do original finland\^es}{do original finland\^es}},
-  fromfrench       = {{do original franc\^es}{do original franc\^es}},
-  fromgerman       = {{do original alem\~ao}{do original alem\~ao}},
-  fromgreek        = {{do original grego}{do original grego}},
-  fromitalian      = {{do original italiano}{do original italiano}},
-  fromlatin        = {{do original em latim}{do original em latim}},
-  fromnorwegian    = {{do original noruegu\^es}{do original noruegu\^es}},
-  frompolish       = {{do original polonês}{do original polonês}},
-  fromportuguese   = {{do original portugu{\^e}s}{do original portugu{\^e}s}},
-  fromrussian      = {{do original russo}{do original russo}},
-  fromslovene      = {{do original esloveno}{do original esloveno}},
-  fromspanish      = {{do original espanhol}{do original espanhol}},
-  fromswedish      = {{do original sueco}{do original sueco}},
+  apud                 = {{apud}{apud}},
+  volume               = {{volume}{v\adddot}},
+  volumes              = {{volumes}{v\adddot}},
+  number               = {{número}{n\adddot}},
+  pages                = {{p\'aginas}{p\adddot}},
+  involumes            = {{in}{in}},
+  in                   = {{in}{in}},
+  inseries             = {{in}{in}},
+  sineloco             = {{sine loco}{s\adddot l\adddot}},
+  sinenomine           = {{sine nomine}{s\adddot n\adddot}},
+  url                  = {{disponível em}{disponível em}},
+  urlseen              = {{acesso em}{acesso em}},
+  sheet                = {{folha}{f.}},
+  sheets               = {{folhas}{f.}},
+  backrefpage          = {{citado na p\'agina}{citado na p\adddot}},
+  backrefpages         = {{citado nas p\'aginas}{citado nas pp\adddot}},
+  illustrated          = {{ilustrado}{il.}},
+  monography           = {{monografia}{monografia}},
+  phdthesis            = {{Tese (Doutorado)}{Tese (Doutorado)}},
+  mathesis             = {{Tese (Mestrado)}{Tese (Mestrado)}},
+  reprintfrom          = {{separata de}{separata de}},
+  recensionof          = {{recensão de}{recensão de}},
+  bycoeditor           = {{co-edição de}{co-edição de}},
+  bydirector           = {{direção de}{direção de}},
+  bygeneraldirector    = {{direção geral de}{direção geral de}},
+  bycoordinator        = {{coordenação de}{coordenação de}},
+  byproducer           = {{produção de}{produção de}},
+  byscreenwriter       = {{roteiro de}{roteiro de}},
+  byinterpreter        = {{interpretação de}{interpretação de}},
+  byillustrator        = {{ilustrações de}{ilustrações de}},
+  photographer         = {{fotógrafo}{fot.}},
+  byphotographer       = {{fotografia de}{fotografia de}},
+  recorder             = {{gravador}{gravador}},
+  byrecorder           = {{gravação de}{gravação de}},
+  interviewer          = {{entrevistador}{entrevistador}},
+  byinterviewer        = {{entrevista por}{entrevista por}},
+  artisticdirector     = {{diretor artístico}{dir. art.}},
+  byartisticdirector   = {{direção artística de}{direção artística de}},
+  organizer            = {{organização}{org\adddot}},
+  organizers           = {{organização}{org\adddot}},
+  generalorganizer     = {{organização geral}{org\adddot geral}},
+  byorganizer          = {{organização de}{organização de}},
+  bygeneralorganizer   = {{organização geral de}{organização geral de}},
+  byauthor             = {{por}{por}},
+  byeditor             = {{edição de}{edição de}},
+  bycompiler           = {{compilação de}{compilação de}},
+  byredactor           = {{redigido por}{redigido por}},
+  byreviser            = {{revisão de}{revisão de}},
+  bytechnicalreviser   = {{revisão técnica de}{revisão técnica de}},
+  byreviewer           = {{resenha de}{resenha de}},
+  byfounder            = {{fundado por}{fundado por}},
+  bycontinuator        = {{continuado por}{continuado por}},
+  bycollaborator       = {{em colabora\c{a}\~o com}{em colabora\c{a}\~o com}},
+  bytranslator         = {{tradução \lbx@lfromlang\ de}{tradução \lbx@lfromlang\ de}},
+  bycommentator        = {{comentário de}{comentário de}},
+  byannotator          = {{notas de}{notas de}},
+  withcommentator      = {{coment\'ario de}{coment\'ario de}},
+  withannotator        = {{notas de}{notas de}},
+  withintroduction     = {{introdu\c{c}\~ao de}{introdu\c{c}\~ao de}},
+  withforeword         = {{pref\'acio de}{pref\'acio de}},
+  withafterword        = {{posf\'acio de}{posf\'acio de}},
+  byorganizerfo        = {{organização e prefácio de}{organização e prefácio de}},
+  bygeneralorganizerfo = {{organização geral e prefácio de}{organização geral e prefácio de}},
+  byeditortr           = {{edição e tradução \lbx@lfromlang\ de}%
+                         {edição e tradução \lbx@lfromlang\ de}},
+  byeditorco           = {{edição e comentário de}%
+                         {edição e comentário de}},
+  byeditoran           = {{edição e notas de}%
+                         {edição e notas de}},
+  byeditorin           = {{edição e introdução de}%
+                         {edição e introdução de}},
+  byeditorfo           = {{edição e prefácio de}%
+                         {edição e prefácio de}},
+  byeditoraf           = {{edição e posfácio de}%
+                         {edição e posfácio de}},
+  byeditortrco         = {{edição, tradução \lbx@lfromlang\ e comentário de}%
+                         {edição, tradução \lbx@lfromlang\ e comentário de}},
+  byeditortran         = {{edição, tradução \lbx@lfromlang\ e notas de}%
+                         {edição, tradução \lbx@lfromlang\ e notas de}},
+  byeditortrin         = {{edição, tradução \lbx@lfromlang\ e introdução de}%
+                         {edição, tradução \lbx@lfromlang\ e introdução de}},
+  byeditortrfo         = {{edição, tradução \lbx@lfromlang\ e prefácio de}%
+                         {edição, tradução \lbx@lfromlang\ e prefácio de}},
+  byeditortraf         = {{edição, tradução \lbx@lfromlang\ e posfácio de}%
+                         {edição, tradução \lbx@lfromlang\ e posfácio de}},
+  byeditorcoin         = {{edição, comentário e introdução de}%
+                         {edição, comentário e introdução de}},
+  byeditorcofo         = {{edição, comentário e prefácio de}%
+                         {edição, comentário e prefácio de}},
+  byeditorcoaf         = {{edição, comentário e posfácio de}%
+                         {edição, comentário e posfácio de}},
+  byeditoranin         = {{edição, notas e introdução de}%
+                         {edição, notas e introdução de}},
+  byeditoranfo         = {{edição, notas e prefácio de}%
+                         {edição, notas e prefácio de}},
+  byeditoranaf         = {{edição, notas e posfácio de}%
+                         {edição, notas e posfácio de}},
+  byeditortrcoin       = {{edição, tradução \lbx@lfromlang, comentário e introdução de}%
+                         {edição, tradução \lbx@lfromlang, comentário e introdução de}},
+  byeditortrcofo       = {{edição, tradução \lbx@lfromlang, comentário e prefácio de}%
+                         {edição, tradução \lbx@lfromlang, comentário e prefácio de}},
+  byeditortrcoaf       = {{edição, tradução \lbx@lfromlang, comentário e posfácio de}%
+                         {edição, tradução \lbx@lfromlang, comentário e posfácio de}},
+  byeditortranin       = {{edição, tradução \lbx@lfromlang, notas e introdução de}%
+                         {edição, tradução \lbx@lfromlang, notas e introdução de}},
+  byeditortranfo       = {{edição, tradução \lbx@lfromlang, notas e prefácio de}%
+                         {edição, tradução \lbx@lfromlang, notas e prefácio de}},
+  byeditortranaf       = {{edição, tradução \lbx@lfromlang, notas e posfácio de}%
+                         {edição, tradução \lbx@lfromlang, notas e posfácio de}},
+  bytranslatorco       = {{tradução \lbx@lfromlang\ e comentário de}%
+                         {tradução \lbx@lfromlang\ e comentário de}},
+  bytranslatoran       = {{tradução \lbx@lfromlang\ e notas de}%
+                         {tradução \lbx@lfromlang\ e notas de}},
+  bytranslatorin       = {{tradução \lbx@lfromlang\ e introdução de}%
+                         {tradução \lbx@lfromlang\ e introdução de}},
+  bytranslatorfo       = {{tradução \lbx@lfromlang\ e prefácio de}%
+                         {tradução \lbx@lfromlang\ e prefácio de}},
+  bytranslatoraf       = {{tradução \lbx@lfromlang\ e posfácio de}%
+                         {tradução \lbx@lfromlang\ e posfácio de}},
+  bytranslatorcoin     = {{tradução \lbx@lfromlang, comentário e introdução de}%
+                         {tradução \lbx@lfromlang, comentário e introdução de}},
+  bytranslatorcofo     = {{tradução \lbx@lfromlang, comentário e prefácio de}%
+                         {tradução \lbx@lfromlang, comentário e prefácio de}},
+  bytranslatorcoaf     = {{tradução \lbx@lfromlang, comentário e posfácio de}%
+                         {tradução \lbx@lfromlang, comentário e posfácio de}},
+  bytranslatoranin     = {{tradução \lbx@lfromlang, notas e introdução de}%
+                         {tradução \lbx@lfromlang, notas e introdução de}},
+  bytranslatoranfo     = {{tradução \lbx@lfromlang, notas e prefácio de}%
+                         {tradução \lbx@lfromlang, notas e prefácio de}},
+  bytranslatoranaf     = {{tradução \lbx@lfromlang, notas e posfácio de}%
+                         {tradução \lbx@lfromlang, notas e posfácio de}},
+  langamerican         = {{versão americana}{versão americana}},
+  langbrazilian        = {{versão brasileira}{versão brasileira}},
+  langcatalan          = {{versão catalã}{versão catalã}},
+  langcroatian         = {{versão croata}{versão croata}},
+  langczech            = {{versão tcheca}{versão tcheca}},
+  langdanish           = {{versão dinamarquesa}{versão dinamarquesa}},
+  langdutch            = {{versão holandesa}{versão holandesa}},
+  langenglish          = {{versão inglesa}{versão inglesa}},
+  langfinnish          = {{versão finlandesa}{versão finlandesa}},
+  langfrench           = {{versão francesa}{versão francesa}},
+  langgerman           = {{versão alem\~a}{versão alem\~a}},
+  langgreek            = {{versão grega}{versão grega}},
+  langitalian          = {{versão italiana}{versão italiana}},
+  langlatin            = {{versão latina}{versão latina}},
+  langnorwegian        = {{versão norueguesa}{versão norueguesa}},
+  langpolish           = {{versão polonesa}{versão polonesa}},
+  langportuguese       = {{versão portuguesa}{versão portuguesa}},
+  langrussian          = {{versão russa}{versão russa}},
+  langslovene          = {{versão eslovena}{versão eslovena}},
+  langspanish          = {{versão espanhola}{versão espanhola}},
+  langswedish          = {{versão sueca}{versão sueca}},
+  fromamerican         = {{do original ingl\^es}{do original ingl\^es}},
+  frombrazilian        = {{do original portugu{\^e}s}{do original portugu{\^e}s}},
+  fromcatalan          = {{do original catalão}{do original catalão}},
+  fromcroatian         = {{do original croata}{do original croata}},
+  fromczech            = {{do original tcheco}{do original tcheco}},
+  fromdanish           = {{do original dinamarqu\^es}{do original dinamarqu\^es}},
+  fromdutch            = {{do original holand{\^e}s}{do original holand{\^e}s}},
+  fromenglish          = {{do original ingl\^es}{do original ingl\^es}},
+  fromfinnish          = {{do original finland\^es}{do original finland\^es}},
+  fromfrench           = {{do original franc\^es}{do original franc\^es}},
+  fromgerman           = {{do original alem\~ao}{do original alem\~ao}},
+  fromgreek            = {{do original grego}{do original grego}},
+  fromitalian          = {{do original italiano}{do original italiano}},
+  fromlatin            = {{do original em latim}{do original em latim}},
+  fromnorwegian        = {{do original noruegu\^es}{do original noruegu\^es}},
+  frompolish           = {{do original polonês}{do original polonês}},
+  fromportuguese       = {{do original portugu{\^e}s}{do original portugu{\^e}s}},
+  fromrussian          = {{do original russo}{do original russo}},
+  fromslovene          = {{do original esloveno}{do original esloveno}},
+  fromspanish          = {{do original espanhol}{do original espanhol}},
+  fromswedish          = {{do original sueco}{do original sueco}},
 }
 \endinput
