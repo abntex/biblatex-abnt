@@ -9,7 +9,7 @@
 %% version 2005/12/01 or later.
 %%
 %% This work has the LPPL maintenance status `maintained'.
-%% 
+%%
 %% The Current Maintainer of this work is Daniel B. Marques.
 
 \ProvidesFile{abnt.cbx}[2016/05/12\space v1.0.1\space ABNT biblatex citation style]
@@ -60,20 +60,71 @@
 % DeclareNameFormat
 % ----------
 
-\DeclareNameFormat{last}{%
-	\nameparts{#1}%
-	\usebibmacro{name:family-given}
-		{\namepartfamily}
-		{}{}{}}
-
 \DeclareNameFormat{LAST}{%
   \nameparts{#1}%
-  \usebibmacro{name:family-given}
+  \ifcase\value{uniquename}%
+    \usebibmacro{name:family}
+      {\iftoggle{sccite}
+  	    	{\textsc{\MakeLowercase{\namepartfamily}}}
+  			{\MakeUppercase{\namepartfamily}}}
+      {\namepartgiven}
+      {\namepartprefix}
+      {\namepartsuffix}%
+  \or
+    \ifuseprefix
+      {\usebibmacro{name:given-family}
         {\iftoggle{sccite}
   	    	{\textsc{\MakeLowercase{\namepartfamily}}}
   			{\MakeUppercase{\namepartfamily}}}
-		{}{}{}}
-		
+        {\namepartgiveni}
+        {\namepartprefix}
+        {\namepartsuffixi}}
+      {\usebibmacro{name:given-family}
+        {\iftoggle{sccite}
+  	    	{\textsc{\MakeLowercase{\namepartfamily}}}
+  			{\MakeUppercase{\namepartfamily}}}
+        {\namepartgiveni}
+        {\namepartprefixi}
+        {\namepartsuffixi}}%
+  \or
+    \usebibmacro{name:given-family}
+      {\iftoggle{sccite}
+  	    	{\textsc{\MakeLowercase{\namepartfamily}}}
+  			{\MakeUppercase{\namepartfamily}}}
+      {\namepartgiven}
+      {\namepartprefix}
+      {\namepartsuffix}%
+  \fi
+  \usebibmacro{name:andothers}}
+
+\DeclareNameFormat{fullcite}{%
+  \nameparts{#1}%
+  \ifcase\value{uniquename}%
+    \usebibmacro{name:given-family}
+      {\namepartfamily}
+      {\namepartgiven}
+      {\namepartprefix}
+      {\namepartsuffix}%
+  \or
+    \ifuseprefix
+      {\usebibmacro{name:given-family}
+        {\namepartfamily}
+        {\namepartgiveni}
+        {\namepartprefix}
+        {\namepartsuffixi}}
+      {\usebibmacro{name:given-family}
+        {\namepartfamily}
+        {\namepartgiveni}
+        {\namepartprefixi}
+        {\namepartsuffixi}}%
+  \or
+    \usebibmacro{name:given-family}
+      {\namepartfamily}
+      {\namepartgiven}
+      {\namepartprefix}
+      {\namepartsuffix}%
+  \fi
+  \usebibmacro{name:andothers}}
 
 % ----------
 % DeclareFieldFormat
@@ -87,7 +138,7 @@
 % ----------
 
 \NewDocumentCommand{\textapud}{o o m o o m}{%
- \citelastname{#3}  
+ \citelastname{#3}
  \mkbibparens{%
   \IfNoValueTF{#2}
    {%
@@ -97,7 +148,7 @@
    }
    {%
     \citeyear[#1][#2]{#3}%
-   }   
+   }
   \IfNoValueTF{#5}
    {%
     \IfNoValueTF{#4}
@@ -106,7 +157,7 @@
    }
    {%
     \cite[\blx@imc@bibxstring{apud} #4][#5]{#6}%
-   }%   
+   }%
   }}
 
 \DeclareMultiCiteCommand{\apud}[\addapud\mkbibparens]
@@ -123,7 +174,15 @@
 	\usebibmacro{cite}}
 	{\setunit{\multicitedelim}}
 	{\usebibmacro{postnote}}
-  
+
+\DeclareCiteCommand{\parencite}[\mkbibparens]
+  {\usebibmacro{cite:init}%
+  \usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \usebibmacro{cite}}
+  {}
+  {\usebibmacro{postnote}}
+
 \DeclareCiteCommand{\cite}[\mkbibparens]
   {\usebibmacro{cite:init}%
   \usebibmacro{prenote}}
@@ -131,7 +190,7 @@
    \usebibmacro{cite}}
   {}
   {\usebibmacro{postnote}}
-  
+
 \DeclareCiteCommand{\plaincite}
   {\usebibmacro{cite:init}%
   \usebibmacro{prenote}}
@@ -216,7 +275,7 @@
   {\ifciteindex
      {\indexnames{labelname}}
      {}%
-   \printnames[last]{labelname}}
+   \printnames{labelname}}
   {\multicitedelim}
   {\usebibmacro{postnote}}
 
@@ -243,7 +302,7 @@
           {}%
         \usebibmacro{cite:labelyear+extrayear}}
        {\usebibmacro{cite:shorthand}}}
-    {\printnames[last]{labelname}%
+    {\printnames{labelname}%
      \setunit{%
        \global\booltrue{cbx:parens}%
        \addspace\bibopenparen}%
@@ -264,7 +323,7 @@
           {}%
         \usebibmacro{cite:labelyear+extrayear}}
        {\usebibmacro{cite:shorthand}}}
-    {\printnames[full]{labelname}%
+    {\printnames[full-cite]{labelname}%
      \setunit{%
        \global\booltrue{cbx:parens}%
        \addspace\bibopenparen}%
@@ -287,13 +346,13 @@
        \savefield{fullhash}{\cbx@lasthash}}
 % Normal cite
      {\ifnameundef{shortauthor}
-        {\printnames[LAST][-\value{listtotal}]{labelname}}%
+        {\printnames[LAST]{labelname}}%
         {\printnames[LAST]{shortauthor}}%
       \setunit{\nameyeardelim}%
       \usebibmacro{cite:plabelyear+extrayear}%
       \savefield{fullhash}{\cbx@lasthash}}}%
    \setunit{\multicitedelim}}
-   
+
 \def\citeresetabnt{\global\let\cbx@abnt@names\@empty}
 \citeresetabnt
 \def\cbx@abnt@ifnamesaved{%
@@ -322,7 +381,7 @@
     {\printnames[labelname][-\value{listtotal}]{labelname}%
      \setunit{\nameyeardelim}%
      \printfield{title}\space\printfield{shorthand}}}
-  
+
 \newbibmacro*{citeyearpunct}{%
   \iffieldundef{labelyear}
     {\usebibmacro{cite:init}}
