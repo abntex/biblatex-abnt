@@ -20,21 +20,23 @@ O arquivo `biblatex-abnt.pdf` apresenta algumas informações sobre o uso do pac
 
 ## Instalação
 
-Para instalar o `biblatex-abnt` manualmente, copie os arquivos `.bbx`, `.cbx` e `.lbx` para:
+Copie os arquivos `.bbx`, `.cbx` e `.lbx` para:
 
 `<TEXMFLOCAL>/tex/latex/biblatex-contrib/biblatex-abnt/`
 
 ## Uso
 
-Para usar o `biblatex-abnt`, adicione as seguintes linhas ao preâmbulo do seu arquivo `.tex`:
+1. Adicione as seguintes linhas ao preâmbulo do seu arquivo `.tex`:
 
-```tex
-\usepackage[backend=biber, style=abnt]{biblatex}
-\usepackage[brazil]{babel}
-\addbibresource{arquivo.bib}        % Seus arquivos de
-\addbibresource{outroarquivo.bib}   % bibliografia vão aqui
-```
+  ```tex
+  \usepackage[backend=biber, style=abnt]{biblatex}
+  \usepackage[brazil]{babel}
+  \addbibresource{arquivo.bib}        % Seus arquivos de
+  \addbibresource{outroarquivo.bib}   % bibliografia vão aqui
+  ```
 
-Use o comando `\printbibliography` para imprimir a bibliografia.
+2. Use os comandos de citação (e.g. `\cite[p.~10]{entrada2016}`) para citar suas entradas.
+
+3. Use o comando `\printbibliography` para imprimir a bibliografia.
 
 *Consulte o arquivo `biblatex-abnt.pdf` para informações sobre as opções e comandos disponíveis.*
