@@ -61,7 +61,33 @@
 
 O \texttt{biblatex-abnt} requer \texttt{biblatex v3.3} e \texttt{biber v2.4}. Caso haja algum problema na compilação, cheque se seus pacotes estão atualizados.
 
+\section{Instalação}
+
+Para instalar o \texttt{biblatex-abnt} manualmente, copie os arquivos \texttt{.bbx}, \texttt{.cbx} e \texttt{.lbx} para:
+\begin{verbatim}
+    <TEXMFLOCAL>/tex/latex/biblatex-contrib/biblatex-abnt/
+\end{verbatim}
+
+\section{Uso}
+
+Para usar o {biblatex-abnt}, adicione as seguintes linhas ao preâmbulo do seu arquivo {.tex}:
+
+\begin{verbatim}
+    \usepackage[backend=biber, style=abnt]{biblatex}
+    \usepackage[brazil]{babel}
+    \addbibresource{arquivo.bib}        % Seus arquivos de
+    \addbibresource{outroarquivo.bib}   % bibliografia vão aqui
+\end{verbatim}
+
+Após as opções \texttt{backend=biber} e \texttt{style=abnt}, podem ser acrescentadas as opções descritas na seção \ref{sec:opções}.
+
+Use os comandos descritos na seção \ref{sec:comandos} para citar obras.
+
+Use o comando \verb"\printbibliography" para imprimir a bibliografia.
+
+\clearpage
 \section{Comandos}
+\label{sec:comandos}
 
 \begin{description}[style=nextline]
     \item [\PVerb{\cite{bosi08}}] \cite{bosi08}
@@ -73,12 +99,14 @@ O \texttt{biblatex-abnt} requer \texttt{biblatex v3.3} e \texttt{biber v2.4}. Ca
     \item [\PVerb{\textcites{moretti09}{mann09}{amaral15}}] \textcites{moretti09}{mann09}{amaral15}
     \item [\PVerb{\apud{assis08}{bosi08}}] \apud{assis08}{bosi08}
     \item [\PVerb{\apud[p.~12]{assis08}[p.~200]{bosi08}}] \apud[p.~12]{assis08}[p.~200]{bosi08}
-    \item [\PVerb{\apud[batman][]{bosi08}}] \apud[batman][]{bosi08}
     \item [\PVerb{\textapud[p.~200]{assis08}[p.~12]{bosi08}}] \textapud[p.~200]{assis08}[p.~12]{bosi08}
+    \item [\PVerb{\apud[batman][]{bosi08}}] \apud[batman][]{bosi08}
+    \item [\PVerb{Assis \cite[apud][p.~200]{bosi08}}] Assis \cite[apud][p.~200]{bosi08}
 \end{description}
 
 \clearpage
 \section{Opções}
+\label{sec:opções}
 
 As opções a seguir podem ser usadas ao chamar o pacote \texttt{biblatex}:
 
@@ -88,6 +116,7 @@ As opções a seguir podem ser usadas ao chamar o pacote \texttt{biblatex}:
     \item [repeatfields] Imprime os campos repetidos na bibliografia, em vez de substituí-los por traços sublineares
     \item [usedashes] Usa os traços padrão do \texttt{biblatex} em vez de traços sublineares nos campos repetidos
     \item [giveninits] Abrevia os primeiros nomes na bibliografia
+    \item [uniquename=init] Essa opção deve ser usada em conjunto com a opção \texttt{giveninits}
     \item [bftitles] Usa negrito para os títulos na bibliografia
     \item [indent] Indenta as entradas da bibliografia
     \item [scbib] Imprime os nomes em versalete na bibliografia
