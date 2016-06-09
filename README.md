@@ -20,7 +20,9 @@ O arquivo `biblatex-abnt.pdf` apresenta algumas informações sobre o uso do pac
 
 ## Instalação
 
-O `biblatex-abnt` está incluso no TeX Live 2016. Para instalá-lo manualmente, copie os arquivos `.bbx`, `.cbx` e `.lbx` para:
+O `biblatex-abnt` está incluso no TeX Live 2016.
+
+Para instalá-lo manualmente, copie os arquivos `.bbx`, `.cbx` e `.lbx` para:
 
 `<TEXMFLOCAL>/tex/latex/biblatex-contrib/biblatex-abnt/`
 
