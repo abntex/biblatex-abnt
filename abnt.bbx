@@ -12,7 +12,7 @@
 %%
 %% The Current Maintainer of this work is Daniel B. Marques.
 
-\ProvidesFile{abnt.bbx}[2016/05/12\space v1.0.1\space ABNT biblatex citation style]%
+\ProvidesFile{abnt.bbx}[2016/05/12\space v1.0.2\space ABNT biblatex citation style]%
 \RequireBiber[3]%
 \DeclareLanguageMapping{brazilian}{abnt-brazilian}%
 
@@ -327,6 +327,9 @@
 \DeclareFieldFormat{booktitle}{\iftoggle{bftitles}{\addspace\mkbibbold{#1}\isdot}{\addspace\mkbibemph{#1}\isdot}}%
 \DeclareFieldFormat{citetitle}{\iftoggle{bftitles}{\addspace\mkbibbold{#1}\isdot}{\addspace\mkbibemph{#1}\isdot}}%
 \DeclareFieldFormat*{title}{\iftoggle{bftitles}{\addspace\mkbibbold{#1}\isdot}{\addspace\mkbibemph{#1}\isdot}}%
+
+\DeclareFieldFormat{authortype}{\bibsentence#1}
+\DeclareFieldFormat{editortype}{\bibsentence#1}
 
 % Use normal text for the title in these entries.
 \DeclareFieldFormat%
@@ -758,7 +761,7 @@
 		}{%
 			\usebibmacro{bbx:savehash}%
 			\printnames{editor}%
-			\setunit{\addperiod\addspace}%
+			\setunit{\addspace}%
         	\printtext[parens]{\usebibmacro{editor+othersstrg}}%
 		}%
    	 	\savenamecs*{editor}{saveded}%
@@ -776,7 +779,7 @@
 		\printlist[uppercase]{organization}%
 	}{%
 		\printnames{editor}%
-		\setunit*{\addperiod\addspace}%
+		\setunit*{\addspace}%
         \printtext[parens]{\usebibmacro{editor+othersstrg}}%
 		\clearname{editor}%
 	}%
