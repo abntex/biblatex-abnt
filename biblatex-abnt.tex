@@ -137,7 +137,7 @@ As opções \texttt{repeatfields}, \texttt{nosl}, \texttt{nosn} e \texttt{noslsn
         author  = {Machado de Assis},
         title   = {Obra completa em quatro volumes},
         year    = {2008},
-        options = {repeatfields, noslsn=false}
+        options = {repeatfields, noslsn=false},
     }
 \end{verbatim}
 
@@ -153,7 +153,7 @@ A lista completa de campos e entradas pode ser encontrada no manual do \texttt{b
 \subsection{@mvbook}
 \endgroup
 
-Um livro abrangendo múltiplos volumes:
+Um obra que abrange múltiplos volumes:
 
 \begin{verbatim}
     @mvbook{assis08,
@@ -176,7 +176,7 @@ Um livro abrangendo múltiplos volumes:
 
 \subsection{@book}
 
-Um único livro. Pode ser um dos volumes de um livro que abrange múltiplos volumes:
+Um único livro. Pode ser um dos volumes de uma obra que abrange múltiplos volumes (\texttt{@mvbook}):
 
 \begin{verbatim}
     @book{assis08:1,
@@ -352,7 +352,7 @@ Uma coleção abrangendo diversos volumes, cada um composto por diversas contrib
 
 \subsection{@collection}
 
-Uma única coleção composta por diversas contribuições independentes. Pode ser um dos volumes de uma coleção que abrange múltiplos volumes:
+Um único livro constituindo uma coleção composta por diversas contribuições independentes. Pode ser um dos volumes de uma coleção que abrange múltiplos volumes (\texttt{@mvcollection}):
 
 \begin{verbatim}
     @collection{moretti09:1,
@@ -387,7 +387,7 @@ Ou:
 
 \subsection{@incollection}
 
-Uma contribuição a uma coleção, formando uma unidade independente com autor e título próprios:
+Uma contribuição a uma coleção, formando uma unidade independente, com autor e título próprios:
 
 \begin{verbatim}
     @incollection{mann09,
@@ -515,7 +515,7 @@ Uma tese de doutorado:
 
 \subsection{@inproceedings}
 
-Resumos ou anais de eventos:
+Trabalhos publicados em resumos ou anais de eventos:
 
 \begin{verbatim}
     @inproceedings{negrão13,
@@ -546,26 +546,26 @@ Em geral é possível usar o mesmo arquivo \texttt{.bib} utilizado pelo \texttt{
 
 \begin{itemize}
 \begin{sloppypar}
-    \item Não consegui entender por que, mas os exemplos do \texttt{abntex2cite} usam \texttt{{\'\i}} para o caractere ``í'', enquanto o normal me parece ser \texttt{{\'i}} (para outras letras com acento agudo o \texttt{abntex2cite} usa o formato normal). Isso pode causar alguns problemas, o ideal é usar \texttt{{\'i}} (ou aproveitar os recursos do biber e usar a codificação utf-8). Caso isso não seja possível por algum motivo, chamar o biblatex com a opção \texttt{safeinputenc} pode resolver alguns problemas (mas também causa alguns outros, interferindo, por exemplo, na capitalização automática de palavras acentuadas).
-    \item Os campos de datas (\texttt{date}, \texttt{year}, \texttt{month} etc.) devem seguir o formato usado pelo \texttt{biblatex}, \texttt{yyyy-mm-dd}. Cf. seção 2.2.1 do manual.
+    \item Não consegui entender por que, mas os exemplos do \texttt{abntex2cite} usam \verb"\'\i" para o caractere ``í'', enquanto o normal me parece ser \verb"\'i" (para outras letras com acento agudo o \texttt{abntex2cite} usa o formato normal). Isso pode causar alguns problemas, o ideal é usar \verb"\'i" (ou aproveitar os recursos do biber e usar a codificação utf-8). Caso isso não seja possível por algum motivo, chamar o biblatex com a opção \texttt{safeinputenc} pode resolver alguns problemas (mas também causa alguns outros, interferindo, por exemplo, na capitalização automática de palavras acentuadas).
+    \item Os campos de datas (\texttt{date}, \texttt{year}, \texttt{month} etc.) devem seguir o formato usado pelo \texttt{biblatex} (\texttt{yyyy-mm-dd}). Cf. seção 2.2.1 do manual.
     \item O \texttt{biblatex} diferencia os campos \texttt{pages} (e.g. ``p. 12-18'') e \texttt{pagetotal} (e.g. ``347 p.'').
-    \item Quando o primeiro campo impresso é o título, a primeira palavra é automaticamente impressa em maiúsculas. Para que mais de uma palavra seja impressa em maiúsculas, coloque-as entre chaves ou separadas por um no breaking space (\texttt{~}).
-    \item Quando o primeiro campo impresso é a organização, todo o campo é impresso em maiúsculas. Para que a capitalização de uma palavra não seja alterada, coloque-a entre chaves (e.g. \texttt{{pAlaVRa}}).
-    \item Pode-se incluir no campo \texttt{options} as opções \texttt{nosl} (para não mostrar a abreviação ``[s.l]''), \texttt{nosn} (para não mostrar ``[s.n.]'') ou \texttt{noslsn} (para não mostrar nenhuma das duas abreviações) (e.g. \texttt{options = {noslsn}}); essa configuração tem efeito em cada entrada específica. Pode-se também incluir essas opções ao chamar o \texttt{biblatex} para nunca mostrar as abreviações, e então abrir exceções para entradas específicas (e.g. \texttt{options = {noslsn=false}}).
+    \item Quando o primeiro campo impresso é o título, a primeira palavra é automaticamente impressa em maiúsculas. Para que mais de uma palavra seja impressa em maiúsculas, coloque-as entre chaves ou separadas por um \emph{no breaking space} (\verb"~").
+    \item Quando o primeiro campo impresso é a organização, todo o campo é impresso em maiúsculas. Para que a capitalização de uma palavra não seja alterada, coloque-a entre chaves (e.g. \verb"{pAlaVRa}").
+    \item Pode-se incluir no campo \texttt{options} as opções \texttt{nosl} (para não mostrar a abreviação ``[s.l]''), \texttt{nosn} (para não mostrar ``[s.n.]'') ou \texttt{noslsn} (para não mostrar nenhuma das duas abreviações) (e.g. \texttt{options = \{noslsn\}}); essa configuração tem efeito em cada entrada específica. Pode-se também incluir essas opções ao chamar o \texttt{biblatex} para nunca mostrar as abreviações, e então abrir exceções para entradas específicas (e.g. \texttt{options = \{noslsn=false\}}).
     \item Para periódicos, deve se utilizar entradas \texttt{@periodical}. Usando-se \texttt{@book}, como no \texttt{abntex2cite}, o ISSN não aparece.
-    \item Para teses de mestrado e doutorado, o campo \texttt{pagetotal} é automaticamente formatado em folhas, como requer a norma (e.g. ``347 f.''). Para usar páginas também nessas entradas, use \texttt{bookpagination = {page}}. Para usar folhas em outras entradas, use \texttt{bookpagination = {sheet}}.
+    \item Para teses de mestrado e doutorado, o campo \texttt{pagetotal} é automaticamente formatado em folhas, como requer a norma (e.g. ``347 f.''). Para usar páginas também nessas entradas, use \texttt{bookpagination = \{page\}}. Para usar folhas em outras entradas, use \texttt{bookpagination = \{sheet\}}.
     \item Ao modificar o campo \texttt{type} em teses de mestrado e doutorado, deve-se preenchê-lo com todo o texto desejado (e.g. ``Tese (Doutorado em Nutrição)'').
     \item Ao utilizar o campo \texttt{illustrated}, deve-se preenchê-lo com todo o texto desejado (e.g. ``il.'').
     \item Além do campo \texttt{organization}, há o campo \texttt{nameaddon}, de modo que organizações como ``BRASIL. Supremo Tribunal de Justiça'' e ``BRASIL. Supremo Tribunal Federal'' podem ter uma mesma organização, diferenciando-se por esse campo. Isso permite que a primeira parte, ``BRASIL'', não seja repetida várias vezes seguidas (e.g. ``\underline{\hspace*{4em}}. Supremo Tribunal Federal'').
     \item O \texttt{abntex2cite} às vezes usa o campo \texttt{type} como um complemento da organização (um exemplo é a entrada \texttt{brasil1988}). Com o \texttt{biblatex-abnt} deve-se usar o campo \texttt{nameaddon} em vez de \texttt{type}. Embora nesse caso (``Constituição (1988)'') o campo \texttt{type} faça mais sentido semanticamente, colocá-lo nessa posição causaria problemas na organização alfabética da bibliografia, já que o campo \texttt{type} às vezes apareceria antes do título e às vezes depois.
-    \item A recomendação do manual do \texttt{biblatex} (seção 2.3.3) é de que, para autores corporativos, utilize-se os campos \texttt{author} e \texttt{editor}, colocando o nome da organização entre chaves. Essa opção tem a vantagem de permitir que se misture autores corporativos e autores comuns (e.g. \texttt{editor = {{National} \texttt{Aeronautics and Space Administration} and Doe, John}}).
-    \item Quando o nome do autor, editor ou organização for muito grande para usar nas citações, pode-se acrescentar os campos \texttt{short\-author} e \texttt{short\-editor} (e.g. \texttt{author = {National Aeronautics and Space Ad\-min\-is\-tra\-tion},} \texttt{short\-author = {NASA}} imprimirá ``NASA'' nas citações e ``National Aeronautics and Space Administration'' na bibliografia). O campo \texttt{org-short}, usado pelo \texttt{abntex\-2\-cite}, é automaticamente convertido para \texttt{shortauthor}.
+    \item A recomendação do manual do \texttt{biblatex} (seção 2.3.3) é de que, para autores corporativos, utilize-se os campos \texttt{author} e \texttt{editor}, colocando o nome da organização entre chaves. Essa opção tem a vantagem de permitir que se misture autores corporativos e autores comuns (e.g. \texttt{editor = \{National Aeronautics and Space Administration\} and John Doe}).
+    \item Quando o nome do autor, editor ou organização for muito grande para usar nas citações, pode-se acrescentar os campos \texttt{short\-author} e \texttt{short\-editor} (e.g. \texttt{author = \{National Aeronautics and Space Ad\-min\-is\-tra\-tion\},} \texttt{short\-author = \{NASA\}} imprimirá ``NASA'' nas citações e ``National Aeronautics and Space Administration'' na bibliografia). O campo \texttt{org-short}, usado pelo \texttt{abntex\-2\-cite}, é automaticamente convertido para \texttt{shortauthor}.
     \item O separador ``de'' faz com que tudo o que vem depois dele seja considerado um único sobrenome (e.g. na entrada \texttt{alves1995} o nome \texttt{Roque de Brito} \texttt{Alves} é impresso como ``BRITO ALVES, Roque de''). Cf. \url{http://tex.stackexchange.com/q/308625/102699}.
-    \item Quando os campos \texttt{number}, \texttt{volume}, \texttt{chapter} e \texttt{edition} contém apenas números, eles são formatados automaticamente (e.g. \texttt{edition = {5}} imprime ``5. ed.''). Quando esses campos contém letras, deve-se preencher todo o conteúdo desejado (e.g. \texttt{edition = {5th. ed}} imprime ``5th. ed.''). Os caracteres \texttt{.,-/} podem ser usados e o campo ainda será considerado como contendo apenas números.
+    \item Quando os campos \texttt{number}, \texttt{volume}, \texttt{chapter} e \texttt{edition} contém apenas números, eles são formatados automaticamente (e.g. \texttt{edition = \{5\}} imprime ``5. ed.''). Quando esses campos contém letras, deve-se preencher todo o conteúdo desejado (e.g. \verb"edition = {5th. ed}" imprime ``5th. ed.''). Os caracteres \texttt{.,-/} podem ser usados e o campo ainda será considerado como contendo apenas números.
     \item Em entradas dos tipos \texttt{phdthesis}, \texttt{mastersthesis} e \texttt{monography}, há a data de publicação, que aparece logo após o título, e a data da defesa, que aparece por último. O \texttt{abntex2cite} às vezes usa o campo \texttt{year-presented} para diferenciar entre as duas datas e às vezes muda as opções do pacote para mostrar uma mesma data em uma ou outra posição. No \texttt{biblatex-abnt} pode-se usar os campos de datas usuais para a data de publicação, que aparece após o título, e os campos \texttt{eventdate}, \texttt{eventmonth} e \texttt{eventyear} para a data da defesa, que aparece no final. O campo \texttt{year-presented}, usado pelo \texttt{abntex2cite}, é automaticamente convertido para \texttt{eventyear}. (Cf. entradas \texttt{morgado1990}, \texttt{morgadob1990} e \texttt{morgadoc1990} no arquivo \texttt{abnt-testcase.tex}.)
-    \item Em vez dos campos \texttt{reprinted-from} e \texttt{reprinted-text}, utilizados pelo \texttt{abntex2cite}, usa-se o campo \texttt{related} para citar uma entrada relacionada e o campo \texttt{relatedtype} para especificar a natureza dessa relação. O campo \texttt{reprinted-from} é automaticamente convertido para \texttt{related}; esse campo deve conter a chave da obra relacionada. O campo \texttt{relatedtype} pode conter algumas opções: \texttt{relatedtype={reprintfrom}} imprime ``Separata de'' (esse texto também é usado como padrão quando se escreve qualquer coisa no campo \texttt{reprinted-text}, usado no \texttt{abntex2cite}); \texttt{recensionof} imprime ``Recensão de''; \texttt{reviewof} imprime ``Resenha de''; \texttt{reprintof} imprime ``Reimpressão de''; \texttt{translationof} imprime ``Tradução de''. Outras possibilidades podem ser encontradas no arquivo \texttt{brazilian.lbx}, incluso na instalação padrão do \texttt{biblatex}.
+    \item Em vez dos campos \texttt{reprinted-from} e \texttt{reprinted-text}, utilizados pelo \texttt{abntex2cite}, usa-se o campo \texttt{related} para citar uma entrada relacionada e o campo \texttt{relatedtype} para especificar a natureza dessa relação. O campo \texttt{reprinted-from} é automaticamente convertido para \texttt{related}; esse campo deve conter a chave da obra relacionada. O campo \texttt{relatedtype} pode conter algumas opções: \texttt{relatedtype=\{reprintfrom\}} imprime ``Separata de'' (esse texto também é usado como padrão quando se escreve qualquer coisa no campo \texttt{reprinted-text}, usado no \texttt{abntex2cite}); \texttt{recensionof} imprime ``Recensão de''; \texttt{reviewof} imprime ``Resenha de''; \texttt{reprintof} imprime ``Reimpressão de''; \texttt{translationof} imprime ``Tradução de''. Outras possibilidades podem ser encontradas no arquivo \texttt{brazilian.lbx}, incluso na instalação padrão do \texttt{biblatex}.
     \item As entradas \texttt{inbook} e \texttt{incollection}, no \texttt{biblatex}, não se comportam como no \texttt{bibtex}. Entradas \texttt{inbook} também podem ter um \texttt{bookauthor}; elas estão para as entradas \texttt{book} assim como as entradas \texttt{incollection} estão para as entradas \texttt{collection} (Cf. seção 2.3.1 do manual do \texttt{biblatex}). No \texttt{biblatex-abnt} é possível definir um \texttt{bookauthor} para entradas \texttt{inbook}, mas, caso isso não seja feito, essas entradas se comportarão como as entradas \texttt{inbook} do \texttt{bibtex}.
-    \item É possível usar o campo \texttt{furtherresp} como no \texttt{abntex2cite}, mas é preferível usar os campos \texttt{editora}, \texttt{editoratype}, \texttt{editorb}, \texttt{editorbtype} etc. (e.g. \texttt{editora = {Ismael Cardim},  editoratype={coeditor}} imprimirá ``Co-edição de Ismael Cardim'' na bibliografia; cf. entradas \texttt{hou\-a\-iss\-1996}, \texttt{koogan1998}, \texttt{ceravi1983}, \texttt{riofilme1998} e pesquise pelo campo \texttt{editor\-a\-type} para mais exemplos). Todas as opções para o campo \texttt{editor\-type} podem ser encontradas no arquivo \texttt{abnt-brazilian.lbx}. Usar esses campos em lugar do campo \texttt{furtherresp} assegurará que as entradas sejam impressas de forma consistente, embora as entradas da própria ABNT não o sejam.
+    \item É possível usar o campo \texttt{furtherresp} como no \texttt{abntex2cite}, mas é preferível usar os campos \texttt{editora}, \texttt{editoratype}, \texttt{editorb}, \texttt{editorbtype} etc. (e.g. \verb"editora = {Ismael Cardim},  editoratype={coeditor}" imprimirá ``Co-edição de Ismael Cardim'' na biblioqgrafia; cf. entradas \texttt{hou\-a\-iss\-1996}, \texttt{koogan1998}, \texttt{ceravi1983}, \texttt{riofilme1998} e pesquisar pelo campo \texttt{editor\-a\-type} para mais exemplos). Todas as opções para o campo \texttt{editor\-type} podem ser encontradas no arquivo \texttt{abnt-brazilian.lbx}. Usar esses campos em lugar do campo \texttt{furtherresp} assegurará que as entradas sejam impressas de forma consistente, embora as entradas da própria ABNT não o sejam.
     \item Para tradutores pode-se usar o campo \texttt{translator}.
 \end{sloppypar}
 \end{itemize}
