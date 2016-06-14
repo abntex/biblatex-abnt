@@ -67,11 +67,15 @@
   \settoggle{repeatfields}{#1}%
   \ifstrequal{#1}{true}{%
     \renewbibmacro*{bbx:savehash}{}%
-    \newbibmacro*{saveorghash}{}%
+    \newbibmacro*{bbx:saveorg}{}%
+    \newbibmacro*{bbx:savetitle}{}%
+    \newbibmacro*{bbx:savesubtitle}{}%
   }{%
     \ExecuteBibliographyOptions{pagetracker}%
     \renewbibmacro*{bbx:savehash}{\savefield{fullhash}{\bbx@lasthash}}%
-    \newbibmacro*{saveorghash}{\savelist{organization}{\bbx@lasthash}}%
+    \newbibmacro*{bbx:saveorg}{\savelist{organization}{\bbx@lasthash}}%
+    \newbibmacro*{bbx:savetitle}{\savefield{title}{\bbx@lasttitle}}%
+    \newbibmacro*{bbx:savesubtitle}{\savefield{subtitle}{\bbx@lastsubtitle}}%
   }%
 }%
 \DeclareEntryOption[boolean]{repeatfields}[true]{%
