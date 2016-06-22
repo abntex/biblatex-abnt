@@ -269,7 +269,6 @@
 % ----------
 
 \DeclareNameFormat{LAST-first}{%
-	\nameparts{#1}%
 	\ifgiveninits{%
 		\usebibmacro{name:family-given}{%
 			\iftoggle{scbib}{%
@@ -297,7 +296,6 @@
 }%
 
 \DeclareNameFormat{full}{%
-  \nameparts{#1}%
   \usebibmacro{name:given-family}%
     {\namepartfamily}%
     {\namepartgiven}%

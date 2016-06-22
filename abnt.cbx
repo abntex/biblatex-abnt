@@ -61,11 +61,10 @@
 % ----------
 
 \DeclareNameFormat{LAST}{%
-  \nameparts{#1}%
   \ifcase\value{uniquename}%
     \usebibmacro{name:family}
       {\iftoggle{sccite}
-  	    	{\textsc{\MakeLowercase{\namepartfamily}}}
+        {\textsc{\MakeLowercase{\namepartfamily}}}
   			{\MakeUppercase{\namepartfamily}}}
       {\namepartgiven}
       {\namepartprefix}
@@ -75,7 +74,7 @@
       {\usebibmacro{name:given-family}
         {\iftoggle{sccite}
   	    	{\textsc{\MakeLowercase{\namepartfamily}}}
-  			{\MakeUppercase{\namepartfamily}}}
+          {\MakeUppercase{\namepartfamily}}}
         {\namepartgiveni}
         {\namepartprefix}
         {\namepartsuffixi}}
@@ -89,7 +88,7 @@
   \or
     \usebibmacro{name:given-family}
       {\iftoggle{sccite}
-  	    	{\textsc{\MakeLowercase{\namepartfamily}}}
+        {\textsc{\MakeLowercase{\namepartfamily}}}
   			{\MakeUppercase{\namepartfamily}}}
       {\namepartgiven}
       {\namepartprefix}
@@ -98,7 +97,6 @@
   \usebibmacro{name:andothers}}
 
 \DeclareNameFormat{fullcite}{%
-  \nameparts{#1}%
   \ifcase\value{uniquename}%
     \usebibmacro{name:given-family}
       {\namepartfamily}
