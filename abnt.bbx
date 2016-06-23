@@ -855,7 +855,7 @@
 \newbibmacro*{language}{%
 	\ifboolexpr{%
 		test {\iflistundef{language}}%
-		and%
+		or%
 		test {\iffieldundef{origlanguage}}%
 	}%
 	{}%
