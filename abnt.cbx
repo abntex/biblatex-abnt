@@ -20,26 +20,26 @@
 
 \newcommand{\addapud}{%
   \renewcommand*{\multicitedelim}{%
-    \ifnumequal{\value{multicitecount}}{\value{multicitetotal}}
-      {\space\bibstring{apud}}
+    \ifnumequal{\value{multicitecount}}{\value{multicitetotal}}%
+      {\space\bibstring{apud}}%
       {\addsemicolon}%
     \space}%
   \renewcommand*{\textcitedelim}{%
-    \ifnumequal{\value{multicitecount}}{\value{multicitetotal}}
-      {\addspace\bibstring{apud}}
+    \ifnumequal{\value{multicitecount}}{\value{multicitetotal}}%
+      {\addspace\bibstring{apud}}%
       {\addsemicolon}%
     \space}%
 }
 
 \newcommand{\addand}{%
   \renewcommand*{\multicitedelim}{%
-    \ifnumequal{\value{multicitecount}}{\value{multicitetotal}}
-      {\space\bibstring{and}}
+    \ifnumequal{\value{multicitecount}}{\value{multicitetotal}}%
+      {\space\bibstring{and}}%
       {\addsemicolon}%
     \space}%
   \renewcommand*{\textcitedelim}{%
-    \ifnumequal{\value{multicitecount}}{\value{multicitetotal}}
-      {\addspace\bibstring{and}}
+    \ifnumequal{\value{multicitecount}}{\value{multicitetotal}}%
+      {\addspace\bibstring{and}}%
       {\addsemicolon}%
     \space}%
 }
@@ -52,7 +52,7 @@
 
 % Option to use small caps in the citations.
 \newtoggle{sccite}
-\DeclareBibliographyOption{sccite}[true]{
+\DeclareBibliographyOption{sccite}[true]{%
   \settoggle{sccite}{#1}}
 
 
@@ -63,67 +63,67 @@
 \DeclareNameFormat{LAST}{%
   \nameparts{#1}%
   \ifcase\value{uniquename}%
-    \usebibmacro{name:family}
-      {\iftoggle{sccite}
-  	    	{\textsc{\MakeLowercase{\namepartfamily}}}
-  			{\MakeUppercase{\namepartfamily}}}
-      {\namepartgiven}
-      {\namepartprefix}
+    \usebibmacro{name:family}%
+      {\iftoggle{sccite}%
+        {\textsc{\MakeLowercase{\namepartfamily}}}%
+  			{\MakeUppercase{\namepartfamily}}}%
+      {\namepartgiven}%
+      {\namepartprefix}%
       {\namepartsuffix}%
-  \or
-    \ifuseprefix
-      {\usebibmacro{name:given-family}
-        {\iftoggle{sccite}
-  	    	{\textsc{\MakeLowercase{\namepartfamily}}}
-  			{\MakeUppercase{\namepartfamily}}}
-        {\namepartgiveni}
-        {\namepartprefix}
-        {\namepartsuffixi}}
-      {\usebibmacro{name:given-family}
-        {\iftoggle{sccite}
-  	    	{\textsc{\MakeLowercase{\namepartfamily}}}
-  			{\MakeUppercase{\namepartfamily}}}
-        {\namepartgiveni}
-        {\namepartprefixi}
+  \or%
+    \ifuseprefix%
+      {\usebibmacro{name:given-family}%
+        {\iftoggle{sccite}%
+  	    	{\textsc{\MakeLowercase{\namepartfamily}}}%
+          {\MakeUppercase{\namepartfamily}}}%
+        {\namepartgiveni}%
+        {\namepartprefix}%
         {\namepartsuffixi}}%
-  \or
-    \usebibmacro{name:given-family}
-      {\iftoggle{sccite}
-  	    	{\textsc{\MakeLowercase{\namepartfamily}}}
-  			{\MakeUppercase{\namepartfamily}}}
-      {\namepartgiven}
-      {\namepartprefix}
+      {\usebibmacro{name:given-family}%
+        {\iftoggle{sccite}%
+  	    	{\textsc{\MakeLowercase{\namepartfamily}}}%
+  			{\MakeUppercase{\namepartfamily}}}%
+        {\namepartgiveni}%
+        {\namepartprefixi}%
+        {\namepartsuffixi}}%
+  \or%
+    \usebibmacro{name:given-family}%
+      {\iftoggle{sccite}%
+        {\textsc{\MakeLowercase{\namepartfamily}}}%
+  			{\MakeUppercase{\namepartfamily}}}%
+      {\namepartgiven}%
+      {\namepartprefix}%
       {\namepartsuffix}%
-  \fi
+  \fi%
   \usebibmacro{name:andothers}}
 
 \DeclareNameFormat{fullcite}{%
   \nameparts{#1}%
   \ifcase\value{uniquename}%
-    \usebibmacro{name:given-family}
-      {\namepartfamily}
-      {\namepartgiven}
-      {\namepartprefix}
+    \usebibmacro{name:given-family}%
+      {\namepartfamily}%
+      {\namepartgiven}%
+      {\namepartprefix}%
       {\namepartsuffix}%
-  \or
-    \ifuseprefix
-      {\usebibmacro{name:given-family}
-        {\namepartfamily}
-        {\namepartgiveni}
-        {\namepartprefix}
-        {\namepartsuffixi}}
-      {\usebibmacro{name:given-family}
-        {\namepartfamily}
-        {\namepartgiveni}
-        {\namepartprefixi}
+  \or%
+    \ifuseprefix%
+      {\usebibmacro{name:given-family}%
+        {\namepartfamily}%
+        {\namepartgiveni}%
+        {\namepartprefix}%
         {\namepartsuffixi}}%
-  \or
-    \usebibmacro{name:given-family}
-      {\namepartfamily}
-      {\namepartgiven}
-      {\namepartprefix}
+      {\usebibmacro{name:given-family}%
+        {\namepartfamily}%
+        {\namepartgiveni}%
+        {\namepartprefixi}%
+        {\namepartsuffixi}}%
+  \or%
+    \usebibmacro{name:given-family}%
+      {\namepartfamily}%
+      {\namepartgiven}%
+      {\namepartprefix}%
       {\namepartsuffix}%
-  \fi
+  \fi%
   \usebibmacro{name:andothers}}
 
 % ----------
@@ -138,23 +138,23 @@
 % ----------
 
 \NewDocumentCommand{\textapud}{o o m o o m}{%
- \citelastname{#3}
+ \citelastname{#3}%
  \mkbibparens{%
-  \IfNoValueTF{#2}
+  \IfNoValueTF{#2}%
    {%
-    \IfNoValueTF{#1}
-     {\citeyear{#3}}
+    \IfNoValueTF{#1}%
+     {\citeyear{#3}}%
      {\citeyear[#1]{#3}}%
-   }
+   }%
    {%
     \citeyear[#1][#2]{#3}%
-   }
-  \IfNoValueTF{#5}
+   }%
+  \IfNoValueTF{#5}%
    {%
-    \IfNoValueTF{#4}
-     {\plaincite[\blx@imc@bibxstring{apud}][]{#6}}
+    \IfNoValueTF{#4}%
+     {\plaincite[\blx@imc@bibxstring{apud}][]{#6}}%
      {\plaincite[\blx@imc@bibxstring{apud}][#4]{#6}}%
-   }
+   }%
    {%
     \cite[\blx@imc@bibxstring{apud} #4][#5]{#6}%
    }%
@@ -166,117 +166,117 @@
 
 \DeclareCiteCommand{\@apud}
 	{\usebibmacro{cite:init}%
-	\iffieldundef{prenote}
-		{}
-		{\printfield[uppercasecite]{prenote}
-		\addspace\bibstring{apud}\addspace}}
+	\iffieldundef{prenote}%
+		{}%
+		{\printfield[uppercasecite]{prenote}%
+		\addspace\bibstring{apud}\addspace}}%
 	{\usebibmacro{citeindex}%
-	\usebibmacro{cite}}
-	{\setunit{\multicitedelim}}
+	\printtext[bibhyperref]{\usebibmacro{cite}}}%
+	{\setunit{\multicitedelim}}%
 	{\usebibmacro{postnote}}
 
 \DeclareCiteCommand{\parencite}[\mkbibparens]
   {\usebibmacro{cite:init}%
-  \usebibmacro{prenote}}
+  \usebibmacro{prenote}}%
   {\usebibmacro{citeindex}%
-   \usebibmacro{cite}}
-  {}
+   \printtext[bibhyperref]{\usebibmacro{cite}}}%
+  {}%
   {\usebibmacro{postnote}}
 
 \DeclareCiteCommand{\cite}[\mkbibparens]
   {\usebibmacro{cite:init}%
-  \usebibmacro{prenote}}
+  \usebibmacro{prenote}}%
   {\usebibmacro{citeindex}%
-   \usebibmacro{cite}}
-  {}
+   \printtext[bibhyperref]{\usebibmacro{cite}}}%
+  {}%
   {\usebibmacro{postnote}}
 
 \DeclareCiteCommand{\plaincite}
   {\usebibmacro{cite:init}%
-  \usebibmacro{prenote}}
+  \usebibmacro{prenote}}%
   {\usebibmacro{citeindex}%
-   \usebibmacro{cite}}
-  {\multicitedelim}
+   \printtext[bibhyperref]{\usebibmacro{cite}}}%
+  {\multicitedelim}%
   {\usebibmacro{postnote}}
 
 \DeclareMultiCiteCommand{\cites}[\mkbibparens]
-	{\cite}
+	{\cite}%
 	{\setunit{\multicitedelim}}
 
 \DeclareCiteCommand*{\cite}[\mkbibparens]
   {\usebibmacro{cite:init}%
-  \usebibmacro{prenote}}
+  \usebibmacro{prenote}}%
   {\usebibmacro{citeindex}%
-   \usebibmacro{citeyearpunct}}
-  {}
+   \usebibmacro{citeyearpunct}}%
+  {}%
   {\usebibmacro{postnote}}
 
 \DeclareCiteCommand{\textcite}
   {\usebibmacro{cite:init}%
   \boolfalse{cbx:parens}%
   \renewcommand*{\finalnamedelim}{\addspace\bibstring{and}\addspace}%
-  \renewcommand*{\multinamedelim}{\addcomma\addspace}}
+  \renewcommand*{\multinamedelim}{\addcomma\addspace}}%
   {\usebibmacro{citeindex}%
-   \iffirstcitekey
-     {\setcounter{textcitetotal}{1}}
+   \iffirstcitekey%
+     {\setcounter{textcitetotal}{1}}%
      {\stepcounter{textcitetotal}%
       \textcitedelim}%
-   \usebibmacro{textcite}}
-  {\ifbool{cbx:parens}
-     {\bibcloseparen\global\boolfalse{cbx:parens}}
-     {}}
+   \usebibmacro{textcite}}%
+  {\ifbool{cbx:parens}%
+     {\bibcloseparen\global\boolfalse{cbx:parens}}%
+     {}}%
   {\usebibmacro{textcite:postnote}}
 
 \DeclareCiteCommand*{\textcite}
   {\usebibmacro{cite:init}%
   \boolfalse{cbx:parens}%
   \renewcommand*{\finalnamedelim}{\addspace\bibstring{and}\addspace}%
-  \renewcommand*{\multinamedelim}{\addcomma\addspace}}
+  \renewcommand*{\multinamedelim}{\addcomma\addspace}}%
   {\usebibmacro{citeindex}%
-   \iffirstcitekey
-     {\setcounter{textcitetotal}{1}}
+   \iffirstcitekey%
+     {\setcounter{textcitetotal}{1}}%
      {\stepcounter{textcitetotal}%
       \textcitedelim}%
-   \usebibmacro{textcitefull}}
-  {\ifbool{cbx:parens}
-     {\bibcloseparen\global\boolfalse{cbx:parens}}
-     {}}
+   \usebibmacro{textcitefull}}%
+  {\ifbool{cbx:parens}%
+     {\bibcloseparen\global\boolfalse{cbx:parens}}%
+     {}}%
   {\usebibmacro{textcite:postnote}}
 
 \DeclareCiteCommand{\citetitle}[\mkbibparens]
   {\usebibmacro{cite:init}%
   \boolfalse{citetracker}%
    \boolfalse{pagetracker}%
-   \usebibmacro{prenote}}
-  {\ifciteindex
-     {\indexfield{indextitle}}
+   \usebibmacro{prenote}}%
+  {\ifciteindex%
+     {\indexfield{indextitle}}%
      {}%
-   \printfield[citetitle]{labeltitle}}
-  {\multicitedelim}
+   \printtext[bibhyperref]{\printfield[citetitle]{labeltitle}}}%
+  {\multicitedelim}%
   {\usebibmacro{postnote}}
 
 \DeclareCiteCommand*{\citetitle}
   {\usebibmacro{cite:init}%
   \boolfalse{citetracker}%
    \boolfalse{pagetracker}%
-   \usebibmacro{prenote}}
-  {\ifciteindex
-     {\indexfield{indextitle}}
+   \usebibmacro{prenote}}%
+  {\ifciteindex%
+     {\indexfield{indextitle}}%
      {}%
-   \printfield[citetitle]{title}\nopunct}
-  {\multicitedelim}
+   \printtext[bibhyperref]{\printfield[citetitle]{title}\nopunct}}%
+  {\multicitedelim}%
   {\usebibmacro{postnote}}
 
 \DeclareCiteCommand{\citelastname}
   {\usebibmacro{cite:init}%
   \boolfalse{citetracker}%
    \boolfalse{pagetracker}%
-   \usebibmacro{prenote}}
-  {\ifciteindex
-     {\indexnames{labelname}}
+   \usebibmacro{prenote}}%
+  {\ifciteindex%
+     {\indexnames{labelname}}%
      {}%
-   \printnames{labelname}}
-  {\multicitedelim}
+   \printtext[bibhyperref]{\printnames{labelname}}}%
+  {\multicitedelim}%
   {\usebibmacro{postnote}}
 
 
@@ -291,61 +291,61 @@
   \printtext[bibhyperref]{\printfield{author}}}
 
 \renewbibmacro*{textcite}{%
-  \ifnameundef{labelname}
-    {\iffieldundef{shorthand}
+  \ifnameundef{labelname}%
+    {\iffieldundef{shorthand}%
        {\usebibmacro{cite:label}%
         \setunit{%
           \global\booltrue{cbx:parens}%
           \nonameyeardelim\bibopenparen}%
-        \ifnumequal{\value{citecount}}{1}
-          {\usebibmacro{prenote}}
+        \ifnumequal{\value{citecount}}{1}%
+          {\usebibmacro{prenote}}%
           {}%
-        \usebibmacro{cite:labelyear+extrayear}}
-       {\usebibmacro{cite:shorthand}}}
+        \usebibmacro{cite:labelyear+extrayear}}%
+       {\usebibmacro{cite:shorthand}}}%
     {\printnames{labelname}%
      \setunit{%
        \global\booltrue{cbx:parens}%
        \addspace\bibopenparen}%
-     \ifnumequal{\value{citecount}}{1}
-       {\usebibmacro{prenote}}
+     \ifnumequal{\value{citecount}}{1}%
+       {\usebibmacro{prenote}}%
        {}%
      \usebibmacro{citeyear}}}
 
 \newbibmacro*{textcitefull}{%
-  \ifnameundef{labelname}
-    {\iffieldundef{shorthand}
+  \ifnameundef{labelname}%
+    {\iffieldundef{shorthand}%
        {\usebibmacro{cite:label}%
         \setunit{%
           \global\booltrue{cbx:parens}%
           \nonameyeardelim\bibopenparen}%
-        \ifnumequal{\value{citecount}}{1}
-          {\usebibmacro{prenote}}
+        \ifnumequal{\value{citecount}}{1}%
+          {\usebibmacro{prenote}}%
           {}%
-        \usebibmacro{cite:labelyear+extrayear}}
-       {\usebibmacro{cite:shorthand}}}
+        \usebibmacro{cite:labelyear+extrayear}}%
+       {\usebibmacro{cite:shorthand}}}%
     {\printnames[fullcite]{labelname}%
      \setunit{%
        \global\booltrue{cbx:parens}%
        \addspace\bibopenparen}%
-     \ifnumequal{\value{citecount}}{1}
-       {\usebibmacro{prenote}}
+     \ifnumequal{\value{citecount}}{1}%
+       {\usebibmacro{prenote}}%
        {}%
      \usebibmacro{citeyear}}}
 
 \renewbibmacro*{cite}{%
-  \iffieldequals{fullhash}{\cbx@lasthash}
+  \iffieldequals{fullhash}{\cbx@lasthash}%
 % Multiple cites in one command
    {\setunit{\compcitedelim}%
     \usebibmacro{cite:plabelyear+extrayear}}%
 % Single cite
-   {\ifthenelse{\ifnameundef{labelname}\OR\iffieldequalstr{entrytype}{patent}}
+   {\ifthenelse{\ifnameundef{labelname}\OR\iffieldequalstr{entrytype}{patent}}%
 % No author/editor
      {\usebibmacro{cite:noname}%
        \setunit{\nameyeardelim}%
        \usebibmacro{cite:plabelyear+extrayear}%
-       \savefield{fullhash}{\cbx@lasthash}}
+       \savefield{fullhash}{\cbx@lasthash}}%
 % Normal cite
-     {\ifnameundef{shortauthor}
+     {\ifnameundef{shortauthor}%
         {\printnames[LAST]{labelname}}%
         {\printnames[LAST]{shortauthor}}%
       \setunit{\nameyeardelim}%
@@ -362,32 +362,32 @@
 
 \renewbibmacro*{cite:label}{%
   \iffieldundef{label}
-    {\printtext[bibhyperref]{\printfield[uppercasecite]{labeltitle}}}
+    {\printtext[bibhyperref]{\printfield[uppercasecite]{labeltitle}}}%
     {\printtext[bibhyperref]{\printfield{label}}}}
 
 \newbibmacro*{cite:plabelyear+extrayear}{%
-  \iffieldundef{labelyear}
-    {}
+  \iffieldundef{labelyear}%
+    {}%
     {\printtext[bibhyperref]{%
        \printfield[noformat]{origyear}\setunit*{\addslash}%
        \printfield{labelyear}\printfield{extrayear}}}%
-       \iffieldundef{issue}
-         {}
+       \iffieldundef{issue}%
+         {}%
          {\addcomma\addspace\printfield{issue}}}
 
 \renewbibmacro*{cite:shorthand}{%
-  \ifciteseen
-    {\printfield{shorthand}}
+  \ifciteseen%
+    {\printfield{shorthand}}%
     {\printnames[labelname][-\value{listtotal}]{labelname}%
      \setunit{\nameyeardelim}%
      \printfield{title}\space\printfield{shorthand}}}
 
 \newbibmacro*{citeyearpunct}{%
-  \iffieldundef{labelyear}
-    {\usebibmacro{cite:init}}
-    {\iffieldequals{fullhash}{\cbx@lasthash}
+  \iffieldundef{labelyear}%
+    {\usebibmacro{cite:init}}%
+    {\iffieldequals{fullhash}{\cbx@lasthash}%
        {\setunit{\compcitedelim}%
-        \usebibmacro{cite:plabelyear+extrayear}}
+        \usebibmacro{cite:plabelyear+extrayear}}%
        {\usebibmacro{cite:plabelyear+extrayear}%
         \savefield{fullhash}{\cbx@lasthash}}}%
   \setunit{\multicitedelim}}
