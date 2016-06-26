@@ -282,6 +282,17 @@
 % newbibmacro
 % ----------
 
+\DeclareFieldFormat{citetitle}{%
+  \iftoggle{sccite}{%
+    \normalfont\FirstWordLCSC{\FirstWordOnlySC{#1}}%
+  }{%
+    \normalfont\MakeUppercase{\FirstWordOnlyUpper{#1}}%
+  }%
+}%
+
+\newbibmacro*{cite:noname}{%
+    \printfield[citetitle]{title}}
+
 \newbibmacro*{cite:init}{%
   \global\undef\cbx@lasthash}
 
@@ -389,5 +400,14 @@
        {\usebibmacro{cite:plabelyear+extrayear}%
         \savefield{fullhash}{\cbx@lasthash}}}%
   \setunit{\multicitedelim}}
+
+
+\newcommand\FirstWordOnlyUpper[1]{\@firstwordonlyupper#1 \@nil}%
+\newcommand\@firstwordonlyupper{}%
+\def\@firstwordonlyupper#1 #2\@nil{\MakeUppercase{#1}\unskip}%
+
+\newcommand\FirstWordOnlySC[1]{\@firstwordonlysc#1 \@nil}%
+\newcommand\@firstwordonlysc{}%
+\def\@firstwordonlysc#1 #2\@nil{\textsc{\MakeLowercase{#1}}\unskip}%
 
 \endinput
