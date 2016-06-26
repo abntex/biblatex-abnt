@@ -124,11 +124,18 @@
   \fi%
   \usebibmacro{name:andothers}}
 
+
 % ----------
 % DeclareFieldFormat
 % ----------
 
-\DeclareFieldFormat{citetitle}{\mkbibemph{#1}}
+\DeclareFieldFormat{citetitle}{%
+  \iftoggle{sccite}{%
+    \normalfont\textsc\MakeLowercase{\FirstWord{#1}}%
+  }{%
+    \normalfont\MakeUppercase{\FirstWord{#1}}%
+  }%
+}%
 
 
 % ----------
@@ -282,14 +289,6 @@
 % newbibmacro
 % ----------
 
-\DeclareFieldFormat{citetitle}{%
-  \iftoggle{sccite}{%
-    \normalfont\FirstWordLCSC{\FirstWordOnlySC{#1}}%
-  }{%
-    \normalfont\MakeUppercase{\FirstWordOnlyUpper{#1}}%
-  }%
-}%
-
 \newbibmacro*{cite:noname}{%
     \printfield[citetitle]{title}}
 
@@ -402,12 +401,10 @@
   \setunit{\multicitedelim}}
 
 
-\newcommand\FirstWordOnlyUpper[1]{\@firstwordonlyupper#1 \@nil}%
-\newcommand\@firstwordonlyupper{}%
-\def\@firstwordonlyupper#1 #2\@nil{\MakeUppercase{#1}\unskip}%
-
-\newcommand\FirstWordOnlySC[1]{\@firstwordonlysc#1 \@nil}%
-\newcommand\@firstwordonlysc{}%
-\def\@firstwordonlysc#1 #2\@nil{\textsc{\MakeLowercase{#1}}\unskip}%
+\newcommand\FirstWord[1]{\@firstword#1 \@nil}%
+\def\@firstword#1 #2\@nil{\@removecomma#1,\@nil}%
+\def\@removecomma#1,#2\@nil{\@removeperiod#1.\@nil}
+\def\@removeperiod#1.#2\@nil{\@removesemicolon#1;\@nil}
+\def\@removesemicolon#1;#2\@nil{#1}
 
 \endinput
