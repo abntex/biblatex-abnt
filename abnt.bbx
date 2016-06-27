@@ -1635,15 +1635,26 @@
 \DeclareBibliographyDriver{patent}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
-  \iflistundef{organization}%
-    {\usebibmacro{author/editor+others}%
-	\clearnames{author}}%
-    {\usebibmacro{organization}}%
+  \ifnameundef{holder}{%
+    \iflistundef{organization}{%
+      \usebibmacro{author/editor+others}%
+    }{%
+      \usebibmacro{organization}
+      \ifnameundef{author}{%
+        \printnames[given-family]{editor}%
+      }{%
+        \printnames[given-family]{author}
+      }%
+    }
+  }{%
+      \printnames{holder}
+      \ifnameundef{author}{%
+        \printnames[given-family]{editor}%
+      }{%
+        \printnames[given-family]{author}
+      }%
+  }
   \setunit{\labelnamepunct}\newblock%
-  \ifnameundef{author}%
-    {\printnames[given-family]{editor}}%
-    {\printnames[given-family]{author}}%
-  \newunit%
   \usebibmacro{title}%
   \newunit%
   \printlist{language}%
