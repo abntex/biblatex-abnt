@@ -342,23 +342,28 @@
 
 \renewbibmacro*{cite}{%
   \iffieldequals{fullhash}{\cbx@lasthash}%
-% Multiple cites in one command
    {\setunit{\compcitedelim}%
     \usebibmacro{cite:plabelyear+extrayear}}%
-% Single cite
-   {\ifthenelse{\ifnameundef{labelname}\OR\iffieldequalstr{entrytype}{patent}}%
-% No author/editor
-     {\usebibmacro{cite:noname}%
-       \setunit{\nameyeardelim}%
-       \usebibmacro{cite:plabelyear+extrayear}%
-       \savefield{fullhash}{\cbx@lasthash}}%
-% Normal cite
-     {\ifnameundef{shortauthor}%
-        {\printnames[LAST]{labelname}}%
-        {\printnames[LAST]{shortauthor}}%
-      \setunit{\nameyeardelim}%
+   {\ifnameundef{shortauthor}{%
+        \ifnameundef{holder}{%
+          \ifnameundef{labelname}{%
+            \iflistundef{organization}{%
+              \usebibmacro{cite:noname}%
+            }{%
+              \printlist[uppercase]{organization}
+            }
+          }{%
+            \printnames[LAST]{labelname}
+          }
+        }{%
+          \printnames[LAST]{holder}
+        }
+      }{%
+        \printnames[LAST]{shortauthor}
+      }
+     \setunit{\nameyeardelim}%
       \usebibmacro{cite:plabelyear+extrayear}%
-      \savefield{fullhash}{\cbx@lasthash}}}%
+      \savefield{fullhash}{\cbx@lasthash}}%
    \setunit{\multicitedelim}}
 
 \def\citeresetabnt{\global\let\cbx@abnt@names\@empty}
