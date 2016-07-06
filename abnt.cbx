@@ -129,9 +129,11 @@
 % DeclareFieldFormat
 % ----------
 
+\DeclareFieldFormat{emphtitle}{\emph{#1}}
+
 \DeclareFieldFormat{citetitle}{%
   \iftoggle{sccite}{%
-    \normalfont\textsc\MakeLowercase{\FirstWord{#1}}%
+    \normalfont\textsc{\MakeLowercase{\FirstWord{#1}}}%
   }{%
     \normalfont\MakeUppercase{\FirstWord{#1}}%
   }%
@@ -256,7 +258,7 @@
   {\ifciteindex%
      {\indexfield{indextitle}}%
      {}%
-   \printfield[citetitle]{labeltitle}}%
+   \printfield[emphtitle]{labeltitle}}%
   {\multicitedelim}%
   {\usebibmacro{postnote}}
 
