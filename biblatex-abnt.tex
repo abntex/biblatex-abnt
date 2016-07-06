@@ -9,7 +9,7 @@
 \usepackage[utf8]{inputenc}
 
 \usepackage{parskip}
-\setlength{\parskip}{1.2\baselineskip}
+\setlength{\parskip}{\baselineskip}
 
 \usepackage{titlesec}
 \newcommand{\subsectionbreak}{\clearpage}
@@ -17,19 +17,22 @@
 \usepackage[
     backend=biber,
     style=./abnt,
-    %hyperref,         % Uncomment to turn citations into links
-    %backref,          % Uncomment for back references (E.g. ``Cit. on p. 1")
-    %repeatfields,     % Uncomment to repeat fields instead of using an underscore
-    %usedashes,        % Uncomment to use biblatex standard dashes instead of underscores
-    giveninits,       % Uncomment to use initials for first names
-    uniquename=init,   % When using giveninits only initials can be used for disambiguation
-    %bftitles,         % Uncomment to print titles in bold
-    %indent,           % Uncomment to use hanging indentation in the bibliography
-    %scbib,            % Uncomment to use small caps in the bibliography
-    %sccite,           % Uncomment to use small caps in the citations
-    %noslsn,           % Uncomment to hide [s.l], [s.n] and [s.l.: s.n.]
-    %nosl,             % Uncomment to hide just [s.l]
-    %nosn,             % Uncomment to hide just [s.n]
+    giveninits,             % Uncomment to use initials for first names
+    uniquename = init,      % This is necessary when using giveninits
+    %hyperref,              % Uncomment to turn citations into links
+    %backref,               % Uncomment for back references (E.g. ``Cit. on p. 1")
+    %repeatfields,          % Uncomment to repeat fields instead of using an underscore
+    %usedashes,             % Uncomment to use the standard dashes instead of underscores
+    %bftitles,              % Uncomment to print titles in bold
+    %indent,                % Uncomment to use hanging indentation in the bibliography
+    %scbib,                 % Uncomment to use small caps in the bibliography
+    %sccite,                % Uncomment to use small caps in the citations
+    %noslsn,                % Uncomment to hide [s.l], [s.n] and [s.l.: s.n.]
+    %nosl,                  % Uncomment to hide just [s.l]
+    %nosn,                  % Uncomment to hide just [s.n]
+                            %
+    labelnumber,            % These two options are used to show the numbers
+    defernumbers = true,    % properly in the abnt-numeric examples
 ]{biblatex}
 \usepackage[brazil]{babel}
 \usepackage[autostyle]{csquotes}
@@ -80,36 +83,23 @@ Para instalá-lo manualmente, copie os arquivos \texttt{.bbx}, \texttt{.cbx} e \
 Para usar o {biblatex-abnt}, adicione as seguintes linhas ao preâmbulo do seu arquivo {.tex}:
 
 \begin{verbatim}
-    \usepackage[backend=biber, style=abnt]{biblatex}
+    \usepackage[
+        backend = biber, 
+        style = abnt,           % Para usar o sistema alfabético.
+      % style = abnt-numeric,   % Para usar o sistema numérico.
+    ]{biblatex}
+
     \usepackage[brazil]{babel}
+
     \addbibresource{arquivo.bib}        % Seus arquivos de
-    \addbibresource{outroarquivo.bib}   % bibliografia vão aqui
+    \addbibresource{outroarquivo.bib}   % bibliografia vão aqui.
 \end{verbatim}
 
-Após as opções \texttt{backend=biber} e \texttt{style=abnt}, podem ser acrescentadas as opções descritas na seção \ref{sec:opções}.
+Após as opções \texttt{backend} e \texttt{style}, podem ser acrescentadas as opções descritas na seção \ref{sec:opções}.
 
 Use os comandos descritos na seção \ref{sec:comandos} para citar obras.
 
 Use o comando \verb"\printbibliography" para imprimir a bibliografia.
-
-\clearpage
-\section{Comandos}
-\label{sec:comandos}
-
-\begin{description}[style=nextline]
-    \item [\PVerb{\cite{bosi08}}] \cite{bosi08}
-    \item [\PVerb{\textcite{bosi08}}] \textcite{bosi08}
-    \item [\PVerb{\cite*{bosi08}}] \cite*{bosi08}
-    \item [\PVerb{\textcite*{bosi08}}] \textcite*{bosi08}
-    \item [\PVerb{\cites{mann09}{moretti09:1}{moretti09}}] \cites{mann09}{moretti09:1}{moretti09}
-    \item [\PVerb{\cites{mann09}{moretti09:1, moretti09}}] \cites{mann09}{moretti09:1, moretti09}
-    \item [\PVerb{\textcites{moretti09}{mann09}{amaral15}}] \textcites{moretti09}{mann09}{amaral15}
-    \item [\PVerb{\apud{assis08}{bosi08}}] \apud{assis08}{bosi08}
-    \item [\PVerb{\apud[p.~12]{assis08}[p.~200]{bosi08}}] \apud[p.~12]{assis08}[p.~200]{bosi08}
-    \item [\PVerb{\textapud[p.~200]{assis08}[p.~12]{bosi08}}] \textapud[p.~200]{assis08}[p.~12]{bosi08}
-    \item [\PVerb{\apud[batman][]{bosi08}}] \apud[batman][]{bosi08}
-    \item [\PVerb{Assis \cite[apud][p.~200]{bosi08}}] Assis \cite[apud][p.~200]{bosi08}
-\end{description}
 
 \clearpage
 \section{Opções}
@@ -123,7 +113,7 @@ As opções a seguir podem ser usadas ao chamar o pacote \texttt{biblatex}:
     \item [repeatfields] Imprime os campos repetidos na bibliografia, em vez de substituí-los por traços sublineares
     \item [usedashes] Usa os traços padrão do \texttt{biblatex} em vez de traços sublineares nos campos repetidos
     \item [giveninits] Abrevia os primeiros nomes na bibliografia
-    \item [uniquename=init] Essa opção deve ser usada em conjunto com a opção \texttt{giveninits}
+    \item [uniquename=init] Necessário ao usar a opção \texttt{giveninits}
     \item [bftitles] Usa negrito para os títulos na bibliografia
     \item [indent] Indenta as entradas da bibliografia
     \item [scbib] Imprime os nomes em versalete na bibliografia
@@ -145,6 +135,59 @@ As opções \texttt{repeatfields}, \texttt{nosl}, \texttt{nosn} e \texttt{noslsn
         options = {repeatfields, noslsn=false},
     }
 \end{verbatim}
+
+\clearpage
+\section{Comandos}
+\label{sec:comandos}
+
+\subsection{Estilo \texttt{abnt}}
+
+\begin{description}[style=nextline, parsep=10pt]
+    \item [\PVerb{\cite{bosi08}}] \cite{bosi08}
+    \item [\PVerb{\textcite{bosi08}}] \textcite{bosi08}
+    \item [\PVerb{\cite*{bosi08}}] \cite*{bosi08}
+    \item [\PVerb{\textcite*{bosi08}}] \textcite*{bosi08}
+    \item [\PVerb{\cites{mann09}{moretti09:1}{moretti09}}] \cites{mann09}{moretti09:1}{moretti09}
+    \item [\PVerb{\cites{mann09}{moretti09:1, moretti09}}] \cites{mann09}{moretti09:1, moretti09}
+    \item [\PVerb{\textcites{moretti09}{mann09}{amaral15}}] \textcites{moretti09}{mann09}{amaral15}
+    \item [\PVerb{\apud{assis08}{bosi08}}] \apud{assis08}{bosi08}
+    \item [\PVerb{\apud[p.~12]{assis08}[p.~200]{bosi08}}] \apud[p.~12]{assis08}[p.~200]{bosi08}
+    \item [\PVerb{\textapud[p.~200]{assis08}[p.~12]{bosi08}}] \textapud[p.~200]{assis08}[p.~12]{bosi08}
+    \item [\PVerb{\apud[batman][]{bosi08}}] \apud[batman][]{bosi08}
+    \item [\PVerb{Assis \cite[apud][p.~200]{bosi08}}] Assis \cite[apud][p.~200]{bosi08}
+\end{description}
+
+\begingroup
+\let\clearpage\relax
+\subsection{Estilo \texttt{abnt-numeric}}
+\endgroup
+  
+\DeclareCiteCommand{\supercite}[\mkbibsuperscript]
+  {\iffieldundef{prenote}
+     {}
+     {\BibliographyWarning{Ignoring prenote argument}}%
+   \iffieldundef{postnote}
+     {}
+     {\BibliographyWarning{Ignoring postnote argument}}}
+  {\usebibmacro{citeindex}%
+   \usebibmacro{cite}}
+  {\supercitedelim}
+  {}
+
+\providebool{bbx:subentry}
+  
+\renewbibmacro*{cite}{%
+  \printtext[bibhyperref]{%
+    \printfield{labelprefix}%
+    \printfield{labelnumber}%
+    \ifbool{bbx:subentry}
+      {\printfield{entrysetcount}}
+      {}}}
+
+\begin{description}[style=nextline, parsep=10pt]
+    \item [\PVerb{Segundo Alfredo Bosi \cite{bosi08}}] Segundo Alfredo Bosi \cite{bosi08}
+    \item [\PVerb{Segundo Alfredo Bosi \supercite{bosi08}}] Segundo Alfredo Bosi \supercite{bosi08}
+\end{description}
 
 
 
