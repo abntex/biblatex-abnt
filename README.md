@@ -41,4 +41,4 @@ Para instalá-lo manualmente, copie os arquivos `.bbx`, `.cbx` e `.lbx` para:
 
 3. Use o comando `\printbibliography` para imprimir a bibliografia.
 
-*Consulte o arquivo `biblatex-abnt.pdf` para informações sobre as opções e comandos disponíveis.*
+*Consulte o arquivo `biblatex-abnt.pdf` e o [manual do `biblatex`](http://mirrors.ctan.org/macros/latex/contrib/biblatex/doc/biblatex.pdf) para informações sobre as opções e comandos disponíveis.*
