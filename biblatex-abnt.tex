@@ -142,7 +142,7 @@ As opções \texttt{repeatfields}, \texttt{nosl}, \texttt{nosn} e \texttt{noslsn
 
 \subsection{Estilo \texttt{abnt}}
 
-\begin{description}[style=nextline, parsep=10pt]
+\begin{description}[style=nextline, parsep=8pt]
     \item [\PVerb{\cite{bosi08}}] \cite{bosi08}
     \item [\PVerb{\textcite{bosi08}}] \textcite{bosi08}
     \item [\PVerb{\cite*{bosi08}}] \cite*{bosi08}
@@ -184,9 +184,33 @@ As opções \texttt{repeatfields}, \texttt{nosl}, \texttt{nosn} e \texttt{noslsn
       {\printfield{entrysetcount}}
       {}}}
 
-\begin{description}[style=nextline, parsep=10pt]
-    \item [\PVerb{Segundo Alfredo Bosi \cite{bosi08}}] Segundo Alfredo Bosi \cite{bosi08}
-    \item [\PVerb{Segundo Alfredo Bosi \supercite{bosi08}}] Segundo Alfredo Bosi \supercite{bosi08}
+\makeatletter
+\newbibmacro*{textcite}{%
+  \iffieldequals{namehash}{\cbx@lasthash}
+    {\setunit{\multicitedelim}}
+    {\ifnameundef{labelname}
+       {\printfield[citetitle]{labeltitle}}
+       {\printnames{labelname}}%
+     \setunit{%
+       \global\booltrue{cbx:parens}%
+       \printdelim{namelabeldelim}\bibopenparen}%
+     \stepcounter{textcitecount}%
+     \savefield{namehash}{\cbx@lasthash}}%
+  \ifnumequal{\value{citecount}}{1}
+    {\usebibmacro{prenote}}
+    {}%
+  \usebibmacro{cite}%
+  \setunit{%
+    \ifbool{cbx:parens}
+      {\bibcloseparen\global\boolfalse{cbx:parens}}
+      {}%
+    \textcitedelim}}
+\makeatother
+
+\begin{description}[style=nextline, parsep=8pt]
+    \item [\PVerb{\textcite{bosi08}}] \textcite{bosi08}
+    \item [\PVerb{Bosi \cite{bosi08}}] Bosi \cite{bosi08}
+    \item [\PVerb{Bosi \supercite{bosi08}}] Bosi \supercite{bosi08}
 \end{description}
 
 
