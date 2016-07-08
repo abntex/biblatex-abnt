@@ -34,7 +34,6 @@
     labelnumber,            % These two options are used to show the numbers
     defernumbers = true,    % properly in the abnt-numeric examples
 ]{biblatex}
-\usepackage[brazil]{babel}
 \usepackage[autostyle]{csquotes}
 
 \addbibresource{biblatex-abnt.bib}
@@ -83,13 +82,13 @@ Para instalá-lo manualmente, copie os arquivos \texttt{.bbx}, \texttt{.cbx} e \
 Para usar o {biblatex-abnt}, adicione as seguintes linhas ao preâmbulo do seu arquivo {.tex}:
 
 \begin{verbatim}
+    \usepackage[brazil]{babel}
+
     \usepackage[
-        backend = biber, 
+        backend = biber,
         style = abnt,           % Para usar o sistema alfabético.
       % style = abnt-numeric,   % Para usar o sistema numérico.
     ]{biblatex}
-
-    \usepackage[brazil]{babel}
 
     \addbibresource{arquivo.bib}        % Seus arquivos de
     \addbibresource{outroarquivo.bib}   % bibliografia vão aqui.

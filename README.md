@@ -31,8 +31,8 @@ Para instalá-lo manualmente, copie os arquivos `.bbx`, `.cbx` e `.lbx` para:
 1. Adicione as seguintes linhas ao preâmbulo do seu arquivo `.tex`:
 
   ```tex
-  \usepackage[backend=biber, style=abnt]{biblatex}
   \usepackage[brazil]{babel}
+  \usepackage[backend=biber, style=abnt]{biblatex}
   \addbibresource{arquivo.bib}        % Seus arquivos de
   \addbibresource{outroarquivo.bib}   % bibliografia vão aqui
   ```
