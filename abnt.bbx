@@ -64,6 +64,25 @@
   \settoggle{nosl}{#1}%
   \settoggle{nosn}{#1}}%
 
+\newtoggle{repeattitle}%
+\DeclareBibliographyOption[boolean]{repeattitles}[true]{%
+  \settoggle{repeattitle}{#1}%
+  \ifstrequal{#1}{true}{%
+    \newbibmacro*{bbx:savetitle}{}%
+    \newbibmacro*{bbx:savesubtitle}{}%
+  }{%
+    \ExecuteBibliographyOptions{pagetracker}%
+    \newbibmacro*{bbx:savetitle}{\savefield{title}{\bbx@lasttitle}}%
+    \newbibmacro*{bbx:savesubtitle}{\savefield{subtitle}{\bbx@lastsubtitle}}%
+  }%
+}%
+\DeclareEntryOption[boolean]{repeattitle}[true]{%
+  \settoggle{repeattitle}{#1}%
+}%
+\DeclareEntryOption[boolean]{repeattitles}[true]{%
+  \settoggle{repeattitle}{#1}%
+}%
+
 \newtoggle{repeatfields}%
 \DeclareBibliographyOption[boolean]{repeatfields}[true]{%
   \settoggle{repeatfields}{#1}%
@@ -509,8 +528,8 @@
 		{\global\undef\bbx@lasttitle%
 		\global\undef\bbx@lastsubtitle}%
     	{\usebibmacro{bbx:titledashcheck}%
-			{\unspace\bibnamedash}%
-			{\usebibmacro{bbx:savetitle}%
+        {\unspace\bibnamedash}%
+        {\usebibmacro{bbx:savetitle}%
 			\usebibmacro{bbx:savesubtitle}%
 			\printtext[title]{%
 				\usebibmacro{titleiskey}%
@@ -888,14 +907,15 @@
 
 \newbibmacro*{bbx:dashcheck}[2]{%
   \ifboolexpr{%
-    (test {\iffieldequals{fullhash}{\bbx@lasthash}}%
-	or%
-	test {\iflistequals{organization}{\bbx@lastorg}}%
+    (%
+      test {\iffieldequals{fullhash}{\bbx@lasthash}}%
+      or%
+      test {\iflistequals{organization}{\bbx@lastorg}}%
     )%
     and%
     not test \iffirstonpage%
-	and%
-	not test {\iftoggle{repeatfields}}%
+    and%
+    not test {\iftoggle{repeatfields}}%
     and%
     (%
        not bool {bbx@inset}%
@@ -910,8 +930,14 @@
 	\iftoggle{isdashed}{%
 		\ifboolexpr{%
 			test {\iffieldequals{title}{\bbx@lasttitle}}%
-			and%
-			test {\iffieldequals{subtitle}{\bbx@lastsubtitle}}%
+			and
+      (%
+        test {\iffieldequals{subtitle}{\bbx@lastsubtitle}}%
+        or%
+        test {\iffieldundef{subtitle}}%
+      )
+      and%
+      not test {\iftoggle{repeattitle}}
 		}%
 			{#1}%
 			{#2}%
