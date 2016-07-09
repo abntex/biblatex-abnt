@@ -22,6 +22,7 @@
     %hyperref,              % Uncomment to turn citations into links
     %backref,               % Uncomment for back references (E.g. ``Cit. on p. 1")
     %repeatfields,          % Uncomment to repeat fields instead of using an underscore
+    %repeattitles,          % Uncomment to repeat just titles, avoiding ____.____.
     %usedashes,             % Uncomment to use the standard dashes instead of underscores
     %bftitles,              % Uncomment to print titles in bold
     %indent,                % Uncomment to use hanging indentation in the bibliography
@@ -106,32 +107,34 @@ Use o comando \verb"\printbibliography" para imprimir a bibliografia.
 
 As opções a seguir podem ser usadas ao chamar o pacote \texttt{biblatex}:
 
-\begin{description}
-    \item [hyperref] Transforma as citações em links que levam à bibliografia
-    \item [backref] Aponta, na bibliografia, as páginas em que a entrada foi citada
-    \item [repeatfields] Imprime os campos repetidos na bibliografia, em vez de substituí-los por traços sublineares
-    \item [usedashes] Usa os traços padrão do \texttt{biblatex} em vez de traços sublineares nos campos repetidos
+\begin{description}[parsep=8pt,itemindent=-1em,leftmargin=3em]
+    \item [indent] Indenta as entradas da bibliografia
+    \item [sccite] Imprime os nomes em versalete nas citações
+    \item [scbib] Imprime os nomes em versalete na bibliografia
+    \item [bftitles] Usa negrito para os títulos na bibliografia
     \item [giveninits] Abrevia os primeiros nomes na bibliografia
     \item [uniquename=init] Necessário ao usar a opção \texttt{giveninits}
-    \item [bftitles] Usa negrito para os títulos na bibliografia
-    \item [indent] Indenta as entradas da bibliografia
-    \item [scbib] Imprime os nomes em versalete na bibliografia
-    \item [sccite] Imprime os nomes em versalete nas citações
-    \item [noslsn] Oculta as abreviações [s.l], [s.n] e [s.l.: s.n.] na bibliografia
-    \item [nosl] Oculta apenas as abreviações [s.l.]
-    \item [nosn] Oculta apenas as abreviações [s.n.]
+    \item [nosl] Oculta apenas as abreviações [s.l.] na bibliografia
+    \item [nosn] Oculta apenas as abreviações [s.n.] na bibliografia
+    \item [noslsn] Oculta as abreviações [s.l], [s.n] e [s.l.: s.n.]
+    \item [repeatfields] Imprime os campos repetidos na bibliografia, em vez de substituí-los por traços sublineares
+    \item [repeattitles] Imprime apenas os títulos repetidos na bibliografia, mas substitui os autores por traços sublineares
+    \item [usedashes] Usa os traços padrão do \texttt{biblatex} em vez de traços sublineares nos campos repetidos
+    \item [hyperref] Transforma as citações em links que levam à bibliografia
+    \item [backref] Aponta, na bibliografia, as páginas em que a entrada foi citada
 \end{description}
 
+\vspace{\baselineskip}
 E.g.: \verb"\usepackage[backend=biber, style=abnt, bftitles]{biblatex}"
 
-As opções \texttt{repeatfields}, \texttt{nosl}, \texttt{nosn} e \texttt{noslsn} também podem ser usadas apenas em entradas específicas. E.g.:
+As opções \texttt{repeatfields}, \texttt{repeattitles}, \texttt{nosl}, \texttt{nosn} e \texttt{noslsn} também podem ser usadas apenas em entradas específicas. E.g.:
 
 \begin{verbatim}
     @mvbook{assis08,
         author  = {Machado de Assis},
         title   = {Obra completa em quatro volumes},
         year    = {2008},
-        options = {repeatfields, noslsn=false},
+        options = {repeattitles, noslsn=false},
     }
 \end{verbatim}
 
