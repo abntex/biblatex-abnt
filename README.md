@@ -1,6 +1,6 @@
 # biblatex-abnt
 
-Version 2.0
+Version 2.0.1
 
 Permission is granted to copy, distribute and/or modify this software under
 the terms of the LaTeX Project Public License, version
