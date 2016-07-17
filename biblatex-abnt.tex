@@ -145,19 +145,39 @@ As opções \texttt{repeatfields}, \texttt{repeattitles}, \texttt{nosl}, \texttt
 
 \subsection{Estilo \texttt{abnt}}
 
-\begin{description}[style=nextline, parsep=8pt]
+Comandos principais:
+
+\begin{description}[style=nextline, labelindent=2em, leftmargin=4em]
     \item [\PVerb{\cite{bosi08}}] \cite{bosi08}
     \item [\PVerb{\textcite{bosi08}}] \textcite{bosi08}
-    \item [\PVerb{\cite*{bosi08}}] \cite*{bosi08}
-    \item [\PVerb{\textcite*{bosi08}}] \textcite*{bosi08}
-    \item [\PVerb{\cites{mann09}{moretti09:1}{moretti09}}] \cites{mann09}{moretti09:1}{moretti09}
-    \item [\PVerb{\cites{mann09}{moretti09:1, moretti09}}] \cites{mann09}{moretti09:1, moretti09}
-    \item [\PVerb{\textcites{moretti09}{mann09}{amaral15}}] \textcites{moretti09}{mann09}{amaral15}
     \item [\PVerb{\apud{assis08}{bosi08}}] \apud{assis08}{bosi08}
+    \item [\PVerb{\cites{moretti09}{mann09}{amaral15}}] \cites{moretti09}{mann09}{amaral15}
+    \item [\PVerb{\textcites{moretti09}{mann09}{amaral15}}] \textcites{moretti09}{mann09}{amaral15}
+\end{description}
+
+\vspace{1em}
+Outros exemplos:
+
+\begin{description}[style=nextline, labelindent=2em, leftmargin=4em]
+    \item [\PVerb{\cites{mann09}{moretti09:1, moretti09}}] \cites{mann09}{moretti09:1, moretti09}
     \item [\PVerb{\apud[p.~12]{assis08}[p.~200]{bosi08}}] \apud[p.~12]{assis08}[p.~200]{bosi08}
     \item [\PVerb{\textapud[p.~200]{assis08}[p.~12]{bosi08}}] \textapud[p.~200]{assis08}[p.~12]{bosi08}
     \item [\PVerb{\apud[batman][]{bosi08}}] \apud[batman][]{bosi08}
     \item [\PVerb{Assis \cite[apud][p.~200]{bosi08}}] Assis \cite[apud][p.~200]{bosi08}
+    \item [\PVerb{\citetitle{bosi08}}] \citetitle{bosi08}
+    \item [\PVerb{\citeauthor{bosi08}}] \citeauthor{bosi08}
+    \item [\PVerb{\citeyear{bosi08}}] \citeyear{bosi08}
+\end{description}
+    
+    
+Exceto pelo comando \PVerb{\textcite*}, que imprime o nome completo do autor, as versões com asterisco dos comandos acima imprimem o mesmo texto sem os parêntesis:
+    
+\begin{description}[style=nextline, labelindent=2em, leftmargin=4em]
+    \item [\PVerb{\textcite*{bosi08}}] \textcite*{bosi08}
+    \item [\PVerb{\cite*{bosi08}}] \cite*{bosi08}
+    \item [\PVerb{\citetitle*{bosi08}}] \citetitle*{bosi08}
+    \item [\PVerb{\citeauthor*{bosi08}}] \citeauthor*{bosi08}
+    \item [\PVerb{\citeyear*{bosi08}}] \citeyear*{bosi08}
 \end{description}
 
 \begingroup

@@ -152,11 +152,11 @@
   \IfNoValueTF{#2}
    {%
     \IfNoValueTF{#1}
-     {\citeyear{#3}}
-     {\citeyear[#1]{#3}}%
+     {\citeyear*{#3}}
+     {\citeyear*[#1]{#3}}%
    }
    {%
-    \citeyear[#1][#2]{#3}%
+    \citeyear*[#1][#2]{#3}%
    }
   \IfNoValueTF{#5}
    {%
@@ -200,24 +200,24 @@
   {}%
   {\usebibmacro{postnote}}
 
+\DeclareMultiCiteCommand{\cites}[\mkbibparens]
+	{\cite}%
+	{\setunit{\multicitedelim}}
+
+\DeclareCiteCommand*{\cite}
+  {\usebibmacro{cite:init}%
+  \usebibmacro{prenote}}%
+  {\usebibmacro{citeindex}%
+   \usebibmacro{cite}}%
+  {}%
+  {\usebibmacro{postnote}}
+
 \DeclareCiteCommand{\plaincite}
   {\usebibmacro{cite:init}%
   \usebibmacro{prenote}}%
   {\usebibmacro{citeindex}%
    \usebibmacro{cite}}%
   {\multicitedelim}%
-  {\usebibmacro{postnote}}
-
-\DeclareMultiCiteCommand{\cites}[\mkbibparens]
-	{\cite}%
-	{\setunit{\multicitedelim}}
-
-\DeclareCiteCommand*{\cite}[\mkbibparens]
-  {\usebibmacro{cite:init}%
-  \usebibmacro{prenote}}%
-  {\usebibmacro{citeindex}%
-   \usebibmacro{citeyearpunct}}%
-  {}%
   {\usebibmacro{postnote}}
 
 \DeclareCiteCommand{\textcite}
@@ -286,6 +286,44 @@
      {}%
    \printnames{labelname}}%
   {\multicitedelim}%
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\citeauthor}[\mkbibparens]
+  {\boolfalse{citetracker}%
+   \boolfalse{pagetracker}%
+   \usebibmacro{prenote}}
+  {\ifciteindex
+     {\indexnames{labelname}}
+     {}%
+   \printnames[LAST]{labelname}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand*{\citeauthor}
+  {\boolfalse{citetracker}%
+   \boolfalse{pagetracker}%
+   \usebibmacro{prenote}}
+  {\ifciteindex
+     {\indexnames{labelname}}
+     {}%
+   \printnames{labelname}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\citeyear}[\mkbibparens]
+  {\boolfalse{citetracker}%
+   \boolfalse{pagetracker}%
+   \usebibmacro{prenote}}
+  {\printfield{year}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand*{\citeyear}
+  {\boolfalse{citetracker}%
+   \boolfalse{pagetracker}%
+   \usebibmacro{prenote}}
+  {\printfield{year}}
+  {\multicitedelim}
   {\usebibmacro{postnote}}
 
 
