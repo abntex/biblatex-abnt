@@ -386,22 +386,26 @@
   \iffieldequals{fullhash}{\cbx@lasthash}%
    {\setunit{\compcitedelim}%
     \usebibmacro{cite:plabelyear+extrayear}}%
-   {\ifnameundef{shortauthor}{%
-        \ifnameundef{holder}{%
-          \ifnameundef{labelname}{%
-            \iflistundef{organization}{%
-              \usebibmacro{cite:noname}%
+   {\iffieldundef{shorthand}{%
+      \ifnameundef{shortauthor}{%
+            \ifnameundef{holder}{%
+              \ifnameundef{labelname}{%
+                \iflistundef{organization}{%
+                  \usebibmacro{cite:noname}%
+                }{%
+                  \printlist[uppercase]{organization}%
+                }
+              }{%
+                \printtext[bibhyperref]{\printnames[LAST]{labelname}}%
+              }
             }{%
-              \printlist[uppercase]{organization}%
+              \printnames[LAST]{holder}%
             }
           }{%
-            \printtext[bibhyperref]{\printnames[LAST]{labelname}}%
+            \printnames[LAST]{shortauthor}%
           }
-        }{%
-          \printnames[LAST]{holder}%
-        }
       }{%
-        \printnames[LAST]{shortauthor}%
+        \usebibmacro{cite:shorthand}
       }
      \setunit{\nameyeardelim}%
       \usebibmacro{cite:plabelyear+extrayear}%
@@ -430,12 +434,8 @@
          {}%
          {\addcomma\addspace\printfield{issue}}}
 
-\renewbibmacro*{cite:shorthand}{%
-  \ifciteseen%
-    {\printfield{shorthand}}%
-    {\printnames[labelname][-\value{listtotal}]{labelname}%
-     \setunit{\nameyeardelim}%
-     \printfield{title}\space\printfield{shorthand}}}
+\newbibmacro*{cite:shorthand}{%
+  \printtext[bibhyperref]{\emph{\printfield{shorthand}}}}
 
 \newbibmacro*{citeyearpunct}{%
   \iffieldundef{labelyear}%
