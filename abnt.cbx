@@ -46,7 +46,13 @@
     \space}%
 }
 
-\DeclareFieldFormat{uppercasecite}{\iftoggle{sccite}{\textsc{\smartlowercase{#1}}}{\smartuppercase{#1}}}
+\DeclareFieldFormat{uppercasecite}{%
+  \iftoggle{sccite}{%
+    \textsc{\smartlowercase{#1}}%
+  }{%
+    \smartuppercase{#1}%
+  }%
+}
 
 % ----------
 % Options
@@ -260,7 +266,7 @@
   {\ifciteindex%
      {\indexfield{indextitle}}%
      {}%
-   \printfield[emphtitle]{labeltitle}}%
+   \printtext[bibhyperref]{\printfield[emphtitle]{labeltitle}}}%
   {\multicitedelim}%
   {\usebibmacro{postnote}}
 
@@ -272,7 +278,7 @@
   {\ifciteindex%
      {\indexfield{indextitle}}%
      {}%
-   \printfield[emphtitle]{labeltitle}}%
+   \printtext[bibhyperref]{\printfield[emphtitle]{labeltitle}}}%
   {\multicitedelim}%
   {\usebibmacro{postnote}}
 
@@ -284,7 +290,7 @@
   {\ifciteindex%
      {\indexnames{labelname}}%
      {}%
-   \printnames{labelname}}%
+   \printtext[bibhyperref]{\printnames{labelname}}}%
   {\multicitedelim}%
   {\usebibmacro{postnote}}
 
@@ -295,7 +301,7 @@
   {\ifciteindex
      {\indexnames{labelname}}
      {}%
-   \printnames[LAST]{labelname}}
+   \printtext[bibhyperref]{\printnames[LAST]{labelname}}}
   {\multicitedelim}
   {\usebibmacro{postnote}}
 
@@ -306,7 +312,7 @@
   {\ifciteindex
      {\indexnames{labelname}}
      {}%
-   \printnames{labelname}}
+   \printtext[bibhyperref]{\printnames{labelname}}}%
   {\multicitedelim}
   {\usebibmacro{postnote}}
 
@@ -314,7 +320,7 @@
   {\boolfalse{citetracker}%
    \boolfalse{pagetracker}%
    \usebibmacro{prenote}}
-  {\printfield{year}}
+  {\printfield[bibhyperref]{year}}
   {\multicitedelim}
   {\usebibmacro{postnote}}
 
@@ -322,7 +328,7 @@
   {\boolfalse{citetracker}%
    \boolfalse{pagetracker}%
    \usebibmacro{prenote}}
-  {\printfield{year}}
+  {\printfield[bibhyperref]{year}}
   {\multicitedelim}
   {\usebibmacro{postnote}}
 
@@ -384,8 +390,7 @@
 
 \renewbibmacro*{cite}{%
   \iffieldequals{fullhash}{\cbx@lasthash}%
-   {\setunit{\compcitedelim}%
-    \usebibmacro{cite:plabelyear+extrayear}}%
+   {\usebibmacro{cite:plabelyear+extrayear}}%
    {\iffieldundef{shorthand}{%
       \ifnameundef{shortauthor}{%
             \ifnameundef{holder}{%
@@ -446,6 +451,58 @@
        {\usebibmacro{cite:plabelyear+extrayear}%
         \savefield{fullhash}{\cbx@lasthash}}}%
   \setunit{\multicitedelim}}
+
+
+% Get the whole thing inside bibhyperref (including punctuation)
+
+\DeclareFieldFormat{citehyperref}{%
+  \DeclareFieldAlias{bibhyperref}{noformat}% Avoid nested links
+  \bibhyperref{#1}}
+
+\DeclareFieldFormat{textcitehyperref}{%
+  \DeclareFieldAlias{bibhyperref}{noformat}% Avoid nested links
+  \bibhyperref{%
+    #1%
+    \ifbool{cbx:parens}
+      {\bibcloseparen\global\boolfalse{cbx:parens}}
+      {}}}
+
+\savebibmacro{cite}
+\savebibmacro{textcite}
+\savebibmacro{textcitefull}
+
+\renewbibmacro*{cite}{%
+  \printtext[citehyperref]{%
+    \restorebibmacro{cite}%
+    \usebibmacro{cite}}}
+
+\renewbibmacro*{textcite}{%
+  \ifboolexpr{
+    ( not test {\iffieldundef{prenote}} and
+      test {\ifnumequal{\value{citecount}}{1}} )
+    or
+    ( not test {\iffieldundef{postnote}} and
+      test {\ifnumequal{\value{citecount}}{\value{citetotal}}} )
+  }
+    {\DeclareFieldAlias{textcitehyperref}{noformat}}
+    {}%
+  \printtext[textcitehyperref]{%
+    \restorebibmacro{textcite}%
+    \usebibmacro{textcite}}}
+
+\renewbibmacro*{textcitefull}{%
+  \ifboolexpr{
+    ( not test {\iffieldundef{prenote}} and
+      test {\ifnumequal{\value{citecount}}{1}} )
+    or
+    ( not test {\iffieldundef{postnote}} and
+      test {\ifnumequal{\value{citecount}}{\value{citetotal}}} )
+  }
+    {\DeclareFieldAlias{textcitehyperref}{noformat}}
+    {}%
+  \printtext[textcitehyperref]{%
+    \restorebibmacro{textcitefull}%
+    \usebibmacro{textcitefull}}}
 
 
 \newcommand\FirstWord[1]{\@firstword#1 \@nil}%
