@@ -8,5 +8,6 @@
 *.toc
 *.fls
 *.dvi
+*.swp
 *.synctex.gz
 *.fdb_latexmk
