@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+
+### Fixed
+- Fix missing parentheses around `authortype`
+- Remove `authortype` when the author is omitted
+- Fix `number` field format for `collection` entries
+
 
 ## [2.0.1] - 2016-08-03
 
@@ -40,6 +47,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Add "et al." in citations
 
 
+[Unreleased]: https://github.com/abntex/biblatex-abnt/compare/v2.0.1...HEAD
 [2.0.1]: https://github.com/abntex/biblatex-abnt/compare/v2.0...v2.0.1
 [2.0]: https://github.com/abntex/biblatex-abnt/compare/v1.0.1...v2.0
 [1.0.1]: https://github.com/abntex/biblatex-abnt/compare/v1.0...v1.0.1
