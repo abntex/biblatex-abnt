@@ -352,8 +352,8 @@
 \DeclareFieldFormat{citetitle}{\iftoggle{bftitles}{\addspace\mkbibbold{#1}\isdot}{\addspace\mkbibemph{#1}\isdot}}%
 \DeclareFieldFormat*{title}{\iftoggle{bftitles}{\addspace\mkbibbold{#1}\isdot}{\addspace\mkbibemph{#1}\isdot}}%
 
-\DeclareFieldFormat{authortype}{\bibsentence#1}
-\DeclareFieldFormat{editortype}{\bibsentence#1}
+\DeclareFieldFormat{authortype}{\printtext[parens]{\bibsentence#1}}
+\DeclareFieldFormat{editortype}{\printtext[parens]{\bibsentence#1}}
 
 % Use normal text for the title in these entries.
 \DeclareFieldFormat%
@@ -786,7 +786,7 @@
 			\usebibmacro{bbx:savehash}%
 			\printnames{editor}%
 			\setunit{\addspace}%
-        	\printtext[parens]{\usebibmacro{editor+othersstrg}}%
+        	\usebibmacro{editor+othersstrg}%
 		}%
    	 	\savenamecs*{editor}{saveded}%
         \clearname{editor}%
@@ -804,7 +804,7 @@
 	}{%
 		\printnames{editor}%
 		\setunit*{\addspace}%
-        \printtext[parens]{\usebibmacro{editor+othersstrg}}%
+        \usebibmacro{editor+othersstrg}%
 		\clearname{editor}%
 	}%
 }%
