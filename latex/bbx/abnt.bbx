@@ -764,11 +764,11 @@
 		}{%
 			\usebibmacro{bbx:savehash}%
 			\printnames{author}%
+      \addspace%
+      \usebibmacro{authorstrg}%
+      \newunit\newblock%
+      \printfield{nameaddon}%
 		}%
-		\addspace%
-		\usebibmacro{authorstrg}%
-		\newunit\newblock%
-		\printfield{nameaddon}%
 	}{%
 		\global\undef\bbx@lasthash%
 	}%
