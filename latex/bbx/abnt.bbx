@@ -104,7 +104,9 @@
 }%
 
 % Option to use the original dashes instead of underscores.
+\newtoggle{usedashes}%
 \DeclareBibliographyOption[boolean]{usedashes}[true]{%
+  \settoggle{usedashes}{#1}%
   \ifstrequal{#1}{true}%
     {\renewcommand*{\bibnamedash}{%
 	   \ifdimless{\leftmargin}{0.75em}%
@@ -252,6 +254,12 @@
 
 \renewcommand*{\subtitlepunct}{\addcolon\addspace}%
 
+\newcommand*{\labelunit}{%
+  \iftoggle{usedashes}{\labelnamepunct}{\unspace .\addspace}%
+  % It's necessary to hard code the period
+  % for it to be added after the \bibnamedash underlining.
+}
+
 % Use a period to separate the backref from what comes before
 % E.g.: "1973. p. 33–79. Ver p. 2."
 \renewcommand*{\bibpagerefpunct}{\addperiod\addspace}%
@@ -277,7 +285,7 @@
 \newbool{bbx@inset}%
 
 % This replaces repeated authors' names.
-\renewcommand*{\bibnamedash}{\underline{\hspace*{4em}}\addperiod\addspace}%
+\renewcommand*{\bibnamedash}{\underline{\hspace*{4em}}}%
 
 % Use or not small caps for acronyms, depending on the scbib option.
 \renewcommand*{\mkbibacro}[1]{%
@@ -802,10 +810,17 @@
 	\ifnameundef{editor}{%
 		\printlist[uppercase]{organization}%
 	}{%
+		\usebibmacro{bbx:ineditordashcheck}{%
+			\bibnamedash%
+      \setunit*{\addspace}%
+          \usebibmacro{editor+othersstrg}%
+      \clearname{editor}%
+		}{%
 		\printnames{editor}%
 		\setunit*{\addspace}%
         \usebibmacro{editor+othersstrg}%
 		\clearname{editor}%
+		}%
 	}%
 }%
 
@@ -927,6 +942,21 @@
     {\settoggle{isdashed}{true}#1}%
     {\settoggle{isdashed}{false}#2}}%
 
+\newbibmacro*{bbx:ineditordashcheck}[2]{%
+  \ifboolexpr{%
+    test {\ifnamesequal{editor}{author}}%
+    and%
+    not test {\iftoggle{repeatfields}}%
+    and%
+    (%
+       not bool {bbx@inset}%
+       or%
+       test {\iffieldequalstr{entrysetcount}{1}}%
+    )%
+  }%
+    {\settoggle{isdashed}{true}#1}%
+    {\settoggle{isdashed}{false}#2}}%
+
 \newbibmacro*{bbx:titledashcheck}[2]{%
 	\iftoggle{isdashed}{%
 		\ifboolexpr{%
@@ -959,7 +989,7 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/organization}%
-  \setunit{\labelnamepunct}\newblock%
+  \labelunit\newblock%
   \usebibmacro{title}%
   \newunit%
   \printlist{language}%
@@ -1013,7 +1043,7 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/editor+others}%
-  \setunit{\labelnamepunct}\newblock%
+  \labelunit\newblock%
   \usebibmacro{title}%
   \newunit\newblock%
   \usebibmacro{inmaintitle}%
@@ -1062,7 +1092,7 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/editor+others}%
-  \setunit{\labelnamepunct}\newblock%
+  \labelunit\newblock%
   \usebibmacro{title}%
   \newunit\newblock%
   \usebibmacro{inmaintitle}%
@@ -1114,7 +1144,7 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/editor+others}%
-  \setunit{\labelnamepunct}\newblock%
+  \labelunit\newblock%
   \usebibmacro{title}%
   \newunit%
   \usebibmacro{inbookauthor+others}%
@@ -1156,7 +1186,7 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{editor+others}%
-  \setunit{\labelnamepunct}\newblock%
+  \labelunit\newblock%
   \usebibmacro{title}%
   \newunit\newblock%
   \usebibmacro{inmaintitle}%
@@ -1205,7 +1235,7 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{editor+others}%
-  \setunit{\labelnamepunct}\newblock%
+  \labelunit\newblock%
   \usebibmacro{title}%
   \newunit\newblock%
   \usebibmacro{inmaintitle}%
@@ -1257,7 +1287,7 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author}%
-  \setunit{\labelnamepunct}\newblock%
+  \labelunit\newblock%
   \usebibmacro{title}%
   \newunit\newblock%
   \usebibmacro{in:editor+others}%
@@ -1299,7 +1329,7 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{editor+others/organization}%
-  \setunit{\labelnamepunct}\newblock%
+  \labelunit\newblock%
   \usebibmacro{title}%
   \newunit\newblock%
   \usebibmacro{publisher+location+date}%
@@ -1334,7 +1364,7 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/editor+others}%
-  \setunit{\labelnamepunct}\newblock%
+  \labelunit\newblock%
   \usebibmacro{issue}%
   \setunit*{\addperiod\addspace}%
   \usebibmacro{periodical}%
@@ -1387,7 +1417,7 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/editor+others}%
-  \setunit{\labelnamepunct}\newblock%
+  \labelunit\newblock%
   \usebibmacro{maintitle+title}%
   \newunit%
   \printlist{language}%
@@ -1478,7 +1508,7 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/translator+others}%
-  \setunit{\labelnamepunct}\newblock%
+  \labelunit\newblock%
   \usebibmacro{title}%
   \newunit%
   \printlist{language}%
@@ -1542,7 +1572,7 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author}%
-  \setunit{\labelnamepunct}\newblock%
+  \labelunit\newblock%
   \usebibmacro{title}%
   \newunit%
   \usebibmacro{date}%
@@ -1581,7 +1611,7 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author}%
-  \setunit{\labelnamepunct}\newblock%
+  \labelunit\newblock%
   \usebibmacro{title}%
   \newunit%
   \usebibmacro{date}%
@@ -1620,7 +1650,7 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/editor+others}%
-  \setunit{\labelnamepunct}\newblock%
+  \labelunit\newblock%
   \usebibmacro{maintitle+title}%
   \newunit%
   \printlist{language}%
@@ -1683,7 +1713,7 @@
         \printnames[given-family]{author}
       }%
   }
-  \setunit{\labelnamepunct}\newblock%
+  \labelunit\newblock%
   \usebibmacro{title}%
   \newunit%
   \printlist{language}%
@@ -1722,7 +1752,7 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/editor+others}%
-  \setunit{\labelnamepunct}\newblock%
+  \labelunit\newblock%
   \usebibmacro{maintitle+title}%
   \newunit%
   \printlist{language}%
@@ -1770,7 +1800,7 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/editor+others}%
-  \setunit{\labelnamepunct}\newblock%
+  \labelunit\newblock%
   \usebibmacro{maintitle+title}%
   \newunit%
   \printlist{language}%
