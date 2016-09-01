@@ -16,10 +16,10 @@
 
 \usepackage[
     backend=biber,
-    style=./abnt,
+    style=abnt,
     giveninits,             % Uncomment to use initials for first names
     uniquename = init,      % This is necessary when using giveninits
-    %hyperref,              % Uncomment to turn citations into links
+    hyperref,               % Uncomment to turn citations into links
     %backref,               % Uncomment for back references (E.g. ``Cit. on p. 1")
     %repeatfields,          % Uncomment to repeat fields instead of using an underscore
     %repeattitles,          % Uncomment to repeat just titles, avoiding ____.____.
@@ -38,6 +38,12 @@
 \usepackage[autostyle]{csquotes}
 
 \addbibresource{biblatex-abnt.bib}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=red,
+}
 
 \DeclareBibliographyCategory{singleentries}
 
