@@ -358,7 +358,7 @@
           {}%
         \usebibmacro{cite:labelyear+extrayear}}%
        {\usebibmacro{cite:shorthand}}}%
-    {\printnames{labelname}%
+    {\printtext[bibhyperref]{\printnames{labelname}}%
      \setunit{%
        \global\booltrue{cbx:parens}%
        \addspace\bibopenparen}%
@@ -379,7 +379,7 @@
           {}%
         \usebibmacro{cite:labelyear+extrayear}}%
        {\usebibmacro{cite:shorthand}}}%
-    {\printnames[fullcite]{labelname}%
+    {\printtext[bibhyperref]{\printnames[fullcite]{labelname}}%
      \setunit{%
        \global\booltrue{cbx:parens}%
        \addspace\bibopenparen}%
