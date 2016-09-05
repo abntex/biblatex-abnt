@@ -4,8 +4,9 @@ Version 2.0.1
 
 Permission is granted to copy, distribute and/or modify this software under
 the terms of the LaTeX Project Public License, version
-1.3c (http://www.latex-project.org/lppl.txt). The current
-maintainer is Daniel B. Marques.
+1.3c (http://www.latex-project.org/lppl.txt).
+
+The current maintainer is Daniel B. Marques ([@dbmrq](https://github.com/dbmrq)).
 
 ----------
 
@@ -31,8 +32,7 @@ Para instalá-lo manualmente, copie os arquivos `.bbx`, `.cbx` e `.lbx` para:
 1. Adicione as seguintes linhas ao preâmbulo do seu arquivo `.tex`:
 
   ```tex
-  \usepackage[brazil]{babel}
-  \usepackage[backend=biber, style=abnt]{biblatex}
+  \usepackage[style = abnt, language = brazil]{biblatex}
   \addbibresource{arquivo.bib}        % Seus arquivos de
   \addbibresource{outroarquivo.bib}   % bibliografia vão aqui
   ```
