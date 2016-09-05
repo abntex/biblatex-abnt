@@ -254,12 +254,6 @@
 
 \renewcommand*{\subtitlepunct}{\addcolon\addspace}%
 
-\newcommand*{\labelunit}{%
-  \iftoggle{usedashes}{\labelnamepunct}{\unspace .\addspace}%
-  % It's necessary to hard code the period
-  % for it to be added after the \bibnamedash underlining.
-}
-
 % Use a period to separate the backref from what comes before
 % E.g.: "1973. p. 33–79. Ver p. 2."
 \renewcommand*{\bibpagerefpunct}{\addperiod\addspace}%
@@ -285,7 +279,9 @@
 \newbool{bbx@inset}%
 
 % This replaces repeated authors' names.
-\renewcommand*{\bibnamedash}{\underline{\hspace*{4em}}}%
+\newcommand*{\bibnameunderscore}{\underline{\hspace*{4em}}}%
+\newcommand*{\nopunctdash}{\bibnameunderscore\addspace}%
+\renewcommand*{\bibnamedash}{\bibnameunderscore\addperiod\addspace}%
 
 % Use or not small caps for acronyms, depending on the scbib option.
 \renewcommand*{\mkbibacro}[1]{%
@@ -768,7 +764,14 @@
 		not test {\ifnameundef{author}}%
 	}{%
 		\usebibmacro{bbx:dashcheck}{%
-			\bibnamedash%
+      \iffieldundef{authortype}{%
+        \bibnamedash%
+      }{%
+        \nopunctdash%
+        \usebibmacro{authorstrg}%
+        \newunit\newblock%
+        \printfield{nameaddon}%
+      }
 		}{%
 			\usebibmacro{bbx:savehash}%
 			\printnames{author}%
@@ -789,7 +792,12 @@
 		not test {\ifnameundef{editor}}%
 	}{%
 		\usebibmacro{bbx:dashcheck}{%
-			\bibnamedash%
+      \iffieldundef{editortype}{%
+        \bibnamedash%
+      }{%
+        \nopunctdash%
+        \usebibmacro{editor+othersstrg}%
+      }
 		}{%
 			\usebibmacro{bbx:savehash}%
 			\printnames{editor}%
@@ -811,10 +819,13 @@
 		\printlist[uppercase]{organization}%
 	}{%
 		\usebibmacro{bbx:ineditordashcheck}{%
-			\bibnamedash%
-      \setunit*{\addspace}%
-          \usebibmacro{editor+othersstrg}%
-      \clearname{editor}%
+      \iffieldundef{editortype}{%
+        \bibnamedash%
+      }{%
+        \nopunctdash%
+        \usebibmacro{editor+othersstrg}%
+        \clearname{editor}%
+      }
 		}{%
 		\printnames{editor}%
 		\setunit*{\addspace}%
@@ -831,7 +842,7 @@
 			\printlist[uppercase]{organization}%
 			\clearlist{organization}%
 		}{%
-			\printnames{editor}%
+			\usebibmacro{editor+others}%
 		}%
 	}{%
 		\printfield[uppercase]{eventtitle}%
@@ -989,7 +1000,7 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/organization}%
-  \labelunit\newblock%
+  \setunit{\labelnamepunct}\newblock%
   \usebibmacro{title}%
   \newunit%
   \printlist{language}%
@@ -1043,7 +1054,7 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/editor+others}%
-  \labelunit\newblock%
+  \setunit{\labelnamepunct}\newblock%
   \usebibmacro{title}%
   \newunit\newblock%
   \usebibmacro{inmaintitle}%
@@ -1092,7 +1103,7 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/editor+others}%
-  \labelunit\newblock%
+  \setunit{\labelnamepunct}\newblock%
   \usebibmacro{title}%
   \newunit\newblock%
   \usebibmacro{inmaintitle}%
@@ -1144,7 +1155,7 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/editor+others}%
-  \labelunit\newblock%
+  \setunit{\labelnamepunct}\newblock%
   \usebibmacro{title}%
   \newunit%
   \usebibmacro{inbookauthor+others}%
@@ -1186,7 +1197,7 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{editor+others}%
-  \labelunit\newblock%
+  \setunit{\labelnamepunct}\newblock%
   \usebibmacro{title}%
   \newunit\newblock%
   \usebibmacro{inmaintitle}%
@@ -1235,7 +1246,7 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{editor+others}%
-  \labelunit\newblock%
+  \setunit{\labelnamepunct}\newblock%
   \usebibmacro{title}%
   \newunit\newblock%
   \usebibmacro{inmaintitle}%
@@ -1287,7 +1298,7 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author}%
-  \labelunit\newblock%
+  \setunit{\labelnamepunct}\newblock%
   \usebibmacro{title}%
   \newunit\newblock%
   \usebibmacro{in:editor+others}%
@@ -1329,7 +1340,7 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{editor+others/organization}%
-  \labelunit\newblock%
+  \setunit{\labelnamepunct}\newblock%
   \usebibmacro{title}%
   \newunit\newblock%
   \usebibmacro{publisher+location+date}%
@@ -1364,7 +1375,7 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/editor+others}%
-  \labelunit\newblock%
+  \setunit{\labelnamepunct}\newblock%
   \usebibmacro{issue}%
   \setunit*{\addperiod\addspace}%
   \usebibmacro{periodical}%
@@ -1417,7 +1428,7 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/editor+others}%
-  \labelunit\newblock%
+  \setunit{\labelnamepunct}\newblock%
   \usebibmacro{maintitle+title}%
   \newunit%
   \printlist{language}%
@@ -1508,7 +1519,7 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/translator+others}%
-  \labelunit\newblock%
+  \setunit{\labelnamepunct}\newblock%
   \usebibmacro{title}%
   \newunit%
   \printlist{language}%
@@ -1572,7 +1583,7 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author}%
-  \labelunit\newblock%
+  \setunit{\labelnamepunct}\newblock%
   \usebibmacro{title}%
   \newunit%
   \usebibmacro{date}%
@@ -1611,7 +1622,7 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author}%
-  \labelunit\newblock%
+  \setunit{\labelnamepunct}\newblock%
   \usebibmacro{title}%
   \newunit%
   \usebibmacro{date}%
@@ -1650,7 +1661,7 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/editor+others}%
-  \labelunit\newblock%
+  \setunit{\labelnamepunct}\newblock%
   \usebibmacro{maintitle+title}%
   \newunit%
   \printlist{language}%
@@ -1713,7 +1724,7 @@
         \printnames[given-family]{author}
       }%
   }
-  \labelunit\newblock%
+  \setunit{\labelnamepunct}\newblock%
   \usebibmacro{title}%
   \newunit%
   \printlist{language}%
@@ -1752,7 +1763,7 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/editor+others}%
-  \labelunit\newblock%
+  \setunit{\labelnamepunct}\newblock%
   \usebibmacro{maintitle+title}%
   \newunit%
   \printlist{language}%
@@ -1800,7 +1811,7 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/editor+others}%
-  \labelunit\newblock%
+  \setunit{\labelnamepunct}\newblock%
   \usebibmacro{maintitle+title}%
   \newunit%
   \printlist{language}%
