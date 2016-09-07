@@ -586,10 +586,14 @@
   }%
     {}%
     {\printtext[booktitle]{%
-       \printfield[titlecase]{booktitle}%
-       \normalfont{\setunit*{\subtitlepunct}}%
-       \printfield[noformat]{booksubtitle}}%
-     \newunit}%
+      \ifnameundef{bookauthor}{%
+        \printfield[upperfirst]{booktitle}%
+      }{%
+        \printfield[titlecase]{booktitle}%
+      }
+      \normalfont{\setunit*{\subtitlepunct}}%
+      \printfield[noformat]{booksubtitle}}%
+      \newunit}%
   \printfield{booktitleaddon}}%
 
 \renewbibmacro*{maintitle}{%
@@ -600,10 +604,14 @@
   }%
     {}%
     {\printtext[maintitle]{%
-       \printfield[titlecase]{maintitle}%
-       \normalfont{\setunit*{\subtitlepunct}}%
-       \printfield[noformat]{mainsubtitle}}%
-     \newunit}%
+      \ifnameundef{mainauthor}{%
+        \printfield[upperfirst]{maintitle}%
+      }{%
+        \printfield[titlecase]{maintitle}%
+      }
+      \normalfont{\setunit*{\subtitlepunct}}%
+      \printfield[noformat]{mainsubtitle}}%
+      \newunit}%
   \printfield{maintitleaddon}}%
 
 \newbibmacro*{publisher}{%
@@ -694,24 +702,20 @@
 
 \newbibmacro*{inbookauthor+others}{%
 	\usebibmacro{in:}%
-	\ifboolexpr{%
-		test {\ifnameundef{author}}%
-	  	and%
-	  	test {\ifcsundef{saveded}}%
-	  	and%
-	  	test {\ifcsundef{savedorg}}%
-	}%
-		{}%
-		{\ifboolexpr{%
-			test {\ifnameundef{bookauthor}}%
-	  		or%
-	  		test {\ifnamesequal{author}{bookauthor}}%
-		}%
-			{\iftoggle{repeatfields}%
-				{\usebibmacro{author/editor+others}}%
-				{\bibnamedash}}%
-			{\printnames{bookauthor}}}%
-}%
+  \ifnameundef{bookauthor}{%
+    % do nothing
+  }{% else
+    \ifnamesequal{author}{bookauthor}{%
+      \iftoggle{repeatfields}{%
+        \usebibmacro{author/editor+others}
+      }{% else
+        \bibnamedash
+      }
+    }{% else
+      \printnames{bookauthor}
+    }
+  }%
+}
 
 % For @bookinbook entries: use the bookauthor when available,
 % else use editor+others.
