@@ -681,6 +681,38 @@
 	\usebibmacro{date}%
 	\newunit}%
 
+\renewbibmacro*{publisher+location+issue+date}{%
+	\ifboolexpr{%
+		test {\iflistundef{publisher}}%
+		and%
+		test {\iflistundef{location}}%
+		and%
+		not test {\iftoggle{nosl}}%
+		and%
+		not test {\iftoggle{nosn}}%
+	}%
+		{\printtext[brackets]{\bibstring{sineloco}%
+		\setunit{\addcolon\addnbspace}%
+		\bibstring{sinenomine}}}%
+		{\ifboolexpr{%
+			test {\ifnameundef{author}}%
+			and%
+			test {\ifnameundef{editor}}%
+			and%
+			test {\iflistundef{publisher}}%
+			and%
+			not test {\iflistundef{organization}}%
+		}%
+			{\usebibmacro{location}}%
+			{\usebibmacro{location}%
+			\setunit*{\addcolon\addspace}%
+			\usebibmacro{publisher}}}%
+	\setunit*{\addcomma\addspace}%
+  \printfield[number]{issue}
+	\setunit*{\addcomma\addspace}%
+	\usebibmacro{date}%
+	\newunit}%
+
 \renewbibmacro*{url+urldate}{%
   \usebibmacro{url}%
   \iffieldundef{urlyear}%
@@ -1351,7 +1383,7 @@
   \setunit{\labelnamepunct}\newblock%
   \usebibmacro{title}%
   \newunit\newblock%
-  \usebibmacro{publisher+location+date}%
+  \usebibmacro{publisher+location+issue+date}%
   \newunit%
   \printlist{language}%
   \newunit\newblock%
