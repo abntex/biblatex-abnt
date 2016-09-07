@@ -519,6 +519,8 @@
 \ifboolexpr{%
 	test {\ifnameundef{author}}%
 	and%
+	test {\ifnameundef{holder}}%
+	and%
 	test {\ifcsundef{saveded}}%
 	and%
 	test {\ifcsundef{savedorg}}%
@@ -1767,9 +1769,15 @@
       }{%
         \printnames[given-family]{author}
       }%
+      \newunit\newblock%
+      \printfield{nameaddon}%
+      \newunit\newblock%
     }
   }{%
       \printnames{holder}
+      \newunit\newblock%
+      \printfield{nameaddon}%
+      \newunit\newblock%
       \ifnameundef{author}{%
         \printnames[given-family]{editor}%
       }{%
