@@ -590,7 +590,11 @@
   }%
     {}%
     {\printtext[booktitle]{%
-      \ifnameundef{bookauthor}{%
+      \ifboolexpr{%
+        test {\ifnameundef{bookauthor}}%
+        and%
+        test {\iffieldundef{eventtitle}}%
+      }{%
         \printfield[upperfirst]{booktitle}%
       }{%
         \printfield[titlecase]{booktitle}%
