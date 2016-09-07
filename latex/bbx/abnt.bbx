@@ -812,6 +812,8 @@
 		\usebibmacro{bbx:dashcheck}{%
       \iffieldundef{authortype}{%
         \bibnamedash%
+        \newunit\newblock%
+        \printfield{nameaddon}%
       }{%
         \nopunctdash%
         \usebibmacro{authorstrg}%
