@@ -24,7 +24,7 @@
     %repeatfields,          % Uncomment to repeat fields instead of using an underscore
     %repeattitles,          % Uncomment to repeat just titles, avoiding ____.____.
     %usedashes,             % Uncomment to use the standard dashes instead of underscores
-    %bftitles,              % Uncomment to print titles in bold
+    %ittitles,              % Uncomment to print titles in italics
     %indent,                % Uncomment to use hanging indentation in the bibliography
     %scbib,                 % Uncomment to use small caps in the bibliography
     %sccite,                % Uncomment to use small caps in the citations
@@ -115,7 +115,7 @@ As opções a seguir podem ser usadas ao chamar o pacote \texttt{biblatex}:
     \item [indent] Indenta as entradas da bibliografia
     \item [sccite] Imprime os nomes em versalete nas citações
     \item [scbib] Imprime os nomes em versalete na bibliografia
-    \item [bftitles] Usa negrito para os títulos na bibliografia
+    \item [ittitles] Usa itálico para os títulos na bibliografia
     \item [giveninits] Abrevia os primeiros nomes na bibliografia
     \item [uniquename=init] Necessário ao usar a opção \texttt{giveninits}
     \item [noslsn] Oculta as abreviações [s.l], [s.n] e [s.l.: s.n.]
@@ -129,7 +129,7 @@ As opções a seguir podem ser usadas ao chamar o pacote \texttt{biblatex}:
 \end{description}
 
 \vspace{\baselineskip}
-E.g.: \verb"\usepackage[backend=biber, style=abnt, bftitles]{biblatex}"
+E.g.: \verb"\usepackage[backend=biber, style=abnt, ittitles]{biblatex}"
 
 As opções \texttt{repeatfields}, \texttt{repeattitles}, \texttt{nosl}, \texttt{nosn} e \texttt{noslsn} também podem ser usadas apenas em entradas específicas. E.g.:
 
@@ -662,7 +662,7 @@ Em geral é possível usar o mesmo arquivo \texttt{.bib} utilizado pelo \texttt{
     \item Quando os campos \texttt{number}, \texttt{volume}, \texttt{chapter} e \texttt{edition} contém apenas números, eles são formatados automaticamente (e.g. \texttt{edition = \{5\}} imprime ``5. ed.''). Quando esses campos contém letras, deve-se preencher todo o conteúdo desejado (e.g. \verb"edition = {5th. ed}" imprime ``5th. ed.''). Os caracteres \texttt{.,-/} podem ser usados e o campo ainda será considerado como contendo apenas números.
     \item Em entradas dos tipos \texttt{phdthesis}, \texttt{mastersthesis} e \texttt{monography}, há a data de publicação, que aparece logo após o título, e a data da defesa, que aparece por último. O \texttt{abntex2cite} às vezes usa o campo \texttt{year-presented} para diferenciar entre as duas datas e às vezes muda as opções do pacote para mostrar uma mesma data em uma ou outra posição. No \texttt{biblatex-abnt} pode-se usar os campos de datas usuais para a data de publicação, que aparece após o título, e os campos \texttt{eventdate}, \texttt{eventmonth} e \texttt{eventyear} para a data da defesa, que aparece no final. O campo \texttt{year-presented}, usado pelo \texttt{abntex2cite}, é automaticamente convertido para \texttt{eventyear}. (Cf. entradas \texttt{morgado1990}, \texttt{morgadob1990} e \texttt{morgadoc1990} no arquivo \texttt{abnt-testcase.tex}.)
     \item Em vez dos campos \texttt{reprinted-from} e \texttt{reprinted-text}, utilizados pelo \texttt{abntex2cite}, usa-se o campo \texttt{related} para citar uma entrada relacionada e o campo \texttt{relatedtype} para especificar a natureza dessa relação. O campo \texttt{reprinted-from} é automaticamente convertido para \texttt{related}; esse campo deve conter a chave da obra relacionada. O campo \texttt{relatedtype} pode conter algumas opções: \texttt{relatedtype=\{reprintfrom\}} imprime ``Separata de'' (esse texto também é usado como padrão quando se escreve qualquer coisa no campo \texttt{reprinted-text}, usado no \texttt{abntex2cite}); \texttt{recensionof} imprime ``Recensão de''; \texttt{reviewof} imprime ``Resenha de''; \texttt{reprintof} imprime ``Reimpressão de''; \texttt{translationof} imprime ``Tradução de''. Outras possibilidades podem ser encontradas no arquivo \texttt{brazilian.lbx}, incluso na instalação padrão do \texttt{biblatex}.
-    \item As entradas \texttt{inbook} e \texttt{incollection}, no \texttt{biblatex}, não se comportam como no \texttt{bibtex}. Entradas \texttt{inbook} também podem ter um \texttt{bookauthor}; elas estão para as entradas \texttt{book} assim como as entradas \texttt{incollection} estão para as entradas \texttt{collection} (Cf. seção 2.3.1 do manual do \texttt{biblatex}). No \texttt{biblatex-abnt} é possível definir um \texttt{bookauthor} para entradas \texttt{inbook}, mas, caso isso não seja feito, essas entradas se comportarão como as entradas \texttt{inbook} do \texttt{bibtex}.
+    \item No \texttt{biblatex}, as entradas \texttt{inbook} e \texttt{incollection} não se comportam como no \texttt{bibtex}. Entradas \texttt{inbook} também podem ter um \texttt{bookauthor}; elas estão para as entradas \texttt{book} assim como as entradas \texttt{incollection} estão para as entradas \texttt{collection} (Cf. seção 2.3.1 do manual do \texttt{biblatex}). Para que o autor da obra principal seja substituído pelos traços sublineares, é necessário que o campo \texttt{bookauthor} seja igual ao campo \texttt{author}.
     \item É possível usar o campo \texttt{furtherresp} como no \texttt{abntex2cite}, mas é preferível usar os campos \texttt{editora}, \texttt{editoratype}, \texttt{editorb}, \texttt{editorbtype} etc. (e.g. \verb"editora = {Ismael Cardim},  editoratype={coeditor}" imprimirá ``Co-edição de Ismael Cardim'' na biblioqgrafia; cf. entradas \texttt{hou\-a\-iss\-1996}, \texttt{koogan1998}, \texttt{ceravi1983}, \texttt{riofilme1998} e pesquisar pelo campo \texttt{editor\-a\-type} para mais exemplos). Todas as opções para o campo \texttt{editor\-type} podem ser encontradas no arquivo \texttt{abnt-brazilian.lbx}. Usar esses campos em lugar do campo \texttt{furtherresp} assegurará que as entradas sejam impressas de forma consistente, embora as entradas da própria ABNT não o sejam.
     \item Para tradutores pode-se usar o campo \texttt{translator}.
 \end{sloppypar}

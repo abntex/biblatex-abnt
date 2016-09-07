@@ -30,9 +30,9 @@
 % ----------
 
 % Option to make titles bold.
-\newtoggle{bftitles}%
-\DeclareBibliographyOption{bftitles}[true]{%
-  \settoggle{bftitles}{#1}}%
+\newtoggle{ittitles}%
+\DeclareBibliographyOption{ittitles}[true]{%
+  \settoggle{ittitles}{#1}}%
 
 % Option to use small caps in the bibliography.
 \newtoggle{scbib}%
@@ -349,12 +349,48 @@
 % ----------
 
 % Use bold or italics for the main titles, depending on what the user chose.
-\DeclareFieldFormat{journaltitle}{\iftoggle{bftitles}{\addspace\mkbibbold{#1}\isdot}{\addspace\mkbibemph{#1}\isdot}}%
-\DeclareFieldFormat{issuetitle}{\iftoggle{bftitles}{\addspace\mkbibbold{#1}\isdot}{\addspace\mkbibemph{#1}\isdot}}%
-\DeclareFieldFormat{maintitle}{\iftoggle{bftitles}{\addspace\mkbibbold{#1}\isdot}{\addspace\mkbibemph{#1}\isdot}}%
-\DeclareFieldFormat{booktitle}{\iftoggle{bftitles}{\addspace\mkbibbold{#1}\isdot}{\addspace\mkbibemph{#1}\isdot}}%
-\DeclareFieldFormat{citetitle}{\iftoggle{bftitles}{\addspace\mkbibbold{#1}\isdot}{\addspace\mkbibemph{#1}\isdot}}%
-\DeclareFieldFormat*{title}{\iftoggle{bftitles}{\addspace\mkbibbold{#1}\isdot}{\addspace\mkbibemph{#1}\isdot}}%
+\DeclareFieldFormat{journaltitle}{%
+  \iftoggle{ittitles}{%
+    \addspace\mkbibemph{#1}\isdot%
+  }{%
+    \addspace\mkbibbold{#1}\isdot%
+  }%
+}%
+\DeclareFieldFormat{issuetitle}{%
+  \iftoggle{ittitles}{%
+    \addspace\mkbibemph{#1}\isdot%
+  }{%
+    \addspace\mkbibbold{#1}\isdot%
+  }%
+}%
+\DeclareFieldFormat{maintitle}{%
+  \iftoggle{ittitles}{%
+    \addspace\mkbibemph{#1}\isdot%
+  }{%
+    \addspace\mkbibbold{#1}\isdot%
+  }%
+}%
+\DeclareFieldFormat{booktitle}{%
+  \iftoggle{ittitles}{%
+    \addspace\mkbibemph{#1}\isdot%
+  }{%
+    \addspace\mkbibbold{#1}\isdot%
+  }%
+}%
+\DeclareFieldFormat{citetitle}{%
+  \iftoggle{ittitles}{%
+    \addspace\mkbibemph{#1}\isdot%
+  }{%
+    \addspace\mkbibbold{#1}\isdot%
+  }%
+}%
+\DeclareFieldFormat*{title}{%
+  \iftoggle{ittitles}{%
+    \addspace\mkbibemph{#1}\isdot%
+  }{%
+    \addspace\mkbibbold{#1}\isdot%
+  }%
+}%
 
 \DeclareFieldFormat{authortype}{\printtext[parens]{\bibsentence#1}}
 \DeclareFieldFormat{editortype}{\printtext[parens]{\bibsentence#1}}
