@@ -555,6 +555,8 @@
 \ifboolexpr{%
 	test {\ifnameundef{author}}%
 	and%
+	test {\ifnameundef{editor}}%
+	and%
 	test {\ifnameundef{holder}}%
 	and%
 	test {\ifcsundef{saveded}}%
@@ -628,11 +630,7 @@
   }%
     {}%
     {\printtext[booktitle]{%
-      \ifboolexpr{%
-        test {\ifnameundef{bookauthor}}%
-        and%
-        test {\iffieldundef{eventtitle}}%
-      }{%
+      \usebibmacro{titleiskey}{%
         \printfield[upperfirst]{booktitle}%
       }{%
         \printfield[titlecase]{booktitle}%
@@ -650,7 +648,7 @@
   }%
     {}%
     {\printtext[maintitle]{%
-      \ifnameundef{mainauthor}{%
+      \usebibmacro{titleiskey}{%
         \printfield[upperfirst]{maintitle}%
       }{%
         \printfield[titlecase]{maintitle}%
