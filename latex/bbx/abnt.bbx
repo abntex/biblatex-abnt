@@ -684,8 +684,8 @@
 	\iffieldundef{series}{}{%
 		\printtext[parens]{%
 			\printfield{series}%
-			\setunit*{\addspace}%
-			\printfield{number}%
+			\setunit*{\addcomma\addspace}%
+			\printfield[noformat]{number}%
 			\newunit}%
 		}%
 	}%
