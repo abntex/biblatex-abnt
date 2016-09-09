@@ -622,6 +622,23 @@
     {\usebibmacro{maintitle}}%
 }%
 
+\newbibmacro*{booktitleiskey}[2]{%
+\ifboolexpr{%
+	test {\ifnameundef{bookauthor}}%
+	and%
+  test {\ifnameundef{editor}}%
+	and%
+	test {\iffieldundef{organization}}%
+	and%
+	test {\ifcsundef{saveded}}%
+	and%
+	test {\ifcsundef{savedorg}}%
+	and%
+	test {\iffieldundef{eventtitle}}%
+}%
+    {#1}%
+    {#2}}%
+
 \renewbibmacro*{booktitle}{%
   \ifboolexpr{%
     test {\iffieldundef{booktitle}}%
@@ -630,7 +647,7 @@
   }%
     {}%
     {\printtext[booktitle]{%
-      \usebibmacro{titleiskey}{%
+      \usebibmacro{booktitleiskey}{%
         \printfield[upperfirst]{booktitle}%
       }{%
         \printfield[titlecase]{booktitle}%
