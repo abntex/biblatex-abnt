@@ -1448,7 +1448,11 @@
   \usebibmacro{begentry}%
   \usebibmacro{editor+others/organization}%
   \setunit{\labelnamepunct}\newblock%
-  \usebibmacro{title}%
+  \printfield[uppercase]{title}%
+  \setunit*{\addcolon\addspace}%
+  \printfield[noformat]{subtitle}%
+  \newunit%
+  \printfield{titleaddon}
   \newunit\newblock%
   \usebibmacro{publisher+location+issue+date}%
   \newunit%
