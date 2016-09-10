@@ -583,7 +583,11 @@
 			\printtext[title]{%
 				\usebibmacro{titleiskey}%
 					{\unspace\printfield[upperfirst]{title}}%
-					{\iffieldundef{maintitle}%
+					{\ifboolexpr{%
+            test {\iffieldundef{maintitle}}%
+            and%
+            test {\iffieldundef{related}}%
+          }
 						{\printfield[titlecase]{title}}%
 						{\printfield[noformat]{title}}}%
 				\normalfont{\setunit*{\subtitlepunct}%
