@@ -83,6 +83,14 @@
   \settoggle{repeattitle}{#1}%
 }%
 
+\newtoggle{repeatfirstfields}%
+\DeclareBibliographyOption[boolean]{repeatfirstfields}[true]{%
+  \settoggle{repeatfirstfields}{#1}%
+}%
+\DeclareEntryOption[boolean]{repeatfirstfields}[true]{%
+  \settoggle{repeatfirstfields}{#1}%
+}%
+
 \newtoggle{repeatfields}%
 \DeclareBibliographyOption[boolean]{repeatfields}[true]{%
   \settoggle{repeatfields}{#1}%
@@ -344,6 +352,11 @@
 \DeclareNameAlias{withforeword}{given-family}%
 \DeclareNameAlias{withafterword}{given-family}%
 
+\DeclareBibliographyAlias{legislation}{article}
+\DeclareBibliographyAlias{jurisdiction}{article}
+\DeclareBibliographyAlias{legal}{article}
+
+
 % ----------
 % DeclareFieldFormat
 % ----------
@@ -396,9 +409,17 @@
 \DeclareFieldFormat{editortype}{\printtext[parens]{\bibsentence#1}}
 
 % Use normal text for the title in these entries.
-\DeclareFieldFormat%
-  [article, inbook, incollection, bookinbook, inproceedings, unpublished]%
-  {title}{\addspace #1\isdot}%
+\DeclareFieldFormat[%
+  article,
+  legislation,
+  jurisdiction,
+  legal,
+  inbook,
+  incollection,
+  bookinbook,
+  inproceedings,
+  unpublished
+]{title}{\addspace #1\isdot}%
 
 \DeclareNumChars*{,-/}% Strings with these characters will still be considered numbers.
 
@@ -1056,6 +1077,8 @@
     not test \iffirstonpage%
     and%
     not test {\iftoggle{repeatfields}}%
+    and%
+    not test {\iftoggle{repeatfirstfields}}%
     and%
     (%
        not bool {bbx@inset}%
