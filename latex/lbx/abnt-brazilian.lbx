@@ -17,8 +17,9 @@
 
 \InheritBibliographyExtras{brazilian}
 
+
+\DeclareBibliographyExtras{% {{{
 % Remove preposition between month and year in longdates
-\DeclareBibliographyExtras{
   \protected\def\mkbibdatelong#1#2#3{%
     \iffieldundef{#3}
           {}
@@ -29,66 +30,164 @@
           {\mkbibmonth{\thefield{#2}}%
        \iffieldundef{#1}{}{\addspace}}%
     \thefield{#1}}%
+}% }}}
+
+
+\NewBibliographyString{% {{{
+  apud,
+  sineloco,
+  sinenomine,
+  sheet,
+  sheets,
+  organizer,
+  organizers,
+  byorganizer,
+  byorganizerfo,
+  technicalrevisor,
+  technicalrevisors,
+  bytechnicalrevisor,
+  updater,
+  updaters,
+  withupdater,
+  byupdater,
+  byupdateran,
+  photographer,
+  byphotographer,
+  artisticdirector,
+  byartisticdirector,
+  recorder,
+  byrecorder,
+  interviewer,
+  byinterviewer,
+  generalorganizer,
+  bygeneralorganizer,
+  bygeneralorganizerfo,
+  coordinator,
+  coordinators,
+  bycoordinator,
+  bycoeditor,
+  bydirector,
+  bygeneraldirector,
+  byproducer,
+  byscreenwriter,
+  byinterpreter,
+  byillustrator,
+  bytechnicalreviser,
+  illustrated,
+  monography,
+  recensionof,
+}% }}}
+
+%  {{{
+
+\DeclareBibliographyStrings{
+  bycoeditor           = {{co-edição}{co-edição}},
+  bydirector           = {{direção}{direção}},
+  bygeneraldirector    = {{direção geral}{direção geral}},
+  bycoordinator        = {{coordenação}{coordenação}},
+  byproducer           = {{produção}{produção}},
+  byscreenwriter       = {{roteiro}{roteiro}},
+  byinterpreter        = {{interpretação}{interpretação}},
+  byillustrator        = {{ilustrações}{ilustrações}},
+  byorganizer          = {{organização}{organização}},
+  bytechnicalrevisor   = {{revisão técnica}{revisão técnica}},
+  byartisticdirector   = {{direção artística}{direção artística}},
+  byinterviewer        = {{entrevista por}{entrevista por}},
+  byrecorder           = {{gravação}{gravação}},
+  byphotographer       = {{fotografia}{fotografia}},
+  bygeneralorganizer   = {{organização geral}{organização geral}},
+  byauthor             = {{por}{por}},
+  byeditor             = {{edição}{edição}},
+  bycompiler           = {{compilação}{compilação}},
+  byredactor           = {{redigido por}{redigido por}},
+  byreviser            = {{revisão}{revisão}},
+  bytechnicalreviser   = {{revisão técnica}{revisão técnica}},
+  byreviewer           = {{resenha}{resenha}},
+  byfounder            = {{fundado por}{fundado por}},
+  bycontinuator        = {{continuado por}{continuado por}},
+  bycollaborator       = {{em colabora\c{a}\~o com}{em colabora\c{a}\~o com}},
+  bytranslator         = {{tradução}{tradução}},
+  bycommentator        = {{comentário}{comentário}},
+  byannotator          = {{notas}{notas}},
+  byupdateran          = {{atualização e notas}{atualização e notas}},
+  byupdater            = {{atualização}{atualização}},
+  byorganizerfo        = {{organização e prefácio}{organização e prefácio}},
+  bygeneralorganizerfo = {{organização geral e prefácio}%
+                          {organização geral e prefácio}},
+  byeditortr           = {{edição e tradução}%
+                          {edição e tradução}},
+  byeditorco           = {{edição e comentário}%
+                          {edição e comentário}},
+  byeditoran           = {{edição e notas}%
+                          {edição e notas}},
+  byeditorin           = {{edição e introdução}%
+                          {edição e introdução}},
+  byeditorfo           = {{edição e prefácio}%
+                          {edição e prefácio}},
+  byeditoraf           = {{edição e posfácio}%
+                          {edição e posfácio}},
+  byeditortrco         = {{edição, tradução e comentário}%
+                          {edição, tradução e comentário}},
+  byeditortran         = {{edição, tradução e notas}%
+                          {edição, tradução e notas}},
+  byeditortrin         = {{edição, tradução e introdução}%
+                          {edição, tradução e introdução}},
+  byeditortrfo         = {{edição, tradução e prefácio}%
+                          {edição, tradução e prefácio}},
+  byeditortraf         = {{edição, tradução e posfácio}%
+                          {edição, tradução e posfácio}},
+  byeditorcoin         = {{edição, comentário e introdução}%
+                          {edição, comentário e introdução}},
+  byeditorcofo         = {{edição, comentário e prefácio}%
+                          {edição, comentário e prefácio}},
+  byeditorcoaf         = {{edição, comentário e posfácio}%
+                          {edição, comentário e posfácio}},
+  byeditoranin         = {{edição, introdução e notas}%
+                          {edição, introdução e notas}},
+  byeditoranfo         = {{edição, prefácio e notas}%
+                          {edição, prefácio e notas}},
+  byeditoranaf         = {{edição, posfácio e notas}%
+                          {edição, posfácio e notas}},
+  byeditortrcoin       = {{edição, tradução, comentário e introdução}%
+                          {edição, tradução, comentário e introdução}},
+  byeditortrcofo       = {{edição, tradução, comentário e prefácio}%
+                          {edição, tradução, comentário e prefácio}},
+  byeditortrcoaf       = {{edição, tradução, comentário e posfácio}%
+                          {edição, tradução, comentário e posfácio}},
+  byeditortranin       = {{edição, tradução, notas e introdução}%
+                          {edição, tradução, notas e introdução}},
+  byeditortranfo       = {{edição, tradução, notas e prefácio}%
+                          {edição, tradução, notas e prefácio}},
+  byeditortranaf       = {{edição, tradução, notas e posfácio}%
+                          {edição, tradução, notas e posfácio}},
+  bytranslatorco       = {{tradução e comentário}%
+                          {tradução e comentário}},
+  bytranslatoran       = {{tradução e notas}%
+                          {tradução e notas}},
+  bytranslatorin       = {{tradução e introdução}%
+                          {tradução e introdução}},
+  bytranslatorfo       = {{tradução e prefácio}%
+                          {tradução e prefácio}},
+  bytranslatoraf       = {{tradução e posfácio}%
+                          {tradução e posfácio}},
+  bytranslatorcoin     = {{tradução, comentário e introdução}%
+                          {tradução, comentário e introdução}},
+  bytranslatorcofo     = {{tradução, comentário e prefácio}%
+                          {tradução, comentário e prefácio}},
+  bytranslatorcoaf     = {{tradução, comentário e posfácio}%
+                          {tradução, comentário e posfácio}},
+  bytranslatoranin     = {{tradução, notas e introdução}%
+                          {tradução, notas e introdução}},
+  bytranslatoranfo     = {{tradução, notas e prefácio}%
+                          {tradução, notas e prefácio}},
+  bytranslatoranaf     = {{tradução, notas e posfácio}%
+                          {tradução, notas e posfácio}},
 }
+% }}}
 
-\NewBibliographyString{sineloco}
-\NewBibliographyString{sinenomine}
 
-\NewBibliographyString{sheet}
-\NewBibliographyString{sheets}
 
-\NewBibliographyString{organizer}
-\NewBibliographyString{organizers}
-\NewBibliographyString{byorganizer}
-\NewBibliographyString{byorganizerfo}
-
-\NewBibliographyString{technicalrevisor}
-\NewBibliographyString{technicalrevisors}
-\NewBibliographyString{bytechnicalrevisor}
-
-\NewBibliographyString{updater}
-\NewBibliographyString{updaters}
-\NewBibliographyString{withupdater}
-\NewBibliographyString{byupdater}
-\NewBibliographyString{byupdateran}
-
-\NewBibliographyString{photographer}
-\NewBibliographyString{byphotographer}
-
-\NewBibliographyString{artisticdirector}
-\NewBibliographyString{byartisticdirector}
-
-\NewBibliographyString{recorder}
-\NewBibliographyString{byrecorder}
-
-\NewBibliographyString{interviewer}
-\NewBibliographyString{byinterviewer}
-
-\NewBibliographyString{generalorganizer}
-\NewBibliographyString{bygeneralorganizer}
-\NewBibliographyString{bygeneralorganizerfo}
-
-\NewBibliographyString{coordinator}
-\NewBibliographyString{coordinators}
-\NewBibliographyString{bycoordinator}
-
-\NewBibliographyString{bycoeditor}
-\NewBibliographyString{bydirector}
-\NewBibliographyString{bygeneraldirector}
-\NewBibliographyString{byproducer}
-\NewBibliographyString{byscreenwriter}
-\NewBibliographyString{byinterpreter}
-\NewBibliographyString{byillustrator}
-\NewBibliographyString{bytechnicalreviser}
-
-\NewBibliographyString{illustrated}
-\NewBibliographyString{monography}
-
-\NewBibliographyString{recensionof}
-
-\NewBibliographyString{apud}
-
-\DeclareBibliographyStrings{%
+\DeclareBibliographyStrings{% {{{
   apud                 = {{apud}{apud}},
   volume               = {{volume}{v\adddot}},
   volumes              = {{volumes}{v\adddot}},
@@ -111,125 +210,25 @@
   mathesis             = {{Tese (Mestrado)}{Tese (Mestrado)}},
   reprintfrom          = {{separata de}{separata de}},
   recensionof          = {{recensão de}{recensão de}},
-  bycoeditor           = {{co-edição de}{co-edição de}},
-  bydirector           = {{direção de}{direção de}},
-  bygeneraldirector    = {{direção geral de}{direção geral de}},
   coordinator          = {{coordenação}{coord\adddot}},
   coordinators         = {{coordenação}{coord\adddot}},
-  bycoordinator        = {{coordenação de}{coordenação de}},
-  byproducer           = {{produção de}{produção de}},
-  byscreenwriter       = {{roteiro de}{roteiro de}},
-  byinterpreter        = {{interpretação de}{interpretação de}},
-  byillustrator        = {{ilustrações de}{ilustrações de}},
   photographer         = {{fotógrafo}{fot\adddot}},
-  byphotographer       = {{fotografia de}{fotografia de}},
   recorder             = {{gravador}{gravador}},
-  byrecorder           = {{gravação de}{gravação de}},
   interviewer          = {{entrevistador}{entrevistador}},
-  byinterviewer        = {{entrevista por}{entrevista por}},
   artisticdirector     = {{diretor artístico}{dir\adddot art\adddot}},
-  byartisticdirector   = {{direção artística de}{direção artística de}},
   organizer            = {{organização}{org\adddot}},
   organizers           = {{organização}{org\adddot}},
   technicalrevisor     = {{revisão técnica}{revisão técnica}},
   technicalrevisors    = {{revisão técnica}{revisão técnica}},
-  bytechnicalrevisor   = {{revisão técnica de}{revisão técnica de}},
   generalorganizer     = {{organização geral}{org\adddot geral}},
   updater              = {{atualização}{atualiz.\adddot}},
   updaters             = {{atualização}{atualiz.\adddot}},
-  byorganizer          = {{organização de}{organização de}},
-  bygeneralorganizer   = {{organização geral de}{organização geral de}},
-  byauthor             = {{por}{por}},
-  byeditor             = {{edição de}{edição de}},
-  bycompiler           = {{compilação de}{compilação de}},
-  byredactor           = {{redigido por}{redigido por}},
-  byreviser            = {{revisão de}{revisão de}},
-  bytechnicalreviser   = {{revisão técnica de}{revisão técnica de}},
-  byreviewer           = {{resenha de}{resenha de}},
-  byfounder            = {{fundado por}{fundado por}},
-  bycontinuator        = {{continuado por}{continuado por}},
-  bycollaborator       = {{em colabora\c{a}\~o com}{em colabora\c{a}\~o com}},
-  bytranslator         = {{tradução de}{tradução de}},
-  bycommentator        = {{comentário de}{comentário de}},
-  byannotator          = {{notas de}{notas de}},
-  byupdateran          = {{atualização e notas de}{atualização e notas de}},
-  byupdater            = {{atualização de}{atualização de}},
-  withupdater          = {{atualização de}{atualização de}},
-  withcommentator      = {{coment\'ario de}{coment\'ario de}},
-  withannotator        = {{notas de}{notas de}},
-  withintroduction     = {{introdu\c{c}\~ao de}{introdu\c{c}\~ao de}},
-  withforeword         = {{pref\'acio de}{pref\'acio de}},
-  withafterword        = {{posf\'acio de}{posf\'acio de}},
-  byorganizerfo        = {{organização e prefácio de}{organização e prefácio de}},
-  bygeneralorganizerfo = {{organização geral e prefácio de}{organização geral e prefácio de}},
-  byeditortr           = {{edição e tradução de}%
-                         {edição e tradução de}},
-  byeditorco           = {{edição e comentário de}%
-                         {edição e comentário de}},
-  byeditoran           = {{edição e notas de}%
-                         {edição e notas de}},
-  byeditorin           = {{edição e introdução de}%
-                         {edição e introdução de}},
-  byeditorfo           = {{edição e prefácio de}%
-                         {edição e prefácio de}},
-  byeditoraf           = {{edição e posfácio de}%
-                         {edição e posfácio de}},
-  byeditortrco         = {{edição, tradução e comentário de}%
-                         {edição, tradução e comentário de}},
-  byeditortran         = {{edição, tradução e notas de}%
-                         {edição, tradução e notas de}},
-  byeditortrin         = {{edição, tradução e introdução de}%
-                         {edição, tradução e introdução de}},
-  byeditortrfo         = {{edição, tradução e prefácio de}%
-                         {edição, tradução e prefácio de}},
-  byeditortraf         = {{edição, tradução e posfácio de}%
-                         {edição, tradução e posfácio de}},
-  byeditorcoin         = {{edição, comentário e introdução de}%
-                         {edição, comentário e introdução de}},
-  byeditorcofo         = {{edição, comentário e prefácio de}%
-                         {edição, comentário e prefácio de}},
-  byeditorcoaf         = {{edição, comentário e posfácio de}%
-                         {edição, comentário e posfácio de}},
-  byeditoranin         = {{edição, introdução e notas de}%
-                         {edição, introdução e notas de}},
-  byeditoranfo         = {{edição, prefácio e notas de}%
-                         {edição, prefácio e notas de}},
-  byeditoranaf         = {{edição, posfácio e notas de}%
-                         {edição, posfácio e notas de}},
-  byeditortrcoin       = {{edição, tradução, comentário e introdução de}%
-                         {edição, tradução, comentário e introdução de}},
-  byeditortrcofo       = {{edição, tradução, comentário e prefácio de}%
-                         {edição, tradução, comentário e prefácio de}},
-  byeditortrcoaf       = {{edição, tradução, comentário e posfácio de}%
-                         {edição, tradução, comentário e posfácio de}},
-  byeditortranin       = {{edição, tradução, notas e introdução de}%
-                         {edição, tradução, notas e introdução de}},
-  byeditortranfo       = {{edição, tradução, notas e prefácio de}%
-                         {edição, tradução, notas e prefácio de}},
-  byeditortranaf       = {{edição, tradução, notas e posfácio de}%
-                         {edição, tradução, notas e posfácio de}},
-  bytranslatorco       = {{tradução e comentário de}%
-                         {tradução e comentário de}},
-  bytranslatoran       = {{tradução e notas de}%
-                         {tradução e notas de}},
-  bytranslatorin       = {{tradução e introdução de}%
-                         {tradução e introdução de}},
-  bytranslatorfo       = {{tradução e prefácio de}%
-                         {tradução e prefácio de}},
-  bytranslatoraf       = {{tradução e posfácio de}%
-                         {tradução e posfácio de}},
-  bytranslatorcoin     = {{tradução, comentário e introdução de}%
-                         {tradução, comentário e introdução de}},
-  bytranslatorcofo     = {{tradução, comentário e prefácio de}%
-                         {tradução, comentário e prefácio de}},
-  bytranslatorcoaf     = {{tradução, comentário e posfácio de}%
-                         {tradução, comentário e posfácio de}},
-  bytranslatoranin     = {{tradução, notas e introdução de}%
-                         {tradução, notas e introdução de}},
-  bytranslatoranfo     = {{tradução, notas e prefácio de}%
-                         {tradução, notas e prefácio de}},
-  bytranslatoranaf     = {{tradução, notas e posfácio de}%
-                         {tradução, notas e posfácio de}},
+  withupdater          = {{atualização}{atualização}},
+  withcommentator      = {{coment\'ario}{coment\'ario}},
+  withannotator        = {{notas}{notas}},
+  withintroduction     = {{introdu\c{c}\~ao}{introdu\c{c}\~ao}},
+  withforeword         = {{pref\'acio}{pref\'acio}},
+  withafterword        = {{posf\'acio}{posf\'acio}},
   langamerican         = {{versão americana}{versão americana}},
   langbrazilian        = {{versão brasileira}{versão brasileira}},
   langcatalan          = {{versão catalã}{versão catalã}},
@@ -272,5 +271,7 @@
   fromslovene          = {{do original esloveno}{do original esloveno}},
   fromspanish          = {{do original espanhol}{do original espanhol}},
   fromswedish          = {{do original sueco}{do original sueco}},
-}
+}% }}}
+
 \endinput
+
