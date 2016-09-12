@@ -908,7 +908,7 @@
         	\usebibmacro{editor+othersstrg}%
 		}%
    	 	\savenamecs*{editor}{saveded}%
-        \clearname{editor}%
+      \clearname{editor}%
 	}{%
 		\global\undef\bbx@lasthash%
 		\usebibmacro{organization}%
@@ -927,13 +927,15 @@
       }{%
         \nopunctdash%
         \usebibmacro{editor+othersstrg}%
+        \savenamecs*{editor}{saveded}%
         \clearname{editor}%
       }
 		}{%
-		\printnames{editor}%
-		\setunit*{\addspace}%
-        \usebibmacro{editor+othersstrg}%
-		\clearname{editor}%
+      \printnames{editor}%
+      \setunit*{\addspace}%
+      \usebibmacro{editor+othersstrg}%
+      \savenamecs*{editor}{saveded}%
+      \clearname{editor}%
 		}%
 	}%
 }%
