@@ -13,10 +13,11 @@
 %% The Current Maintainer of this work is Daniel B. Marques.
 
 \ProvidesFile{abnt-numeric.bbx}%
-[2016/07/06\space v2.0.1\space ABNT biblatex citation style]%
+[2016/09/12\space v2.1\space ABNT biblatex citation style]%
 
 \RequireBibliographyStyle{abnt}
 \ExecuteBibliographyOptions{labelnumber}
+
 
 \providebool{bbx:subentry}
 
@@ -25,7 +26,7 @@
 
 \DeclareFieldFormat{bibentrysetcount}{\mkbibparens{\mknumalph{#1}}}
 
-\defbibenvironment{bibliography}
+\defbibenvironment{bibliography}% {{{
   {\list
      {\printtext[labelnumberwidth]{%
 	\printfield{labelprefix}%
@@ -38,9 +39,9 @@
       \setlength{\parsep}{\bibparsep}}%
       \renewcommand*{\makelabel}[1]{\hss##1}}
   {\endlist}
-  {\item}
+  {\item}% }}}
 
-\defbibenvironment{shorthand}
+\defbibenvironment{shorthand}% {{{
   {\list
      {\printfield[shorthandwidth]{shorthand}}
      {\setlength{\labelwidth}{\shorthandwidth}%
@@ -51,9 +52,9 @@
       \setlength{\parsep}{\bibparsep}%
       \renewcommand*{\makelabel}[1]{\hss##1}}}
   {\endlist}
-  {\item}
+  {\item}% }}}
 
-\DeclareBibliographyDriver{set}{%
+\DeclareBibliographyDriver{set}{%% {{{
   \entryset
     {\ifbool{bbx:subentry}
        {\printfield[bibentrysetcount]{entrysetcount}%
@@ -62,6 +63,10 @@
     {}%
   \newunit\newblock
   \usebibmacro{setpageref}%
-  \finentry}
+  \finentry}% }}}
 
 \endinput
+
+
+% vim: set foldmarker=\ {{{,\ }}}
+

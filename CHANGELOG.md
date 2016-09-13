@@ -4,12 +4,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Added
+- Add examples form NBR 6023:2002
+
+### Changed
+- Make `bftitles` default and add `ittitles`
+
 ### Fixed
 - Fix missing parentheses around `authortype`
-- Remove `authortype` when the author is omitted
-- Fix `number` field format for `collection` entries
 - Improve `\bibnamedash` behavior
-- Improve hyperref on `\textcite` with postnote
+- Fix maintitle and booktitle capitalization
+- Fix capitalization of titles in a few entries
 
 
 ## [2.0.1] - 2016-08-03

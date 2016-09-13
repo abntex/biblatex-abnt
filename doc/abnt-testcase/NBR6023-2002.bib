@@ -1,3 +1,16 @@
+%% Copyright 2016 Daniel B. Marques
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%%
+%% The Current Maintainer of this work is Daniel B. Marques.
 
 % section 7 {{{1
 
@@ -25,7 +38,6 @@
     number          = {15},
     note            = {Bibliografia: p. 131-132},
     isbn            = {85-228-0268-8},
-    options         = {repeatfields},
 }
 
 @book{perfil1994,
@@ -52,16 +64,23 @@
 
 @book{houaiss1996,
     keywords        = {7.1},
-    editor          = {A. Houaiss},
+    editor          = {Antonio Houaiss},
     title           = {Novo dicionário {Folha Webster's}},
     subtitle        = {inglês/português, português/inglês},
-    editora         = {Ismael Cardim},
-    editoratype     = {coeditor},
+    titleaddon      = {Co-editor Ismael Cardim},
     location        = {São Paulo},
     publisher       = {Folha da Manhã},
     date            = {1996},
     note            = {Edição exclusiva para o assinante da Folha de S.
                        Paulo},
+    % editora         = {Ismael Cardim},
+    % editoratype     = {coeditor},
+    % O ideal seria usar os campos `editora` e `editoratype` em vez de
+    % `titleaddon`, mas eles sempre imprimem o verbo no infinitivo seguido de
+    % dois pontos, enquanto a ABNT apresenta esse tipo de informação cada vez
+    % de um jeito (e.g., "Co-editor Fulano de Tal", "Direção artística: Fulano
+    % de Tal", "Ilustrações de Fulano de Tal", "Organização por Fulano de
+    % Tal").
 }
 
 @book{brasil1995,
@@ -108,8 +127,7 @@
     % `authortype` para essa informação, mas "São Paulo" nãe é exatamente um
     % tipo de autor, embora a ABNT imprima como se fosse.
     % Nenhuma dessas possibilidades é ideal, e provavelmente causariam
-    % problemas em outros estilos, mas como a ABNT é inconsistente é
-    % necessário fazer algo assim.
+    % problemas em outros estilos.
 }
 
 @manual{instituto1997,
@@ -155,14 +173,17 @@
 
 @book{koogan1998,
     keywords        = {7.2},
-    editor          = {A. Koogan and A. Houaiss},
+    editor          = {André Koogan and Antonio Houaiss},
     title           = {Enciclopédia e dicionário digital 98},
-    editora         = {André Koogan Breikman},
-    editoratype     = {generaldirector},
+    titleaddon      = {Direção geral de André Koogan Breikman},
     location        = {São Paulo},
     publisher       = {Delta: Estadão},
     date            = {1998},
     note            = {5 CD-ROM},
+    % editora         = {André Koogan Breikman},
+    % editoratype     = {gendir},
+    % O ideal seria usar os campos `editora` e `editoratype` em vez de
+    % `titleaddon`.
 }
 
 @book{alves2000,
@@ -175,7 +196,7 @@
                        freebook/port/Lport2/navionegreiro.htm},
     addendum        = {Acesso em: 10 jan 2002, 16:30:30},
     % urldate       = {2002-01-10},
-    % É necessário colocar a data hardcoded pra incluir o horário,
+    % É necessário colocar a data no campo `addendum` pra incluir o horário,
     % como no manual. O ideal seria usar o campo `urldate`.
 }
 
@@ -287,7 +308,7 @@
     title           = {{Revista Brasileira de Geografia}},
     location        = {Rio de Janeiro},
     publisher       = {IBGE},
-    year            = {1939-},
+    year            = {1939-\nopunct},
 }
 
 @periodical{revista1939b,
@@ -297,7 +318,7 @@
     publisher       = {IBGE},
     note            = {Trimestral. Absorveu Boletim Geográfico, do IBGE.
                        Índice acumulado. 1939-1983},
-    year            = {1939-{}-},
+    year            = {1939-~.},
     issn            = {0034-723X},
 }
 
@@ -315,7 +336,7 @@
     title           = {{São Paulo Medical Journal}},
     location        = {São Paulo},
     publisher       = {Associação Paulista de Medicina},
-    year            = {1941-{}-},
+    year            = {1941-~.},
     note            = {Bimensal},
     issn            = {0035-0362},
 }
@@ -355,10 +376,12 @@
     keywords        = {7.5.3},
     title           = {Mão-de-obra e previdência},
     journaltitle    = {Pesquisa Nacional por amostra de domicílios},
-    location        = {Rio de Janeiro},
+    location        = {Rio de Janeiro;\nopunct},
     volume          = {7},
     date            = {1983},
     note            = {Suplemento},
+    % Nesta entrada, ao contrário de todas as outras, a ABNT usa um ponto e
+    % vírgula após o local, em vez de uma vírgula.
 }
 
 @article{costa1998a,
@@ -406,7 +429,8 @@
     location        = {Buenos Aires},
     volume          = {24},
     number          = {2},
-    year            = {primavera 1998},
+    issue           = {primavera},
+    year            = {1998},
 }
 
 @article{sekeff2002,
@@ -442,7 +466,8 @@
     journaltitle    = {Neo Interativa},
     location        = {Rio de Janeiro},
     number          = {2},
-    year            = {inverno 1994},
+    issue           = {inverno},
+    year            = {1994},
     note            = {1 CD-ROM},
 }
 
@@ -547,9 +572,13 @@
     subtitle        = {its not just online journalism},
     journaltitle    = {APS News Online},
     location        = {Los Angeles},
-    date            = {1996-11},
+    month           = {{Nov}\adddot},
+    year            = {1996},
     url             = {http://www.aps.org/apsnews/1196/11965.html},
     urldate         = {1998-11-25},
+    % Aqui, excepcionalmente, a ABNT coloca o mês com a inicial em maiúscula
+    % ("Nov."), por isso é preciso colocá-lo escrito literalmente. O ideal
+    % seria usar `date = {1996-11}`.
 }
 
 @article{arranjo1998,
@@ -680,7 +709,7 @@
     note            = {1 CD-ROM},
 }
 
-@inproceedings{silva1996,
+@inproceedings{silva1996a,
     keywords        = {7.7.3},
     author          = {R. N. Silva and R. Oliveira},
     title           = {Os limites pedagógicos do paradigma
@@ -742,7 +771,7 @@
     keywords        = {7.8},
     holder          = {{Embrapa}},
     nameaddon       = {Unidade de Apoio, Pesquisa e Desenvolvimento
-                       de Instrumentação Agropecuária (São Carlos)},
+                       de Instrumentação Agropecuária (São Carlos, SP)},
     author          = {Paulo Estevão Cruvinel},
     title           = {Medidor digital multisensorial
                        de temperatura para solos},
@@ -754,13 +783,13 @@
 
 % section 7.9 {{{2
 
-@article{saopaulo1998a,
+@legislation{saopaulo1998a,
     keywords        = {7.9.1},
     author          = {{São Paulo}},
     authortype      = {Estado},
     title           = {Decreto nº 42.822, de 20 de janeiro de 1998},
     journaltitle    = {Lex},
-    journalsubtitle = {Coletânea de legislação e jurisprudência},
+    journalsubtitle = {coletânea de legislação e jurisprudência},
     location        = {São Paulo},
     volume          = {62},
     number          = {3},
@@ -768,7 +797,7 @@
     date            = {1998},
 }
 
-@article{brasil1997a,
+@legislation{brasil1997a,
     keywords        = {7.9.1},
     author          = {{Brasil}},
     title           = {Medida provisória nº 1.569-9, de 11 de dezembro de
@@ -780,7 +809,7 @@
     note            = {Seção~1, p.~29514},
 }
 
-@article{brasil1943a,
+@legislation{brasil1943a,
     keywords        = {7.9.1},
     author          = {{Brasil}},
     title           = {Decreto-lei nº 5.452, de 1 de maio de 1943},
@@ -802,7 +831,7 @@
     date            = {1995},
 }
 
-@article{brasil1991a,
+@legislation{brasil1991a,
     keywords        = {7.9.1},
     author          = {{Brasil}},
     nameaddon       = {Congresso. Senado},
@@ -815,7 +844,7 @@
     year            = {1991},
 }
 
-@article{brasil1966a,
+@legislation{brasil1966a,
     keywords        = {7.9.1},
     author          = {{Brasil}},
     nameaddon       = {Constituição (1988)},
@@ -829,7 +858,7 @@
     date            = {1995},
 }
 
-@article{saopaulo1998b,
+@legislation{saopaulo1998b,
     keywords        = {7.9.1},
     author          = {{São Paulo}},
     authortype      = {Estado},
@@ -847,7 +876,7 @@
     date            = {1998},
 }
 
-@article{brasil1997b,
+@legislation{brasil1997b,
     keywords        = {7.9.1},
     author          = {{Brasil}},
     title           = {Medida provisória nº 1.569-9, de 11 de dezembro de
@@ -861,13 +890,13 @@
     note            = {Seção~1, p.~29514},
 }
 
-@article{brasil1943b,
+@legislation{brasil1943b,
     keywords        = {7.9.1},
     author          = {{Brasil}},
     title           = {Decreto-lei nº 5.452, de 1 de maio de 1943.
                        Aprova a consolidação das leis do trabalho},
     journaltitle    = {Lex},
-    journalsubtitle = {Coletânea de legislação: edição federal},
+    journalsubtitle = {coletânea de legislação: edição federal},
     location        = {São Paulo},
     volume          = {7},
     date            = {1943},
@@ -886,7 +915,7 @@
     date            = {1995},
 }
 
-@article{brasil1991b,
+@legislation{brasil1991b,
     keywords        = {7.9.1},
     author          = {{Brasil}},
     nameaddon       = {Congresso. Senado},
@@ -902,7 +931,7 @@
     year            = {1991},
 }
 
-@article{brasil1966b,
+@legislation{brasil1966b,
     keywords        = {7.9.1},
     author          = {{Brasil}},
     nameaddon       = {Constituição (1988)},
@@ -929,9 +958,10 @@
     publisher       = {Associação dos Advogados do Brasil},
     date            = {1994},
     pages           = {16},
+    % options         = {repeatfields},
 }
 
-@article{brasil1998a,
+@jurisdiction{brasil1998a,
     keywords        = {7.9.2},
     author          = {{Brasil}},
     nameaddon       = {Superior Tribunal de Justiça},
@@ -947,7 +977,7 @@
     date            = {1998-03},
 }
 
-@article{brasil1998b,
+@jurisdiction{brasil1998b,
     keywords        = {7.9.2},
     author          = {{Brasil}},
     nameaddon       = {Tribunal Regional Federal (5. região)},
@@ -981,7 +1011,7 @@
     pages           = {16},
 }
 
-@article{brasil1998c,
+@jurisdiction{brasil1998c,
     keywords        = {7.9.2},
     author          = {{Brasil}},
     nameaddon       = {Superior Tribunal de Justiça. Processual Penal.
@@ -998,7 +1028,7 @@
     date            = {1998-03},
 }
 
-@article{brasil1998d,
+@jurisdiction{brasil1998d,
     keywords        = {7.9.2},
     author          = {{Brasil}},
     nameaddon       = {Tribunal Regional Federal (5. região). Administrativo.
@@ -1022,7 +1052,7 @@
     date            = {1998-03},
 }
 
-@article{barros1995,
+@legal{barros1995,
     keywords        = {7.9.3},
     author          = {Raimundo Gomes de Barros},
     title           = {Ministério Público},
@@ -1061,7 +1091,7 @@
     note            = {1 CD-ROM},
 }
 
-@article{brasil1999b,
+@legal{brasil1999b,
     keywords        = {7.9.4},
     author          = {{Brasil}},
     title           = {Lei nº 9.887, de 7 de dezembro de 1999. Altera a
@@ -1070,7 +1100,7 @@
     location        = {Brasília, DF},
     date            = {1999-12-08},
     url             = {http://www.in.gov.br/mp_leis/
-                       leis_texto.aps?Id = Lei%209887},
+                       leis_texto.aps?Id=Lei%209887},
     urldate         = {1999-12-22},
 }
 
@@ -1091,7 +1121,7 @@
 
 % section 7.10 {{{2
 
-@book{osperigos1983a,
+@movie{osperigos1983a,
     keywords        = {7.10},
     title           = {Os~perigos do uso de tóxicos},
     editora         = {Jorge Ramos de Andrade},
@@ -1102,7 +1132,7 @@
     note            = {1 videocassete},
 }
 
-@book{osperigos1983b,
+@movie{osperigos1983b,
     keywords        = {7.10},
     title           = {Os~perigos do uso de tóxicos},
     editora         = {Jorge Ramos de Andrade},
@@ -1115,7 +1145,7 @@
     note            = {1 videocassete (30 min), VHS, son., color.},
 }
 
-@book{central1998,
+@movie{central1998,
     keywords        = {7.10},
     title           = {Central do Brasil},
     titleaddon      = {Direção: Walter Salles Júnior. Produção: Martire
@@ -1133,16 +1163,13 @@
     % editorb       = {Martire de Clermont-Tonnerre and Artur Cohn},
     % editorbtype   = {producer},
     % editorc       = {Marcos Bernstein and João Emanuel Carneiro and
-    %                    Walter Salles Júnior},
+    %                  Walter Salles Júnior},
     % editorctype   = {screenwriter},
-    % O ideal seria usar os campos `editora`, `editorb` etc. em vez de
-    % `titleaddon`, mas eles imprimem sempre "Direção de..." em vez de
-    % "Direção:", como a ABNT usa nessa entrada (e cada vez de um jeito em
-    % outras). Além disso, só há três desses campos, e aqui eles resolveram
-    % pôr todo o elenco do filme.
+    % O ideal seria usar os campos `editora`, `editoratype` etc. em vez de
+    % `titleaddon`.
 }
 
-@book{blade1991,
+@movie{blade1991,
     keywords        = {7.10},
     title           = {Blade Runner},
     titleaddon      = {Direção: Ridley Scott. Produção: Michael Deeley.
@@ -1162,18 +1189,15 @@
     % editorbtype   = {producer},
     % editorc       = {Hampton Fancher and David Peoples},
     % editorctype   = {screenwriter},
-    % O ideal seria usar os campos `editora`, `editorb` etc. em vez de
-    % `titleaddon`, mas eles imprimem sempre "Direção de..." em vez de
-    % "Direção:", como a ABNT usa nessa entrada (e cada vez de um jeito em
-    % outras). Além disso, só há três desses campos, e aqui eles resolveram
-    % pôr todo o elenco do filme.
+    % O ideal seria usar os campos `editora`, `editoratype` etc. em vez de
+    % `titleaddon`.
 }
 
 % }}}
 
 % section 7.11 {{{2
 
-@misc{kobayashi1998a,
+@image{kobayashi1998a,
     keywords        = {7.11.1},
     author          = {K. Kobayashi},
     title           = {Doença dos xavantes},
@@ -1182,7 +1206,7 @@
     options         = {noslsn},
 }
 
-@misc{kobayashi1998b,
+@image{kobayashi1998b,
     keywords        = {7.11.2},
     author          = {K. Kobayashi},
     title           = {Doença dos xavantes},
@@ -1202,7 +1226,7 @@
                        Foto apresentada no Projeto ABRA/Coca-cola},
 }
 
-@misc{oque1985,
+@image{oque1985,
     keywords        = {7.11.2},
     title           = {O~que acreditar em relação à maconha},
     location        = {São Paulo},
@@ -1211,7 +1235,7 @@
     note            = {22 transparências, color., 25 cm $\times$ 20 cm},
 }
 
-@misc{odescobrimento1985,
+@image{odescobrimento1985,
     keywords        = {7.11.2},
     title           = {O~descobrimento do Brasil},
     editora         = {Carmem Souza},
@@ -1225,7 +1249,7 @@
                        cassete sonoro (15 min), mono},
 }
 
-@misc{samu1977,
+@image{samu1977,
     keywords        = {7.11.2},
     author          = {R. Samú},
     title           = {Vitória, 18,35 horas},
@@ -1235,7 +1259,7 @@
     options         = {noslsn},
 }
 
-@misc{mattos1987,
+@image{mattos1987,
     keywords        = {7.11.2},
     author          = {M. D. Mattos},
     title           = {Paisagem-Quatro Barras},
@@ -1245,7 +1269,7 @@
     options         = {noslsn},
 }
 
-@misc{levi1997a,
+@image{levi1997a,
     keywords        = {7.11.2},
     author          = {R. Levi},
     title           = {Edifício Columbus de propriedade de Lamberto
@@ -1259,7 +1283,7 @@
     options         = {noslsn},
 }
 
-@misc{datum1996,
+@image{datum1996,
     keywords        = {7.11.2},
     organization    = {Datum Consultoria e Projetos},
     title           = {Hotel Porto do Sol São Paulo},
@@ -1268,11 +1292,11 @@
     options         = {noslsn},
     date            = {1996-06-15},
     note            = {Projeto final. Desenhista: Pedro. N.
-                       da obra 1744/96/Folha 10},
+                       da obra: 1744/96/Folha 10},
 }
 
-@misc{vaso1999,
-    keywords        = {7.9.3-7},
+@image{vaso1999,
+    keywords        = {7.11.2},
     title           = {VASO.TIFF},
     date            = {1999},
     note            = {Altura: 1083 pixels. Largura: 827 pixels.
@@ -1283,7 +1307,8 @@
     options         = {noslsn},
 }
 
-@misc{geddes2000,
+@image{geddes2000,
+    keywords        = {7.11.2},
     author          = {Anne Geddes},
     title           = {Geddes135.jpg},
     date            = {2000},
@@ -1293,6 +1318,7 @@
 }
 
 @inbook{estacao1999,
+    keywords        = {7.11.2},
     title           = {Estação da Cia. Paulista com locomotiva elétrica
                        e linhas de bitola larga},
     titleaddon      = {1 fotografia, p\&b},
@@ -1304,7 +1330,7 @@
     addendum        = {1 CD-ROM},
 }
 
-@misc{stockdale2002,
+@image{stockdale2002,
     author          = {René Stockdale},
     title           = {When's recess?},
     year            = {[2002?]},
@@ -1345,7 +1371,7 @@
     % necessário fazer algo assim.
 }
 
-@book{brasil1981a,
+@misc{brasil1981a,
     keywords        = {7.12.1},
     title           = {Brasil e parte da América do Sul},
     location        = {São Paulo},
@@ -1354,8 +1380,8 @@
     note            = {1 mapa. Escala 1:600.000},
 }
 
-@book{brasil1981b,
-    keywords        = {7.12.1},
+@misc{brasil1981b,
+    keywords        = {7.12.2},
     title           = {Brasil e parte da América do Sul},
     subtitle        = {mapa político, escolar, rodoviário,
                        turístico e regional},
@@ -1366,7 +1392,7 @@
                        Escala 1:600.000},
 }
 
-@manual{instituto1986,
+@image{instituto1986,
     keywords        = {7.12.2},
     author          = {{Instituto Geográfico e Cartográfico\nopunct}},
     nameaddon       = {(São Paulo, SP)},
@@ -1375,6 +1401,7 @@
     location        = {São Paulo},
     date            = {1986},
     note            = {1 fotografia aérea. Escala 1:35.000. Fx 28, n. 15.},
+    options         = {noslsn},
     % Para que o "(São Paulo, SP)" fique em minúsculas, pode-se usar
     % `\nopunct` para omitir o ponto depois do autor e então acrescentar
     % essa informação no campo `nameaddon`. Também é possível usar o campo
@@ -1385,8 +1412,19 @@
     % necessário fazer algo assim.
 }
 
-@misc{estados1999,
-    keywords        = {7.10-6},
+@image{landsat1987,
+    keywords        = {7.12.2},
+    title           = {LANDSAT TM 5},
+    subtitle        = {imagem de satélide},
+    location        = {São José dos Campos},
+    publisher       = {Instituto Nacional de Pesquisas Espaciais},
+    year            = {1987-1988},
+    note            = {1 fotografia aérea. Escala 1:100.000. Canais 3, 4 e
+                       composição colorida 3, 4 e 5},
+}
+
+@image{estados1999,
+    keywords        = {7.12.3},
     author          = {{Estados Unidos}},
     nameaddon       = {National Oceanic and Atmospheric Administration},
     title           = {1999071318.GIF},
@@ -1394,21 +1432,23 @@
     date            = {1999},
     publisher       = {UNIVALI},
     note            = {1 imagem de satélite. 557 Kb.  GOES-08: SE. 13 jul.
-                       1999,
-                       17:42Z, IR04. 1 disquete, 3½ pol.},
+                       1999, 17:42Z, IR04. 1 disquete, 3½ pol.},
 }
 
 @article{percentagem1994,
+    keywords        = {7.12.3},
     title           = {Percentagem de imigrantes em São Paulo, 1920},
     titleaddon      = {1 mapa, color. Escala indeterminável.},
     journaltitle    = {Neo Interativa},
     location        = {Rio de Janeiro},
     number          = {2},
-    year            = {inverno 1994},
+    issue           = {inverno},
+    year            = {1994},
     note            = {1 CD-ROM},
 }
 
 @misc{florida2000,
+    keywords        = {7.12.3},
     author          = {{Florida Museum of Natural History}},
     title           = {1931-2000 Brazil's confirmed unprovoked shark attacks},
     location        = {Gainesville},
@@ -1423,6 +1463,7 @@
 }
 
 @misc{mapa2001,
+    keywords        = {7.12.3},
     title           = {Mapa de Ubicación},
     subtitle        = {vista ampliada},
     publisher       = {Dirección de Salud y Acción Social de la Armada},
@@ -1438,7 +1479,7 @@
 
 % section 7.13 {{{2
 
-@misc{alcione1988a,
+@audio{alcione1988a,
     keywords        = {7.13},
     author          = {Alcione},
     title           = {Ouro e cobre},
@@ -1448,7 +1489,7 @@
     note            = {1 disco sonoro},
 }
 
-@misc{mpb1995,
+@audio{mpb1995,
     keywords        = {7.13},
     title           = {MPB especial},
     location        = {[Rio de Janeiro]},
@@ -1457,25 +1498,20 @@
     note            = {1 CD},
 }
 
-@misc{alcione1988b,
+@audio{alcione1988b,
     keywords        = {7.13},
     author          = {Alcione},
     title           = {Ouro e cobre},
-    titleaddon      = {Direção artística: Miguel Propschi},
+    editor          = {Miguel Propschi},
+    editortype      = {artdir},
     location        = {São Paulo},
     publisher       = {RCA Victor},
     year            = {p1988},
     note            = {1 disco sonoro (45 min),
                        33 1/3 rpm, estero., 12 pol.},
-    % editor        = {Miguel Propschi},
-    % editortype    = {artisticdirector},
-    % O ideal seria usar os campos `editor` e `editortype` em vez de
-    % `titleaddon` mas eles imprimem sempre "Direção artística de..." em vez
-    % de "Direção artística:", como a ABNT usa nessa entrada (e cada vez de um
-    % jeito em outras).
 }
 
-@misc{silva1991,
+@audio{silva1991,
     keywords        = {7.13},
     author          = {Luiz Inácio Lula da Silva},
     title           = {Luiz Inácio Lula da Silva},
@@ -1489,12 +1525,10 @@
     % editor        = {V. Tremel and M. Garcia},
     % editortype    = {interviewer},
     % O ideal seria usar os campos `editor` e `editortype` em vez de
-    % `titleaddon` mas eles imprimem sempre "Entrevista por..." em vez de
-    % "Entrevistadores:", como a ABNT usa nessa entrada (e cada vez de um
-    % jeito em outras).
+    % `titleaddon`.
 }
 
-@misc{fagner1988,
+@audio{fagner1988,
     keywords        = {7.13},
     author          = {R. Fagner},
     title           = {Revelação},
@@ -1504,7 +1538,7 @@
     note            = {1 cassete sonoro (60 min), 3¾ pps, estereo},
 }
 
-@misc{simone1977a,
+@audio{costa1977a,
     keywords        = {7.13},
     author          = {Simone},
     title           = {Face a face},
@@ -1517,7 +1551,7 @@
 
 % section 7.14 {{{2
 
-@inbook{simone1977b,
+@inbook{costa1977b,
     keywords        = {7.14},
     author          = {S. Costa and A. Silva},
     title           = {Jura secreta},
@@ -1530,9 +1564,7 @@
     % editor          = {Simone},
     % editortype      = {interpreter},
     % O ideal seria usar os campos `editor` e `editortype` em vez de
-    % `titleaddon` mas eles imprimem sempre "Interpretação de..." em vez de
-    % "Intérprete:", como a ABNT usa nessa entrada (e cada vez de um
-    % jeito em outras).
+    % `titleaddon`.
 }
 
 @inbook{gino1988,
@@ -1549,9 +1581,7 @@
     % editor          = {Alcione},
     % editortype      = {interpreter},
     % O ideal seria usar os campos `editor` e `editortype` em vez de
-    % `titleaddon` mas eles imprimem sempre "Interpretação de..." em vez de
-    % "Intérprete:", como a ABNT usa nessa entrada (e cada vez de um
-    % jeito em outras).
+    % `titleaddon`.
 }
 
 @inbook{alcione1988c,
@@ -1567,12 +1597,6 @@
     year            = {p1988},
     note            = {1 disco sonoro (45 min), 33 1/3 rpm,
                        estereo., 12 pol. Lado A, faixa 1 (4 min 3 s)},
-    % editor          = {Miguel Propschi},
-    % editortype      = {artisticdirector},
-    % O ideal seria usar os campos `editor` e `editortype` em vez de
-    % `booktitleaddon` mas eles imprimem sempre "Interpretação de..." em vez
-    % de "Intérprete:", como a ABNT usa nessa entrada (e cada vez de um jeito
-    % em outras).
 }
 
 % }}}
@@ -1627,7 +1651,7 @@
 
 % section 7.16 {{{2
 
-@misc{duchamp1918a,
+@artwork{duchamp1918a,
     keywords        = {7.16},
     author          = {Marcel Duchamp},
     title           = {Escultura para viajar},
@@ -1636,14 +1660,14 @@
     options         = {noslsn},
 }
 
-@misc{bule0000a,
+@artwork{bule0000a,
     keywords        = {7.16},
     title           = {Bule de porcelana},
     note            = {[China: Companhia das Índias, 18-{}-]. 1 bule},
     options         = {noslsn},
 }
 
-@misc{duchamp1918b,
+@artwork{duchamp1918b,
     keywords        = {7.16},
     author          = {Marcel Duchamp},
     title           = {Escultura para viajar},
@@ -1656,7 +1680,7 @@
     options         = {noslsn},
 }
 
-@misc{bule0000b,
+@artwork{bule0000b,
     keywords        = {7.16},
     title           = {Bule de porcelana},
     subtitle        = {família rosa, decorado com buquês e guirlandas de
@@ -1671,7 +1695,7 @@
 
 % section 7.17 {{{2
 
-@misc{microsoft1995a,
+@software{microsoft1995a,
     keywords        = {7.17},
     title           = {Microsoft Project for Windows 95},
     titleaddon      = {Version 4.1},
@@ -1680,7 +1704,7 @@
     note            = {1 CD-ROM},
 }
 
-@misc{universidade1998a,
+@software{universidade1998a,
     keywords        = {7.17},
     author          = {{Universidade Federal do Paraná}},
     nameaddon       = {Biblioteca Central},
@@ -1691,7 +1715,7 @@
     options         = {noslsn},
 }
 
-@misc{allie1993a,
+@software{allie1993a,
     keywords        = {7.17},
     title           = {Allie's play house},
     location        = {Palo Alto, CA\adddot},
@@ -1712,7 +1736,7 @@
     options         = {noslsn},
 }
 
-@misc{microsoft1995b,
+@software{microsoft1995b,
     keywords        = {7.17},
     title           = {Microsoft Project for Windows 95},
     subtitle        = {project planning software},
@@ -1722,7 +1746,7 @@
     note            = {1 CD-ROM},
 }
 
-@misc{allie1993b,
+@software{allie1993b,
     keywords        = {7.17},
     title           = {Allie's play house},
     location        = {Palo Alto, CA\adddot},
@@ -1731,7 +1755,7 @@
     note            = {1 CD-ROM. Windows 3.1},
 }
 
-@misc{universidade1998b,
+@software{universidade1998b,
     keywords        = {7.17},
     author          = {{Universidade Federal do Paraná}},
     nameaddon       = {Biblioteca Central},
@@ -1743,7 +1767,7 @@
     options         = {noslsn},
 }
 
-@misc{aves1998,
+@online{aves1998,
     keywords        = {7.17},
     title           = {Aves do Amapá},
     subtitle        = {banco de dados},
@@ -1752,7 +1776,7 @@
     options         = {noslsn},
 }
 
-@misc{bioline1998,
+@online{bioline1998,
     keywords        = {7.17},
     title           = {Bioline Discussion List. List maintained
                        by the Bases de Dados Tropical, BDT in Brasil},
@@ -1761,7 +1785,7 @@
     options         = {noslsn},
 }
 
-@misc{civitas1995,
+@online{civitas1995,
     keywords        = {7.17},
     title           = {Civitas},
     editora         = {Simão Pedro P. Marinho},
@@ -1775,7 +1799,7 @@
     options         = {noslsn},
 }
 
-@misc{galeria1998,
+@online{galeria1998,
     keywords        = {7.17},
     title           = {Galeria virtual de arte do Vale do Paraíba},
     location        = {São José dos Campos},
@@ -1787,7 +1811,7 @@
     urldate         = {1998-11-27},
 }
 
-@misc{almeida2002,
+@online{almeida2002,
     keywords        = {7.17},
     author          = {M. P. S. Almeida},
     title           = {Fichas para MARC\nopunct},
@@ -1903,16 +1927,12 @@
     keywords        = {8.1.1},
     author          = {{Dante Alighieri}},
     title           = {A divina comédia},
-    titleaddon      = {Tradução, prefácio e notas: Hernâni Donato},
+    editor          = {Hernâni Donato},
+    editortype      = {translatoranfo},
     location        = {São Paulo},
     publisher       = {Círculo do Livro},
     year            = {[1983]},
     pagetotal       = {344},
-    % editor          = {Hernâni Donato},
-    % editortype      = {translatoranfo},
-    % O ideal seria usar os campos `editor` e `editortype` em vez de
-    % `titleaddon`, mas pra variar a ABNT não é consistente e usa um formato
-    % em cada lugar.
 }
 
 @book{gomes1995,
@@ -1933,27 +1953,32 @@
     author          = {Lino de Albergaria},
     title           = {Cinco anos sem chover},
     subtitle        = {história de Lino Albergaria},
-    editor          = {Paulo Lyra},
-    editortype      = {illustrator},
+    titleaddon      = {Ilustrações de Paulo Lyra},
     edition         = {12},
     location        = {São Paulo},
     publisher       = {FTD},
     date            = {1994},
     pagetotal       = {63},
+    editor          = {Paulo Lyra},
+    editortype      = {illustrator},
+    % O ideal seria usar os campos `editor` e `editortype` em vez de
+    % `titleaddon`.
 }
 
 @book{chevalier1990,
     keywords        = {8.1.1},
     author          = {Jean Chevalier and Alain Gheerbrant},
     title           = {Dicionário de símbolos},
-    translator      = {Vera da Costa e Silva and others},
+    titleaddon      = {Tradução Vera da Costa e Silva et al.},
     edition         = {3. ed. rev. e aum.},
     date            = {1990},
     publisher       = {J. Olympio},
     location        = {Rio de Janeiro},
+    % translator      = {Vera da Costa e Silva and others},
+    % O ideal seria usar o campo `translator`.
 }
 
-@manual{associação1988,
+@standard{associação1988,
     keywords        = {8.1.2},
     author          = {{Associação Brasileira de Normas Técnicas}},
     title           = {NBR 10520},
@@ -1961,15 +1986,17 @@
                        citações em documentos: apresentação},
     location        = {Rio de Janeiro},
     date            = {2002},
+    options         = {noslsn},
 }
 
-@manual{universidade1993,
+@booklet{universidade1993,
     keywords        = {8.1.2},
     author          = {{Universidade de São Paulo}},
     title           = {Catálogo de teses da Universidade de São Paulo, 1992},
     location        = {São Paulo},
     date            = {1993},
     pagetotal       = {467},
+    options         = {noslsn},
 }
 
 @proceedings{congresso1979,
@@ -1998,7 +2025,7 @@
     pagetotal       = {35},
 }
 
-@techreport{brasil1993,
+@report{brasil1993,
     keywords        = {8.1.2},
     author          = {{Brasil}},
     nameaddon       = {Ministério da Justiça},
@@ -2008,25 +2035,41 @@
     pagetotal       = {28},
 }
 
-@techreport{biblioteca1985,
+@report{biblioteca1985,
     keywords        = {8.1.2},
     author          = {{Biblioteca Nacional\nopunct}},
-    nameaddon       = {Brasil},
+    nameaddon       = {(Brasil)},
     title           = {Relatório da diretoria-geral},
     subtitle        = {1984},
     location        = {Rio de Janeiro},
     date            = {1985},
     pagetotal       = {40},
+    % Para que o "(Brasil)" fique em minúsculas, pode-se usar
+    % `\nopunct` para omitir o ponto depois do autor e então acrescentar
+    % essa informação no campo `nameaddon`. Também é possível usar o campo
+    % `authortype` para essa informação, mas "Brasil" nãe é exatamente um
+    % tipo de autor, embora a ABNT imprima como se fosse.
+    % Nenhuma dessas possibilidades é ideal, e provavelmente causariam
+    % problemas em outros estilos, mas como a ABNT é inconsistente é
+    % necessário fazer algo assim.
 }
 
-@techreport{biblioteca1983,
+@report{biblioteca1983,
     keywords        = {8.1.2},
     author          = {{Biblioteca Nacional\nopunct}},
-    nameaddon       = {Portugal},
+    nameaddon       = {(Portugal)},
     title           = {O 24 de julho de 1833 e a guerra civil de 1829-1834},
     location        = {Lisboa},
     date            = {1983},
     pagetotal       = {95},
+    % Para que o "(Portugal)" fique em minúsculas, pode-se usar
+    % `\nopunct` para omitir o ponto depois do autor e então acrescentar
+    % essa informação no campo `nameaddon`. Também é possível usar o campo
+    % `authortype` para essa informação, mas "Portugal" nãe é exatamente um
+    % tipo de autor, embora a ABNT imprima como se fosse.
+    % Nenhuma dessas possibilidades é ideal, e provavelmente causariam
+    % problemas em outros estilos, mas como a ABNT é inconsistente é
+    % necessário fazer algo assim.
 }
 
 @book{diagnostico1993,
@@ -2104,7 +2147,7 @@
                        Medicina},
     location        = {São Paulo},
     publisher       = {Associação Paulista de Medicina},
-    year            = {1941-},
+    year            = {1941-~.},
     note            = {Bimensal},
     issn            = {0035-0362},
 }
@@ -2121,7 +2164,7 @@
     keywords        = {8.2},
     title           = {Boletim Estatístico {[da] Rede Ferroviária Federal}},
     location        = {Rio de Janeiro},
-    year            = {1965-},
+    year            = {1965-~.},
     note            = {Trimestral},
     options         = {noslsn},
 }
@@ -2178,7 +2221,7 @@
     pagetotal       = {219},
 }
 
-@book{francca1996,
+@standard{francca1996,
     keywords        = {8.3},
     author          = {Júnia Lessa França and others},
     title           = {Manual para normalização
@@ -2189,7 +2232,7 @@
     date            = {1996},
 }
 
-@misc{astrology1994,
+@software{astrology1994,
     keywords        = {8.3},
     title           = {Astrology source},
     titleaddon      = {Version 1.0A},
@@ -2227,10 +2270,9 @@
     note            = {2 v.},
     % translator      = {Alfredo Alves de Faria},
     % editor          = {Antonio Pertence Júnior},
-    % editortype      = {technicalrevisor},
-    % O ideal seria usar os campos `translator` e `editortype`, mas nessa
-    % entrada o manual coloca o tradutor antes do editor e usa "Revisão
-    % técnica Antonio" em vez de "Revisão técnica *de* Antonio".
+    % editortype      = {techrev},
+    % O ideal seria usar os campos `editor` e `editortype` em vez de
+    % `titleaddon`.
 }
 
 @book{lazzarini1994,
@@ -2308,7 +2350,7 @@
 
 @book{franco1993,
     keywords        = {8.5},
-    author          = {Itamar Franco},
+    author          = {I. Franco},
     title           = {Discursos},
     subtitle        = {de outubro de 1992 a agosto de 1993},
     location        = {Brasília, DF},
@@ -2400,7 +2442,7 @@
     title           = {Globo Rural},
     location        = {São Paulo},
     publisher       = {Rio Gráfica},
-    year            = {1985-},
+    year            = {1985-~.},
     note            = {Mensal},
 }
 
@@ -2450,7 +2492,8 @@
     location        = {Buenos Aires},
     volume          = {24},
     number          = {2},
-    year            = {primavera 1998},
+    issue           = {primavera},
+    year            = {1998},
 }
 
 @article{figueirde1996,
@@ -2538,7 +2581,7 @@
     note            = {4 v.},
 }
 
-@book{silva1996,
+@book{silva1996b,
     keywords        = {8.7},
     author          = {De Plácido e Silva},
     title           = {Vocabulário jurídico},
@@ -2629,27 +2672,29 @@
     keywords        = {8.8},
     author          = {Z. Batista and N. Batista},
     title           = {O foguete do Guido},
-    editor          = {Marilda Castanha},
-    editortype      = {illustrator},
+    titleaddon      = {Ilustrações de Marilda Castanha},
     location        = {São Paulo},
     publisher       = {Ed. do Brasil},
     date            = {1992},
     pagetotal       = {15},
     illustrated     = {principalmente il. color.},
+    % editor          = {Marilda Castanha},
+    % editortype      = {illustrator},
 }
 
 @book{chueire1994,
     keywords        = {8.8},
     author          = {C. Chueire},
     title           = {Marca angelical},
-    editora         = {Luciane Fadel},
-    editoratype     = {illustrator},
+    titleaddon      = {Ilustração Luciane Fadel},
     location        = {Petrópolis},
     publisher       = {Vozes},
     date            = {1994},
     pagetotal       = {18},
     illustrated     = {somente il.},
     isbn            = {85-326-1087-0},
+    % editora         = {Luciane Fadel},
+    % editoratype     = {illustrator},
 }
 
 % }}}
@@ -2738,7 +2783,7 @@
     keywords        = {8.10},
     author          = {Amaral Sobrinho, J.},
     title           = {Ensino fundamental},
-    subtitle        = {gastos das União e do MEC em 1991: tendências},
+    subtitle        = {gastos da União e do MEC em 1991: tendências},
     location        = {Brasília, DF},
     publisher       = {IPEA},
     date            = {1994},
@@ -2751,13 +2796,14 @@
     keywords        = {8.10},
     author          = {Nelson Rodrigues},
     title           = {Teatro completo},
-    editor          = {Sábato Magaldi},
-    editortype      = {generalorganizerfo},
+    titleaddon      = {Organização geral e prefácio Sábato Magaldi},
     location        = {Rio de Janeiro},
     publisher       = {Nova Aguilar},
     date            = {1994},
     pagetotal       = {1134},
     series          = {Biblioteca luso-brasileira. Série brasileira},
+    % editor          = {Sábato Magaldi},
+    % editortype      = {genorgfo},
 }
 
 % }}}
@@ -2804,12 +2850,13 @@
     location        = {São Paulo},
     publisher       = {Contexto},
     date            = {1988},
+    pagetotal       = {146},
     relatedtype     = {recensionof},
     related         = {silva1988},
 }
 
 @article{silva1988,
-    keywords        = {8.11},
+    % keywords        = {8.11},
     author          = {E. T. Silva},
     journaltitle    = {Ci. Inf.},
     location        = {Brasília, DF},
@@ -2820,16 +2867,18 @@
 }
 
 @book{matsuda1986,
+    keywords        = {8.11},
     author          = {C. T. Matsuda},
     title           = {Cometas: do mito à ciência},
     date            = {1986},
     publisher       = {Ícone},
     location        = {São Paulo},
     related         = {santos1987},
-    relatedtype     = {recensionof},
+    relatedtype     = {reviewof},
 }
 
 @article{santos1987,
+    % keywords        = {8.11},
     author          = {P. M. Santos},
     title           = {Cometa},
     subtitle        = {divindade momentânea ou bola de gelo sujo?},
@@ -2853,11 +2902,10 @@
 }
 
 @book{carruth1993,
-    keywords        = {8.11.1},
+    keywords        = {8.11},
     author          = {Jane Carruth},
     title           = {A nova casa do Bebeto},
-    titleaddon      = {Desenhos de Tony Hutchings},
-    translator      = {Ruth Rocha},
+    titleaddon      = {Desenhos de Tony Hutchings. Tradução Ruth Rocha},
     location        = {São Paulo},
     publisher       = {Círculo do Livro},
     date            = {1993},
@@ -2865,16 +2913,16 @@
     note            = {Tradução de: Moving House},
     % editor          = {Tony Hutchings},
     % editortype      = {illustrator},
+    % translator      = {Ruth Rocha},
     % O ideal seria usar os campos `editor` e `editortype` em vez de
-    % `titleaddon`, mas eles imprimem "Ilustrações de", em vez de "Desenhos
-    % de", como a ABNT faz nesse exemplo.
+    % `titleaddon`.
 }
 
 @book{saadi1994,
-    keywords        = {8.11.2},
+    keywords        = {8.11},
     author          = {Saadi},
     title           = {O jardim das rosas\ldots},
-    translator      = {Aurélio Buarque de Holanda},
+    titleaddon      = {Tradução de Aurélio Buarque de Holanda},
     location        = {Rio de Janeiro},
     publisher       = {J. Olympio},
     date            = {1944},
@@ -2882,10 +2930,11 @@
     illustrated     = {il.},
     series          = {Coleção Rubaiyat},
     note            = {Versão francesa de Franz Toussaint do original árabe},
+    % translator      = {Aurélio Buarque de Holanda},
 }
 
 @book{makau1962,
-    keywords        = {8.11.3},
+    keywords        = {8.11},
     author          = {A. B. Makau},
     title           = {Esperanza de la educación hoy},
     location        = {Lisboa},
@@ -2896,7 +2945,7 @@
 }
 
 @book{moore1960b,
-    keywords        = {8.11.3},
+    % keywords        = {8.11},
     editor          = {W. Moore},
     title           = {Construtivismo del movimiento educacional},
     subtitle        = {soluciones},
@@ -2906,7 +2955,7 @@
 }
 
 @article{lion1981,
-    keywords        = {8.11.3},
+    keywords        = {8.11},
     author          = {M. F. Lion and J. Andrade},
     title           = {Drogas cardiovasculares e gravidez},
     titleaddon      = {Separata de:},
@@ -2919,7 +2968,7 @@
 }
 
 @thesis{morgado1990,
-    keywords        = {8.11.4},
+    keywords        = {8.11},
     author          = {M. L. C. Morgado},
     title           = {Reimplante dentário},
     date            = {1990},
@@ -2933,7 +2982,7 @@
 }
 
 @mastersthesis{araujo1986,
-    keywords        = {8.11.4},
+    keywords        = {8.11},
     author          = {U. A. M. Araujo},
     title           = {Máscaras inteiriças Tukúna},
     subtitle        = {possibilidade de estudo de artefatos
@@ -2948,7 +2997,7 @@
 }
 
 @thesis{alentejo1999,
-    keywords        = {8.11.4},
+    keywords        = {8.11},
     author          = {Eduardo Alentejo},
     title           = {Catalogação de postais},
     titleaddon      = {1999. Trabalho apresentado como requisito parcial para
@@ -2964,7 +3013,7 @@
 }
 
 @book{holanda1994,
-    keywords        = {8.11.5},
+    keywords        = {8.11},
     author          = {S. B. Holanda},
     title           = {Caminhos e fronteiras},
     edition         = {3},
@@ -2978,7 +3027,7 @@
 }
 
 @book{pelosi1993,
-    keywords        = {8.11.5},
+    keywords        = {8.11},
     author          = {T. Pelosi},
     title           = {O caminho das cordas},
     location        = {Rio de Janeiro},
@@ -2990,7 +3039,7 @@
 }
 
 @book{tringali1994,
-    keywords        = {8.11.5},
+    keywords        = {8.11},
     author          = {Dante Tringali},
     title           = {Escolas literárias},
     location        = {São Paulo},
@@ -3001,7 +3050,7 @@
 }
 
 @book{cardim1984,
-    keywords        = {8.11.5},
+    keywords        = {8.11},
     author          = {M. S. Cardim},
     title           = {Constitui o ensino de 2º grau regular noturno
                        uma verdadeira educação de adultos?},
@@ -3058,7 +3107,7 @@
 }
 
 @mvbook{freyre1943,
-    keywords        = {9.1.1},
+    keywords        = {9.1},
     author          = {Gilberto Freyre},
     title           = {Casa grande \& senzala},
     subtitle        = {formação da família brasileira
@@ -3070,17 +3119,18 @@
 }
 
 @book{freyre1936a,
-    keywords        = {9.1.1},
+    keywords        = {9.1},
     author          = {Gilberto Freyre},
     title           = {Sobrados e mocambos},
     subtitle        = {decadência do patriarcado rural no Brasil},
     location        = {São Paulo},
     publisher       = {Ed. Nacional},
     date            = {1936},
+    options         = {repeatfields=false, repeatfirstfields=false},
 }
 
 @book{freyre1936b,
-    keywords        = {9.1.2},
+    keywords        = {9.1},
     author          = {Gilberto Freyre},
     title           = {Sobrados e mocambos},
     subtitle        = {decadência do patriarcado rural no Brasil},
@@ -3091,7 +3141,7 @@
 }
 
 @book{freyre1938,
-    keywords        = {9.1.2},
+    keywords        = {9.1},
     author          = {Gilberto Freyre},
     title           = {Sobrados e mocambos},
     subtitle        = {decadência do patriarcado rural no Brasil},
@@ -3100,6 +3150,7 @@
     date            = {1938},
     edition         = {2},
     pagetotal       = {410},
+    options         = {repeatfields=false, repeatfirstfields=false},
 }
 
 % }}}

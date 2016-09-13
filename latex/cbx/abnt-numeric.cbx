@@ -13,38 +13,45 @@
 %% The Current Maintainer of this work is Daniel B. Marques.
 
 \ProvidesFile{abnt-numeric.cbx}%
-[2016/07/06\space v2.0.1\space ABNT biblatex citation style]%
+[2016/09/12\space v2.1\space ABNT biblatex citation style]%
 
 \RequireCitationStyle{numeric}
 
-\DeclareCiteCommand{\cite}[\mkbibparens]
-  {\usebibmacro{prenote}}
-  {\usebibmacro{citeindex}%
-   \usebibmacro{cite}}
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
 
-\DeclareCiteCommand{\parencite}[\mkbibparens]
-  {\usebibmacro{prenote}}
-  {\usebibmacro{citeindex}%
-   \usebibmacro{cite}}
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
+% Cite commands {{{1
 
-\DeclareCiteCommand{\smartcite}[\iffootnote\mkbibparens\mkbibfootnote]
+\DeclareCiteCommand{\cite}[\mkbibparens]% {{{2
   {\usebibmacro{prenote}}
   {\usebibmacro{citeindex}%
    \usebibmacro{cite}}
   {\multicitedelim}
-  {\usebibmacro{postnote}}
+  {\usebibmacro{postnote}}% }}}2
+
+\DeclareCiteCommand{\parencite}[\mkbibparens]% {{{2
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \usebibmacro{cite}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}% }}}2
+
+\DeclareCiteCommand{\smartcite}[\iffootnote\mkbibparens\mkbibfootnote]% {{{2
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \usebibmacro{cite}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}% }}}2
 
 \DeclareMultiCiteCommand{\cites}[\mkbibparens]{\cite}{\multicitedelim}
-\DeclareMultiCiteCommand{\parencites}[\mkbibparens]{\parencite}{\multicitedelim}
-\DeclareMultiCiteCommand{\smartcites}[\iffootnote\mkbibparens\mkbibfootnote]
-  {\smartcite}{\multicitedelim}
 
+\DeclareMultiCiteCommand{\parencites}%
+  [\mkbibparens]{\parencite}{\multicitedelim}
 
-\renewbibmacro*{textcite}{%
+\DeclareMultiCiteCommand{\smartcites}%
+  [\iffootnote\mkbibparens\mkbibfootnote]{\smartcite}{\multicitedelim}
+
+% }}}1
+
+\renewbibmacro*{textcite}{%% {{{1
   \iffieldequals{namehash}{\cbx@lasthash}
     {\setunit{\multicitedelim}}
     {\ifnameundef{labelname}
@@ -63,7 +70,10 @@
     \ifbool{cbx:parens}
       {\bibcloseparen\global\boolfalse{cbx:parens}}
       {}%
-    \textcitedelim}}
-
+    \textcitedelim}}% }}}1
 
 \endinput
+
+
+% vim: set foldmarker=\ {{{,\ }}}
+
