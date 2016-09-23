@@ -11,3 +11,4 @@
 *.swp
 *.synctex.gz
 *.fdb_latexmk
+.DS_Store
