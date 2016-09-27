@@ -77,12 +77,12 @@
 \DeclareBibliographyOption[boolean]{repeattitles}[true]{%
   \settoggle{repeattitle}{#1}%
   \ifstrequal{#1}{true}{%
-    \newbibmacro*{bbx:savetitle}{}%
-    \newbibmacro*{bbx:savesubtitle}{}%
+    \renewbibmacro*{bbx:savetitle}{}%
+    \renewbibmacro*{bbx:savesubtitle}{}%
   }{%
     \ExecuteBibliographyOptions{pagetracker}%
-    \newbibmacro*{bbx:savetitle}{\savefield{title}{\bbx@lasttitle}}%
-    \newbibmacro*{bbx:savesubtitle}{\savefield{subtitle}{\bbx@lastsubtitle}}%
+    \renewbibmacro*{bbx:savetitle}{\savefield{title}{\bbx@lasttitle}}%
+    \renewbibmacro*{bbx:savesubtitle}{\savefield{subtitle}{\bbx@lastsubtitle}}%
   }%
 }%
 \DeclareEntryOption[boolean]{repeattitle}[true]{%
