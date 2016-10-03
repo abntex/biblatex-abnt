@@ -13,33 +13,32 @@
 %% The Current Maintainer of this work is Daniel B. Marques.
 
 \ProvidesFile{abnt-numeric.cbx}%
-[2016/09/12\space v2.1\space ABNT biblatex citation style]%
+[2016/10/03\space v3.0\space ABNT BibLaTeX citation style]%
 
 \RequireCitationStyle{numeric}
 
+% Cite commands >>>1
 
-% Cite commands {{{1
-
-\DeclareCiteCommand{\cite}[\mkbibparens]% {{{2
+\DeclareCiteCommand{\cite}[\mkbibparens]% >>>2
   {\usebibmacro{prenote}}
   {\usebibmacro{citeindex}%
    \usebibmacro{cite}}
   {\multicitedelim}
-  {\usebibmacro{postnote}}% }}}2
+  {\usebibmacro{postnote}}% <<<2
 
-\DeclareCiteCommand{\parencite}[\mkbibparens]% {{{2
+\DeclareCiteCommand{\parencite}[\mkbibparens]% >>>2
   {\usebibmacro{prenote}}
   {\usebibmacro{citeindex}%
    \usebibmacro{cite}}
   {\multicitedelim}
-  {\usebibmacro{postnote}}% }}}2
+  {\usebibmacro{postnote}}% <<<2
 
-\DeclareCiteCommand{\smartcite}[\iffootnote\mkbibparens\mkbibfootnote]% {{{2
+\DeclareCiteCommand{\smartcite}[\iffootnote\mkbibparens\mkbibfootnote]% >>>2
   {\usebibmacro{prenote}}
   {\usebibmacro{citeindex}%
    \usebibmacro{cite}}
   {\multicitedelim}
-  {\usebibmacro{postnote}}% }}}2
+  {\usebibmacro{postnote}}% <<<2
 
 \DeclareMultiCiteCommand{\cites}[\mkbibparens]{\cite}{\multicitedelim}
 
@@ -49,9 +48,9 @@
 \DeclareMultiCiteCommand{\smartcites}%
   [\iffootnote\mkbibparens\mkbibfootnote]{\smartcite}{\multicitedelim}
 
-% }}}1
+% <<<1
 
-\renewbibmacro*{textcite}{%% {{{1
+\renewbibmacro*{textcite}{%% >>>1
   \iffieldequals{namehash}{\cbx@lasthash}
     {\setunit{\multicitedelim}}
     {\ifnameundef{labelname}
@@ -70,10 +69,10 @@
     \ifbool{cbx:parens}
       {\bibcloseparen\global\boolfalse{cbx:parens}}
       {}%
-    \textcitedelim}}% }}}1
+    \textcitedelim}}% <<<1
 
 \endinput
 
 
-% vim: set foldmarker=\ {{{,\ }}}
+% vim: set foldmarker=\ >>>,\ <<< :
 

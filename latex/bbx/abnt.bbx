@@ -13,10 +13,10 @@
 %% The Current Maintainer of this work is Daniel B. Marques.
 
 \ProvidesFile{abnt.bbx}%
-[2016/09/12\space v2.1\space ABNT biblatex citation style]%
+[2016/10/03\space v3.0\space ABNT BibLaTeX citation style]%
 
 
-% Init {{{1
+% Init >>>1
 
 \RequireBiber[3]%
 \DeclareLanguageMapping{brazilian}{abnt-brazilian}%
@@ -27,40 +27,40 @@
 
 \InitializeBibliographyStyle{\global\undef\bbx@lasthash}%
 
-% }}}1
+% <<<1
 
 
-% Options {{{1
+% Options >>>1
 
-% Print titles in italics {{{2
+% Print titles in italics >>>2
 \newtoggle{ittitles}%
 \DeclareBibliographyOption{ittitles}[true]{%
   \settoggle{ittitles}{#1}}%
-% }}}2
+% <<<2
 
-% Use small caps in the bibliography {{{2
+% Use small caps in the bibliography >>>2
 \newtoggle{scbib}%
 \DeclareBibliographyOption{scbib}[true]{%
   \settoggle{scbib}{#1}}%
-% }}}2
+% <<<2
 
-% Hide "[s.l.]" {{{2
+% Hide "[s.l.]" >>>2
 \newtoggle{nosl}%
 \DeclareBibliographyOption{nosl}[true]{%
   \settoggle{nosl}{#1}}%
 \DeclareEntryOption[boolean]{nosl}[true]{%
   \settoggle{nosl}{#1}}%
-% }}}2
+% <<<2
 
-% Hide "[s.n.]" {{{2
+% Hide "[s.n.]" >>>2
 \newtoggle{nosn}%
 \DeclareBibliographyOption{nosn}[true]{%
   \settoggle{nosn}{#1}}%
 \DeclareEntryOption[boolean]{nosn}[true]{%
   \settoggle{nosn}{#1}}%
-% }}}2
+% <<<2
 
-% Hide "[S.l.: sn]" {{{2
+% Hide "[S.l.: sn]" >>>2
 \newtoggle{noslsn}%
 \DeclareBibliographyOption{noslsn}[true]{%
   \settoggle{noslsn}{#1}%
@@ -70,9 +70,9 @@
   \settoggle{noslsn}{#1}%
   \settoggle{nosl}{#1}%
   \settoggle{nosn}{#1}}%
-% }}}2
+% <<<2
 
-% Repeat titles {{{2
+% Repeat titles >>>2
 \newtoggle{repeattitle}%
 \DeclareBibliographyOption[boolean]{repeattitles}[true]{%
   \settoggle{repeattitle}{#1}%
@@ -91,9 +91,9 @@
 \DeclareEntryOption[boolean]{repeattitles}[true]{%
   \settoggle{repeattitle}{#1}%
 }%
-% }}}2
+% <<<2
 
-% Repeat first fields {{{2
+% Repeat first fields >>>2
 \newtoggle{repeatfirstfields}%
 \DeclareBibliographyOption[boolean]{repeatfirstfields}[true]{%
   \settoggle{repeatfirstfields}{#1}%
@@ -101,9 +101,9 @@
 \DeclareEntryOption[boolean]{repeatfirstfields}[true]{%
   \settoggle{repeatfirstfields}{#1}%
 }%
-% }}}2
+% <<<2
 
-% Repeat fields {{{2
+% Repeat fields >>>2
 \newtoggle{repeatfields}%
 \DeclareBibliographyOption[boolean]{repeatfields}[true]{%
   \settoggle{repeatfields}{#1}%
@@ -123,9 +123,9 @@
 \DeclareEntryOption[boolean]{repeatfields}[true]{%
   \settoggle{repeatfields}{#1}%
 }%
-% }}}2
+% <<<2
 
-% Use original dashes instead of underscores {{{2
+% Use original dashes instead of underscores >>>2
 \newtoggle{usedashes}%
 \DeclareBibliographyOption[boolean]{usedashes}[true]{%
   \settoggle{usedashes}{#1}%
@@ -145,9 +145,9 @@
     }%
   }{}%
 }%
-% }}}2
+% <<<2
 
-% Use hanging indentation {{{2
+% Use hanging indentation >>>2
 \setlength{\bibhang}{0pt}%
 \DeclareBibliographyOption{indent}[true]{%
 	\ifstrequal{#1}{true}{%
@@ -155,14 +155,14 @@
       \ifnumequal{\parindent}{0}{1em}{\parindent}%
     }%
   }{}}%
-% }}}2
+% <<<2
 
-% }}}1
+% <<<1
 
 
-% Data model and sorting {{{1
+% Data model and sorting >>>1
 
-\DeclareSortingScheme{nty}{%% {{{2
+\DeclareSortingScheme{nty}{%% >>>2
   \sort{%
     \field{presort}%
   }%
@@ -201,9 +201,9 @@
     \field[padside=left,padwidth=4,padchar=0]{volume}%
     \literal{0000}%
   }%
-}% }}}2
+}% <<<2
 
-\DeclareSourcemap{%% {{{2
+\DeclareSourcemap{%% >>>2
   % This maps some fields used in abntex2cite to biblatex fields.
   \maps[datatype=bibtex]{%
     \map{%
@@ -237,16 +237,16 @@
       \step[fieldset=bookpagination, fieldvalue={sheet}]%
     }%
   }%
-}% }}}2
+}% <<<2
 
-\DeclareDatamodelFields[type=field,datatype=literal]{%% {{{2
+\DeclareDatamodelFields[type=field,datatype=literal]{%% >>>2
 	section,%
 	illustrated,%
 	dimensions,%
 	reprinted-text,%
-}% }}}2
+}% <<<2
 
-\DeclareDatamodelEntryfields[monography]{%% {{{2
+\DeclareDatamodelEntryfields[monography]{%% >>>2
   location,%
   author,%
   chapter%
@@ -265,14 +265,14 @@
   pubstate,%
   pageref,%
   date%
-}% }}}2
+}% <<<2
 
-% }}}1
+% <<<1
 
 
-% Formatting {{{1
+% Formatting >>>1
 
-% Capitalization commands {{{2
+% Capitalization commands >>>2
 
 \renewcommand*{\mkbibacro}[1]{%
   \iftoggle{scbib}{%
@@ -342,11 +342,11 @@
    \egroup%
 }%
 
-% }}}2
+% <<<2
 
-% Name format {{{2
+% Name format >>>2
 
-% Name delimiters {{{3
+% Name delimiters >>>3
 \newtoggle{byeditor+others}%
 
 \renewcommand*{\multinamedelim}{%
@@ -364,9 +364,9 @@
     \addsemicolon\addspace%
   }%
 }%
-% }}}
+% <<<
 
-\DeclareNameFormat{LAST-first}{%% {{{3
+\DeclareNameFormat{LAST-first}{%% >>>3
 	\ifgiveninits{%
 		\usebibmacro{name:family-given}{%
 			\iftoggle{scbib}{%
@@ -391,15 +391,15 @@
 		{\namepartsuffix}%
 	}%
 	\usebibmacro{name:andothers}%
-}% }}}
+}% <<<
 
-\DeclareNameFormat{full}{%% {{{3
+\DeclareNameFormat{full}{%% >>>3
   \usebibmacro{name:given-family}%
     {\namepartfamily}%
     {\namepartgiven}%
     {\namepartprefix}%
     {\namepartsuffix}%
-}% }}}
+}% <<<
 
 \DeclareNameAlias{default}{LAST-first}%
 
@@ -421,65 +421,65 @@
 \DeclareBibliographyAlias{jurisdiction}{article}%
 \DeclareBibliographyAlias{legal}{article}%
 
-% }}}2
+% <<<2
 
-% Field format {{{2
+% Field format >>>2
 
-% Standard entry fields {{{3
+% Standard entry fields >>>3
 
 \DeclareFieldFormat{authortype}{\printtext[parens]{\bibsentence#1}}%
 \DeclareFieldFormat{editortype}{\printtext[parens]{\bibsentence#1}}%
 
 \DeclareFieldFormat{nameaddon}{\addspace #1}%
 
-% titles {{{4
+% titles >>>4
 
 \renewcommand*{\subtitlepunct}{\addcolon\addspace}%
-\renewcommand*{\bibpagerefpunct}{\addperiod\addspace}%
+\renewcommand*{\bibpagerefpunct}{\addcomma\addspace}%
 
-\DeclareFieldFormat{journaltitle}{%% {{{
+\DeclareFieldFormat{journaltitle}{%% >>>
   \iftoggle{ittitles}{%
     \addspace\mkbibemph{#1}\isdot%
   }{%
     \addspace\mkbibbold{#1}\isdot%
   }%
-}%% }}}
-\DeclareFieldFormat{issuetitle}{%% {{{
+}%% <<<
+\DeclareFieldFormat{issuetitle}{%% >>>
   \iftoggle{ittitles}{%
     \addspace\mkbibemph{#1}\isdot%
   }{%
     \addspace\mkbibbold{#1}\isdot%
   }%
-}%% }}}
-\DeclareFieldFormat{maintitle}{%% {{{
+}%% <<<
+\DeclareFieldFormat{maintitle}{%% >>>
   \iftoggle{ittitles}{%
     \addspace\mkbibemph{#1}\isdot%
   }{%
     \addspace\mkbibbold{#1}\isdot%
   }%
-}%% }}}
-\DeclareFieldFormat{booktitle}{%% {{{
+}%% <<<
+\DeclareFieldFormat{booktitle}{%% >>>
   \iftoggle{ittitles}{%
     \addspace\mkbibemph{#1}\isdot%
   }{%
     \addspace\mkbibbold{#1}\isdot%
   }%
-}%% }}}
-\DeclareFieldFormat{citetitle}{%% {{{
+}%% <<<
+\DeclareFieldFormat{citetitle}{%% >>>
   \iftoggle{ittitles}{%
     \addspace\mkbibemph{#1}\isdot%
   }{%
     \addspace\mkbibbold{#1}\isdot%
   }%
-}%% }}}
-\DeclareFieldFormat*{title}{%% {{{
+}%% <<<
+\DeclareFieldFormat*{title}{%% >>>
   \iftoggle{ittitles}{%
     \addspace\mkbibemph{#1}\isdot%
   }{%
     \addspace\mkbibbold{#1}\isdot%
   }%
-}%% }}}
-\DeclareFieldFormat[% title {{{
+}%% <<<
+\DeclareFieldFormat[% title >>>
   article,%
   legislation,%
   jurisdiction,%
@@ -489,102 +489,102 @@
   bookinbook,%
   inproceedings,%
   unpublished%
-]{title}{\addspace #1\isdot}%% }}}
+]{title}{\addspace #1\isdot}%% <<<
 
-% }}}
+% <<<
 
-% number {{{4
+% number >>>4
 \DeclareNumChars*{,-/}%
 \newcommand{\abntnum}[1]{\ifrmnum{#1}{\rmntonum{#1}}{#1}}%
-\DeclareFieldFormat*{number}{%% {{{
+\DeclareFieldFormat*{number}{%% >>>
 	\ifnumerals{#1}%
 		{\addspace \MakeLowercase{\bibstring{number}}~\abntnum{#1}}%
 		{\addspace #1\isdot}%
-}%% }}}
-\DeclareFieldFormat[% number {{{
+}%% <<<
+\DeclareFieldFormat[% number >>>
   book,%
   collection,%
   proceedings,%
   inproceedings,%
   misc%
-]{number}{\addcomma\addspace #1}%% }}}
-% }}}
+]{number}{\addcomma\addspace #1}%% <<<
+% <<<
 
-\DeclareFieldFormat*{volume}{%% {{{4
+\DeclareFieldFormat*{volume}{%% >>>4
 	\ifnumerals{#1}%
 		{\addspace \MakeLowercase{\bibstring{volume}}~#1}%
 		{\addspace #1\isdot}%
-}%% }}}
+}%% <<<
 
-\DeclareFieldFormat*{chapter}{%% {{{4
+\DeclareFieldFormat*{chapter}{%% >>>4
 	\ifnumerals{#1}%
 		{\addspace \MakeLowercase{\bibstring{chapter}~#1}}%
 		{\addspace #1\isdot}%
-}%% }}}
+}%% <<<
 
-\DeclareFieldFormat{edition}{%% {{{4
+\DeclareFieldFormat{edition}{%% >>>4
 	\ifnumerals{#1}%
 		{\addspace #1\adddot\addspace\bibstring{edition}}%
 		{\addspace #1\isdot}%
-}%% }}}
+}%% <<<
 
-\DeclareFieldFormat*{pages}{%% {{{4
+\DeclareFieldFormat*{pages}{%% >>>4
   \MakeLowercase{\mkpageprefix[bookpagination]{#1}}%
-}%% }}}
+}%% <<<
 
-\DeclareFieldFormat*{pagetotal}{%% {{{4
+\DeclareFieldFormat*{pagetotal}{%% >>>4
   \MakeLowercase{\mkpagetotal[bookpagination]{#1}}%
-}%% }}}
+}%% <<<
 
 \DeclareFieldFormat{illustrated}{\addspace #1\isdot}%
 
 \DeclareFieldFormat{url}{\bibstring{url}\addcolon\addspace\url{<#1>}}%
 \DeclareFieldFormat{urldate}{\bibstring{urlseen}\addcolon\addspace #1}%
 
-\DeclareFieldFormat*{note}{\addspace #1\addperiod\addspace}%
+\DeclareFieldFormat*{note}{\addspace #1}%
 
 \DeclareFieldFormat{mathesis}{\bibstring{mathesis}}%
 \DeclareFieldFormat{phdthesis}{\bibstring{phdthesis}}%
 
-\DeclareFieldFormat[monography]{type}{%% {{{4
+\DeclareFieldFormat[monography]{type}{%% >>>4
   \bibstring{monography}\addspace\printtext[parens]{#1}%
-}%% }}}
+}%% <<<
 
-\DeclareFieldFormat{origlanguage}{%% {{{4
+\DeclareFieldFormat{origlanguage}{%% >>>4
     \ifbibstring{#1}%
       {\bibxstring{#1}}%
       {\ifbibstring{from#1}%
          {\bibxstring{from#1}}%
          {#1}}%
-}%% }}}
+}%% <<<
 
-% is*n {{{4
+% is*n >>>4
 \DeclareFieldFormat{isbn}{\mkbibacro{ISBN}\space #1}%
 \DeclareFieldFormat{isrn}{\mkbibacro{ISRN}\space #1}%
 \DeclareFieldFormat{issn}{\mkbibacro{ISSN}\space #1}%
-% }}}
+% <<<
 
-% relatedstring {{{4
+% relatedstring >>>4
 \DeclareFieldFormat{relatedstring:reprintfrom}{#1\addcolon\addspace}%
 \DeclareFieldFormat{relatedstring:reviewof}{#1\addcolon\addspace}%
 \DeclareFieldFormat{relatedstring:default}{#1\addcolon\addspace}%
-% }}}
+% <<<
 
-% }}}
+% <<<
 
-% Capitalization {{{3
+% Capitalization >>>3
 
 \DeclareFieldFormat{lowercase}{\smartlowercase{#1}}%
 
-\DeclareFieldFormat{uppercase}{%% {{{
+\DeclareFieldFormat{uppercase}{%% >>>
   \iftoggle{scbib}{%
     \textsc{\smartlowercase{#1}}%
   }{%
     \smartuppercase{#1}%
   }%
-}%% }}}
+}%% <<<
 
-\DeclareListFormat{uppercase}{%% {{{
+\DeclareListFormat{uppercase}{%% >>>
   \usebibmacro{list:delim}{#1}%
   \iftoggle{scbib}{%
     \ifgiveninits{%
@@ -597,9 +597,9 @@
   }%
   \isdot%
   \usebibmacro{list:andothers}%
-}%% }}}
+}%% <<<
 
-\DeclareFieldFormat{upperfirst}{%% {{{
+\DeclareFieldFormat{upperfirst}{%% >>>
 	\iftoggle{scbib}{%
 		\ifgiveninits{%
 			\normalfont\FirstWordSC{#1}%
@@ -609,9 +609,9 @@
 	}{%
 		\normalfont\FirstWordUpper{#1}%
 	}%
-}%% }}}
+}%% <<<
 
-\DeclareListFormat{upperfirst}{%% {{{
+\DeclareListFormat{upperfirst}{%% >>>
 	\usebibmacro{list:delim}{#1}%
 		\iftoggle{scbib}{%
 			\ifgiveninits{%
@@ -624,20 +624,20 @@
 		}%
 		\isdot%
 	\usebibmacro{list:andothers}%
-}%% }}}
+}%% <<<
 
-% }}}
+% <<<
 
 \DeclareFieldFormat{noformat}{\normalfont{#1}}%
 
-% }}}2
+% <<<2
 
-% }}}1
+% <<<1
 
 
-% Macros {{{1
+% Macros >>>1
 
-% Dashed option {{{2
+% Dashed option >>>2
 
 \newbool{bbx@inset}%
 
@@ -647,27 +647,27 @@
 \newcommand*{\nopunctdash}{\bibnameunderscore\addspace}%
 \renewcommand*{\bibnamedash}{\bibnameunderscore\addperiod\addspace}%
 
-\renewbibmacro*{begrelated}{%% {{{3
+\renewbibmacro*{begrelated}{%% >>>3
   \booltrue{bbx@inset}%
-}%% }}}3
+}%% <<<3
 
-\newbibmacro*{bbx:savehash}{%% {{{3
+\newbibmacro*{bbx:savehash}{%% >>>3
   \savefield{fullhash}{\bbx@lasthash}%
-}%% }}}3
+}%% <<<3
 
-\newbibmacro*{bbx:saveorg}{%% {{{3
+\newbibmacro*{bbx:saveorg}{%% >>>3
   \savelist{organization}{\bbx@lastorg}%
-}%% }}}3
+}%% <<<3
 
-\newbibmacro*{bbx:savetitle}{%% {{{3
+\newbibmacro*{bbx:savetitle}{%% >>>3
   \savefield{title}{\bbx@lasttitle}%
-}%% }}}3
+}%% <<<3
 
-\newbibmacro*{bbx:savesubtitle}{%% {{{3
+\newbibmacro*{bbx:savesubtitle}{%% >>>3
   \savefield{subtitle}{\bbx@lastsubtitle}%
-}%% }}}3
+}%% <<<3
 
-\newbibmacro*{bbx:dashcheck}[2]{%% {{{3
+\newbibmacro*{bbx:dashcheck}[2]{%% >>>3
   \ifboolexpr{%
     (%
       test {\iffieldequals{fullhash}{\bbx@lasthash}}%
@@ -689,9 +689,9 @@
   }%
     {\settoggle{isdashed}{true}#1}%
     {\settoggle{isdashed}{false}#2}%
-}%% }}}3
+}%% <<<3
 
-\newbibmacro*{bbx:titledashcheck}[2]{%% {{{3
+\newbibmacro*{bbx:titledashcheck}[2]{%% >>>3
 	\iftoggle{isdashed}{%
 		\ifboolexpr{%
 			test {\iffieldequals{title}{\bbx@lasttitle}}%
@@ -709,9 +709,9 @@
 	}{%
 		#2%
 	}%
-}%% }}}3
+}%% <<<3
 
-\newbibmacro*{bbx:ineditordashcheck}[2]{%% {{{3
+\newbibmacro*{bbx:ineditordashcheck}[2]{%% >>>3
   \ifboolexpr{%
     test {\ifnamesequal{editor}{author}}%
     and%
@@ -725,13 +725,13 @@
   }%
     {\settoggle{isdashed}{true}#1}%
     {\settoggle{isdashed}{false}#2}%
-}%% }}}3
+}%% <<<3
 
-% }}}2
+% <<<2
 
-% Titles {{{2
+% Titles >>>2
 
-\newbibmacro*{titleiskey}[2]{%% {{{3
+\newbibmacro*{titleiskey}[2]{%% >>>3
 \ifboolexpr{%
 	test {\ifnameundef{author}}%
 	and%
@@ -747,9 +747,9 @@
 }%
     {#1}%
     {#2}%
-}%% }}}3
+}%% <<<3
 
-\renewbibmacro*{title}{%% {{{3
+\renewbibmacro*{title}{%% >>>3
 	\ifboolexpr{%
 		test {\iffieldundef{title}}%
 		and%
@@ -776,9 +776,9 @@
 				\setunit{\addperiod\addspace}}}%
 		\newunit}}%
 	\printfield{titleaddon}%
-}%% }}}3
+}%% <<<3
 
-\newbibmacro*{booktitleiskey}[2]{%% {{{3
+\newbibmacro*{booktitleiskey}[2]{%% >>>3
 \ifboolexpr{%
 	test {\ifnameundef{bookauthor}}%
 	and%
@@ -794,9 +794,9 @@
 }%
     {#1}%
     {#2}%
-}%% }}}3
+}%% <<<3
 
-\renewbibmacro*{booktitle}{%% {{{3
+\renewbibmacro*{booktitle}{%% >>>3
   \ifboolexpr{%
     test {\iffieldundef{booktitle}}%
     and%
@@ -813,9 +813,9 @@
       \printfield[noformat]{booksubtitle}}%
       \newunit}%
   \printfield{booktitleaddon}%
-}%% }}}3
+}%% <<<3
 
-\renewbibmacro*{maintitle}{%% {{{3
+\renewbibmacro*{maintitle}{%% >>>3
   \ifboolexpr{%
     test {\iffieldundef{maintitle}}%
     and%
@@ -832,9 +832,9 @@
       \printfield[noformat]{mainsubtitle}}%
       \newunit}%
   \printfield{maintitleaddon}%
-}%% }}}3
+}%% <<<3
 
-\newbibmacro*{in:maintitle}{%% {{{3
+\newbibmacro*{in:maintitle}{%% >>>3
 	\iffieldundef{maintitle}{}{%
 		\usebibmacro{in:}%
 		\iftoggle{repeatfields}%
@@ -843,9 +843,9 @@
 		\newunit\newblock%
 		\usebibmacro{maintitle}%
 	}%
-}%% }}}3
+}%% <<<3
 
-\renewbibmacro*{maintitle+booktitle}{%% {{{3
+\renewbibmacro*{maintitle+booktitle}{%% >>>3
   \iffieldundef{maintitle}%
     {}%
     {\usebibmacro{maintitle}%
@@ -857,32 +857,32 @@
         \setunit{\addcolon\addspace}}}%
   \usebibmacro{booktitle}%
   \newunit%
-}%% }}}3
+}%% <<<3
 
-\newbibmacro*{maintitle/booktitle}{%% {{{3
+\newbibmacro*{maintitle/booktitle}{%% >>>3
   \iffieldundef{maintitle}%
     {\usebibmacro{booktitle}}%
     {\usebibmacro{maintitle}}%
-}%% }}}3
+}%% <<<3
 
-\renewbibmacro*{journal}{%% {{{3
+\renewbibmacro*{journal}{%% >>>3
   \iffieldundef{journaltitle}%
     {}%
     {\printtext[journaltitle]{%
        \printfield[titlecase]{journaltitle}%
        \setunit{\subtitlepunct}%
        \printfield[noformat]{journalsubtitle}}}%
-}%% }}}3
+}%% <<<3
 
-\newbibmacro{journal+section}{%% {{{3
+\newbibmacro{journal+section}{%% >>>3
 	\usebibmacro{journal}%
 	\iffieldundef{section}%
 		{}%
 		{\setunit{\addspace\textendash\addspace}%
 		\printfield{section}}%
-}%% }}}3
+}%% <<<3
 
-\renewbibmacro*{journal+issuetitle}{%% {{{3
+\renewbibmacro*{journal+issuetitle}{%% >>>3
   \usebibmacro{journal}%
   \setunit*{\addcomma\addspace}%
   \iffieldundef{series}%
@@ -892,9 +892,9 @@
      \setunit{\addspace}}%
   \usebibmacro{volume+number+eid}%
   \newunit%
-}%% }}}3
+}%% <<<3
 
-\renewbibmacro*{periodical}{%% {{{3
+\renewbibmacro*{periodical}{%% >>>3
   \iffieldundef{title}%
     {}%
     {\iffieldundef{issue}{%
@@ -908,13 +908,13 @@
 	   \normalfont{\setunit*{\subtitlepunct}%
        \printfield[noformat]{subtitle}}}}%
 	}%
-}%% }}}3
+}%% <<<3
 
-% }}}2
+% <<<2
 
-% Names {{{2
+% Names >>>2
 
-\renewbibmacro*{author}{%% {{{3
+\renewbibmacro*{author}{%% >>>3
 	\ifboolexpr{%
 		test \ifuseauthor%
 		and%
@@ -942,9 +942,9 @@
 	}{%
 		\global\undef\bbx@lasthash%
 	}%
-}%% }}}3
+}%% <<<3
 
-\renewbibmacro*{editor+others}{%% {{{3
+\renewbibmacro*{editor+others}{%% >>>3
 	\ifboolexpr{%
 		test \ifuseeditor%
 		and%
@@ -969,9 +969,9 @@
 		\global\undef\bbx@lasthash%
 		\usebibmacro{organization}%
 	}%
-}%% }}}3
+}%% <<<3
 
-\renewbibmacro*{byeditor+others}{%% {{{3
+\renewbibmacro*{byeditor+others}{%% >>>3
   \toggletrue{byeditor+others}%
   \ifnameundef{editor}{}{% else
     \usebibmacro{byeditor+othersstrg}%
@@ -983,9 +983,9 @@
   \usebibmacro{byeditorx}%
   \usebibmacro{bytranslator+others}%
   \togglefalse{byeditor+others}%
-}%% }}}3
+}%% <<<3
 
-\newbibmacro*{organization}{%% {{{3
+\newbibmacro*{organization}{%% >>>3
 	\iflistundef{organization}%
 		{\global\undef\bbx@lastorg}%
         {\usebibmacro{bbx:dashcheck}%
@@ -996,33 +996,33 @@
 		\clearlist{organization}%
 		\newunit\newblock%
 		\printfield{nameaddon}}%
-}%% }}}3
+}%% <<<3
 
-\newbibmacro*{author/organization}{%% {{{3
+\newbibmacro*{author/organization}{%% >>>3
 	\ifnameundef{author}%
 	{\usebibmacro{organization}}%
 	{\usebibmacro{author}}%
-}%% }}}3
+}%% <<<3
 
-\newbibmacro*{editor+others/organization}{%% {{{3
+\newbibmacro*{editor+others/organization}{%% >>>3
 	\ifnameundef{editor}%
 		{\usebibmacro{organization}}%
 		{\usebibmacro{editor+others}}%
-}%% }}}3
+}%% <<<3
 
-\newbibmacro*{organization/eventtitle}{%% {{{3
+\newbibmacro*{organization/eventtitle}{%% >>>3
 	\iffieldundef{eventtitle}%
 	{\usebibmacro{organization}}%
 	{\printfield[uppercase]{eventtitle}}%
-}%% }}}3
+}%% <<<3
 
-\newbibmacro*{bookauthor/editor+others}{%% {{{3
+\newbibmacro*{bookauthor/editor+others}{%% >>>3
   \ifnameundef{bookauthor}{%
     \usebibmacro{editor+others}}%
 	{\printnames{bookauthor}}%
-}%% }}}3
+}%% <<<3
 
-\newbibmacro*{in:bookauthor+others}{%% {{{3
+\newbibmacro*{in:bookauthor+others}{%% >>>3
 	\usebibmacro{in:}%
   \ifnameundef{bookauthor}{%
     % do nothing
@@ -1037,9 +1037,9 @@
       \printnames{bookauthor}%
     }%
   }%
-}%% }}}3
+}%% <<<3
 
-\newbibmacro*{in:editor+others}{%% {{{3
+\newbibmacro*{in:editor+others}{%% >>>3
 	\usebibmacro{in:}%
 	\addspace%
 	\ifnameundef{editor}{%
@@ -1062,9 +1062,9 @@
       \clearname{editor}%
 		}%
 	}%
-}%% }}}3
+}%% <<<3
 
-\newbibmacro*{in:eventtitle/organization/editor}{%% {{{3
+\newbibmacro*{in:eventtitle/organization/editor}{%% >>>3
 	\usebibmacro{in:}%
 	\iffieldundef{eventtitle}{%
 		\ifnameundef{editor}{%
@@ -1076,40 +1076,43 @@
 	}{%
 		\printfield[uppercase]{eventtitle}%
 	}%
-}%% }}}3
+}%% <<<3
 
-% }}}2
+% <<<2
 
-% Publisher, location, date, issue {{{2
+% Publisher, location, date, issue >>>2
 
-\renewbibmacro*{date}{\printdate\addperiod}%
+\renewbibmacro*{date}{%
+  \printdate%
+  \printunit{\addperiod\addspace}%
+}%
 
-\newbibmacro*{publisher}{%% {{{3
+\newbibmacro*{publisher}{%% >>>3
 	\iflistundef{publisher}%
 		{\iftoggle{nosn}{}{\printtext[brackets]{\bibstring{sinenomine}}}}%
 	  	{\printlist{publisher}}%
-}%% }}}3
+}%% <<<3
 
-\newbibmacro*{location}{%% {{{3
+\newbibmacro*{location}{%% >>>3
 	\iflistundef{location}%
 		{\iftoggle{nosl}{}{\printtext[brackets]{\bibstring{sineloco}}}}%
 	  	{\printlist{location}}%
-}%% }}}3
+}%% <<<3
 
-\newbibmacro*{venue}{%% {{{3
+\newbibmacro*{venue}{%% >>>3
 	\iffieldundef{venue}%
 		{\iftoggle{nosl}{}{\printtext[brackets]{\bibstring{sineloco}}}}%
 	  	{\printfield{venue}}%
-}%% }}}3
+}%% <<<3
 
-\renewbibmacro*{location+date}{%% {{{3
+\renewbibmacro*{location+date}{%% >>>3
 	\usebibmacro{location}%
 	\setunit*{\addcomma\addspace}%
 	\usebibmacro{date}%
 	\newunit%
-}%% }}}3
+}%% <<<3
 
-\renewbibmacro*{publisher+location+date}{%% {{{3
+\renewbibmacro*{publisher+location+date}{%% >>>3
 	\ifboolexpr{%
 		test {\iflistundef{publisher}}%
 		and%
@@ -1142,27 +1145,27 @@
 	\setunit*{\addcomma\addspace}%
 	\usebibmacro{date}%
 	\newunit%
-}%% }}}3
+}%% <<<3
 
-\renewbibmacro*{issue}{%% {{{3
+\renewbibmacro*{issue}{%% >>>3
   \iffieldundef{issuetitle}%
     {}%
     {\printtext[issuetitle]{%
        \printfield[upperfirst]{issuetitle}%
        \setunit*{\subtitlepunct}%
        \printfield[noformat]{issuesubtitle}}}%
-}%% }}}3
+}%% <<<3
 
-\renewbibmacro*{issue+date}{%% {{{3
+\renewbibmacro*{issue+date}{%% >>>3
   \iffieldundef{issue}%
     {\usebibmacro{date}}%
     {\printfield{issue}%
      \setunit*{\addspace}%
      \usebibmacro{date}}%
   \newunit%
-}%% }}}3
+}%% <<<3
 
-\newbibmacro*{publisher+location+issue+date}{%% {{{3
+\newbibmacro*{publisher+location+issue+date}{%% >>>3
 	\ifboolexpr{%
 		test {\iflistundef{publisher}}%
 		and%
@@ -1197,21 +1200,21 @@
 	\setunit*{\addcomma\addspace}%
 	\usebibmacro{date}%
 	\newunit%
-}%% }}}3
+}%% <<<3
 
-% }}}2
+% <<<2
 
-% Misc {{{
+% Misc >>>
 
-\renewbibmacro*{volume+number+eid}{%% {{{3
+\renewbibmacro*{volume+number+eid}{%% >>>3
   \printfield{volume}%
   \setunit*{\addcomma\addspace}%
   \printfield{number}%
   \setunit{\addcomma\addspace}%
   \printfield{eid}%
-}%% }}}3
+}%% <<<3
 
-\renewbibmacro*{series+number}{%% {{{3
+\renewbibmacro*{series+number}{%% >>>3
 	\iffieldundef{series}{}{%
 		\printtext[parens]{%
 			\printfield{series}%
@@ -1219,43 +1222,44 @@
 			\printfield[noformat]{number}%
 			\newunit}%
 		}%
-}%% }}}3
+}%% <<<3
 
-\renewbibmacro*{pageref}{%% {{{3
+\renewbibmacro*{pageref}{%% >>>3
   \iflistundef{pageref}%
     {}%
-	{\printtext{% \printtext[parens]{%
+	{\printunit{\addperiod\addspace}
+  \printtext{% \printtext[parens]{%
 	  \ifnumgreater{\value{pageref}}{1}%
 	    {\bibstring{backrefpages}\ppspace}%
 	    {\bibstring{backrefpage}\ppspace}%
 	  \printlist[pageref][-\value{listtotal}]{pageref}}}%
-}%% }}}3
+}%% <<<3
 
-\renewbibmacro*{url+urldate}{%% {{{3
+\renewbibmacro*{url+urldate}{%% >>>3
   \usebibmacro{url}%
   \iffieldundef{urlyear}%
     {}%
     {\setunit*{\addperiod\addspace}%
      \usebibmacro{urldate}}%
-}%% }}}3
+}%% <<<3
 
-\newbibmacro*{mathesis}{%% {{{3
+\newbibmacro*{mathesis}{%% >>>3
 	\iffieldundef{type}{%
 		\bibstring{dissertation}\addspace\printtext[parens]{\bibstring{mathesis}}%
 	}{%
 		\bibstring{dissertation}\addspace\printtext[parens]{\printfield{type}}%
 	}%
-}%% }}}3
+}%% <<<3
 
-\newbibmacro*{phdthesis}{%% {{{3
+\newbibmacro*{phdthesis}{%% >>>3
 	\iffieldundef{type}{%
 		\bibstring{thesis}\addspace\printtext[parens]{\bibstring{phdthesis}}%
 	}{%
 		\bibstring{thesis}\addspace\printtext[parens]{\printfield{type}}%
 	}%
-}%% }}}3
+}%% <<<3
 
-\newbibmacro*{language}{%% {{{3
+\newbibmacro*{language}{%% >>>3
 	\ifboolexpr{%
 		test {\iflistundef{language}}%
 		or%
@@ -1265,9 +1269,9 @@
 	{%
 		\printtext{\printlist{language}\addspace\printfield{origlanguage}}%
 	}%
-}%% }}}3
+}%% <<<3
 
-\renewbibmacro*{related:reprintfrom}[1]{%% {{{3
+\renewbibmacro*{related:reprintfrom}[1]{%% >>>3
   \entrydata*{#1}{%
     \usedriver%
       {\ifnameundef{savedauthor}%
@@ -1287,16 +1291,16 @@
           \renewbibmacro*{date}{\printdate}}%
        \renewbibmacro*{pageref}{}}%
       {\thefield{entrytype}}}%
-}%% }}}3
+}%% <<<3
 
-% }}}
+% <<<
 
-% }}}1
+% <<<1
 
 
-% Drivers {{{1
+% Drivers >>>1
 
-\DeclareBibliographyDriver{article}{%% {{{2
+\DeclareBibliographyDriver{article}{%% >>>2
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/organization}%
@@ -1331,7 +1335,7 @@
   \usebibmacro{issue+date}%
   \newunit%
   \printfield{note}%
-  \newunit\newblock%
+  \printunit{\addperiod\addspace}%
   \iftoggle{bbx:isbn}%
     {\printfield{issn}}%
     {}%
@@ -1339,7 +1343,7 @@
   \usebibmacro{doi+eprint+url}%
   \newunit\newblock%
   \usebibmacro{addendum+pubstate}%
-  \setunit{\bibpagerefpunct}\newblock%
+  \printunit{\bibpagerefpunct}\newblock%
   \usebibmacro{pageref}%
   \newunit\newblock%
   \iftoggle{bbx:related}%
@@ -1347,9 +1351,9 @@
      \usebibmacro{related}}%
     {}%
   \usebibmacro{finentry}%
-}%% }}}2
+}%% <<<2
 
-\DeclareBibliographyDriver{book}{%% {{{2
+\DeclareBibliographyDriver{book}{%% >>>2
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/editor+others}%
@@ -1384,7 +1388,7 @@
   \usebibmacro{language}%
   \newunit\newblock%
   \printfield{note}%
-  \newunit\newblock%
+  \printunit{\addperiod\addspace}%
   \iftoggle{bbx:isbn}%
     {\printfield{isbn}}%
     {}%
@@ -1392,7 +1396,7 @@
   \usebibmacro{doi+eprint+url}%
   \newunit\newblock%
   \usebibmacro{addendum+pubstate}%
-  \setunit{\bibpagerefpunct}\newblock%
+  \printunit{\bibpagerefpunct}\newblock%
   \usebibmacro{pageref}%
   \newunit\newblock%
   \iftoggle{bbx:related}%
@@ -1400,9 +1404,9 @@
      \usebibmacro{related}}%
     {}%
   \usebibmacro{finentry}%
-}%% }}}2
+}%% <<<2
 
-\DeclareBibliographyDriver{inbook}{%% {{{2
+\DeclareBibliographyDriver{inbook}{%% >>>2
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/editor+others}%
@@ -1427,7 +1431,7 @@
   \usebibmacro{series+number}%
   \newunit\newblock%
   \printfield{note}%
-  \newunit\newblock%
+  \printunit{\addperiod\addspace}%
   \iftoggle{bbx:isbn}%
     {\printfield{isbn}}%
     {}%
@@ -1435,7 +1439,7 @@
   \usebibmacro{doi+eprint+url}%
   \newunit\newblock%
   \usebibmacro{addendum+pubstate}%
-  \setunit{\bibpagerefpunct}\newblock%
+  \printunit{\bibpagerefpunct}\newblock%
   \usebibmacro{pageref}%
   \newunit\newblock%
   \iftoggle{bbx:related}%
@@ -1443,9 +1447,9 @@
      \usebibmacro{related}}%
     {}%
   \usebibmacro{finentry}%
-}%% }}}2
+}%% <<<2
 
-\DeclareBibliographyDriver{mvbook}{%% {{{2
+\DeclareBibliographyDriver{mvbook}{%% >>>2
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/editor+others}%
@@ -1477,7 +1481,7 @@
   \usebibmacro{language}%
   \newunit\newblock%
   \printfield{note}%
-  \newunit\newblock%
+  \printunit{\addperiod\addspace}%
   \iftoggle{bbx:isbn}%
     {\printfield{isbn}}%
     {}%
@@ -1485,7 +1489,7 @@
   \usebibmacro{doi+eprint+url}%
   \newunit\newblock%
   \usebibmacro{addendum+pubstate}%
-  \setunit{\bibpagerefpunct}\newblock%
+  \printunit{\bibpagerefpunct}\newblock%
   \usebibmacro{pageref}%
   \newunit\newblock%
   \iftoggle{bbx:related}%
@@ -1493,9 +1497,9 @@
      \usebibmacro{related}}%
     {}%
   \usebibmacro{finentry}%
-}%% }}}2
+}%% <<<2
 
-\DeclareBibliographyDriver{booklet}{%% {{{2
+\DeclareBibliographyDriver{booklet}{%% >>>2
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/editor+others}%
@@ -1531,7 +1535,7 @@
   \usebibmacro{doi+eprint+url}%
   \newunit\newblock%
   \usebibmacro{addendum+pubstate}%
-  \setunit{\bibpagerefpunct}\newblock%
+  \printunit{\bibpagerefpunct}\newblock%
   \usebibmacro{pageref}%
   \newunit\newblock%
   \iftoggle{bbx:related}%
@@ -1539,9 +1543,9 @@
      \usebibmacro{related}}%
     {}%
   \usebibmacro{finentry}%
-}%% }}}2
+}%% <<<2
 
-\DeclareBibliographyDriver{collection}{%% {{{2
+\DeclareBibliographyDriver{collection}{%% >>>2
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{editor+others}%
@@ -1576,7 +1580,7 @@
   \usebibmacro{language}%
   \newunit\newblock%
   \printfield{note}%
-  \newunit\newblock%
+  \printunit{\addperiod\addspace}%
   \iftoggle{bbx:isbn}%
     {\printfield{isbn}}%
     {}%
@@ -1584,7 +1588,7 @@
   \usebibmacro{doi+eprint+url}%
   \newunit\newblock%
   \usebibmacro{addendum+pubstate}%
-  \setunit{\bibpagerefpunct}\newblock%
+  \printunit{\bibpagerefpunct}\newblock%
   \usebibmacro{pageref}%
   \newunit\newblock%
   \iftoggle{bbx:related}%
@@ -1592,9 +1596,9 @@
      \usebibmacro{related}}%
     {}%
   \usebibmacro{finentry}%
-}%% }}}2
+}%% <<<2
 
-\DeclareBibliographyDriver{incollection}{%% {{{2
+\DeclareBibliographyDriver{incollection}{%% >>>2
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author}%
@@ -1617,7 +1621,7 @@
   \usebibmacro{series+number}%
   \newunit\newblock%
   \printfield{note}%
-  \newunit\newblock%
+  \printunit{\addperiod\addspace}%
   \usebibmacro{chapter+pages}%
   \newunit\newblock%
   \iftoggle{bbx:isbn}%
@@ -1627,7 +1631,7 @@
   \usebibmacro{doi+eprint+url}%
   \newunit\newblock%
   \usebibmacro{addendum+pubstate}%
-  \setunit{\bibpagerefpunct}\newblock%
+  \printunit{\bibpagerefpunct}\newblock%
   \usebibmacro{pageref}%
   \newunit\newblock%
   \iftoggle{bbx:related}%
@@ -1635,9 +1639,9 @@
      \usebibmacro{related}}%
     {}%
   \usebibmacro{finentry}%
-}%% }}}2
+}%% <<<2
 
-\DeclareBibliographyDriver{mvcollection}{%% {{{2
+\DeclareBibliographyDriver{mvcollection}{%% >>>2
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{editor+others}%
@@ -1669,7 +1673,7 @@
   \usebibmacro{language}%
   \newunit\newblock%
   \printfield{note}%
-  \newunit\newblock%
+  \printunit{\addperiod\addspace}%
   \iftoggle{bbx:isbn}%
     {\printfield{isbn}}%
     {}%
@@ -1677,7 +1681,7 @@
   \usebibmacro{doi+eprint+url}%
   \newunit\newblock%
   \usebibmacro{addendum+pubstate}%
-  \setunit{\bibpagerefpunct}\newblock%
+  \printunit{\bibpagerefpunct}\newblock%
   \usebibmacro{pageref}%
   \newunit\newblock%
   \iftoggle{bbx:related}%
@@ -1685,9 +1689,9 @@
      \usebibmacro{related}}%
     {}%
   \usebibmacro{finentry}%
-}%% }}}2
+}%% <<<2
 
-\DeclareBibliographyDriver{manual}{%% {{{2
+\DeclareBibliographyDriver{manual}{%% >>>2
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/editor+others}%
@@ -1715,7 +1719,7 @@
   \usebibmacro{series+number}%
   \newunit%
   \printfield{note}%
-  \newunit\newblock%
+  \printunit{\addperiod\addspace}%
   \iftoggle{bbx:isbn}%
     {\printfield{isbn}}%
     {}%
@@ -1723,7 +1727,7 @@
   \usebibmacro{doi+eprint+url}%
   \newunit\newblock%
   \usebibmacro{addendum+pubstate}%
-  \setunit{\bibpagerefpunct}\newblock%
+  \printunit{\bibpagerefpunct}\newblock%
   \usebibmacro{pageref}%
   \newunit\newblock%
   \iftoggle{bbx:related}%
@@ -1731,9 +1735,9 @@
      \usebibmacro{related}}%
     {}%
   \usebibmacro{finentry}%
-}%% }}}2
+}%% <<<2
 
-\DeclareBibliographyDriver{monography}{%% {{{2
+\DeclareBibliographyDriver{monography}{%% >>>2
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author}%
@@ -1755,7 +1759,7 @@
   \printeventdate%
   \newunit\newblock%
   \printfield{note}%
-  \newunit\newblock%
+  \printunit{\addperiod\addspace}%
   \iftoggle{bbx:isbn}%
     {\printfield{isbn}}%
     {}%
@@ -1763,7 +1767,7 @@
   \usebibmacro{doi+eprint+url}%
   \newunit\newblock%
   \usebibmacro{addendum+pubstate}%
-  \setunit{\bibpagerefpunct}\newblock%
+  \printunit{\bibpagerefpunct}\newblock%
   \usebibmacro{pageref}%
   \newunit\newblock%
   \iftoggle{bbx:related}%
@@ -1771,9 +1775,9 @@
      \usebibmacro{related}}%
     {}%
   \usebibmacro{finentry}%
-}%% }}}2
+}%% <<<2
 
-\DeclareBibliographyDriver{patent}{%% {{{2
+\DeclareBibliographyDriver{patent}{%% >>>2
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \ifnameundef{holder}{%
@@ -1823,11 +1827,11 @@
   \printfield{version}%
   \newunit%
   \printfield{note}%
-  \newunit\newblock%
+  \printunit{\addperiod\addspace}%
   \usebibmacro{doi+eprint+url}%
   \newunit\newblock%
   \usebibmacro{addendum+pubstate}%
-  \setunit{\bibpagerefpunct}\newblock%
+  \printunit{\bibpagerefpunct}\newblock%
   \usebibmacro{pageref}%
   \newunit\newblock%
   \iftoggle{bbx:related}%
@@ -1835,9 +1839,9 @@
      \usebibmacro{related}}%
     {}%
   \usebibmacro{finentry}%
-}%% }}}2
+}%% <<<2
 
-\DeclareBibliographyDriver{periodical}{%% {{{2
+\DeclareBibliographyDriver{periodical}{%% >>>2
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{editor+others/organization}%
@@ -1859,7 +1863,7 @@
   \printfield{pagetotal}%
   \newunit\newblock%
   \printfield{note}%
-  \newunit\newblock%
+  \printunit{\addperiod\addspace}%
   \iftoggle{bbx:isbn}%
     {\printfield{issn}}%
     {}%
@@ -1867,7 +1871,7 @@
   \usebibmacro{doi+eprint+url}%
   \newunit\newblock%
   \usebibmacro{addendum+pubstate}%
-  \setunit{\bibpagerefpunct}\newblock%
+  \printunit{\bibpagerefpunct}\newblock%
   \usebibmacro{pageref}%
   \newunit\newblock%
   \iftoggle{bbx:related}%
@@ -1875,9 +1879,9 @@
      \usebibmacro{related}}%
     {}%
   \usebibmacro{finentry}%
-}%% }}}2
+}%% <<<2
 
-\DeclareBibliographyDriver{supperiodical}{%% {{{2
+\DeclareBibliographyDriver{supperiodical}{%% >>>2
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/editor+others}%
@@ -1915,11 +1919,11 @@
   \printfield{pagetotal}%
   \newunit%
   \printfield{note}%
-  \newunit\newblock%
+  \printunit{\addperiod\addspace}%
   \usebibmacro{doi+eprint+url}%
   \newunit\newblock%
   \usebibmacro{addendum+pubstate}%
-  \setunit{\bibpagerefpunct}\newblock%
+  \printunit{\bibpagerefpunct}\newblock%
   \usebibmacro{pageref}%
   \newunit\newblock%
   \iftoggle{bbx:related}%
@@ -1927,9 +1931,9 @@
      \usebibmacro{related}}%
     {}%
   \usebibmacro{finentry}%
-}%% }}}2
+}%% <<<2
 
-\DeclareBibliographyDriver{proceedings}{%% {{{2
+\DeclareBibliographyDriver{proceedings}{%% >>>2
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{organization/eventtitle}%
@@ -1954,7 +1958,7 @@
   \printfield{volumes}%
   \newunit\newblock%
   \printfield{note}%
-  \newunit\newblock%
+  \printunit{\addperiod\addspace}%
   \printlist{organization}% % This has to be printed conditionally
   \newunit\newblock%
   \usebibmacro{chapter+pages}%
@@ -1968,7 +1972,7 @@
   \usebibmacro{doi+eprint+url}%
   \newunit\newblock%
   \usebibmacro{addendum+pubstate}%
-  \setunit{\bibpagerefpunct}\newblock%
+  \printunit{\bibpagerefpunct}\newblock%
   \usebibmacro{pageref}%
   \newunit\newblock%
   \iftoggle{bbx:related}%
@@ -1976,9 +1980,9 @@
      \usebibmacro{related}}%
     {}%
   \usebibmacro{finentry}%
-}%% }}}2
+}%% <<<2
 
-\DeclareBibliographyDriver{inproceedings}{%% {{{2
+\DeclareBibliographyDriver{inproceedings}{%% >>>2
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/translator+others}%
@@ -2025,7 +2029,7 @@
   \printfield{pagetotal}%
   \newunit\newblock%
   \printfield{note}%
-  \newunit\newblock%
+  \printunit{\addperiod\addspace}%
   \iftoggle{bbx:isbn}%
     {\printfield{isbn}}%
     {}%
@@ -2033,7 +2037,7 @@
   \usebibmacro{doi+eprint+url}%
   \newunit\newblock%
   \usebibmacro{addendum+pubstate}%
-  \setunit{\bibpagerefpunct}\newblock%
+  \printunit{\bibpagerefpunct}\newblock%
   \usebibmacro{pageref}%
   \newunit\newblock%
   \iftoggle{bbx:related}%
@@ -2041,9 +2045,9 @@
      \usebibmacro{related}}%
     {}%
   \usebibmacro{finentry}%
-}%% }}}2
+}%% <<<2
 
-\DeclareBibliographyDriver{report}{%% {{{2
+\DeclareBibliographyDriver{report}{%% >>>2
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/editor+others}%
@@ -2074,7 +2078,7 @@
   \usebibmacro{series+number}%
   \newunit\newblock%
   \printfield{note}%
-  \newunit\newblock%
+  \printunit{\addperiod\addspace}%
   \iftoggle{bbx:isbn}%
     {\printfield{isbn}}%
     {}%
@@ -2082,7 +2086,7 @@
   \usebibmacro{doi+eprint+url}%
   \newunit\newblock%
   \usebibmacro{addendum+pubstate}%
-  \setunit{\bibpagerefpunct}\newblock%
+  \printunit{\bibpagerefpunct}\newblock%
   \usebibmacro{pageref}%
   \newunit\newblock%
   \iftoggle{bbx:related}%
@@ -2090,9 +2094,9 @@
      \usebibmacro{related}}%
     {}%
   \usebibmacro{finentry}%
-}%% }}}2
+}%% <<<2
 
-\DeclareBibliographyDriver{thesis}{%% {{{2
+\DeclareBibliographyDriver{thesis}{%% >>>2
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author}%
@@ -2114,7 +2118,7 @@
   \printeventdate%
   \newunit\newblock%
   \printfield{note}%
-  \newunit\newblock%
+  \printunit{\addperiod\addspace}%
   \iftoggle{bbx:isbn}%
     {\printfield{isbn}}%
     {}%
@@ -2122,7 +2126,7 @@
   \usebibmacro{doi+eprint+url}%
   \newunit\newblock%
   \usebibmacro{addendum+pubstate}%
-  \setunit{\bibpagerefpunct}\newblock%
+  \printunit{\bibpagerefpunct}\newblock%
   \usebibmacro{pageref}%
   \newunit\newblock%
   \iftoggle{bbx:related}%
@@ -2130,9 +2134,9 @@
      \usebibmacro{related}}%
     {}%
   \usebibmacro{finentry}%
-}%% }}}2
+}%% <<<2
 
-\DeclareBibliographyDriver{misc}{%% {{{2
+\DeclareBibliographyDriver{misc}{%% >>>2
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/editor+others}%
@@ -2167,7 +2171,7 @@
   \usebibmacro{series+number}%
   \newunit\newblock%
   \printfield{note}%
-  \newunit\newblock%
+  \printunit{\addperiod\addspace}%
   \iftoggle{bbx:isbn}%
     {\printfield{isbn}}%
     {}%
@@ -2175,7 +2179,7 @@
   \usebibmacro{doi+eprint+url}%
   \newunit\newblock%
   \usebibmacro{addendum+pubstate}%
-  \setunit{\bibpagerefpunct}\newblock%
+  \printunit{\bibpagerefpunct}\newblock%
   \usebibmacro{pageref}%
   \newunit\newblock%
   \iftoggle{bbx:related}%
@@ -2183,21 +2187,21 @@
      \usebibmacro{related}}%
     {}%
   \usebibmacro{finentry}%
-}%% }}}2
+}%% <<<2
 
-\DeclareBibliographyDriver{set}{%% {{{2
+\DeclareBibliographyDriver{set}{%% >>>2
   \booltrue{bbx@inset}%
   \entryset{}{}%
   \newunit\newblock%
   \usebibmacro{setpageref}%
   \finentry%
-}%% }}}2
+}%% <<<2
 
-% }}}1
+% <<<1
 
 
 \endinput%
 
 
-% vim: set foldmarker=\ {{{,\ }}}
+% vim: set foldmarker=\ >>>,\ <<< :
 

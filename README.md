@@ -1,6 +1,6 @@
 # biblatex-abnt
 
-Version 2.1
+Version 3.0
 
 Permission is granted to copy, distribute and/or modify this software
 under the terms of the LaTeX Project Public License, version 1.3c
@@ -15,12 +15,11 @@ Estilo para `biblatex` compatível com as normas da ABNT.
 
 Substitui o pacote [`abntex2cite`](https://github.com/abntex/abntex2).
 
-**Requer `biblatex v3.4` e `biber v2.5`.**
+**Requer `biblatex v3.6` e `biber v2.6`.**
 
 O arquivo `biblatex-abnt.pdf` apresenta algumas informações sobre o uso do
 pacote e a compatibilidade com o `abntex2cite`. O arquivo `abnt-testcase.pdf`
-imprime todas as entradas usadas nos manuais do `abntex2cite` (incluindo todas
-as entradas usadas na norma 6023 (2000) da ABNT).
+imprime *ipsis litteris* todas as entradas citadas na norma 6023:2002 da ABNT.
 
 
 ## Instalação
@@ -41,7 +40,7 @@ Para instalá-lo manualmente, copie os arquivos `.bbx`, `.cbx` e `.lbx` para:
   \addbibresource{outroarquivo.bib}   % bibliografia vão aqui
   ```
 
-2. Use os comandos de citação (e.g. `\cite[p.~10]{entrada2016}`) para citar
+2. Use os comandos de citação (e.g. `\cite[10]{entrada2016}`) para citar
 suas entradas.
 
 3. Use o comando `\printbibliography` para imprimir a bibliografia.

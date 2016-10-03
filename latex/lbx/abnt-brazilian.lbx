@@ -13,19 +13,19 @@
 %% The Current Maintainer of this work is Daniel B. Marques.
 
 \ProvidesFile{abnt.lbx}%
-[2016/09/12\space v2.1\space ABNT biblatex citation style]%
+[2016/10/03\space v3.0\space ABNT BibLaTeX citation style]%
 
 
-% Init {{{
+% Init >>>
 
 \InheritBibliographyExtras{brazilian}%
 \DeclareBibliographyStrings{%
   inherit = {brazil},%
 }%
 
-% }}}
+% <<<
 
-% No preposition between month and year {{{1
+% No preposition between month and year >>>1
 
 \DeclareBibliographyExtras{%
   \protected\def\mkbibdatelong#1#2#3{%
@@ -40,9 +40,9 @@
     \thefield{#1}}%
 }%
 
-% }}}
+% <<<
 
-% Publication details {{{1
+% Publication details >>>1
 
 \NewBibliographyString{%
   apud,%
@@ -57,6 +57,7 @@
 
 \DeclareBibliographyStrings{%
   apud             = {{apud}{apud}},%
+  idem             = {{idem}{id\adddot}},%
   volume           = {{volume}{v\adddot}},%
   volumes          = {{volumes}{v\adddot}},%
   number           = {{número}{n\adddot}},%
@@ -81,9 +82,9 @@
   reviewof         = {{resenha de}{resenha de}},%
 }%
 
-% }}}
+% <<<
 
-% Languages {{{1
+% Languages >>>1
 
 \DeclareBibliographyStrings{%
   langamerican     = {{versão americana}{versão americana}},%
@@ -130,9 +131,9 @@
   fromswedish      = {{do original sueco}{do original sueco}},%
 }%
 
-% }}}
+% <<<
 
-% Roles expressed as functions {{{1
+% Roles expressed as functions >>>1
 
 \NewBibliographyString{%
   organizer,%
@@ -153,9 +154,9 @@
   coordinators    = {{coordenadores}{coord\adddot}},%
 }%
 
-% }}}
+% <<<
 
-% Roles expressed as objects {{{1
+% Roles expressed as objects >>>1
 
 \DeclareBibliographyStrings{%
   withcommentator  = {{comentário\addcolon}{comentário\addcolon}},%
@@ -165,11 +166,11 @@
   withafterword    = {{posfácio\addcolon}{posfácio\addcolon}},%
 }%
 
-% }}}
+% <<<
 
-% Roles expressed as actions {{{1
+% Roles expressed as actions >>>1
 
-\NewBibliographyString{% {{{2
+\NewBibliographyString{% >>>2
   byorganizer,%
   byorganizerfo,%
   bytechrev,%
@@ -190,9 +191,9 @@
   byinterpreter,%
   byillustrator,%
   bytechrev,%
-}% }}}
+}% <<<
 
-\DeclareBibliographyStrings{% {{{2
+\DeclareBibliographyStrings{% >>>2
   bycoeditor       = {{co-edição\addcolon}%
                      {co-edição\addcolon}},%
   bydirector       = {{direção\addcolon}%
@@ -325,11 +326,11 @@
                      {tradução, notas e prefácio\addcolon}},%
   bytranslatoranaf = {{tradução, notas e posfácio\addcolon}%
                      {tradução, notas e posfácio\addcolon}},%
-}% }}}
+}% <<<
 
-% }}}
+% <<<
 
 \endinput%
 
-% vim: set foldmarker=\ {{{,\ }}}
+% vim: set foldmarker=\ >>>,\ <<< :
 
