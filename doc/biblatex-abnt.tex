@@ -76,8 +76,8 @@
 
 % }}}
 
-\newcommand{\version}{2.1}
-\newcommand{\requirements}{\texttt{biblatex 3.4} e \texttt{biber 2.5}}
+\newcommand{\version}{3.0}
+\newcommand{\requirements}{\texttt{biblatex 3.6} e \texttt{biber 2.6}}
 \title{biblatex-abnt \version}
 \author{Daniel B. Marques}
 
@@ -181,7 +181,7 @@ específicas. E.g.:
 Comandos principais:
 
 \begin{description}[style=nextline, labelindent=2em, leftmargin=4em]
-  \item [\PVerb{\cite{bosi08}}] \cite{bosi08}
+  \item [\PVerb{\cite{amaral15}}] \cite{amaral15}
   \item [\PVerb{\textcite{bosi08}}] \textcite{bosi08}
   \item [\PVerb{\apud{assis08}{bosi08}}] \apud{assis08}{bosi08}
   \item [\PVerb{\cites{moretti09}{mann09}{amaral15}}]
@@ -213,7 +213,7 @@ Exceto pelo comando \PVerb{\textcite*}, que imprime o nome completo do autor,
     as versões com asterisco dos comandos acima imprimem o mesmo texto sem os
     parênteses:
 
-\begin{description}[style=nextline, labelindent=2em, leftmargin=4em]
+\begin{description}[style=nextline, labelindent=2em, leftmargin=4em, parsep=4pt]
   \item [\PVerb{\textcite*{bosi08}}] \textcite*{bosi08}
   \item [\PVerb{\cite*{bosi08}}] \cite*{bosi08}
   \item [\PVerb{\citetitle*{bosi08}}] \citetitle*{bosi08}
@@ -271,12 +271,46 @@ Exceto pelo comando \PVerb{\textcite*}, que imprime o nome completo do autor,
     \textcitedelim}}
 \makeatother
 
-\begin{description}[style=nextline, parsep=8pt]
+\begin{description}[style=nextline, parsep=4pt]
     \item [\PVerb{\textcite{bosi08}}] \textcite{bosi08}
     \item [\PVerb{Bosi \cite{bosi08}}] Bosi \cite{bosi08}
     \item [\PVerb{Bosi \supercite{bosi08}}] Bosi \supercite{bosi08}
 \end{description}
 
+
+\begingroup
+\let\clearpage\relax
+\subsection{Estilo \texttt{abnt-ibid}}
+\endgroup
+
+\makeatletter
+\DeclareCiteCommand{\@apud}[\mkbibfootnote]%
+	{\iffieldundef{prenote}%
+		{}%
+		{\printfield[uppercasecite]{prenote}%
+		\addspace\bibstring{apud}\addspace}}%
+	{\usebibmacro{citeindex}%
+	\usebibmacro{footcite:short}}%
+	{\setunit{\multicitedelim}}%
+	{\usebibmacro{postnote}}%
+	
+\DeclareMultiCiteCommand{\apud}[\addapud\mkbibfootnote]%
+	{\@apud}%
+	{\setunit{\multicitedelim}%
+}%
+\makeatother
+
+\begin{description}[style=nextline, parsep=4pt]
+    \item [\PVerb{Segundo o autor\footcite{bosi08}}] Segundo o autor\footcite{bosi08}
+    \item [\PVerb{Segundo o autor\apud{assis08}{bosi08}}] Segundo o autor\apud{assis08}{bosi08}
+\end{description}
+
+A referência é abreviada e as abreviações ``id.'', ``ibid.'' e ``op. cit.'' são adicionadas automaticamente quando apropriado:
+
+\begin{description}[style=nextline, parsep=4pt]
+    \item [\PVerb{Segundo o autor\footcite[25]{bosi08}}] Segundo o autor\footcite[25]{bosi08}
+    \item [\PVerb{Segundo o autor\footcite[43]{bosi08}}] Segundo o autor\footcite[43]{bosi08}
+\end{description}
 
 
 \clearpage
