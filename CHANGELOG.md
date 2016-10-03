@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - Add examples form NBR 6023:2002
+- Add `abnt-ibid` style
 
 ### Changed
 - Make `bftitles` default and add `ittitles`
