@@ -11,4 +11,6 @@
 *.swp
 *.synctex.gz
 *.fdb_latexmk
+*.listing
 .DS_Store
+.dialect.*

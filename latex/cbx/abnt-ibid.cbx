@@ -186,35 +186,40 @@
 \newbibmacro*{footcite}{% >>>2
   \usebibmacro{footcite:citepages}%
   \global\togglefalse{cbx:loccit}%
-  \ifciteseen%
-    {\iffieldundef{shorthand}%
-       {\ifboolexpr{%
-          test {\ifciteibid}%
+  \ifciteseen{%
+    \iffieldundef{shorthand}{%
+      \ifboolexpr{%
+        test {\ifciteibid}%
+        and%
+        not test {\iffirstonpage}%
+      }{%
+        \usebibmacro{footcite:ibid}%
+      }{%
+        \ifboolexpr{%
+          test {\ifciteidem}%
           and%
           not test {\iffirstonpage}%
         }{%
-          \usebibmacro{footcite:ibid}%
+          \usebibmacro{footcite:idem}%
         }{%
           \ifboolexpr{%
-            test {\ifciteidem}%
+            test {\ifopcit}%
             and%
             not test {\iffirstonpage}%
           }{%
-            \usebibmacro{footcite:idem}%
+            \usebibmacro{footcite:opcit}%
           }{%
-            \ifboolexpr{%
-              test {\ifopcit}%
-              and%
-              not test {\iffirstonpage}%
-            }{%
-              \usebibmacro{footcite:opcit}%
-            }{%
-              \usebibmacro{footcite:short}%
-            }%
+            \usebibmacro{footcite:short}%
           }%
-        }}%
-       {\usebibmacro{footcite:shorthand}}}%
-    {\usebibmacro{footcite:full}}}% <<<2
+        }%
+      }%
+    }{%
+      \usebibmacro{footcite:shorthand}%
+    }%
+  }{%
+    \usebibmacro{footcite:full}%
+  }%
+}% <<<2
 
 \newbibmacro*{footcite:full}{% >>>2
   \usebibmacro{footcite:full:citepages}%
@@ -303,6 +308,15 @@
   {\usebibmacro{prenote}}%
   {\usebibmacro{citeindex}%
    \usebibmacro{footcite}}%
+  {\multicitedelim}%
+  {\usebibmacro{footcite:postnote}}% <<<2
+
+\DeclareCiteCommand*{\footcite}[\mkbibfootnote]% >>>2
+  {\usebibmacro{prenote}}%
+  {\usebibmacro{citeindex}%
+   \usebibmacro{footcite:citepages}%
+   \global\togglefalse{cbx:loccit}%
+   \usebibmacro{footcite:short}}%
   {\multicitedelim}%
   {\usebibmacro{footcite:postnote}}% <<<2
 
