@@ -295,6 +295,47 @@ originais excluindo os parênteses:
 \end{example}
 % <<<3
 
+
+\subsection{Estilo \texttt{abnt-ibid}}% >>>3
+
+\makeatletter
+\DeclareCiteCommand{\@apud}[\mkbibfootnote]%
+	{\iffieldundef{prenote}%
+		{}%
+		{\printfield[uppercasecite]{prenote}%
+		\addspace\bibstring{apud}\addspace}}%
+	{\usebibmacro{citeindex}%
+	\usebibmacro{footcite:short}}%
+	{\setunit{\multicitedelim}}%
+	{\usebibmacro{postnote}}%
+
+\DeclareMultiCiteCommand{\apud}[\addapud\mkbibfootnote]%
+	{\@apud}%
+	{\setunit{\multicitedelim}%
+}%
+\makeatother
+
+\begin{example}
+Segundo o autor\footcite{bosi08}\\
+Segundo o autor\footcite{assis08:1}
+\end{example}
+
+\begin{example}
+Segundo o autor\apud{assis08}{bosi08}
+\end{example}
+
+A referência é abreviada automaticamente e as abreviações ``id.'',
+``ibid.'', ``op. cit.'' e ``loc. cit.'' são adicionadas quando apropriado:
+
+\begin{example}
+Segundo o autor\footcite[25]{assis08}\\
+Segundo o autor\footcite[55]{assis08:1}\\
+Segundo o autor\footcite[43]{bosi08}\\
+Segundo o autor\footcite[134]{bosi08}\\
+Segundo o autor\footcite[25]{assis08}\\
+Segundo o autor\footcite[254]{bosi08}
+\end{example}% <<<3
+
 \subsection{Estilo \texttt{abnt-numeric}}% >>>3
 
 \DeclareCiteCommand{\supercite}[\mkbibsuperscript]
@@ -355,46 +396,6 @@ Bosi \cite{bosi08}
 Bosi \supercite{bosi08}
 \end{example}
 % <<<3
-
-\begingroup
-\let\clearpage\relax
-\subsection{Estilo \texttt{abnt-ibid}}% >>>3
-\endgroup
-
-\makeatletter
-\DeclareCiteCommand{\@apud}[\mkbibfootnote]%
-	{\iffieldundef{prenote}%
-		{}%
-		{\printfield[uppercasecite]{prenote}%
-		\addspace\bibstring{apud}\addspace}}%
-	{\usebibmacro{citeindex}%
-	\usebibmacro{footcite:short}}%
-	{\setunit{\multicitedelim}}%
-	{\usebibmacro{postnote}}%
-
-\DeclareMultiCiteCommand{\apud}[\addapud\mkbibfootnote]%
-	{\@apud}%
-	{\setunit{\multicitedelim}%
-}%
-\makeatother
-
-\begin{example}
-Segundo o autor\footcite{bosi08}
-\end{example}
-
-\begin{example}
-Segundo o autor\apud{assis08}{bosi08}
-\end{example}
-
-A referência é abreviada automaticamente e as abreviações ``id.'',
-``ibid.'' e ``op. cit.'' são adicionadas quando apropriado:
-
-\begin{example}
-Segundo o autor\footcite[25]{assis08}\\
-Segundo o autor\footcite[43]{bosi08}\\
-Segundo o autor\footcite[139]{assis08}\\
-Segundo o autor\footcite[258]{assis08}
-\end{example}% <<<3
 
 % <<<2
 

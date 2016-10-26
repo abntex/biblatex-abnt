@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [Unreleased]
+
+### Added
+- Add "loc. cit." to `abnt-ibid` style
+- Add \textcite to `abnt-ibid` style
+
+
 ## [3.0] - 2016-10-13
 
 ### Added
@@ -55,6 +62,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Add "et al." in citations
 
 
+[Unreleased]: https://github.com/abntex/biblatex-abnt/compare/v3.0...HEAD
 [3.0]: https://github.com/abntex/biblatex-abnt/compare/v2.0.1...v3.0
 [2.0.1]: https://github.com/abntex/biblatex-abnt/compare/v2.0...v2.0.1
 [2.0]: https://github.com/abntex/biblatex-abnt/compare/v1.0.1...v2.0
