@@ -436,20 +436,21 @@
      {}%
      {\usebibmacro{textcite:count}%
       \savefield{namehash}{\cbx@lasthash}}%
-   \ifnumequal{\value{footcitecount}}{\value{footcitetotal}}%
-     {\protected@xappto\cbx@textcite@args{{\cbx@savedkeys}}%
+   \ifnumequal{\value{citecount}}{\value{citetotal}}{%
+      \protected@xappto\cbx@textcite@args{{\cbx@savedkeys}}%
       \protected@xappto\cbx@footcite@args{%
-        [\thefield{prenote}][\thefield{postnote}]{\cbx@savedkeys}}%
-      \iflastcitekey%
-        {\protected@xappto\cbx@textcite@args{\thefield{postpunct}}%
-         \protected@xappto\cbx@footcite@args{\nopunct}}%
-        {}}%
-     {}}%
+        [\thefield{prenote}][\thefield{postnote}]{\cbx@savedkeys}%
+      }%
+      \iflastcitekey{%
+         \protected@xappto\cbx@textcite@args{\thefield{postpunct}}%
+         \protected@xappto\cbx@footcite@args{\nopunct}%
+      }{}%
+    }{}}%
   {}%
   {}% <<<2
 
 % textcite has nested \DeclareCiteCommand definitions for
-% textcite and we want to use % the normal textcite context
+% textcite and we want to use the normal textcite context
 \DeclareDelimcontextAlias{cbx@textcite}{textcite}%
 
 \newrobustcmd{\cbx@textcite@init}[3]{% >>>2
