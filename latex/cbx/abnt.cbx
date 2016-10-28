@@ -335,6 +335,21 @@
 
 % <<<2
 
+\DeclareCiteCommand*{\footcite}[\mkbibfootnote]% >>>2
+  {\usebibmacro{prenote}}%
+  {\usebibmacro{citeindex}%
+   \usebibmacro{footcite}}%
+  {\multicitedelim}%
+  {\usebibmacro{footcite:postnote}}% <<<2
+
+\DeclareCiteCommand{\footcite}[\mkbibfootnote]% >>>2
+  {\usebibmacro{prenote}}%
+  {\usebibmacro{citeindex}%
+   \usebibmacro{footcite:citepages}%
+   \usebibmacro{footcite:short}}%
+  {\multicitedelim}%
+  {\usebibmacro{footcite:postnote}}% <<<2
+
 % <<<1
 
 

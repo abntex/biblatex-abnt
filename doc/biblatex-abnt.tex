@@ -224,7 +224,7 @@ Comandos principais:
 Outros exemplos:
 
 \begin{example}
-Segundo o autor\footcite{assis08}
+Como sabemos\footcite[Cf.][]{assis08},
 \end{example}
 
 \begin{example}
@@ -260,13 +260,12 @@ Assis \cite[apud][p.~200]{bosi08}
 \end{example}
 
 
-Enquanto o comando \PVerb{\footcite} imprime a referência inteira, sua versão
+Enquanto o comando \PVerb{\footcite} imprime a versão abreviada da referência, o comando \PVerb{\footcite*} imprime a referência inteira, sua versão
 abreviada ou as abreviações ``id.'', ``ibid.'' e ``op. cit.'' de acordo com
-as instruções da ABNT, a versão com asterisco (\PVerb{\footcite*}) imprime
-sempre a versão abreviada:
+as instruções da ABNT (No estilo \texttt{abnt} os comandos \PVerb{\footcite} e \PVerb{\footcite*} são invertidos em relação ao estilo \texttt{abnt-ibid}:
 
 \begin{example}
-Segundo o autor\footcite*{assis08}
+Como sabemos\footcite*[Cf.][]{assis08},
 \end{example}
 
 O comando \PVerb{\textcite*}, por sua vez, imprime o nome completo do autor:
