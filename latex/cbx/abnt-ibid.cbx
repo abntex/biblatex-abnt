@@ -231,6 +231,48 @@
   }%
 }% <<<2
 
+\newbibmacro*{footcitestar}{% >>>2
+  \usebibmacro{footcite:citepages}%
+  \global\togglefalse{cbx:loccit}%
+  \iffieldundef{shorthand}{%
+    \ifboolexpr{%
+      test {\ifciteibid}%
+      and%
+      not test {\iffirstonpage}%
+    }{%
+      \usebibmacro{footcite:ibid}%
+    }{%
+      \ifboolexpr{%
+        test {\ifciteidem}%
+        and%
+        not test {\iffirstonpage}%
+      }{%
+        \usebibmacro{footcite:idem}%
+      }{%
+        \ifboolexpr{%
+          test {\ifloccit}%
+          and%
+          not test {\iffirstonpage}%
+        }{%
+          \usebibmacro{footcite:loccit}%
+        }{%
+          \ifboolexpr{%
+            test {\ifopcit}%
+            and%
+            not test {\iffirstonpage}%
+          }{%
+            \usebibmacro{footcite:opcit}%
+          }{%
+            \usebibmacro{footcite:short}%
+          }%
+        }%
+      }%
+    }%
+  }{%
+    \usebibmacro{footcite:shorthand}%
+  }%
+}% <<<2
+
 \newbibmacro*{footcite:full}{% >>>2
   \usebibmacro{footcite:full:citepages}%
   \printtext[bibhypertarget]{%
@@ -345,8 +387,7 @@
 \DeclareCiteCommand*{\footcite}[\mkbibfootnote]% >>>2
   {\usebibmacro{prenote}}%
   {\usebibmacro{citeindex}%
-   \usebibmacro{footcite:citepages}%
-   \usebibmacro{footcite:short}}%
+   \usebibmacro{footcitestar}}%
   {\multicitedelim}%
   {\usebibmacro{footcite:postnote}}% <<<2
 
