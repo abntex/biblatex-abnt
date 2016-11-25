@@ -923,7 +923,9 @@
 		\usebibmacro{bbx:dashcheck}{%
       \iffieldundef{authortype}{%
         \bibnamedash%
-        .%
+        \iftoggle{usedashes}{}{% else
+          .%
+        }
         \newunit\newblock%
         \printfield{nameaddon}%
       }{%
