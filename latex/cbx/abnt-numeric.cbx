@@ -40,6 +40,16 @@
   {\multicitedelim}
   {\usebibmacro{postnote}}% <<<2
 
+\DeclareCiteCommand{\cbx@textcite}% >>>2
+  {\usebibmacro{textcite:init}% Mudar \multinamedelim e \finalnamedelim.
+  \boolfalse{cbx:parens}%
+  \renewcommand*{\finalnamedelim}{\addspace\bibstring{and}\addspace}%
+  \renewcommand*{\multinamedelim}{\addcomma\addspace}}%
+  {\usebibmacro{citeindex}%
+   \usebibmacro{textcite}}
+  {}
+  {\usebibmacro{textcite:postnote}}% <<<2
+
 \DeclareMultiCiteCommand{\cites}[\mkbibparens]{\cite}{\multicitedelim}
 
 \DeclareMultiCiteCommand{\parencites}%
