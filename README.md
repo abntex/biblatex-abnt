@@ -26,9 +26,11 @@ imprime *ipsis litteris* todas as entradas citadas na norma 6023:2002 da ABNT.
 
 O `biblatex-abnt` está incluso no TeX Live 2016.
 
-Para instalá-lo manualmente, copie os arquivos `.bbx`, `.cbx` e `.lbx` para:
+Para instalá-lo manualmente, copie os arquivos `.bbx`, `.cbx` e `.lbx` para
 
-`<TEXMFLOCAL>/tex/latex/biblatex-contrib/biblatex-abnt/`
+    <TEXMFLOCAL>/tex/latex/biblatex-contrib/biblatex-abnt/
+
+e atualize o banco de dados do TeX (rodando o `texhash`, por exemplo).
 
 ## Uso
 
