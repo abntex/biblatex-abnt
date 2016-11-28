@@ -628,7 +628,7 @@
 
 % <<<
 
-\DeclareFieldFormat{noformat}{\normalfont{#1}}%
+\DeclareFieldFormat{normalfont}{\normalfont{#1}}%
 
 % <<<2
 
@@ -770,9 +770,9 @@
             test {\iffieldundef{related}}%
           }%
 						{\printfield[titlecase]{title}}%
-						{\printfield[noformat]{title}}}%
+						{\printfield[normalfont]{title}}}%
 				\normalfont{\setunit*{\subtitlepunct}%
-				\printfield[noformat]{subtitle}%
+				\printfield[normalfont]{subtitle}%
 				\setunit{\addperiod\addspace}}}%
 		\newunit}}%
 	\printfield{titleaddon}%
@@ -810,7 +810,7 @@
         \printfield[titlecase]{booktitle}%
       }%
       \normalfont{\setunit*{\subtitlepunct}}%
-      \printfield[noformat]{booksubtitle}}%
+      \printfield[normalfont]{booksubtitle}}%
       \newunit}%
   \printfield{booktitleaddon}%
 }%% <<<3
@@ -829,7 +829,7 @@
         \printfield[titlecase]{maintitle}%
       }%
       \normalfont{\setunit*{\subtitlepunct}}%
-      \printfield[noformat]{mainsubtitle}}%
+      \printfield[normalfont]{mainsubtitle}}%
       \newunit}%
   \printfield{maintitleaddon}%
 }%% <<<3
@@ -871,7 +871,7 @@
     {\printtext[journaltitle]{%
        \printfield[titlecase]{journaltitle}%
        \setunit{\subtitlepunct}%
-       \printfield[noformat]{journalsubtitle}}}%
+       \printfield[normalfont]{journalsubtitle}}}%
 }%% <<<3
 
 \newbibmacro{journal+section}{%% >>>3
@@ -901,12 +901,12 @@
 		\printtext[title]{%
 	       \unspace\printfield[upperfirst]{title}%
 		\normalfont{\setunit*{\subtitlepunct}%
-	       \printfield[noformat]{subtitle}}}%
+	       \printfield[normalfont]{subtitle}}}%
 	}%
 	{\printtext[title]{%
        \printfield[titlecase]{title}%
 	   \normalfont{\setunit*{\subtitlepunct}%
-       \printfield[noformat]{subtitle}}}}%
+       \printfield[normalfont]{subtitle}}}}%
 	}%
 }%% <<<3
 
@@ -1156,7 +1156,7 @@
     {\printtext[issuetitle]{%
        \printfield[upperfirst]{issuetitle}%
        \setunit*{\subtitlepunct}%
-       \printfield[noformat]{issuesubtitle}}}%
+       \printfield[normalfont]{issuesubtitle}}}%
 }%% <<<3
 
 \renewbibmacro*{issue+date}{%% >>>3
@@ -1222,7 +1222,7 @@
 		\printtext[parens]{%
 			\printfield{series}%
 			\setunit*{\addcomma\addspace}%
-			\printfield[noformat]{number}%
+			\printfield[normalfont]{number}%
 			\newunit}%
 		}%
 }%% <<<3
@@ -1851,7 +1851,7 @@
   \setunit{\labelnamepunct}\newblock%
   \printfield[uppercase]{title}%
   \setunit*{\addcolon\addspace}%
-  \printfield[noformat]{subtitle}%
+  \printfield[normalfont]{subtitle}%
   \newunit%
   \printfield{titleaddon}%
   \newunit\newblock%
