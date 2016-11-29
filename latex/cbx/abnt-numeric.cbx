@@ -81,6 +81,54 @@
       {}%
     \textcitedelim}}% <<<1
 
+% bibhyperref >>>1
+
+\DeclareFieldFormat{citehyperref}{%% >>>2
+  \DeclareFieldAlias{bibhyperref}{noformat}% Avoid nested links
+  \bibhyperref{#1}%
+}% <<<2
+
+\DeclareFieldFormat{textcitehyperref}{%% >>>2
+  \DeclareFieldAlias{bibhyperref}{noformat}% Avoid nested links
+  \bibhyperref{%
+    #1%
+    \ifbool{cbx:parens}%
+      {\bibcloseparen\global\boolfalse{cbx:parens}}%
+      {}}%
+}% <<<2
+
+\savebibmacro{cite}%
+\savebibmacro{textcite}%
+
+\renewbibmacro*{cite}{%% >>>2
+  \printtext[citehyperref]{%
+    \restorebibmacro{cite}%
+    \usebibmacro{cite}}%
+}% <<<2
+
+\renewbibmacro*{textcite}{%% >>>2
+  \ifboolexpr{%
+    (%
+      not test {\iffieldundef{prenote}}%
+      and%
+      test {\ifnumequal{\value{citecount}}{1}}%
+    )%
+    or%
+    (%
+      not test {\iffieldundef{postnote}}%
+      and%
+      test {\ifnumequal{\value{citecount}}{\value{citetotal}}}%
+    )%
+  }%
+    {\DeclareFieldAlias{textcitehyperref}{noformat}}%
+    {}%
+  \printtext[textcitehyperref]{%
+    \restorebibmacro{textcite}%
+    \usebibmacro{textcite}}%
+}% <<<2
+
+% <<<1
+
 \endinput
 
 
