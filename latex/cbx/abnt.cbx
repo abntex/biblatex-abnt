@@ -355,33 +355,35 @@
 % Macros >>>1
 
 \renewbibmacro*{cite}{%% >>>2
-  \iffieldequals{fullhash}{\cbx@lasthash}%
-   {\usebibmacro{cite:plabelyear+extrayear}}%
-   {\iffieldundef{shorthand}{%
+  \iffieldequals{fullhash}{\cbx@lasthash}{%
+    \usebibmacro{cite:plabelyear+extrayear}%
+  }{%
+    \iffieldundef{shorthand}{%
       \ifnameundef{shortauthor}{%
-            \ifnameundef{holder}{%
-              \ifnameundef{labelname}{%
-                \iflistundef{organization}{%
-                  \usebibmacro{cite:noname}%
-                }{%
-                  \printlist[uppercase]{organization}%
-                }%
-              }{%
-                \printtext[bibhyperref]{\printnames[LAST]{labelname}}%
-              }%
+        \ifnameundef{holder}{%
+          \ifnameundef{labelname}{%
+            \iflistundef{organization}{%
+              \usebibmacro{cite:noname}%
             }{%
-              \printnames[LAST]{holder}%
+              \printlist[uppercase]{organization}%
             }%
           }{%
-            \printnames[LAST]{shortauthor}%
+            \printtext[bibhyperref]{\printnames[LAST]{labelname}}%
           }%
+        }{%
+          \printnames[LAST]{holder}%
+        }%
       }{%
-        \usebibmacro{cite:shorthand}%
+        \printnames[LAST]{shortauthor}%
       }%
-     \setunit{\nameyeardelim}%
-      \usebibmacro{cite:plabelyear+extrayear}%
-      \savefield{fullhash}{\cbx@lasthash}}%
-   \setunit{\multicitedelim}%
+        \setunit{\nameyeardelim}%
+        \usebibmacro{cite:plabelyear+extrayear}%
+    }{%
+      \usebibmacro{cite:shorthand}%
+    }%
+   \savefield{fullhash}{\cbx@lasthash}%
+  }%
+  \setunit{\multicitedelim}%
 }% <<<2
 
 \renewbibmacro*{textcite}{%% >>>2
