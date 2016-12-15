@@ -115,10 +115,11 @@ problema na compilação, cheque se seus pacotes estão atualizados.
 O \texttt{biblatex-abnt} está incluso no TeX Live 2016.
 
 Para instalá-lo manualmente, copie os arquivos \texttt{.bbx}, \texttt{.cbx} e
-\texttt{.lbx} para:
+\texttt{.lbx} para
 \begin{verbatim}
     <TEXMFLOCAL>/tex/latex/biblatex-contrib/biblatex-abnt/
 \end{verbatim}
+e atualize o banco de dados do TeX (rodando o `texhash`, por exemplo).
 % <<<2
 
 \section{Uso}% >>>2
@@ -138,7 +139,7 @@ arquivo {.tex}:
     \addbibresource{outroarquivo.bib}   % bibliografia vão aqui.
 \end{verbatim}
 
-Após as opções \texttt{backend} e \texttt{style}, podem ser acrescentadas
+Após a opção \texttt{style}, podem ser acrescentadas
 as opções descritas na seção \ref{sec:opções}.
 
 Use os comandos descritos na seção \ref{sec:comandos} para citar obras.
@@ -159,9 +160,9 @@ As opções a seguir podem ser usadas ao chamar o pacote \texttt{biblatex}:
   \item [ittitles] Usa itálico para os títulos na bibliografia
   \item [giveninits] Abrevia os primeiros nomes na bibliografia
   \item [uniquename=init] Necessário ao usar a opção \texttt{giveninits}
+  \item [nosl] Oculta as abreviações [s.l.] na bibliografia
+  \item [nosn] Oculta as abreviações [s.n.] na bibliografia
   \item [noslsn] Oculta as abreviações [s.l], [s.n] e [s.l.: s.n.]
-  \item [nosl] Oculta apenas as abreviações [s.l.] na bibliografia
-  \item [nosn] Oculta apenas as abreviações [s.n.] na bibliografia
   \item [repeatfields] Imprime os campos repetidos na bibliografia, em vez de
     substituí-los por traços sublineares
   \item [repeatfirstfields] Repete apenas o primeiro campo de cada entrada,
@@ -262,10 +263,10 @@ Assis \cite[apud][p.~200]{bosi08}
 
 Enquanto o comando \PVerb{\footcite} imprime a versão abreviada da referência, o comando \PVerb{\footcite*} imprime a referência inteira, sua versão
 abreviada ou as abreviações ``id.'', ``ibid.'' e ``op. cit.'' de acordo com
-as instruções da ABNT (No estilo \texttt{abnt} os comandos \PVerb{\footcite} e \PVerb{\footcite*} são invertidos em relação ao estilo \texttt{abnt-ibid}:
+as instruções da ABNT (No estilo \texttt{abnt} os comandos \PVerb{\footcite} e \PVerb{\footcite*} são invertidos em relação ao estilo \texttt{abnt-ibid}):
 
 \begin{example}
-Como sabemos\footcite*[Cf.][]{assis08},
+Como sabemos\footcite*[Cf.][]{bosi08},
 \end{example}
 
 O comando \PVerb{\textcite*}, por sua vez, imprime o nome completo do autor:
