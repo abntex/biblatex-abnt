@@ -125,17 +125,17 @@
 
 \DeclareFieldFormat{citetitle}{%% >>>3
   \iftoggle{sccite}{%
-    \normalfont\textsc{\MakeLowercase{\FirstWord{#1}}}\ldots,%
+    \normalfont\textsc{\MakeLowercase{\FirstWord{#1}}}\ldots\isdot%
   }{%
-    \normalfont\MakeUppercase{\FirstWord{#1}}\ldots,%
+    \normalfont\MakeUppercase{\FirstWord{#1}}\ldots\isdot%
   }%
 }%% <<<3
 
 \DeclareFieldFormat{noname}{%% >>>3
   \iftoggle{sccite}{%
-    \normalfont\textsc{\MakeLowercase{\FirstWord{#1}}}\ldots,%
+    \normalfont\textsc{\MakeLowercase{\FirstWord{#1}}}\ldots\isdot%
   }{%
-    \normalfont\MakeUppercase{\FirstWord{#1}}\ldots,%
+    \normalfont\MakeUppercase{\FirstWord{#1}}\ldots\isdot%
   }%
 }%% <<<3
 
