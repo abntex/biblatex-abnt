@@ -8,6 +8,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Add "loc. cit." to `abnt-ibid` style
 - Add \textcite to `abnt-ibid` style
+- Add ellipsis after abbreviated titles in citations
+
+### Fixed
+- Fix citations of articles with no author
 
 
 ## [3.0] - 2016-10-13
