@@ -125,9 +125,17 @@
 
 \DeclareFieldFormat{citetitle}{%% >>>3
   \iftoggle{sccite}{%
-    \normalfont\textsc{\MakeLowercase{\FirstWord{#1}}}%
+    \normalfont\textsc{\MakeLowercase{\FirstWord{#1}}}\ldots,%
   }{%
-    \normalfont\MakeUppercase{\FirstWord{#1}}%
+    \normalfont\MakeUppercase{\FirstWord{#1}}\ldots,%
+  }%
+}%% <<<3
+
+\DeclareFieldFormat{noname}{%% >>>3
+  \iftoggle{sccite}{%
+    \normalfont\textsc{\MakeLowercase{\FirstWord{#1}}}\ldots,%
+  }{%
+    \normalfont\MakeUppercase{\FirstWord{#1}}\ldots,%
   }%
 }%% <<<3
 
@@ -439,7 +447,7 @@
 }% <<<2
 
 \newbibmacro*{cite:noname}{%% >>>2
-  \printfield[citetitle]{title}%
+  \printfield[noname]{title}%
 }% <<<2
 
 \def\citeresetabnt{\global\let\cbx@abnt@names\@empty}%
