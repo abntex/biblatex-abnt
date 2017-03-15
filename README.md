@@ -47,7 +47,5 @@ suas entradas.
 
 3. Use o comando `\printbibliography` para imprimir a bibliografia.
 
-*Consulte o arquivo `biblatex-abnt.pdf` e o [manual do
-`biblatex`](http://mirrors.ctan.org/macros/latex/contrib/biblatex/doc/biblatex
-.pdf) para informações sobre as opções e comandos disponíveis.*
+*Consulte [o arquivo `biblatex-abnt.pdf`](https://github.com/abntex/biblatex-abnt/raw/master/doc/biblatex-abnt.pdf) e o [manual do `biblatex`](http://mirrors.ctan.org/macros/latex/contrib/biblatex/doc/biblatex.pdf) para informações sobre as opções e comandos disponíveis.*
 
