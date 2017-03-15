@@ -1,6 +1,6 @@
 # biblatex-abnt
 
-Version 3.0
+Version 3.0.1
 
 Permission is granted to copy, distribute and/or modify this software
 under the terms of the LaTeX Project Public License, version 1.3c
@@ -50,3 +50,4 @@ suas entradas.
 *Consulte o arquivo `biblatex-abnt.pdf` e o [manual do
 `biblatex`](http://mirrors.ctan.org/macros/latex/contrib/biblatex/doc/biblatex
 .pdf) para informações sobre as opções e comandos disponíveis.*
+
