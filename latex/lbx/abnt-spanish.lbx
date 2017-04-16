@@ -1,0 +1,338 @@
+%% Copyright 2016 Daniel B. Marques
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%%
+%% The Current Maintainer of this work is Daniel B. Marques.
+%%
+%% Tradução para o espanhol de Juan-Ernesto Sepúlveda. Obrigado!
+
+\ProvidesFile{abnt-spanish.lbx}%
+[2017/03/15\space v3.0.1\space ABNT BibLaTeX citation style]%
+
+
+% Init >>>
+
+\InheritBibliographyExtras{spanish}%
+\DeclareBibliographyStrings{%
+  inherit = {spanish},%
+}%
+
+% <<<
+
+% No preposition between month and year >>>1
+
+\DeclareBibliographyExtras{%
+  \protected\def\mkbibdatelong#1#2#3{%
+    \iffieldundef{#3}%
+          {}%
+          {\stripzeros{\thefield{#3}}%
+       \iffieldundef{#2}{}{\addspace}}%
+    \iffieldundef{#2}%
+          {}%
+          {\mkbibmonth{\thefield{#2}}%
+       \iffieldundef{#1}{}{\addspace}}%
+    \thefield{#1}}%
+}%
+
+% <<<
+
+% Publication details >>>1
+
+\NewBibliographyString{%
+  apud,%
+  sineloco,%
+  sinenomine,%
+  sheet,%
+  sheets,%
+  illustrated,%
+  monography,%
+  recensionof,%
+}%
+
+\DeclareBibliographyStrings{%
+  apud             = {{apud}{apud}},%
+  idem             = {{idem}{id\adddot}},%
+  volume           = {{volumen}{v\adddot}},%
+  volumes          = {{volumenes}{v\adddot}},%
+  number           = {{n\'umero}{n\adddot}},%
+  pages            = {{p\'aginas}{p\adddot}},%
+  involumes        = {{in}{in}},%
+  in               = {{in}{in}},%
+  inseries         = {{in}{in}},%
+  sineloco         = {{sine loco}{s\adddot l\adddot}},%
+  sinenomine       = {{sine nomine}{s\adddot n\adddot}},%
+  url              = {{disponible en}{disponible en}},%
+  urlseen          = {{acceso en}{acceso en}},%
+  sheet            = {{hoja}{h\adddot}},%
+  sheets           = {{hojas}{h\adddot}},%
+  backrefpage      = {{citado en la p\'agina}{citado en la p\adddot}},%
+  backrefpages     = {{citado en las p\'aginas}{citado en las pp\adddot}},%
+  illustrated      = {{ilustrado}{il\adddot}},%
+  monography       = {{monograf\'ia}{monograf\'ia}},%
+  phdthesis        = {{Tesis (Doctorado)}{Tesis (Doctorado)}},%
+  mathesis         = {{Tesis (Mag\'ister)}{Tesis (Mag\'ister)}},%
+  reprintfrom      = {{separata de}{separata de}},%
+  recensionof      = {{recensi\'on de}{recensi\'on de}},%
+  reviewof         = {{rese\~na de}{rese\~na de}},%
+}%
+
+% <<<
+
+% Languages >>>1
+
+\DeclareBibliographyStrings{%
+  langamerican     = {{versi\'on americana}{versi\'on americana}},%
+  langbrazilian    = {{versi\'on brasile\~na}{versi\'on brasile\~na}},%
+  langcatalan      = {{versi\'on catalana}{versi\'on catalana}},%
+  langcroatian     = {{versi\'on croata}{versi\'on croata}},%
+  langczech        = {{versi\'on checa}{versi\'on checa}},%
+  langdanish       = {{versi\'on danesa}{versi\'on danesa}},%
+  langdutch        = {{versi\'on holandesa}{versi\'on holandesa}},%
+  langenglish      = {{versi\'on inglesa}{versi\'on inglesa}},%
+  langfinnish      = {{versi\'on finlandesa}{versi\'on finlandesa}},%
+  langfrench       = {{versi\'on francesa}{versi\'on francesa}},%
+  langgerman       = {{versi\'on alemana}{versi\'on alemana}},%
+  langgreek        = {{versi\'on griega}{versi\'on griega}},%
+  langitalian      = {{versi\'on italiana}{versi\'on italiana}},%
+  langlatin        = {{versi\'on latina}{versi\'on latina}},%
+  langnorwegian    = {{versi\'on noruega}{versi\'on noruega}},%
+  langpolish       = {{versi\'on polaca}{versi\'on polaca}},%
+  langportuguese   = {{versi\'on portuguesa}{versi\'on portuguesa}},%
+  langrussian      = {{versi\'on rusa}{versi\'on rusa}},%
+  langslovene      = {{versi\'on eslovena}{versi\'on eslovena}},%
+  langspanish      = {{versi\'on espa\~nola}{versi\'on espa\~nola}},%
+  langswedish      = {{versi\'on sueca}{versi\'on sueca}},%
+  fromamerican     = {{del original ingl\'es}{del original ingl\'es}},%
+  frombrazilian    = {{del original portugu\'es}{del original portugu\'es}},%
+  fromcatalan      = {{del original catalana}{del original catalana}},%
+  fromcroatian     = {{del original croata}{del original croata}},%
+  fromczech        = {{del original checo}{del original checo}},%
+  fromdanish       = {{del original dan\'es}{del original dan\'es}},%
+  fromdutch        = {{del original holand\'es}{del original holand\'es}},%
+  fromenglish      = {{del original ingl\'es}{del original ingl\'es}},%
+  fromfinnish      = {{del original finland\'es}{del original finland\'es}},%
+  fromfrench       = {{del original franc\'es}{del original franc\'es}},%
+  fromgerman       = {{del original alem\'an}{del original alem\'an}},%
+  fromgreek        = {{del original griego}{del original griego}},%
+  fromitalian      = {{del original italiano}{del original italiano}},%
+  fromlatin        = {{del original em latin}{del original em latin}},%
+  fromnorwegian    = {{del original noruego}{del original noruego}},%
+  frompolish       = {{del original polaco}{del original polaco}},%
+  fromportuguese   = {{del original portugu\'es}{del original portugu\'es}},%
+  fromrussian      = {{del original ruso}{del original ruso}},%
+  fromslovene      = {{del original esloveno}{del original esloveno}},%
+  fromspanish      = {{del original espa\~nol}{del original espa\~nol}},%
+  fromswedish      = {{del original sueco}{del original sueco}},%
+}%
+
+% <<<
+
+% Roles expressed as functions >>>1
+
+\NewBibliographyString{%
+  organizer,%
+  organizers,%
+  coordinator,%
+  coordinators,%
+}%
+
+\DeclareBibliographyStrings{%
+  editors         = {{editores}{ed\adddot}},%
+  collaborators   = {{colaboradores}{col\adddot}},%
+  translators     = {{traductores}{trad\adddot}},%
+  commentators    = {{comentadores}{coment\adddot}},%
+  annotators      = {{anotadores}{anot\adddot}},%
+  organizer       = {{organizador}{org\adddot}},%
+  organizers      = {{organizadores}{org\adddot}},%
+  coordinator     = {{coordinador}{coord\adddot}},%
+  coordinators    = {{coordinadores}{coord\adddot}},%
+}%
+
+% <<<
+
+% Roles expressed as objects >>>1
+
+\DeclareBibliographyStrings{%
+  withcommentator  = {{comentario\addcolon}{comentario\addcolon}},%
+  withannotator    = {{notas\addcolon}{notas\addcolon}},%
+  withintroduction = {{introducci\'on\addcolon}{introducci\'on\addcolon}},%
+  withforeword     = {{prefacio\addcolon}{prefacio\addcolon}},%
+  withafterword    = {{postfacio\addcolon}{postfacio\addcolon}},%
+}%
+
+% <<<
+
+% Roles expressed as actions >>>1
+
+\NewBibliographyString{% >>>2
+  byorganizer,%
+  byorganizerfo,%
+  bytechrev,%
+  byupdater,%
+  byupdateran,%
+  byphotographer,%
+  byartdir,%
+  byrecorder,%
+  byinterviewer,%
+  bygenorg,%
+  bygenorgfo,%
+  bycoordinator,%
+  bycoeditor,%
+  bydirector,%
+  bygendir,%
+  byproducer,%
+  byscreenwriter,%
+  byinterpreter,%
+  byillustrator,%
+  bytechrev,%
+}% <<<
+
+\DeclareBibliographyStrings{% >>>2
+  bycoeditor       = {{co-edici\'on\addcolon}%
+                     {co-edici\'on\addcolon}},%
+  bydirector       = {{direcci\'on\addcolon}%
+                     {direcci\'on\addcolon}},%
+  bygendir         = {{direcci\'on general\addcolon}%
+                     {direcci\'on general\addcolon}},%
+  bycoordinator    = {{coordinaci\'ono\addcolon}%
+                     {coordinaci\'on\addcolon}},%
+  byproducer       = {{producci\'on\addcolon}%
+                     {producci\'on\addcolon}},%
+  byscreenwriter   = {{gui\'on\addcolon}%
+                     {gui\'on\addcolon}},%
+  byinterpreter    = {{interpretaci\'on\addcolon}%
+                     {interpretaci\'on\addcolon}},%
+  byillustrator    = {{ilustraciones\addcolon}%
+                     {ilustraciones\addcolon}},%
+  byorganizer      = {{organizador\addcolon}%
+                     {organizador\addcolon}},%
+  bytechrev        = {{revisi\'on t\'ecnica\addcolon}%
+                     {revisi\'on t\'ecnica\addcolon}},%
+  byartdir         = {{direcci\'on art\'istica\addcolon}%
+                     {direcci\'on art\'istica\addcolon}},%
+  byinterviewer    = {{entrevista por}%
+                     {entrevista por}},%
+  byrecorder       = {{gravaci\'on\addcolon}%
+                     {gravaci\'on\addcolon}},%
+  byphotographer   = {{fotograf\'ia\addcolon}%
+                     {fotograf\'ia\addcolon}},%
+  bygenorg         = {{organizaci\'on general\addcolon}%
+                     {organizaci\'on general\addcolon}},%
+  byauthor         = {{por}%
+                     {por}},%
+  byeditor         = {{edici\'on\addcolon}%
+                     {edici\'on\addcolon}},%
+  bycompiler       = {{compilaci\'on\addcolon}%
+                     {compilaci\'on\addcolon}},%
+  byredactor       = {{redactado por}%
+                     {redactado por}},%
+  byreviser        = {{revisi\'on\addcolon}%
+                     {revisis\'on\addcolon}},%
+  bytechrev        = {{revisi\'on t\'ecnica\addcolon}%
+                     {revisi\'on t\'ecnica\addcolon}},%
+  byreviewer       = {{rese\~na\addcolon}%
+                     {rese\~na\addcolon}},%
+  byfounder        = {{fundado por}%
+                     {fundado por}},%
+  bycontinuator    = {{continuado por}%
+                     {continuado por}},%
+  bycollaborator   = {{en colaboraci\'on con}%
+                     {en colaboraci\'on com}},%
+  bytranslator     = {{traducci\'on\addcolon}%
+                     {traducci\'ono\addcolon}},%
+  bycommentator    = {{comentario\addcolon}%
+                     {comentario\addcolon}},%
+  byannotator      = {{notas\addcolon}%
+                     {notas\addcolon}},%
+  byupdateran      = {{actualizaci\'on y notas\addcolon}%
+                     {actualizaci\'on y notas\addcolon}},%
+  byupdater        = {{actualizaci\'on\addcolon}%
+                     {actualizaci\'on\addcolon}},%
+  byorganizerfo    = {{organizaci\'on y prefacio\addcolon}%
+                     {organizaci\'on y prefacio\addcolon}},%
+  bygenorgfo       = {{organizaci\'on general y prefacio\addcolon}%
+                     {organizaci\'on general y prefacio\addcolon}},%
+  byeditortr       = {{edici\'on y traducci\'on\addcolon}%
+                     {edici\'on y traducci\'on\addcolon}},%
+  byeditorco       = {{edici\'on y comentario\addcolon}%
+                     {edici\'on y comentario\addcolon}},%
+  byeditoran       = {{edici\'on y notas\addcolon}%
+                     {edici\'on y notas\addcolon}},%
+  byeditorin       = {{edici\'on y introducci\'on\addcolon}%
+                     {edici\'on y introducci\'on\addcolon}},%
+  byeditorfo       = {{edici\'on y prefacio\addcolon}%
+                     {edici\'on y prefacio\addcolon}},%
+  byeditoraf       = {{edici\'on y  postfacio\addcolon}%
+                     {edici\'on y  postfacio\addcolon}},%
+  byeditortrco     = {{edici\'on, traducci\'on y comentario\addcolon}%
+                     {edici\'on, traducci\'on y comentario\addcolon}},%
+  byeditortran     = {{edici\'on, traducci\'on y notas\addcolon}%
+                     {edici\'on, traducci\'on y notas\addcolon}},%
+  byeditortrin     = {{edici\'on, traducci\'on y introducci\'on\addcolon}%
+                     {edici\'on, traducci\'on y introducci\'on\addcolon}},%
+  byeditortrfo     = {{edici\'on, traducci\'on y prefacio\addcolon}%
+                     {edici\'on, traducci\'on y prefacio\addcolon}},%
+  byeditortraf     = {{edici\'on, traducci\'on y  postfacio\addcolon}%
+                     {edici\'on, traducci\'on y  postfacio\addcolon}},%
+  byeditorcoin     = {{edici\'on, comentario y introducci\'on\addcolon}%
+                     {edici\'on, comentario y introducci\'on\addcolon}},%
+  byeditorcofo     = {{edici\'on, comentario y prefacio\addcolon}%
+                     {edici\'on, comentario y prefacio\addcolon}},%
+  byeditorcoaf     = {{edici\'on, comentario y  postfacio\addcolon}%
+                     {edici\'on, comentario y  postfacio\addcolon}},%
+  byeditoranin     = {{edici\'on, introducci\'on y notas\addcolon}%
+                     {edici\'on, introducci\'on y notas\addcolon}},%
+  byeditoranfo     = {{edici\'on, prefacio y notas\addcolon}%
+                     {edici\'on, prefacio y notas\addcolon}},%
+  byeditoranaf     = {{edici\'on,  postfacio y notas\addcolon}%
+                     {edici\'on,  postfacio y notas\addcolon}},%
+  byeditortrcoin   = {{edici\'on, traducci\'on, comentario y introducci\'on\addcolon}%
+                     {edici\'on, traducci\'on, comentario y introducci\'on\addcolon}},%
+  byeditortrcofo   = {{edici\'on, traducci\'on, comentario y prefacio\addcolon}%
+                     {edici\'on, traducci\'on, comentario y prefacio\addcolon}},%
+  byeditortrcoaf   = {{edici\'on, traducci\'on, comentario y  postfacio\addcolon}%
+                     {edici\'on, traducci\'on, comentario y  postfacio\addcolon}},%
+  byeditortranin   = {{edici\'on, traducci\'on, notas y introducci\'on\addcolon}%
+                     {edici\'on, traducci\'on, notas y introducci\'on\addcolon}},%
+  byeditortranfo   = {{edici\'on, traducci\'on, notas y prefacio\addcolon}%
+                     {edici\'on, traducci\'on, notas y prefacio\addcolon}},%
+  byeditortranaf   = {{edici\'on, traducci\'on, notas y  postfacio\addcolon}%
+                     {edici\'on, traducci\'on, notas y  postfacio\addcolon}},%
+  bytranslatorco   = {{traducci\'on y comentario\addcolon}%
+                     {traducci\'on y comentario\addcolon}},%
+  bytranslatoran   = {{traducci\'on y notas\addcolon}%
+                     {traducci\'on y notas\addcolon}},%
+  bytranslatorin   = {{traducci\'on y introducci\'on\addcolon}%
+                     {traducci\'on y introducci\'on\addcolon}},%
+  bytranslatorfo   = {{traducci\'on y prefacio\addcolon}%
+                     {traducci\'on y prefacio\addcolon}},%
+  bytranslatoraf   = {{traducci\'on y  postfacio\addcolon}%
+                     {traducci\'on y  postfacio\addcolon}},%
+  bytranslatorcoin = {{traducci\'on, comentario y introducci\'on\addcolon}%
+                     {traducci\'on, comentario y introducci\'on\addcolon}},%
+  bytranslatorcofo = {{traducci\'on, comentario y prefacio\addcolon}%
+                     {traducci\'on, comentario y prefacio\addcolon}},%
+  bytranslatorcoaf = {{traducci\'on, comentario y  postfacio\addcolon}%
+                     {traducci\'on, comentario y  postfacio\addcolon}},%
+  bytranslatoranin = {{traducci\'on, notas y introducci\'on\addcolon}%
+                     {traducci\'on, notas y introducci\'on\addcolon}},%
+  bytranslatoranfo = {{traducci\'on, notas y prefacio\addcolon}%
+                     {traducci\'on, notas y prefacio\addcolon}},%
+  bytranslatoranaf = {{traducci\'on, notas y  postfacio\addcolon}%
+                     {traducci\'on, notas y  postfacio\addcolon}},%
+}% <<<
+
+% <<<
+
+\endinput%
+
+% vim: set foldmarker=\ >>>,\ <<< :
+

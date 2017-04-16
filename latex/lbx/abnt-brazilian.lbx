@@ -12,7 +12,7 @@
 %%
 %% The Current Maintainer of this work is Daniel B. Marques.
 
-\ProvidesFile{abnt.lbx}%
+\ProvidesFile{abnt-brazilian.lbx}%
 [2017/03/15\space v3.0.1\space ABNT BibLaTeX citation style]%
 
 
@@ -60,25 +60,25 @@
   idem             = {{idem}{id\adddot}},%
   volume           = {{volume}{v\adddot}},%
   volumes          = {{volumes}{v\adddot}},%
-  number           = {{número}{n\adddot}},%
-  pages            = {{páginas}{p\adddot}},%
+  number           = {{n\'umero}{n\adddot}},%
+  pages            = {{p\'aginas}{p\adddot}},%
   involumes        = {{in}{in}},%
   in               = {{in}{in}},%
   inseries         = {{in}{in}},%
   sineloco         = {{sine loco}{s\adddot l\adddot}},%
   sinenomine       = {{sine nomine}{s\adddot n\adddot}},%
-  url              = {{disponível em}{disponível em}},%
+  url              = {{dispon\'ivel em}{dispon\'ivel em}},%
   urlseen          = {{acesso em}{acesso em}},%
   sheet            = {{folha}{f\adddot}},%
   sheets           = {{folhas}{f\adddot}},%
-  backrefpage      = {{citado na página}{citado na p\adddot}},%
-  backrefpages     = {{citado nas páginas}{citado nas pp\adddot}},%
+  backrefpage      = {{citado na p\'agina}{citado na p\adddot}},%
+  backrefpages     = {{citado nas p\'aginas}{citado nas pp\adddot}},%
   illustrated      = {{ilustrado}{il\adddot}},%
   monography       = {{monografia}{monografia}},%
   phdthesis        = {{Tese (Doutorado)}{Tese (Doutorado)}},%
-  mathesis         = {{Dissertação (Mestrado)}{Diss. (Mestrado)}},%
+  mathesis         = {{Disserta\c{c}\~ao (Mestrado)}{Diss. (Mestrado)}},%
   reprintfrom      = {{separata de}{separata de}},%
-  recensionof      = {{recensão de}{recensão de}},%
+  recensionof      = {{recens\~ao de}{recens\~ao de}},%
   reviewof         = {{resenha de}{resenha de}},%
 }%
 
@@ -87,44 +87,44 @@
 % Languages >>>1
 
 \DeclareBibliographyStrings{%
-  langamerican     = {{versão americana}{versão americana}},%
-  langbrazilian    = {{versão brasileira}{versão brasileira}},%
-  langcatalan      = {{versão catalã}{versão catalã}},%
-  langcroatian     = {{versão croata}{versão croata}},%
-  langczech        = {{versão tcheca}{versão tcheca}},%
-  langdanish       = {{versão dinamarquesa}{versão dinamarquesa}},%
-  langdutch        = {{versão holandesa}{versão holandesa}},%
-  langenglish      = {{versão inglesa}{versão inglesa}},%
-  langfinnish      = {{versão finlandesa}{versão finlandesa}},%
-  langfrench       = {{versão francesa}{versão francesa}},%
-  langgerman       = {{versão alemã}{versão alemã}},%
-  langgreek        = {{versão grega}{versão grega}},%
-  langitalian      = {{versão italiana}{versão italiana}},%
-  langlatin        = {{versão latina}{versão latina}},%
-  langnorwegian    = {{versão norueguesa}{versão norueguesa}},%
-  langpolish       = {{versão polonesa}{versão polonesa}},%
-  langportuguese   = {{versão portuguesa}{versão portuguesa}},%
-  langrussian      = {{versão russa}{versão russa}},%
-  langslovene      = {{versão eslovena}{versão eslovena}},%
-  langspanish      = {{versão espanhola}{versão espanhola}},%
-  langswedish      = {{versão sueca}{versão sueca}},%
-  fromamerican     = {{do original inglês}{do original inglês}},%
-  frombrazilian    = {{do original português}{do original português}},%
-  fromcatalan      = {{do original catalão}{do original catalão}},%
+  langamerican     = {{vers\~ao americana}{vers\~ao americana}},%
+  langbrazilian    = {{vers\~ao brasileira}{vers\~ao brasileira}},%
+  langcatalan      = {{vers\~ao catal\~a}{vers\~ao catal\~a}},%
+  langcroatian     = {{vers\~ao croata}{vers\~ao croata}},%
+  langczech        = {{vers\~ao tcheca}{vers\~ao tcheca}},%
+  langdanish       = {{vers\~ao dinamarquesa}{vers\~ao dinamarquesa}},%
+  langdutch        = {{vers\~ao holandesa}{vers\~ao holandesa}},%
+  langenglish      = {{vers\~ao inglesa}{vers\~ao inglesa}},%
+  langfinnish      = {{vers\~ao finlandesa}{vers\~ao finlandesa}},%
+  langfrench       = {{vers\~ao francesa}{vers\~ao francesa}},%
+  langgerman       = {{vers\~ao alem\~a}{vers\~ao alem\~a}},%
+  langgreek        = {{vers\~ao grega}{vers\~ao grega}},%
+  langitalian      = {{vers\~ao italiana}{vers\~ao italiana}},%
+  langlatin        = {{vers\~ao latina}{vers\~ao latina}},%
+  langnorwegian    = {{vers\~ao norueguesa}{vers\~ao norueguesa}},%
+  langpolish       = {{vers\~ao polonesa}{vers\~ao polonesa}},%
+  langportuguese   = {{vers\~ao portuguesa}{vers\~ao portuguesa}},%
+  langrussian      = {{vers\~ao russa}{vers\~ao russa}},%
+  langslovene      = {{vers\~ao eslovena}{vers\~ao eslovena}},%
+  langspanish      = {{vers\~ao espanhola}{vers\~ao espanhola}},%
+  langswedish      = {{vers\~ao sueca}{vers\~ao sueca}},%
+  fromamerican     = {{do original ingl\^es}{do original ingl\^es}},%
+  frombrazilian    = {{do original portugu\^es}{do original portugu\^es}},%
+  fromcatalan      = {{do original catal\~ao}{do original catal\~ao}},%
   fromcroatian     = {{do original croata}{do original croata}},%
   fromczech        = {{do original tcheco}{do original tcheco}},%
-  fromdanish       = {{do original dinamarquês}{do original dinamarquês}},%
-  fromdutch        = {{do original holandês}{do original holandês}},%
-  fromenglish      = {{do original inglês}{do original inglês}},%
-  fromfinnish      = {{do original finlandês}{do original finlandês}},%
-  fromfrench       = {{do original francês}{do original francês}},%
-  fromgerman       = {{do original alemão}{do original alemão}},%
+  fromdanish       = {{do original dinamarqu\^es}{do original dinamarqu\^es}},%
+  fromdutch        = {{do original holand\^es}{do original holand\^es}},%
+  fromenglish      = {{do original ingl\^es}{do original ingl\^es}},%
+  fromfinnish      = {{do original finland\^es}{do original finland\^es}},%
+  fromfrench       = {{do original franc\^es}{do original franc\^es}},%
+  fromgerman       = {{do original alem\~ao}{do original alem\~ao}},%
   fromgreek        = {{do original grego}{do original grego}},%
   fromitalian      = {{do original italiano}{do original italiano}},%
   fromlatin        = {{do original em latim}{do original em latim}},%
-  fromnorwegian    = {{do original norueguês}{do original norueguês}},%
-  frompolish       = {{do original polonês}{do original polonês}},%
-  fromportuguese   = {{do original português}{do original português}},%
+  fromnorwegian    = {{do original noruegu\^es}{do original noruegu\^es}},%
+  frompolish       = {{do original polon\^es}{do original polon\^es}},%
+  fromportuguese   = {{do original portugu\^es}{do original portugu\^es}},%
   fromrussian      = {{do original russo}{do original russo}},%
   fromslovene      = {{do original esloveno}{do original esloveno}},%
   fromspanish      = {{do original espanhol}{do original espanhol}},%
@@ -159,11 +159,11 @@
 % Roles expressed as objects >>>1
 
 \DeclareBibliographyStrings{%
-  withcommentator  = {{comentário\addcolon}{comentário\addcolon}},%
+  withcommentator  = {{coment\'ario\addcolon}{coment\'ario\addcolon}},%
   withannotator    = {{notas\addcolon}{notas\addcolon}},%
-  withintroduction = {{introdução\addcolon}{introdução\addcolon}},%
-  withforeword     = {{prefácio\addcolon}{prefácio\addcolon}},%
-  withafterword    = {{posfácio\addcolon}{posfácio\addcolon}},%
+  withintroduction = {{introdu\c{c}\~ao\addcolon}{introdu\c{c}\~ao\addcolon}},%
+  withforeword     = {{pref\'acio\addcolon}{pref\'acio\addcolon}},%
+  withafterword    = {{posf\'acio\addcolon}{posf\'acio\addcolon}},%
 }%
 
 % <<<
@@ -194,138 +194,138 @@
 }% <<<
 
 \DeclareBibliographyStrings{% >>>2
-  bycoeditor       = {{co-edição\addcolon}%
-                     {co-edição\addcolon}},%
-  bydirector       = {{direção\addcolon}%
-                     {direção\addcolon}},%
-  bygendir         = {{direção geral\addcolon}%
-                     {direção geral\addcolon}},%
-  bycoordinator    = {{coordenação\addcolon}%
-                     {coordenação\addcolon}},%
-  byproducer       = {{produção\addcolon}%
-                     {produção\addcolon}},%
+  bycoeditor       = {{co-edi\c{c}\~ao\addcolon}%
+                     {co-edi\c{c}\~ao\addcolon}},%
+  bydirector       = {{dire\c{c}\~ao\addcolon}%
+                     {dire\c{c}\~ao\addcolon}},%
+  bygendir         = {{dire\c{c}\~ao geral\addcolon}%
+                     {dire\c{c}\~ao geral\addcolon}},%
+  bycoordinator    = {{coordena\c{c}\~ao\addcolon}%
+                     {coordena\c{c}\~ao\addcolon}},%
+  byproducer       = {{produ\c{c}\~ao\addcolon}%
+                     {produ\c{c}\~ao\addcolon}},%
   byscreenwriter   = {{roteiro\addcolon}%
                      {roteiro\addcolon}},%
-  byinterpreter    = {{interpretação\addcolon}%
-                     {interpretação\addcolon}},%
-  byillustrator    = {{ilustrações\addcolon}%
-                     {ilustrações\addcolon}},%
-  byorganizer      = {{organização\addcolon}%
-                     {organização\addcolon}},%
-  bytechrev        = {{revisão técnica\addcolon}%
-                     {revisão técnica\addcolon}},%
-  byartdir         = {{direção artística\addcolon}%
-                     {direção artística\addcolon}},%
+  byinterpreter    = {{interpreta\c{c}\~ao\addcolon}%
+                     {interpreta\c{c}\~ao\addcolon}},%
+  byillustrator    = {{ilustra\c{c}\~oes\addcolon}%
+                     {ilustra\c{c}\~oes\addcolon}},%
+  byorganizer      = {{organiza\c{c}\~ao\addcolon}%
+                     {organiza\c{c}\~ao\addcolon}},%
+  bytechrev        = {{revis\~ao t\'ecnica\addcolon}%
+                     {revis\~ao t\'ecnica\addcolon}},%
+  byartdir         = {{dire\c{c}\~ao art\'istica\addcolon}%
+                     {dire\c{c}\~ao art\'istica\addcolon}},%
   byinterviewer    = {{entrevista por}%
                      {entrevista por}},%
-  byrecorder       = {{gravação\addcolon}%
-                     {gravação\addcolon}},%
+  byrecorder       = {{grava\c{c}\~ao\addcolon}%
+                     {grava\c{c}\~ao\addcolon}},%
   byphotographer   = {{fotografia\addcolon}%
                      {fotografia\addcolon}},%
-  bygenorg         = {{organização geral\addcolon}%
-                     {organização geral\addcolon}},%
+  bygenorg         = {{organiza\c{c}\~ao geral\addcolon}%
+                     {organiza\c{c}\~ao geral\addcolon}},%
   byauthor         = {{por}%
                      {por}},%
-  byeditor         = {{edição\addcolon}%
-                     {edição\addcolon}},%
-  bycompiler       = {{compilação\addcolon}%
-                     {compilação\addcolon}},%
+  byeditor         = {{edi\c{c}\~ao\addcolon}%
+                     {edi\c{c}\~ao\addcolon}},%
+  bycompiler       = {{compila\c{c}\~ao\addcolon}%
+                     {compila\c{c}\~ao\addcolon}},%
   byredactor       = {{redigido por}%
                      {redigido por}},%
-  byreviser        = {{revisão\addcolon}%
-                     {revisão\addcolon}},%
-  bytechrev        = {{revisão técnica\addcolon}%
-                     {revisão técnica\addcolon}},%
+  byreviser        = {{revis\~ao\addcolon}%
+                     {revis\~ao\addcolon}},%
+  bytechrev        = {{revis\~ao t\'ecnica\addcolon}%
+                     {revis\~ao t\'ecnica\addcolon}},%
   byreviewer       = {{resenha\addcolon}%
                      {resenha\addcolon}},%
   byfounder        = {{fundado por}%
                      {fundado por}},%
   bycontinuator    = {{continuado por}%
                      {continuado por}},%
-  bycollaborator   = {{em colaboração com}%
-                     {em colaboração com}},%
-  bytranslator     = {{tradução\addcolon}%
-                     {tradução\addcolon}},%
-  bycommentator    = {{comentário\addcolon}%
-                     {comentário\addcolon}},%
+  bycollaborator   = {{em colabora\c{c}\~ao com}%
+                     {em colabora\c{c}\~ao com}},%
+  bytranslator     = {{tradu\c{c}\~ao\addcolon}%
+                     {tradu\c{c}\~ao\addcolon}},%
+  bycommentator    = {{coment\'ario\addcolon}%
+                     {coment\'ario\addcolon}},%
   byannotator      = {{notas\addcolon}%
                      {notas\addcolon}},%
-  byupdateran      = {{atualização e notas\addcolon}%
-                     {atualização e notas\addcolon}},%
-  byupdater        = {{atualização\addcolon}%
-                     {atualização\addcolon}},%
-  byorganizerfo    = {{organização e prefácio\addcolon}%
-                     {organização e prefácio\addcolon}},%
-  bygenorgfo       = {{organização geral e prefácio\addcolon}%
-                     {organização geral e prefácio\addcolon}},%
-  byeditortr       = {{edição e tradução\addcolon}%
-                     {edição e tradução\addcolon}},%
-  byeditorco       = {{edição e comentário\addcolon}%
-                     {edição e comentário\addcolon}},%
-  byeditoran       = {{edição e notas\addcolon}%
-                     {edição e notas\addcolon}},%
-  byeditorin       = {{edição e introdução\addcolon}%
-                     {edição e introdução\addcolon}},%
-  byeditorfo       = {{edição e prefácio\addcolon}%
-                     {edição e prefácio\addcolon}},%
-  byeditoraf       = {{edição e posfácio\addcolon}%
-                     {edição e posfácio\addcolon}},%
-  byeditortrco     = {{edição, tradução e comentário\addcolon}%
-                     {edição, tradução e comentário\addcolon}},%
-  byeditortran     = {{edição, tradução e notas\addcolon}%
-                     {edição, tradução e notas\addcolon}},%
-  byeditortrin     = {{edição, tradução e introdução\addcolon}%
-                     {edição, tradução e introdução\addcolon}},%
-  byeditortrfo     = {{edição, tradução e prefácio\addcolon}%
-                     {edição, tradução e prefácio\addcolon}},%
-  byeditortraf     = {{edição, tradução e posfácio\addcolon}%
-                     {edição, tradução e posfácio\addcolon}},%
-  byeditorcoin     = {{edição, comentário e introdução\addcolon}%
-                     {edição, comentário e introdução\addcolon}},%
-  byeditorcofo     = {{edição, comentário e prefácio\addcolon}%
-                     {edição, comentário e prefácio\addcolon}},%
-  byeditorcoaf     = {{edição, comentário e posfácio\addcolon}%
-                     {edição, comentário e posfácio\addcolon}},%
-  byeditoranin     = {{edição, introdução e notas\addcolon}%
-                     {edição, introdução e notas\addcolon}},%
-  byeditoranfo     = {{edição, prefácio e notas\addcolon}%
-                     {edição, prefácio e notas\addcolon}},%
-  byeditoranaf     = {{edição, posfácio e notas\addcolon}%
-                     {edição, posfácio e notas\addcolon}},%
-  byeditortrcoin   = {{edição, tradução, comentário e introdução\addcolon}%
-                     {edição, tradução, comentário e introdução\addcolon}},%
-  byeditortrcofo   = {{edição, tradução, comentário e prefácio\addcolon}%
-                     {edição, tradução, comentário e prefácio\addcolon}},%
-  byeditortrcoaf   = {{edição, tradução, comentário e posfácio\addcolon}%
-                     {edição, tradução, comentário e posfácio\addcolon}},%
-  byeditortranin   = {{edição, tradução, notas e introdução\addcolon}%
-                     {edição, tradução, notas e introdução\addcolon}},%
-  byeditortranfo   = {{edição, tradução, notas e prefácio\addcolon}%
-                     {edição, tradução, notas e prefácio\addcolon}},%
-  byeditortranaf   = {{edição, tradução, notas e posfácio\addcolon}%
-                     {edição, tradução, notas e posfácio\addcolon}},%
-  bytranslatorco   = {{tradução e comentário\addcolon}%
-                     {tradução e comentário\addcolon}},%
-  bytranslatoran   = {{tradução e notas\addcolon}%
-                     {tradução e notas\addcolon}},%
-  bytranslatorin   = {{tradução e introdução\addcolon}%
-                     {tradução e introdução\addcolon}},%
-  bytranslatorfo   = {{tradução e prefácio\addcolon}%
-                     {tradução e prefácio\addcolon}},%
-  bytranslatoraf   = {{tradução e posfácio\addcolon}%
-                     {tradução e posfácio\addcolon}},%
-  bytranslatorcoin = {{tradução, comentário e introdução\addcolon}%
-                     {tradução, comentário e introdução\addcolon}},%
-  bytranslatorcofo = {{tradução, comentário e prefácio\addcolon}%
-                     {tradução, comentário e prefácio\addcolon}},%
-  bytranslatorcoaf = {{tradução, comentário e posfácio\addcolon}%
-                     {tradução, comentário e posfácio\addcolon}},%
-  bytranslatoranin = {{tradução, notas e introdução\addcolon}%
-                     {tradução, notas e introdução\addcolon}},%
-  bytranslatoranfo = {{tradução, notas e prefácio\addcolon}%
-                     {tradução, notas e prefácio\addcolon}},%
-  bytranslatoranaf = {{tradução, notas e posfácio\addcolon}%
-                     {tradução, notas e posfácio\addcolon}},%
+  byupdateran      = {{atualiza\c{c}\~ao e notas\addcolon}%
+                     {atualiza\c{c}\~ao e notas\addcolon}},%
+  byupdater        = {{atualiza\c{c}\~ao\addcolon}%
+                     {atualiza\c{c}\~ao\addcolon}},%
+  byorganizerfo    = {{organiza\c{c}\~ao e pref\'acio\addcolon}%
+                     {organiza\c{c}\~ao e pref\'acio\addcolon}},%
+  bygenorgfo       = {{organiza\c{c}\~ao geral e pref\'acio\addcolon}%
+                     {organiza\c{c}\~ao geral e pref\'acio\addcolon}},%
+  byeditortr       = {{edi\c{c}\~ao e tradu\c{c}\~ao\addcolon}%
+                     {edi\c{c}\~ao e tradu\c{c}\~ao\addcolon}},%
+  byeditorco       = {{edi\c{c}\~ao e coment\'ario\addcolon}%
+                     {edi\c{c}\~ao e coment\'ario\addcolon}},%
+  byeditoran       = {{edi\c{c}\~ao e notas\addcolon}%
+                     {edi\c{c}\~ao e notas\addcolon}},%
+  byeditorin       = {{edi\c{c}\~ao e introdu\c{c}\~ao\addcolon}%
+                     {edi\c{c}\~ao e introdu\c{c}\~ao\addcolon}},%
+  byeditorfo       = {{edi\c{c}\~ao e pref\'acio\addcolon}%
+                     {edi\c{c}\~ao e pref\'acio\addcolon}},%
+  byeditoraf       = {{edi\c{c}\~ao e posf\'acio\addcolon}%
+                     {edi\c{c}\~ao e posf\'acio\addcolon}},%
+  byeditortrco     = {{edi\c{c}\~ao, tradu\c{c}\~ao e coment\'ario\addcolon}%
+                     {edi\c{c}\~ao, tradu\c{c}\~ao e coment\'ario\addcolon}},%
+  byeditortran     = {{edi\c{c}\~ao, tradu\c{c}\~ao e notas\addcolon}%
+                     {edi\c{c}\~ao, tradu\c{c}\~ao e notas\addcolon}},%
+  byeditortrin     = {{edi\c{c}\~ao, tradu\c{c}\~ao e introdu\c{c}\~ao\addcolon}%
+                     {edi\c{c}\~ao, tradu\c{c}\~ao e introdu\c{c}\~ao\addcolon}},%
+  byeditortrfo     = {{edi\c{c}\~ao, tradu\c{c}\~ao e pref\'acio\addcolon}%
+                     {edi\c{c}\~ao, tradu\c{c}\~ao e pref\'acio\addcolon}},%
+  byeditortraf     = {{edi\c{c}\~ao, tradu\c{c}\~ao e posf\'acio\addcolon}%
+                     {edi\c{c}\~ao, tradu\c{c}\~ao e posf\'acio\addcolon}},%
+  byeditorcoin     = {{edi\c{c}\~ao, coment\'ario e introdu\c{c}\~ao\addcolon}%
+                     {edi\c{c}\~ao, coment\'ario e introdu\c{c}\~ao\addcolon}},%
+  byeditorcofo     = {{edi\c{c}\~ao, coment\'ario e pref\'acio\addcolon}%
+                     {edi\c{c}\~ao, coment\'ario e pref\'acio\addcolon}},%
+  byeditorcoaf     = {{edi\c{c}\~ao, coment\'ario e posf\'acio\addcolon}%
+                     {edi\c{c}\~ao, coment\'ario e posf\'acio\addcolon}},%
+  byeditoranin     = {{edi\c{c}\~ao, introdu\c{c}\~ao e notas\addcolon}%
+                     {edi\c{c}\~ao, introdu\c{c}\~ao e notas\addcolon}},%
+  byeditoranfo     = {{edi\c{c}\~ao, pref\'acio e notas\addcolon}%
+                     {edi\c{c}\~ao, pref\'acio e notas\addcolon}},%
+  byeditoranaf     = {{edi\c{c}\~ao, posf\'acio e notas\addcolon}%
+                     {edi\c{c}\~ao, posf\'acio e notas\addcolon}},%
+  byeditortrcoin   = {{edi\c{c}\~ao, tradu\c{c}\~ao, coment\'ario e introdu\c{c}\~ao\addcolon}%
+                     {edi\c{c}\~ao, tradu\c{c}\~ao, coment\'ario e introdu\c{c}\~ao\addcolon}},%
+  byeditortrcofo   = {{edi\c{c}\~ao, tradu\c{c}\~ao, coment\'ario e pref\'acio\addcolon}%
+                     {edi\c{c}\~ao, tradu\c{c}\~ao, coment\'ario e pref\'acio\addcolon}},%
+  byeditortrcoaf   = {{edi\c{c}\~ao, tradu\c{c}\~ao, coment\'ario e posf\'acio\addcolon}%
+                     {edi\c{c}\~ao, tradu\c{c}\~ao, coment\'ario e posf\'acio\addcolon}},%
+  byeditortranin   = {{edi\c{c}\~ao, tradu\c{c}\~ao, notas e introdu\c{c}\~ao\addcolon}%
+                     {edi\c{c}\~ao, tradu\c{c}\~ao, notas e introdu\c{c}\~ao\addcolon}},%
+  byeditortranfo   = {{edi\c{c}\~ao, tradu\c{c}\~ao, notas e pref\'acio\addcolon}%
+                     {edi\c{c}\~ao, tradu\c{c}\~ao, notas e pref\'acio\addcolon}},%
+  byeditortranaf   = {{edi\c{c}\~ao, tradu\c{c}\~ao, notas e posf\'acio\addcolon}%
+                     {edi\c{c}\~ao, tradu\c{c}\~ao, notas e posf\'acio\addcolon}},%
+  bytranslatorco   = {{tradu\c{c}\~ao e coment\'ario\addcolon}%
+                     {tradu\c{c}\~ao e coment\'ario\addcolon}},%
+  bytranslatoran   = {{tradu\c{c}\~ao e notas\addcolon}%
+                     {tradu\c{c}\~ao e notas\addcolon}},%
+  bytranslatorin   = {{tradu\c{c}\~ao e introdu\c{c}\~ao\addcolon}%
+                     {tradu\c{c}\~ao e introdu\c{c}\~ao\addcolon}},%
+  bytranslatorfo   = {{tradu\c{c}\~ao e pref\'acio\addcolon}%
+                     {tradu\c{c}\~ao e pref\'acio\addcolon}},%
+  bytranslatoraf   = {{tradu\c{c}\~ao e posf\'acio\addcolon}%
+                     {tradu\c{c}\~ao e posf\'acio\addcolon}},%
+  bytranslatorcoin = {{tradu\c{c}\~ao, coment\'ario e introdu\c{c}\~ao\addcolon}%
+                     {tradu\c{c}\~ao, coment\'ario e introdu\c{c}\~ao\addcolon}},%
+  bytranslatorcofo = {{tradu\c{c}\~ao, coment\'ario e pref\'acio\addcolon}%
+                     {tradu\c{c}\~ao, coment\'ario e pref\'acio\addcolon}},%
+  bytranslatorcoaf = {{tradu\c{c}\~ao, coment\'ario e posf\'acio\addcolon}%
+                     {tradu\c{c}\~ao, coment\'ario e posf\'acio\addcolon}},%
+  bytranslatoranin = {{tradu\c{c}\~ao, notas e introdu\c{c}\~ao\addcolon}%
+                     {tradu\c{c}\~ao, notas e introdu\c{c}\~ao\addcolon}},%
+  bytranslatoranfo = {{tradu\c{c}\~ao, notas e pref\'acio\addcolon}%
+                     {tradu\c{c}\~ao, notas e pref\'acio\addcolon}},%
+  bytranslatoranaf = {{tradu\c{c}\~ao, notas e posf\'acio\addcolon}%
+                     {tradu\c{c}\~ao, notas e posf\'acio\addcolon}},%
 }% <<<
 
 % <<<
