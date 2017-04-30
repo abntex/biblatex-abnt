@@ -161,6 +161,14 @@
   }{}}%
 % <<<2
 
+% Show extrayear in bibliography >>>2
+\newtoggle{extrayear}%
+\DeclareBibliographyOption{extrayear}[true]{%
+  \settoggle{extrayear}{#1}}%
+\DeclareEntryOption[boolean]{extrayear}[true]{%
+  \settoggle{extrayear}{#1}}%
+% <<<2
+
 % <<<1
 
 
@@ -1087,7 +1095,11 @@
 % Publisher, location, date, issue >>>2
 
 \renewbibmacro*{date}{%
-  \printdate%
+  \iftoggle{extrayear}{%
+    \printdateextra
+  }{%
+    \printdate%
+  }
   \printunit{\addperiod\addspace}%
 }%
 

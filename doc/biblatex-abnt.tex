@@ -153,7 +153,7 @@ Use o comando \verb"\printbibliography" para imprimir a bibliografia.
 
 As opções a seguir podem ser usadas ao chamar o pacote \texttt{biblatex}:
 
-\begin{description}[parsep=8pt,itemindent=-1em,leftmargin=3em]% >>>3
+\begin{description}[parsep=7pt,itemindent=-1em,leftmargin=3em]% >>>3
   \item [indent] Indenta as entradas da bibliografia
   \item [sccite] Imprime os nomes em versalete nas citações
   \item [scbib] Imprime os nomes em versalete na bibliografia
@@ -175,13 +175,14 @@ As opções a seguir podem ser usadas ao chamar o pacote \texttt{biblatex}:
   \item [backref] Aponta, na bibliografia, as páginas em que a entrada foi
     citada
   \item [sorting=none] Ordena as referências conforme aparecem no texto
+  \item [extrayear] Mostra os anos diferenciados com letras (e.g., 2017a) também na bibliografia
 \end{description}% <<<3
 
 \vspace{\baselineskip}
 E.g.: \verb"\usepackage[backend=biber, style=abnt, ittitles]{biblatex}"
 
 As opções \texttt{repeatfields}, \texttt{repeattitles}, \texttt{nosl},
-\texttt{nosn} e \texttt{noslsn} também podem ser usadas apenas em entradas
+\texttt{nosn}, \texttt{noslsn} e \texttt{extrayear} também podem ser usadas apenas em entradas
 específicas. E.g.:
 
 \begin{verbatim}
