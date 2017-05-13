@@ -309,7 +309,9 @@
   {\usebibmacro{cite:init}%
   \boolfalse{citetracker}%
    \boolfalse{pagetracker}%
-   \usebibmacro{prenote}}%
+   \usebibmacro{prenote}
+   \renewcommand*{\finalnamedelim}{\addspace\bibstring{and}\addspace}%
+   \renewcommand*{\multinamedelim}{\addcomma\addspace}}%
   {\ifciteindex%
      {\indexnames{labelname}}%
      {}%
@@ -478,9 +480,9 @@
       \printfield{extrayear}%
     }%
   }%
-  \iffieldundef{issue}{}{%
-    \addcomma\addspace\printfield{issue}%
-  }%
+  % \iffieldundef{issue}{}{%
+  %   \addcomma\addspace\printfield{issue}%
+  % }%
 }% <<<2
 
 \renewbibmacro*{cite:shorthand}{%% >>>2
