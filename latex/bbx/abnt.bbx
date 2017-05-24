@@ -27,7 +27,7 @@
 
 \RequireBibliographyStyle{standard}%
 
-\ExecuteBibliographyOptions{block=none,urldate=long,pagetracker}%
+\ExecuteBibliographyOptions{block=ragged,urldate=long,pagetracker}%
 
 \InitializeBibliographyStyle{\global\undef\bbx@lasthash}%
 
@@ -852,7 +852,7 @@
 		\iftoggle{repeatfields}%
 			{\addspace\usebibmacro{author/editor+others}}%
 			{\addspace\bibnamedash}%
-		\newunit\newblock%
+		\newunit%
 		\usebibmacro{maintitle}%
 	}%
 }%% <<<3
@@ -935,12 +935,12 @@
 		\usebibmacro{bbx:dashcheck}{%
       \iffieldundef{authortype}{%
         \bibnamedash%
-        \newunit\newblock%
+        \newunit%
         \printfield{nameaddon}%
       }{%
         \nopunctdash%
         \usebibmacro{authorstrg}%
-        \newunit\newblock%
+        \newunit%
         \printfield{nameaddon}%
       }%
 		}{%
@@ -948,7 +948,7 @@
 			\printnames{author}%
       \addspace%
       \usebibmacro{authorstrg}%
-      \newunit\newblock%
+      \newunit%
       \printfield{nameaddon}%
 		}%
 	}{%
@@ -1006,7 +1006,7 @@
 			\printlist[uppercase]{organization}}%
 		\savelistcs*{organization}{savedorg}%
 		\clearlist{organization}%
-		\newunit\newblock%
+		\newunit%
 		\printfield{nameaddon}}%
 }%% <<<3
 
@@ -1320,51 +1320,66 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/organization}%
-  \setunit{\labelnamepunct}\newblock%
-  \usebibmacro{title}%
-  \newunit%
+  \setunit{\labelnamepunct}%
+  \usebibmacro{title}\newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printlist{language}%
-  \newunit\newblock%
-  \usebibmacro{byauthor}%
-  \newunit\newblock%
-  \usebibmacro{byeditor+others}%
   \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \usebibmacro{byauthor}%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \usebibmacro{byeditor+others}\newunit%
   \usebibmacro{bytranslator+others}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{version}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \iffieldundef{relatedtype}{}{%
-	\bibstring{\strfield{relatedtype}}}%
+    \bibstring{\strfield{relatedtype}}}%
   \setunit*{\addcolon\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{journal+section}%
   \setunit*{\addcomma\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printlist{publisher}%
   \setunit*{\addcomma\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printlist{location}%
   \setunit*{\addcomma\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{volume+number+eid}%
   \setunit{\addcomma\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{pages}%
   \setunit*{\addcomma\addspace}%
   \printfield{pagetotal}%
   \setunit{\addcomma\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{issue+date}%
   \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{note}%
   \printunit{\addperiod\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \iftoggle{bbx:isbn}%
     {\printfield{issn}}%
     {}%
-  \newunit\newblock%
+    \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{doi+eprint+url}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{addendum+pubstate}%
-  \printunit{\bibpagerefpunct}\newblock%
+  \printunit{\bibpagerefpunct}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{pageref}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \iftoggle{bbx:related}%
     {\usebibmacro{related:init}%
-     \usebibmacro{related}}%
+    \usebibmacro{related}}%
     {}%
   \usebibmacro{finentry}%
 }%% <<<2
@@ -1373,48 +1388,64 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/editor+others}%
-  \setunit{\labelnamepunct}\newblock%
+  \setunit{\labelnamepunct}%
   \usebibmacro{title}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{in:maintitle}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{byeditor+others}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{edition}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{publisher+location+date}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{volume}%
   \printfield{part}%
   \setunit{\addcomma\addspace}%
   \printfield{chapter}%
   \setunit*{\addcomma\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{pages}%
-  \newunit\newblock%
+  \newunit%
   \printfield{pagetotal}%
   \setunit*{\addcomma\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{illustrated}%
   \setunit*{\addcomma\addspace}%
   \printfield{dimensions}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{series+number}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{howpublished}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{language}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{note}%
   \printunit{\addperiod\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \iftoggle{bbx:isbn}%
     {\printfield{isbn}}%
     {}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{doi+eprint+url}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{addendum+pubstate}%
-  \printunit{\bibpagerefpunct}\newblock%
+  \printunit{\bibpagerefpunct}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{pageref}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \iftoggle{bbx:related}%
     {\usebibmacro{related:init}%
      \usebibmacro{related}}%
@@ -1426,38 +1457,51 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/editor+others}%
-  \setunit{\labelnamepunct}\newblock%
+  \setunit{\labelnamepunct}%
   \usebibmacro{title}%
   \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{in:bookauthor+others}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{maintitle/booktitle}%
   \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{byeditor+others}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{edition}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{publisher+location+date}%
   \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{volume}%
   \printfield{part}%
   \setunit*{\addcomma\addspace}%
   \usebibmacro{chapter+pages}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{series+number}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{note}%
   \printunit{\addperiod\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \iftoggle{bbx:isbn}%
     {\printfield{isbn}}%
     {}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{doi+eprint+url}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{addendum+pubstate}%
-  \printunit{\bibpagerefpunct}\newblock%
+  \printunit{\bibpagerefpunct}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{pageref}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \iftoggle{bbx:related}%
     {\usebibmacro{related:init}%
      \usebibmacro{related}}%
@@ -1469,45 +1513,62 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/editor+others}%
-  \setunit{\labelnamepunct}\newblock%
+  \setunit{\labelnamepunct}%
   \usebibmacro{title}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{in:maintitle}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{byeditor+others}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{edition}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{publisher+location+date}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{volumes}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{chapter+pages}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{pagetotal}%
   \setunit*{\addcomma\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{illustrated}%
   \setunit*{\addcomma\addspace}%
   \printfield{dimensions}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{series+number}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{howpublished}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{language}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{note}%
   \printunit{\addperiod\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \iftoggle{bbx:isbn}%
     {\printfield{isbn}}%
     {}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{doi+eprint+url}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{addendum+pubstate}%
-  \printunit{\bibpagerefpunct}\newblock%
+  \printunit{\bibpagerefpunct}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{pageref}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \iftoggle{bbx:related}%
     {\usebibmacro{related:init}%
      \usebibmacro{related}}%
@@ -1519,41 +1580,56 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/editor+others}%
-  \setunit{\labelnamepunct}\newblock%
+  \setunit{\labelnamepunct}%
   \usebibmacro{maintitle+title}%
   \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printlist{language}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{byauthor}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{byeditor+others}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{edition}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{series+number}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{type}%
   \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{version}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{location+date}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{chapter+pages}%
   \newunit%
+  \printfield{pagetotal}%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{note}%
   \newunit%
-  \printfield{pagetotal}%
-  \newunit\newblock%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \iftoggle{bbx:isbn}%
     {\printfield{isbn}}%
     {}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{doi+eprint+url}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{addendum+pubstate}%
-  \printunit{\bibpagerefpunct}\newblock%
+  \printunit{\bibpagerefpunct}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{pageref}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \iftoggle{bbx:related}%
     {\usebibmacro{related:init}%
      \usebibmacro{related}}%
@@ -1565,48 +1641,64 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{editor+others}%
-  \setunit{\labelnamepunct}\newblock%
+  \setunit{\labelnamepunct}%
   \usebibmacro{title}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{in:maintitle}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{byeditor+others}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{edition}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{publisher+location+date}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{volume}%
   \printfield{part}%
   \setunit{\addcomma\addspace}%
   \printfield{chapter}%
   \setunit*{\addcomma\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{pages}%
-  \newunit\newblock%
+  \newunit%
   \printfield{pagetotal}%
   \setunit*{\addcomma\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{illustrated}%
   \setunit*{\addcomma\addspace}%
   \printfield{dimensions}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{series+number}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{howpublished}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{language}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{note}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printunit{\addperiod\addspace}%
   \iftoggle{bbx:isbn}%
     {\printfield{isbn}}%
     {}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{doi+eprint+url}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{addendum+pubstate}%
-  \printunit{\bibpagerefpunct}\newblock%
+  \printunit{\bibpagerefpunct}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{pageref}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \iftoggle{bbx:related}%
     {\usebibmacro{related:init}%
      \usebibmacro{related}}%
@@ -1618,38 +1710,50 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author}%
-  \setunit{\labelnamepunct}\newblock%
+  \setunit{\labelnamepunct}%
   \usebibmacro{title}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{in:editor+others}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{maintitle/booktitle}%
   \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{byeditor+others}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{edition}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{publisher+location+date}%
   \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{volume}%
   \printfield{part}%
-  \newunit\newblock%
+  \newunit%
   \usebibmacro{series+number}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{note}%
   \printunit{\addperiod\addspace}%
   \usebibmacro{chapter+pages}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \iftoggle{bbx:isbn}%
     {\printfield{isbn}}%
     {}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{doi+eprint+url}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{addendum+pubstate}%
-  \printunit{\bibpagerefpunct}\newblock%
+  \printunit{\bibpagerefpunct}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{pageref}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \iftoggle{bbx:related}%
     {\usebibmacro{related:init}%
      \usebibmacro{related}}%
@@ -1661,45 +1765,62 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{editor+others}%
-  \setunit{\labelnamepunct}\newblock%
+  \setunit{\labelnamepunct}%
   \usebibmacro{title}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{in:maintitle}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{byeditor+others}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{edition}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{publisher+location+date}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{volumes}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{chapter+pages}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{pagetotal}%
   \setunit*{\addcomma\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{illustrated}%
   \setunit*{\addcomma\addspace}%
   \printfield{dimensions}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{series+number}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{howpublished}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{language}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{note}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printunit{\addperiod\addspace}%
   \iftoggle{bbx:isbn}%
     {\printfield{isbn}}%
     {}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{doi+eprint+url}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{addendum+pubstate}%
-  \printunit{\bibpagerefpunct}\newblock%
+  \printunit{\bibpagerefpunct}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{pageref}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \iftoggle{bbx:related}%
     {\usebibmacro{related:init}%
      \usebibmacro{related}}%
@@ -1711,41 +1832,56 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/editor+others}%
-  \setunit{\labelnamepunct}\newblock%
+  \setunit{\labelnamepunct}%
   \usebibmacro{maintitle+title}%
   \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printlist{language}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{byauthor}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{byeditor}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{edition}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{type}%
   \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{version}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{location+date}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{chapter+pages}%
   \newunit%
   \printfield{pagetotal}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{series+number}%
   \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{note}%
   \printunit{\addperiod\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \iftoggle{bbx:isbn}%
     {\printfield{isbn}}%
     {}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{doi+eprint+url}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{addendum+pubstate}%
-  \printunit{\bibpagerefpunct}\newblock%
+  \printunit{\bibpagerefpunct}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{pageref}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \iftoggle{bbx:related}%
     {\usebibmacro{related:init}%
      \usebibmacro{related}}%
@@ -1757,35 +1893,46 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author}%
-  \setunit{\labelnamepunct}\newblock%
+  \setunit{\labelnamepunct}%
   \usebibmacro{title}%
   \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{date}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{chapter+pages}%
   \newunit%
   \printfield{pagetotal}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{type}%
   \setunit*{\addspace\textendash\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printlist{institution}%
   \setunit*{\addcomma\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printlist{location}%
   \setunit*{\addcomma\addspace}%
   \printeventdate%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{note}%
   \printunit{\addperiod\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \iftoggle{bbx:isbn}%
     {\printfield{isbn}}%
     {}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{doi+eprint+url}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{addendum+pubstate}%
-  \printunit{\bibpagerefpunct}\newblock%
+  \printunit{\bibpagerefpunct}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{pageref}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \iftoggle{bbx:related}%
     {\usebibmacro{related:init}%
      \usebibmacro{related}}%
@@ -1806,50 +1953,63 @@
       }{%
         \printnames[given-family]{author}%
       }%
-      \newunit\newblock%
+      \newunit%
       \printfield{nameaddon}%
-      \newunit\newblock%
+      \newunit%
     }%
   }{%
       \printnames{holder}%
-      \newunit\newblock%
+      \newunit%
       \printfield{nameaddon}%
-      \newunit\newblock%
+      \newunit%
       \ifnameundef{author}{%
         \printnames[given-family]{editor}%
       }{%
         \printnames[given-family]{author}%
       }%
   }%
-  \setunit{\labelnamepunct}\newblock%
+  \setunit{\labelnamepunct}%
   \usebibmacro{title}%
   \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printlist{language}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{byauthor}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{byeditor+others}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printlist{location}%
   \setunit*{\addcomma\addspace}%
   \usebibmacro{date}%
   \setunit*{\addcomma\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{number}%
   \setunit*{\addcomma\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{howpublished}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{type}%
   \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{version}%
   \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{note}%
   \printunit{\addperiod\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{doi+eprint+url}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{addendum+pubstate}%
-  \printunit{\bibpagerefpunct}\newblock%
+  \printunit{\bibpagerefpunct}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{pageref}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \iftoggle{bbx:related}%
     {\usebibmacro{related:init}%
      \usebibmacro{related}}%
@@ -1861,35 +2021,45 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{editor+others/organization}%
-  \setunit{\labelnamepunct}\newblock%
+  \setunit{\labelnamepunct}%
   \printfield[uppercase]{title}%
   \setunit*{\addcolon\addspace}%
   \printfield[normalfont]{subtitle}%
   \newunit%
   \printfield{titleaddon}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{publisher+location+issue+date}%
   \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printlist{language}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{byeditor}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{chapter+pages}%
   \setunit*{\addcomma\addspace}%
   \printfield{pagetotal}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{note}%
   \printunit{\addperiod\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \iftoggle{bbx:isbn}%
     {\printfield{issn}}%
     {}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{doi+eprint+url}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{addendum+pubstate}%
-  \printunit{\bibpagerefpunct}\newblock%
+  \printunit{\bibpagerefpunct}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{pageref}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \iftoggle{bbx:related}%
     {\usebibmacro{related:init}%
      \usebibmacro{related}}%
@@ -1901,47 +2071,62 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/editor+others}%
-  \setunit{\labelnamepunct}\newblock%
+  \setunit{\labelnamepunct}%
   \usebibmacro{issue}%
   \setunit*{\addperiod\addspace}%
   \usebibmacro{periodical}%
   \setunit*{\addperiod\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{location}%
   \setunit*{\addcolon\addspace}%
   \usebibmacro{publisher}%
   \setunit*{\addcomma\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{volume}%
   \setunit*{\addcomma\addspace}%
   \printfield{number}%
   \setunit*{\addcomma\addspace}%
   \printfield{pages}%
   \setunit*{\addcomma\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{date}%
   \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printlist{language}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{byauthor}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{byeditor+others}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{howpublished}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{type}%
   \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{version}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{chapter+pages}%
   \setunit*{\addcomma\addspace}%
   \printfield{pagetotal}%
   \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{note}%
   \printunit{\addperiod\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{doi+eprint+url}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{addendum+pubstate}%
-  \printunit{\bibpagerefpunct}\newblock%
+  \printunit{\bibpagerefpunct}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{pageref}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \iftoggle{bbx:related}%
     {\usebibmacro{related:init}%
      \usebibmacro{related}}%
@@ -1956,41 +2141,56 @@
   \setunit{\addcomma\addspace}%
   \printfield{number}%
   \setunit*{\adddot\addcomma\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printeventdate%
   \setunit{\addcomma\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{venue}%
   \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{maintitle+title}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{byeditor+others}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{publisher+location+date}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \iffieldundef{maintitle}%
     {\printfield{volume}%
      \printfield{part}}%
     {}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{volumes}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{note}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printunit{\addperiod\addspace}%
   \printlist{organization}% % This has to be printed conditionally
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{chapter+pages}%
   \newunit%
   \printfield{pagetotal}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \iftoggle{bbx:isbn}%
     {\printfield{isbn}}%
     {}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{doi+eprint+url}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{addendum+pubstate}%
-  \printunit{\bibpagerefpunct}\newblock%
+  \printunit{\bibpagerefpunct}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{pageref}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \iftoggle{bbx:related}%
     {\usebibmacro{related:init}%
      \usebibmacro{related}}%
@@ -2002,25 +2202,33 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/translator+others}%
-  \setunit{\labelnamepunct}\newblock%
+  \setunit{\labelnamepunct}%
   \usebibmacro{title}%
   \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printlist{language}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{byauthor}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{in:eventtitle/organization/editor}%
   \setunit*{\addcomma\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{number}%
   \setunit*{\adddot\addcomma\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printeventdate%
   \setunit*{\addcomma\addspace}%
   \printfield{venue}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{maintitle+booktitle}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{byeditor+others}%
   \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \ifboolexpr{%
     test {\iffieldundef{booktitle}}%
     and%
@@ -2028,34 +2236,45 @@
   }%
 	{}%
 	{\usebibmacro{publisher+location+date}}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \iffieldundef{maintitle}%
     {\printfield{volume}%
      \printfield{part}}%
     {}%
   \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{volumes}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{series+number}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printlist{organization}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{chapter+pages}%
   \newunit%
   \printfield{pagetotal}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{note}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printunit{\addperiod\addspace}%
   \iftoggle{bbx:isbn}%
     {\printfield{isbn}}%
     {}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{doi+eprint+url}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{addendum+pubstate}%
-  \printunit{\bibpagerefpunct}\newblock%
+  \printunit{\bibpagerefpunct}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{pageref}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \iftoggle{bbx:related}%
     {\usebibmacro{related:init}%
      \usebibmacro{related}}%
@@ -2067,44 +2286,59 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/editor+others}%
-  \setunit{\labelnamepunct}\newblock%
+  \setunit{\labelnamepunct}%
   \usebibmacro{maintitle+title}%
   \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printlist{language}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{byauthor}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{byeditor+others}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{edition}%
   \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \iffieldundef{maintitle}%
     {\printfield{volume}%
      \printfield{part}}%
     {}%
   \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{volumes}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{location+date}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{chapter+pages}%
   \newunit%
   \printfield{pagetotal}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{series+number}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{note}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printunit{\addperiod\addspace}%
   \iftoggle{bbx:isbn}%
     {\printfield{isbn}}%
     {}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{doi+eprint+url}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{addendum+pubstate}%
-  \printunit{\bibpagerefpunct}\newblock%
+  \printunit{\bibpagerefpunct}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{pageref}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \iftoggle{bbx:related}%
     {\usebibmacro{related:init}%
      \usebibmacro{related}}%
@@ -2116,35 +2350,46 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author}%
-  \setunit{\labelnamepunct}\newblock%
+  \setunit{\labelnamepunct}%
   \usebibmacro{title}%
   \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{date}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{chapter+pages}%
   \newunit%
   \printfield{pagetotal}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{type}%
   \setunit*{\addspace\textendash\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printlist{institution}%
   \setunit*{\addcomma\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printlist{location}%
   \setunit*{\addcomma\addspace}%
   \printeventdate%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{note}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printunit{\addperiod\addspace}%
   \iftoggle{bbx:isbn}%
     {\printfield{isbn}}%
     {}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{doi+eprint+url}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{addendum+pubstate}%
-  \printunit{\bibpagerefpunct}\newblock%
+  \printunit{\bibpagerefpunct}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{pageref}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \iftoggle{bbx:related}%
     {\usebibmacro{related:init}%
      \usebibmacro{related}}%
@@ -2156,48 +2401,65 @@
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/editor+others}%
-  \setunit{\labelnamepunct}\newblock%
+  \setunit{\labelnamepunct}%
   \usebibmacro{maintitle+title}%
   \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printlist{language}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{byauthor}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{byeditor+others}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{edition}%
   \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \iffieldundef{maintitle}%
     {\printfield{volume}%
      \printfield{part}}%
     {}%
   \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{volumes}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{publisher+location+date}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{chapter+pages}%
   \newunit%
   \printfield{pagetotal}%
   \setunit*{\addcomma\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{dimensions}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{howpublished}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{series+number}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{note}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printunit{\addperiod\addspace}%
   \iftoggle{bbx:isbn}%
     {\printfield{isbn}}%
     {}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{doi+eprint+url}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{addendum+pubstate}%
-  \printunit{\bibpagerefpunct}\newblock%
+  \printunit{\bibpagerefpunct}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{pageref}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \iftoggle{bbx:related}%
     {\usebibmacro{related:init}%
      \usebibmacro{related}}%
@@ -2208,7 +2470,8 @@
 \DeclareBibliographyDriver{set}{%% >>>2
   \booltrue{bbx@inset}%
   \entryset{}{}%
-  \newunit\newblock%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{setpageref}%
   \finentry%
 }%% <<<2
