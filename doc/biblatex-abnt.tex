@@ -46,11 +46,15 @@
     left skip=2em,
 }% <<<2
 
+
+\setlength\itemsep{.6\baselineskip}
+
 \usepackage[%% Biblatex >>>2
     style        = abnt,
     language     = brazil,
     giveninits,             % Use initials for first names
     uniquename   = init,    % This is necessary when using giveninits
+    block        = space,   % Use spaces between blocks, making the text justified
     hyperref,               % Turn citations into links
     %backref,               % Back references (E.g. ``Cit. on p. 1")
     %repeatfields,          % Repeat fields instead of using an underscore
@@ -151,13 +155,14 @@ Use o comando \verb"\printbibliography" para imprimir a bibliografia.
 \section{Opções}% >>>2
 \label{sec:opções}
 
-As opções a seguir podem ser usadas ao chamar o pacote \texttt{biblatex}:
+As opções a seguir podem ser usadas ao chamar o \texttt{biblatex} (além daquelas descritas no manual do pacote):
 
-\begin{description}[parsep=7pt,itemindent=-1em,leftmargin=3em]% >>>3
+\begin{description}[itemindent=-1em,leftmargin=3em]% >>>3
   \item [indent] Indenta as entradas da bibliografia
   \item [sccite] Imprime os nomes em versalete nas citações
   \item [scbib] Imprime os nomes em versalete na bibliografia
   \item [ittitles] Usa itálico para os títulos na bibliografia
+  \item [block=none] Imprime o texto da bibliografia justificado, em vez de separar os blocos com quebras de linha
   \item [giveninits] Abrevia os primeiros nomes na bibliografia
   \item [uniquename=init] Necessário ao usar a opção \texttt{giveninits}
   \item [nosl] Oculta as abreviações [s.l.] na bibliografia
@@ -195,7 +200,7 @@ específicas. E.g.:
 \end{verbatim}
 % <<<2
 
-\clearpage
+
 \section{Comandos}% >>>2
 \label{sec:comandos}
 
