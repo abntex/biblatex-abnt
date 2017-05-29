@@ -27,9 +27,12 @@
 
 \RequireBibliographyStyle{standard}%
 
-\ExecuteBibliographyOptions{block=ragged,urldate=long,pagetracker}%
+\ExecuteBibliographyOptions{block=none,urldate=long,pagetracker}%
 
 \InitializeBibliographyStyle{\global\undef\bbx@lasthash}%
+
+\let\origbibsetup\bibsetup%
+\appto{\bibsetup}{\raggedright}%
 
 % <<<1
 
@@ -167,6 +170,13 @@
   \settoggle{extrayear}{#1}}%
 \DeclareEntryOption[boolean]{extrayear}[true]{%
   \settoggle{extrayear}{#1}}%
+% <<<2
+
+% Justify text >>>2
+\DeclareBibliographyOption{justify}[true]{%
+  \ExecuteBibliographyOptions{block=space}%
+  \renewcommand*{\bibsetup}{\origbibsetup}%
+}%
 % <<<2
 
 % <<<1
