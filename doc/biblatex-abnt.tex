@@ -177,10 +177,6 @@ As opções a seguir podem ser usadas ao chamar o \texttt{biblatex} (além daque
     mas substitui os autores por traços sublineares
   \item [usedashes] Usa os traços padrão do \texttt{biblatex} em vez de
     traços sublineares nos campos repetidos
-  \item [hyperref] Transforma as citações em links que levam à bibliografia
-  \item [backref] Aponta, na bibliografia, as páginas em que a entrada foi
-    citada
-  \item [sorting=none] Ordena as referências conforme aparecem no texto
 \end{description}% <<<3
 
 \vspace{\baselineskip}
@@ -302,7 +298,10 @@ originais excluindo os parênteses:
 % <<<3
 
 
+\begingroup
+\let\clearpage\relax
 \subsection{Estilo \texttt{abnt-ibid}}% >>>3
+\endgroup
 
 \makeatletter
 \DeclareCiteCommand{\@apud}[\mkbibfootnote]%
@@ -342,7 +341,11 @@ Segundo o autor\footcite[25]{assis08}\\
 Segundo o autor\footcite[254]{bosi08}
 \end{example}% <<<3
 
+
+\begingroup
+\let\clearpage\relax
 \subsection{Estilo \texttt{abnt-numeric}}% >>>3
+\endgroup
 
 \DeclareCiteCommand{\supercite}[\mkbibsuperscript]
   {\iffieldundef{prenote}
@@ -914,9 +917,9 @@ mudança é necessária; estas são as principais exceções:
     \texttt{Roque de Brito} \texttt{Alves} é impresso como ``BRITO ALVES,
     Roque de''). Cf. \url{http://tex.stackexchange.com/q/308625/102699}.
   \item Quando os campos \texttt{number}, \texttt{volume}, \texttt{chapter} e
-    \texttt{edition} contém apenas números, eles são formatados
+    \texttt{edition} contêm apenas números, eles são formatados
     automaticamente (e.g. \texttt{edition = \{5\}} imprime ``5. ed.''). Quando
-    esses campos contém letras, deve-se preencher todo o conteúdo desejado
+    esses campos contêm letras, deve-se preencher todo o conteúdo desejado
     (e.g. \verb"edition = {5th. ed}" imprime ``5th. ed.''). Os caracteres
     \texttt{.,-/} podem ser usados e o campo ainda será considerado como
     contendo apenas números.
@@ -971,7 +974,7 @@ mudança é necessária; estas são as principais exceções:
     mais exemplos). Todas as opções para o campo \texttt{editor\-type} podem
     ser encontradas no arquivo \texttt{abnt-brazilian.lbx}. Usar esses campos
     em lugar do campo \texttt{furtherresp} assegurará que as entradas sejam
-    impressas de forma consistente, embora as entradas da própria ABNT não o
+    impressas de forma consistente, embora os exemplos da própria ABNT não o
     sejam.
   \item Para tradutores pode-se usar o campo \texttt{translator}.
   \end{sloppypar}
