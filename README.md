@@ -1,6 +1,9 @@
 # biblatex-abnt
 
-Version 3.0.1
+BibLaTeX style for Brazil's ABNT (Brazilian Association of Technical Norms)
+rules.
+
+Version 3.1
 
 Permission is granted to copy, distribute and/or modify this software
 under the terms of the LaTeX Project Public License, version 1.3c
@@ -9,9 +12,9 @@ under the terms of the LaTeX Project Public License, version 1.3c
 The current maintainer is
 Daniel B. Marques ([@dbmrq](https://github.com/dbmrq)).
 
-----------
+---
 
-Estilo para `biblatex` compatível com as normas da ABNT.
+Estilo para BibLaTeX compatível com as normas da ABNT.
 
 Substitui o pacote [`abntex2cite`](https://github.com/abntex/abntex2).
 
@@ -37,7 +40,7 @@ e atualize o banco de dados do TeX (rodando o `texhash`, por exemplo).
 1. Adicione as seguintes linhas ao preâmbulo do seu arquivo `.tex`:
 
   ```tex
-  \usepackage[style = abnt, language = brazil]{biblatex}
+  \usepackage[style=abnt, language=brazil]{biblatex}
   \addbibresource{arquivo.bib}        % Seus arquivos de
   \addbibresource{outroarquivo.bib}   % bibliografia vão aqui
   ```
