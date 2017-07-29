@@ -13,7 +13,7 @@
 %% The Current Maintainer of this work is Daniel B. Marques.
 
 \ProvidesFile{abnt.bbx}%
-[2017/03/15\space v3.0.1\space ABNT BibLaTeX citation style]%
+[2017/07/28\space v3.0.1\space ABNT BibLaTeX citation style]%
 
 
 % Init >>>1
@@ -24,6 +24,7 @@
 \DeclareLanguageMapping{portuguese}{abnt-brazilian}%
 \DeclareLanguageMapping{portuges}{abnt-brazilian}%
 \DeclareLanguageMapping{spanish}{abnt-spanish}%
+\DeclareLanguageMapping{english}{abnt-english}%
 
 \RequireBibliographyStyle{standard}%
 
@@ -577,7 +578,7 @@
 
 \DeclareFieldFormat{illustrated}{\addspace #1\isdot}%
 
-\DeclareFieldFormat{url}{\bibstring{url}\addcolon\addspace<\url{#1}>}%
+\DeclareFieldFormat{url}{\bibstring{urlfrom}\addcolon\addspace<\url{#1}>}%
 \DeclareFieldFormat{urldate}{\bibstring{urlseen}\addcolon\addspace #1}%
 
 \DeclareFieldFormat*{note}{\addspace #1}%
