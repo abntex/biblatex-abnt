@@ -590,7 +590,7 @@
   \bibstring{monography}\addspace\printtext[parens]{#1}%
 }%% <<<
 
-\DeclareFieldFormat{origlanguage}{%% >>>4
+\DeclareListFormat{origlanguage}{%% >>>4
     \ifbibstring{#1}%
       {\bibxstring{#1}}%
       {\ifbibstring{from#1}%
@@ -1307,11 +1307,11 @@
 	\ifboolexpr{%
 		test {\iflistundef{language}}%
 		or%
-		test {\iffieldundef{origlanguage}}%
+		test {\iflistundef{origlanguage}}%
 	}%
 	{}%
 	{%
-		\printtext{\printlist{language}\addspace\printfield{origlanguage}}%
+		\printtext{\printlist{language}\addspace\printlist{origlanguage}}%
 	}%
 }%% <<<3
 
