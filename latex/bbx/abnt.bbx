@@ -402,14 +402,38 @@
 
 % Name format >>>2
 
-\AtBeginBibliography{%
-  \renewcommand*{\mkbibnamefamily}[1]{\UpperOrSC{#1}}%
-  \renewcommand*{\mkbibnamegiven}[1]{\ifgiveninits{\NormalOrSC{#1}}{#1}}%
-  \renewcommand*{\mkbibnameprefix}[1]{\ifgiveninits{\NormalOrSC{#1}}{#1}}%
-  \renewcommand*{\mkbibnamesuffix}[1]{\ifgiveninits{\NormalOrSC{#1}}{#1}}%
-}%
+\DeclareNameFormat{LAST-first}{%% >>>3
+  \renewcommand*{\mkbibnamefamily}[1]{\UpperOrSC{##1}}%
+  \renewcommand*{\mkbibnamegiven}[1]{\ifgiveninits{\NormalOrSC{##1}}{##1}}%
+  \renewcommand*{\mkbibnameprefix}[1]{\ifgiveninits{\NormalOrSC{##1}}{##1}}%
+  \renewcommand*{\mkbibnamesuffix}[1]{\ifgiveninits{\NormalOrSC{##1}}{##1}}%
+	\ifgiveninits{%
+		\usebibmacro{name:family-given}{%
+			\iftoggle{scbib}{%
+				\textsc{\namepartfamily}%
+			}{%
+				\MakeUppercase{\namepartfamily}%
+			}%
+		}%
+		{\namepartgiveni}%
+		{\namepartprefix}%
+		{\namepartsuffix}%
+	}{%
+		\usebibmacro{name:family-given}{%
+			\iftoggle{scbib}{%
+				\textsc{\MakeLowercase{\namepartfamily}}%
+			}{%
+				\MakeUppercase{\namepartfamily}%
+			}%
+		}%
+		{\namepartgiven}%
+		{\namepartprefix}%
+		{\namepartsuffix}%
+	}%
+	\usebibmacro{name:andothers}%
+}% <<<
 
-\DeclareNameAlias{default}{family-given}%
+\DeclareNameAlias{default}{LAST-first}%
 
 \DeclareNameFormat{full}{%% >>>3
   \usebibmacro{name:given-family}%
