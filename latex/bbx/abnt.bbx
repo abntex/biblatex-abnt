@@ -402,10 +402,12 @@
 
 % Name format >>>2
 
-\renewcommand*{\mkbibnamefamily}[1]{\UpperOrSC{#1}}
-\renewcommand*{\mkbibnamegiven}[1]{\ifgiveninits{\NormalOrSC{#1}}{#1}}
-\renewcommand*{\mkbibnameprefix}[1]{\ifgiveninits{\NormalOrSC{#1}}{#1}}
-\renewcommand*{\mkbibnamesuffix}[1]{\ifgiveninits{\NormalOrSC{#1}}{#1}}
+\AtBeginBibliography{%
+  \renewcommand*{\mkbibnamefamily}[1]{\UpperOrSC{#1}}
+  \renewcommand*{\mkbibnamegiven}[1]{\ifgiveninits{\NormalOrSC{#1}}{#1}}
+  \renewcommand*{\mkbibnameprefix}[1]{\ifgiveninits{\NormalOrSC{#1}}{#1}}
+  \renewcommand*{\mkbibnamesuffix}[1]{\ifgiveninits{\NormalOrSC{#1}}{#1}}
+}
 
 \DeclareNameAlias{default}{family-given}%
 
