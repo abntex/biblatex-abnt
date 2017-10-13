@@ -29,10 +29,10 @@
 \RequireBibliographyStyle{standard}%
 
 \ExecuteBibliographyOptions{%
-  block=none,
-  urldate=long,
-  pagetracker,
-  uniquename=false,
+  block=none,%
+  urldate=long,%
+  pagetracker,%
+  uniquename=false,%
 }%
 
 \InitializeBibliographyStyle{\global\undef\bbx@lasthash}%
@@ -188,11 +188,11 @@
 % Make it pretty >>>2
 \DeclareBibliographyOption{pretty}[true]{%
   \ExecuteBibliographyOptions{%
-    ittitles,
-    sccite,
-    scbib,
-    indent,
-    justify,
+    ittitles,%
+    sccite,%
+    scbib,%
+    indent,%
+    justify,%
   }%
 }%
 % <<<2
@@ -403,11 +403,11 @@
 % Name format >>>2
 
 \AtBeginBibliography{%
-  \renewcommand*{\mkbibnamefamily}[1]{\UpperOrSC{#1}}
-  \renewcommand*{\mkbibnamegiven}[1]{\ifgiveninits{\NormalOrSC{#1}}{#1}}
-  \renewcommand*{\mkbibnameprefix}[1]{\ifgiveninits{\NormalOrSC{#1}}{#1}}
-  \renewcommand*{\mkbibnamesuffix}[1]{\ifgiveninits{\NormalOrSC{#1}}{#1}}
-}
+  \renewcommand*{\mkbibnamefamily}[1]{\UpperOrSC{#1}}%
+  \renewcommand*{\mkbibnamegiven}[1]{\ifgiveninits{\NormalOrSC{#1}}{#1}}%
+  \renewcommand*{\mkbibnameprefix}[1]{\ifgiveninits{\NormalOrSC{#1}}{#1}}%
+  \renewcommand*{\mkbibnamesuffix}[1]{\ifgiveninits{\NormalOrSC{#1}}{#1}}%
+}%
 
 \DeclareNameAlias{default}{family-given}%
 
@@ -1123,7 +1123,7 @@
     \printdateextra%
   }{%
     \printdate%
-  }
+  }%
   \printunit{\addperiod\addspace}%
 }%
 
@@ -1267,7 +1267,7 @@
 \renewbibmacro*{pageref}{%% >>>3
   \iflistundef{pageref}%
     {}%
-	{\printunit{\addperiod\addspace}
+	{\printunit{\addperiod\addspace}%
   \printtext{% \printtext[parens]{%
 	  \ifnumgreater{\value{pageref}}{1}%
 	    {\bibstring{backrefpages}\ppspace}%
