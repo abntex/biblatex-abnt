@@ -382,9 +382,58 @@
    \egroup%
 }%
 
+\newcommand*{\UpperOrSC}[1]{%
+  \iftoggle{scbib}{%
+    \textsc{\MakeLowercase{#1}}%
+  }{%
+    \MakeUppercase{#1}%
+  }%
+}%
+
+\newcommand*{\NormalOrSC}[1]{%
+  \iftoggle{scbib}{%
+    \textsc{\MakeLowercase{#1}}%
+  }{%
+    #1%
+  }%
+}%
+
 % <<<2
 
 % Name format >>>2
+
+\renewcommand*{\mkbibnamefamily}[1]{\UpperOrSC{#1}}
+\renewcommand*{\mkbibnamegiven}[1]{\ifgiveninits{\NormalOrSC{#1}}{#1}}
+\renewcommand*{\mkbibnameprefix}[1]{\ifgiveninits{\NormalOrSC{#1}}{#1}}
+\renewcommand*{\mkbibnamesuffix}[1]{\ifgiveninits{\NormalOrSC{#1}}{#1}}
+
+\DeclareNameAlias{default}{family-given}%
+
+\DeclareNameFormat{full}{%% >>>3
+  \usebibmacro{name:given-family}%
+    {\namepartfamily}%
+    {\namepartgiven}%
+    {\namepartprefix}%
+    {\namepartsuffix}%
+}% <<<
+
+\DeclareNameAlias{byauthor}{full}%
+\DeclareNameAlias{bybookauthor}{byauthor}%
+\DeclareNameAlias{byeditor}{full}%
+\DeclareNameAlias{byeditora}{byeditor}%
+\DeclareNameAlias{byeditorb}{byeditor}%
+\DeclareNameAlias{byeditorc}{byeditor}%
+\DeclareNameAlias{bytranslator}{full}%
+
+\DeclareNameAlias{withcommentator}{given-family}%
+\DeclareNameAlias{withannotator}{given-family}%
+\DeclareNameAlias{withintroduction}{given-family}%
+\DeclareNameAlias{withforeword}{given-family}%
+\DeclareNameAlias{withafterword}{given-family}%
+
+\DeclareBibliographyAlias{legislation}{article}%
+\DeclareBibliographyAlias{jurisdiction}{article}%
+\DeclareBibliographyAlias{legal}{article}%
 
 % Name delimiters >>>3
 \newtoggle{byeditor+others}%
@@ -405,61 +454,6 @@
   }%
 }%
 % <<<
-
-\DeclareNameFormat{LAST-first}{%% >>>3
-	\ifgiveninits{%
-		\usebibmacro{name:family-given}{%
-			\iftoggle{scbib}{%
-				\textsc{\namepartfamily}%
-			}{%
-				\MakeUppercase{\namepartfamily}%
-			}%
-		}%
-		{\namepartgiveni}%
-		{\namepartprefix}%
-		{\namepartsuffix}%
-	}{%
-		\usebibmacro{name:family-given}{%
-			\iftoggle{scbib}{%
-				\textsc{\MakeLowercase{\namepartfamily}}%
-			}{%
-				\MakeUppercase{\namepartfamily}%
-			}%
-		}%
-		{\namepartgiven}%
-		{\namepartprefix}%
-		{\namepartsuffix}%
-	}%
-	\usebibmacro{name:andothers}%
-}% <<<
-
-\DeclareNameFormat{full}{%% >>>3
-  \usebibmacro{name:given-family}%
-    {\namepartfamily}%
-    {\namepartgiven}%
-    {\namepartprefix}%
-    {\namepartsuffix}%
-}% <<<
-
-\DeclareNameAlias{default}{LAST-first}%
-
-\DeclareNameAlias{byauthor}{full}%
-\DeclareNameAlias{bybookauthor}{byauthor}%
-\DeclareNameAlias{byeditor}{full}%
-\DeclareNameAlias{byeditora}{byeditor}%
-\DeclareNameAlias{byeditorb}{byeditor}%
-\DeclareNameAlias{byeditorc}{byeditor}%
-\DeclareNameAlias{bytranslator}{full}%
-
-\DeclareNameAlias{withcommentator}{given-family}%
-\DeclareNameAlias{withannotator}{given-family}%
-\DeclareNameAlias{withintroduction}{given-family}%
-\DeclareNameAlias{withforeword}{given-family}%
-\DeclareNameAlias{withafterword}{given-family}%
-
-\DeclareBibliographyAlias{legislation}{article}%
-\DeclareBibliographyAlias{jurisdiction}{article}%
-\DeclareBibliographyAlias{legal}{article}%
 
 % <<<2
 
