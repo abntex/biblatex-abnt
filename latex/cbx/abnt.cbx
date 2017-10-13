@@ -288,6 +288,19 @@
   {\multicitedelim}%
   {\usebibmacro{postnote}}% <<<2
 
+\DeclareCiteCommand*{\citeyearorsh}%
+  {\boolfalse{citetracker}%
+   \boolfalse{pagetracker}%
+   \usebibmacro{prenote}}%
+  {\iffieldundef{shorthand}{%
+      \printfield[bibhyperref]{year}%
+    }{%
+      \printfield[bibhyperref]{shorthand}%
+    }
+  }
+  {\multicitedelim}%
+  {\usebibmacro{postnote}}% <<<2
+
 % apud >>>2
 
 \DeclareCiteCommand{\@apud}% >>>3
@@ -334,11 +347,11 @@
   \IfNoValueTF{#2}
    {%
     \IfNoValueTF{#1}
-     {\citeyear*{#3}}
-     {\citeyear*[#1]{#3}}%
+     {\citeyearorsh*{#3}}
+     {\citeyearorsh*[#1]{#3}}%
    }
    {%
-    \citeyear*[#1][#2]{#3}%
+    \citeyearorsh*[#1][#2]{#3}%
    }
   \IfNoValueTF{#5}
    {%
