@@ -272,6 +272,26 @@
   {\multicitedelim}%
   {\usebibmacro{postnote}}% <<<2
 
+\DeclareCiteCommand{\citeshorthand}[\mkbibparens]%
+  {\boolfalse{citetracker}%
+   \boolfalse{pagetracker}%
+   \usebibmacro{prenote}}%
+  {\printfield[bibhyperref]{shorthand}}
+  {\multicitedelim}%
+  {\usebibmacro{postnote}}% <<<2
+
+\DeclareCiteCommand*{\citeshorthand}%
+  {\boolfalse{citetracker}%
+   \boolfalse{pagetracker}%
+   \usebibmacro{prenote}}%
+  {\ifciteindex%
+     {\indexfield{indextitle}}%
+     {}%
+   \printtext[bibhyperref]{\printfield[emphtitle]{labeltitle}}
+   \mkbibparens{\printfield[bibhyperref]{shorthand}}}
+  {\multicitedelim}%
+  {\usebibmacro{postnote}}% <<<2
+
 \DeclareCiteCommand{\citeyear}[\mkbibparens]% >>>2
   {\boolfalse{citetracker}%
    \boolfalse{pagetracker}%
