@@ -50,38 +50,50 @@
 
 % Format >>>1
 
+\newcommand*{\UpperOrSCCite}[1]{%
+  \iftoggle{scbib}{%
+    \textsc{\MakeLowercase{#1}}%
+  }{%
+    \MakeUppercase{#1}%
+  }%
+}%
+
+\newcommand*{\NormalOrSCCite}[1]{%
+  \iftoggle{scbib}{%
+    \textsc{\MakeLowercase{#1}}%
+  }{%
+    #1%
+  }%
+}%
+
 % Name format >>>2
 
 \DeclareNameFormat{LAST}{%% >>>3
+  \renewcommand*{\mkbibnamefamily}[1]{\UpperOrSCCite{##1}}%
+  \renewcommand*{\mkbibnamegiven}[1]{\ifgiveninits{\NormalOrSCCite{##1}}{##1}}%
+  \renewcommand*{\mkbibnameprefix}[1]{\ifgiveninits{\NormalOrSCCite{##1}}{##1}}%
+  \renewcommand*{\mkbibnamesuffix}[1]{\ifgiveninits{\NormalOrSCCite{##1}}{##1}}%
   \ifcase\value{uniquename}%
     \usebibmacro{name:family}%
-      {\iftoggle{sccite}%
-        {\textsc{\MakeLowercase{\namepartfamily}}}%
-  			{\MakeUppercase{\namepartfamily}}}%
+      {\namepartfamily}%
       {\namepartgiven}%
       {\namepartprefix}%
       {\namepartsuffix}%
   \or%
     \ifuseprefix%
       {\usebibmacro{name:given-family}%
-        {\iftoggle{sccite}%
-  	    	{\textsc{\MakeLowercase{\namepartfamily}}}%
-          {\MakeUppercase{\namepartfamily}}}%
+      {\namepartfamily}%
         {\namepartgiveni}%
         {\namepartprefix}%
         {\namepartsuffixi}}%
       {\usebibmacro{name:given-family}%
-        {\iftoggle{sccite}%
-  	    	{\textsc{\MakeLowercase{\namepartfamily}}}%
-  			{\MakeUppercase{\namepartfamily}}}%
+        {\namepartfamily}%
         {\namepartgiveni}%
         {\namepartprefixi}%
         {\namepartsuffixi}}%
   \or%
     \usebibmacro{name:given-family}%
-      {\iftoggle{sccite}%
-        {\textsc{\MakeLowercase{\namepartfamily}}}%
-  			{\MakeUppercase{\namepartfamily}}}%
+      {\namepartfamily}%
       {\namepartgiven}%
       {\namepartprefix}%
       {\namepartsuffix}%
