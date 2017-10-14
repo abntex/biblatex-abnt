@@ -51,7 +51,7 @@
 % Format >>>1
 
 \newcommand*{\UpperOrSCCite}[1]{%
-  \iftoggle{scbib}{%
+  \iftoggle{sccite}{%
     \textsc{\MakeLowercase{#1}}%
   }{%
     \MakeUppercase{#1}%
@@ -59,7 +59,7 @@
 }%
 
 \newcommand*{\NormalOrSCCite}[1]{%
-  \iftoggle{scbib}{%
+  \iftoggle{sccite}{%
     \textsc{\MakeLowercase{#1}}%
   }{%
     #1%
@@ -70,9 +70,9 @@
 
 \DeclareNameFormat{LAST}{%% >>>3
   \renewcommand*{\mkbibnamefamily}[1]{\UpperOrSCCite{##1}}%
-  \renewcommand*{\mkbibnamegiven}[1]{\ifgiveninits{\NormalOrSCCite{##1}}{##1}}%
-  \renewcommand*{\mkbibnameprefix}[1]{\ifgiveninits{\NormalOrSCCite{##1}}{##1}}%
-  \renewcommand*{\mkbibnamesuffix}[1]{\ifgiveninits{\NormalOrSCCite{##1}}{##1}}%
+  \renewcommand*{\mkbibnamegiven}[1]{\NormalOrSCCite{##1}}%
+  \renewcommand*{\mkbibnameprefix}[1]{\NormalOrSCCite{##1}}%
+  \renewcommand*{\mkbibnamesuffix}[1]{\NormalOrSCCite{##1}}%
   \ifcase\value{uniquename}%
     \usebibmacro{name:family}%
       {\namepartfamily}%
@@ -82,7 +82,7 @@
   \or%
     \ifuseprefix%
       {\usebibmacro{name:given-family}%
-      {\namepartfamily}%
+        {\namepartfamily}%
         {\namepartgiveni}%
         {\namepartprefix}%
         {\namepartsuffixi}}%
