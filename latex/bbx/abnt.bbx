@@ -408,24 +408,14 @@
   \renewcommand*{\mkbibnameprefix}[1]{\ifgiveninits{\NormalOrSC{##1}}{##1}}%
   \renewcommand*{\mkbibnamesuffix}[1]{\ifgiveninits{\NormalOrSC{##1}}{##1}}%
 	\ifgiveninits{%
-		\usebibmacro{name:family-given}{%
-			\iftoggle{scbib}{%
-				\textsc{\namepartfamily}%
-			}{%
-				\MakeUppercase{\namepartfamily}%
-			}%
-		}%
+		\usebibmacro{name:family-given}%
+    {\namepartfamily}%
 		{\namepartgiveni}%
 		{\namepartprefix}%
 		{\namepartsuffix}%
 	}{%
-		\usebibmacro{name:family-given}{%
-			\iftoggle{scbib}{%
-				\textsc{\MakeLowercase{\namepartfamily}}%
-			}{%
-				\MakeUppercase{\namepartfamily}%
-			}%
-		}%
+		\usebibmacro{name:family-given}%
+    {\namepartfamily}%
 		{\namepartgiven}%
 		{\namepartprefix}%
 		{\namepartsuffix}%
