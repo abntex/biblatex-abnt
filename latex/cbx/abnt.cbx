@@ -335,12 +335,28 @@
 
 % apud >>>2
 
+% \DeclareCiteCommand{\@apud}% >>>3
+% 	{\usebibmacro{cite:init}%
+% 	\iffieldundef{prenote}%
+% 		{}%
+% 		{\printfield[uppercasecite]{prenote}%
+% 		\addspace\bibstring{apud}\addspace}}%
+% 	{\usebibmacro{citeindex}%
+% 	\usebibmacro{cite}}%
+% 	{\setunit{\multicitedelim}}%
+% 	{\usebibmacro{postnote}}% <<<3
+
 \DeclareCiteCommand{\@apud}% >>>3
 	{\usebibmacro{cite:init}%
-	\iffieldundef{prenote}%
-		{}%
-		{\printfield[uppercasecite]{prenote}%
-		\addspace\bibstring{apud}\addspace}}%
+    \iffieldundef{prenote}{}{%
+      \ifnumgreater{\value{multicitetotal}}{1}{%
+        \usebibmacro{prenote}%
+      }{%
+        \printfield[uppercasecite]{prenote}%
+        \isdot\addspace\bibstring{apud}\addspace%
+      }%
+    }%
+  }%
 	{\usebibmacro{citeindex}%
 	\usebibmacro{cite}}%
 	{\setunit{\multicitedelim}}%
