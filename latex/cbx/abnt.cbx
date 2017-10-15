@@ -40,7 +40,7 @@
   block=none,
   urldate=long,
   pagetracker,
-  uniquename=false,
+  uniquename=full,
   sorting=nty,
 }%
 
@@ -70,9 +70,12 @@
 
 \DeclareNameFormat{LAST}{%% >>>3
   \renewcommand*{\mkbibnamefamily}[1]{\UpperOrSCCite{##1}}%
-  \renewcommand*{\mkbibnamegiven}[1]{\NormalOrSCCite{##1}}%
-  \renewcommand*{\mkbibnameprefix}[1]{\NormalOrSCCite{##1}}%
-  \renewcommand*{\mkbibnamesuffix}[1]{\NormalOrSCCite{##1}}%
+  \renewcommand*{\mkbibnamegiven}[1]{%
+      \ifnumequal{\value{uniquename}}{1}{\NormalOrSCCite{##1}}{##1}}%
+  \renewcommand*{\mkbibnameprefix}[1]{%
+      \ifnumequal{\value{uniquename}}{1}{\NormalOrSCCite{##1}}{##1}}%
+  \renewcommand*{\mkbibnamesuffix}[1]{%
+      \ifnumequal{\value{uniquename}}{1}{\NormalOrSCCite{##1}}{##1}}%
   \ifcase\value{uniquename}%
     \usebibmacro{name:family}%
       {\namepartfamily}%
@@ -81,18 +84,18 @@
       {\namepartsuffix}%
   \or%
     \ifuseprefix%
-      {\usebibmacro{name:given-family}%
+      {\usebibmacro{name:family-given}%
         {\namepartfamily}%
         {\namepartgiveni}%
         {\namepartprefix}%
         {\namepartsuffixi}}%
-      {\usebibmacro{name:given-family}%
+      {\usebibmacro{name:family-given}%
         {\namepartfamily}%
         {\namepartgiveni}%
         {\namepartprefixi}%
         {\namepartsuffixi}}%
   \or%
-    \usebibmacro{name:given-family}%
+    \usebibmacro{name:family-given}%
       {\namepartfamily}%
       {\namepartgiven}%
       {\namepartprefix}%
