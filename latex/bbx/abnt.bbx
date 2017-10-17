@@ -454,6 +454,9 @@
 % Name delimiters >>>3
 \newtoggle{byeditor+others}%
 
+\let\multinamedelimorig\multinamedelim
+\let\finalnamedelimorig\finalnamedelim
+
 \renewcommand*{\multinamedelim}{%
   \iftoggle{byeditor+others}{%
     \addcomma\addspace%
