@@ -41,7 +41,8 @@
   urldate=long,
   pagetracker,
   uniquename=full,
-  sorting=nty,
+  sortcites=false,
+  % sorting=nyt,
 }%
 
 
@@ -389,13 +390,13 @@
 
 % <<<2
 
-\DeclareCiteCommand{\footcite}[\mkbibfootnote]%
+\DeclareCiteCommand{\footcite}[\mkbibfootnote]% >>>2
   {\usebibmacro{cite:init}%
   \usebibmacro{prenote}}%
   {\usebibmacro{citeindex}%
    \usebibmacro{cite}}%
   {}%
-  {\usebibmacro{postnote}}%
+  {\usebibmacro{postnote}}% <<<2
 
 % \DeclareCiteCommand*{\footcite}[\mkbibfootnote]% >>>2
 %   {\usebibmacro{prenote}}%
@@ -440,7 +441,7 @@
              {}%
            \usebibmacro{cite:labelyear+extrayear}}
           {\usebibmacro{cite:shorthand}}}
-       {\printnames{labelname}%
+       {\printtext[bibhyperref]{\printnames{labelname}}%
         \setunit{%
           \global\booltrue{cbx:parens}%
           \printdelim{nameyeardelim}\bibopenparen}%
