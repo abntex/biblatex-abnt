@@ -27,7 +27,7 @@ imprime *ipsis litteris* todas as entradas citadas na norma 6023:2002 da ABNT.
 
 ## Instalação
 
-O `biblatex-abnt` está incluso no TeX Live 2016.
+O `biblatex-abnt` está incluso no TeX Live a partir de 2016.
 
 Para instalá-lo manualmente, copie os arquivos `.bbx`, `.cbx` e `.lbx` para
 
@@ -40,7 +40,7 @@ e atualize o banco de dados do TeX (rodando o `texhash`, por exemplo).
 1. Adicione as seguintes linhas ao preâmbulo do seu arquivo `.tex`:
 
   ```tex
-  \usepackage[style=abnt, language=brazil]{biblatex}
+  \usepackage[style=abnt]{biblatex}
   \addbibresource{arquivo.bib}        % Seus arquivos de
   \addbibresource{outroarquivo.bib}   % bibliografia vão aqui
   ```
