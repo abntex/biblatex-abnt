@@ -83,6 +83,43 @@
   reviewof         = {{resenha de}{resenha de}},%
 }%
 
+\NewBibliographyString{% >>>2
+  citecountpage,%
+  citecountpages,%
+  citecountnopage,%
+}
+
+\DeclareBibliographyStrings{%
+  citecountpage = {{%
+    \ifnumgreater{\value{citecounter}}{1}{%
+      Citado \arabic{citecounter} vezes na p\'agina%
+    }{%
+      Citado \arabic{citecounter} vez na p\'agina%
+    }%
+  }{%
+    \ifnumgreater{\value{citecounter}}{1}{%
+      Citado \arabic{citecounter} vezes na p\'agina%
+    }{%
+      Citado \arabic{citecounter} vez na p\'agina%
+    }%
+  }},%
+  citecountpages = {{%
+    \ifnumgreater{\value{citecounter}}{1}{%
+      Citado \arabic{citecounter} vezes nas p\'aginas%
+    }{%
+      Citado \arabic{citecounter} vez nas p\'aginas%
+    }%
+  }{%
+    \ifnumgreater{\value{citecounter}}{1}{%
+      Citado \arabic{citecounter} vezes nas p\'aginas%
+    }{%
+      Citado \arabic{citecounter} vez nas p\'aginas%
+    }%
+  }},%
+  citecountnopage = {{Nenhuma cita\c{c}\~ao no texto}%
+                     {Nenhuma cita\c{c}\~ao no texto}}
+}%
+
 % <<<
 
 % Languages >>>1

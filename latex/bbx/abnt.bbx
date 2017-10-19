@@ -189,13 +189,25 @@
 
 % Make it pretty >>>2
 \DeclareBibliographyOption{pretty}[true]{%
-  \ExecuteBibliographyOptions{%
-    ittitles,%
-    sccite,%
-    scbib,%
-    indent,%
-    justify,%
-  }%
+  \ifstrequal{#1}{true}{%
+    \ExecuteBibliographyOptions{%
+      ittitles,%
+      sccite,%
+      scbib,%
+      indent,%
+      justify,%
+    }%
+  }{}
+}%
+% <<<2
+
+% Show count in backref >>>2
+\newtoggle{citecount}%
+\DeclareBibliographyOption{citecount}[true]{%
+  \settoggle{citecount}{#1}%
+  \ifstrequal{#1}{true}{%
+    \ExecuteBibliographyOptions{backref, citecounter}%
+  }{}
 }%
 % <<<2
 
@@ -1263,7 +1275,7 @@
 
 % <<<2
 
-% Misc >>>
+% Misc >>>2
 
 \renewbibmacro*{volume+number+eid}{%% >>>3
   \printfield{volume}%
@@ -1281,17 +1293,6 @@
 			\printfield[normalfont]{number}%
 			\newunit}%
 		}%
-}%% <<<3
-
-\renewbibmacro*{pageref}{%% >>>3
-  \iflistundef{pageref}%
-    {}%
-	{\printunit{\addperiod\addspace}%
-  \printtext{% \printtext[parens]{%
-	  \ifnumgreater{\value{pageref}}{1}%
-	    {\bibstring{backrefpages}\ppspace}%
-	    {\bibstring{backrefpage}\ppspace}%
-	  \printlist[pageref][-\value{listtotal}]{pageref}}}%
 }%% <<<3
 
 \renewbibmacro*{url+urldate}{%% >>>3
@@ -1352,7 +1353,37 @@
       {\thefield{entrytype}}}%
 }%% <<<3
 
-% <<<
+\newbibmacro*{pageref}{% >>>3
+  \iftoggle{citecount}{%
+    \printunit{\addperiod\addspace}%
+    \iflistundef{pageref}{%
+      \bibstring{citecountnopage}%
+    }{%
+      \printtext{%
+        \ifnumgreater{\value{pageref}}{1}{%
+          \bibstring{citecountpages}\ppspace%
+        }{%
+          \bibstring{citecountpage}\ppspace%
+        }%
+        \printlist[pageref][-\value{listtotal}]{pageref}%
+      }%
+    }
+  }{%
+    \iflistundef{pageref}{}{%
+      \printunit{\addperiod\addspace}%
+      \printtext{%
+        \ifnumgreater{\value{pageref}}{1}{%
+          \bibstring{backrefpages}\ppspace%
+        }{%
+          \bibstring{backrefpage}\ppspace%
+        }%
+        \printlist[pageref][-\value{listtotal}]{pageref}%
+      }%
+    }
+  }
+}% <<<3
+
+% <<<2
 
 % <<<1
 
