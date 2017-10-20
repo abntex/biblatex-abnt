@@ -190,8 +190,6 @@
 
 \renewcommand*{\multicitedelim}{\addsemicolon\addspace}%
 
-\renewcommand*{\textcitedelim}{\addspace\bibstring{and}\addspace}%
-
 % <<<1
 
 
@@ -467,7 +465,11 @@
     \ifbool{cbx:parens}
       {\bibcloseparen\global\boolfalse{cbx:parens}}
       {}%
-    \textcitedelim}}
+    \ifnumequal{\value{textcitecount}}{\value{textcitetotal}-1}{%
+      \finalnamedelim%
+    }{%
+      \multinamedelim%
+    }}}%
 
 \xpretobibmacro{textcite}{%
   \let\multinamedelim\multinamedelimorig%
