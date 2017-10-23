@@ -1,4 +1,4 @@
-%% Copyright 2016 Daniel B. Marques
+%% Copyright 2016 Daniel Ballester Marques
 %%
 %% This work may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3
@@ -10,7 +10,7 @@
 %%
 %% This work has the LPPL maintenance status `maintained'.
 %%
-%% The Current Maintainer of this work is Daniel B. Marques.
+%% The Current Maintainer of this work is Daniel Ballester Marques.
 
 
 % Preamble >>>1
@@ -80,7 +80,7 @@
   \printbibliography[heading=none,check=key#1]%
 }% <<<2
 
-\newcommand{\version}{3.1}
+\newcommand{\version}{3.2}
 \newcommand{\requirements}{\texttt{biblatex 3.6} e \texttt{biber 2.6}}
 
 \title{biblatex-abnt \version}
@@ -174,7 +174,6 @@ As opções a seguir podem ser usadas ao chamar o \texttt{biblatex} (além daque
 
 \vspace{\baselineskip}
 E.g.: \verb"\usepackage[backend=biber, style=abnt, ittitles]{biblatex}"
-\clearpage
 
 As opções \texttt{repeatfields}, \texttt{repeattitles}, \texttt{nosl},
 \texttt{nosn}, \texttt{noslsn} e \texttt{extrayear} também podem ser usadas apenas em entradas
@@ -288,6 +287,10 @@ Assis \cite[apud][p.~200]{bosi08}
 
 \makeatletter
 \renewbibmacro*{textcite}{%
+  \let\mkbibnamefamily\origmkbibnamefamily%
+  \let\mkbibnamegiven\origmkbibnamegiven%
+  \let\mkbibnameprefix\origmkbibnameprefix%
+  \let\mkbibnamesuffix\origmkbibnamesuffix%
   \iffieldequals{namehash}{\cbx@lasthash}
     {\setunit{\multicitedelim}}
     {\ifnameundef{labelname}

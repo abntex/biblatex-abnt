@@ -3,14 +3,14 @@
 BibLaTeX style for Brazil's ABNT (Brazilian Association of Technical Norms)
 rules.
 
-Version 3.1
+Version 3.2
 
 Permission is granted to copy, distribute and/or modify this software
 under the terms of the LaTeX Project Public License, version 1.3c
 (http://www.latex-project.org/lppl.txt).
 
 The current maintainer is
-Daniel B. Marques ([@dbmrq](https://github.com/dbmrq)).
+Daniel Ballester Marques ([@dbmrq](https://github.com/dbmrq)).
 
 ---
 
@@ -21,8 +21,8 @@ Substitui o pacote [`abntex2cite`](https://github.com/abntex/abntex2).
 **Requer `biblatex v3.6` e `biber v2.6`.**
 
 O arquivo `biblatex-abnt.pdf` apresenta algumas informações sobre o uso do
-pacote e a compatibilidade com o `abntex2cite`. O arquivo `abnt-testcase.pdf`
-imprime *ipsis litteris* todas as entradas citadas na norma 6023:2002 da ABNT.
+pacote. Os arquivos `NBR6023-2002.pdf` e `NBR10520-2002.pdf` imprimem *ipsis
+litteris* todas as entradas usadas nas respectivas normas da ABNT.
 
 
 ## Instalação

@@ -1,4 +1,4 @@
-%% Copyright 2016 Daniel B. Marques
+%% Copyright 2016 Daniel Ballester Marques
 %%
 %% This work may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3
@@ -10,16 +10,129 @@
 %%
 %% This work has the LPPL maintenance status `maintained'.
 %%
-%% The Current Maintainer of this work is Daniel B. Marques.
+%% The Current Maintainer of this work is Daniel Ballester Marques.
 
 \ProvidesFile{abnt-ibid.cbx}%
-[2017/07/28\space v3.1\space ABNT BibLaTeX citation style]%
+[2017/10/23\space v3.2\space ABNT BibLaTeX citation style]%
 
-\newtoggle{sccite}%
+% Init >>>1
+
+\RequirePackage{xparse}%
+\RequirePackage{xpatch}%
+\RequirePackage{expl3}%
+\RequirePackage{l3regex}%
+
+% <<<1
 
 % Format >>>1
 
-\DeclareFieldFormat{citetitle}{%% >>>2
+\newcommand*{\UpperOrSCCite}[1]{% >>>2
+  \iftoggle{sccite}{%
+    \textsc{\MakeLowercase{#1}}%
+  }{%
+    \MakeUppercase{#1}%
+  }%
+}% <<<2
+
+\newcommand*{\NormalOrSCCite}[1]{% >>>2
+  \iftoggle{sccite}{%
+    \textsc{\MakeLowercase{#1}}%
+  }{%
+    #1%
+  }%
+}% <<<2
+
+% \IfInitial >>>2
+
+\ExplSyntaxOn
+
+\NewDocumentCommand{\IfInitial}{mmm}{%
+  \regex_match:nVTF {\w\.} \namepartgiven {#2} {#3}%
+}
+\cs_generate_variant:Nn \regex_match:nnTF { nV }
+
+\ExplSyntaxOff
+
+% <<<2
+
+\renewbibmacro*{name:family}[4]{% >>>2
+  \ifuseprefix
+    {\usebibmacro{name:delim}{#3#1}%
+     \usebibmacro{name:hook}{#3#1}%
+     \ifdefvoid{#3}{}{%
+       \ifcapital{%
+          \iftoggle{sccite}{%
+            \mkbibnameprefix{#3}\isdot%
+          }{%
+            \mkbibnameprefix{\MakeCapital{#3}}\isdot%
+          }
+       }{%
+          \mkbibnameprefix{#3}\isdot%
+       }%
+       \ifprefchar{}{\bibnamedelimc}}%
+     \mkbibnamefamily{#1}\isdot
+     \ifdefvoid{#4}{}{\bibnamedelimd\mkbibnamesuffix{#4}\isdot}}
+    {\usebibmacro{name:delim}{#1}%
+     \usebibmacro{name:hook}{#1}%
+     \mkbibnamefamily{#1}\isdot
+     \ifdefvoid{#4}{}{\bibnamedelimd\mkbibnamesuffix{#4}\isdot}}}% <<<2
+
+\DeclareNameFormat{labelname}{% >>>2
+  % Use family-given instead of given-family
+  \ifcase\value{uniquename}%
+    \usebibmacro{name:family}%
+      {\namepartfamily}%
+      {\namepartgiven}%
+      {\namepartprefix}%
+      {\namepartsuffix}%
+  \or%
+    \ifuseprefix%
+      {\usebibmacro{name:family-given}%
+        {\namepartfamily}%
+        {\namepartgiveni}%
+        {\namepartprefix}%
+        {\namepartsuffixi}}%
+      {\usebibmacro{name:family-given}%
+        {\namepartfamily}%
+        {\namepartgiveni}%
+        {\namepartprefixi}%
+        {\namepartsuffixi}}%
+  \or%
+    \usebibmacro{name:family-given}%
+      {\namepartfamily}%
+      {\namepartgiven}%
+      {\namepartprefix}%
+      {\namepartsuffix}%
+  \fi%
+  \usebibmacro{name:andothers}}% <<<2
+
+\let\origmkbibnamefamily\mkbibnamefamily%
+\let\origmkbibnamegiven\mkbibnamegiven%
+\let\origmkbibnameprefix\mkbibnameprefix%
+\let\origmkbibnamesuffix\mkbibnamesuffix%
+
+\renewcommand*{\mkbibnamefamily}[1]{% >>>2
+  \UpperOrSCCite{#1}%
+}% <<<2
+\renewcommand*{\mkbibnamegiven}[1]{% >>>2
+  \ifnumequal{\value{uniquename}}{2}{%
+      \IfInitial{#1}{\NormalOrSCCite{#1}}{#1}%
+  }{%
+      \NormalOrSCCite{#1}%
+  }%
+}% <<<2
+\renewcommand*{\mkbibnameprefix}[1]{% >>>2
+  \ifuseprefix{%
+    \UpperOrSC{#1}%
+  }{%
+    \ifnumequal{\value{uniquename}}{2}{#1}{\NormalOrSCCite{#1}}%
+  }
+}% <<<2
+\renewcommand*{\mkbibnamesuffix}[1]{% >>>2
+  \UpperOrSCCite{#1}%
+}% <<<2
+
+\DeclareFieldFormat{firstword}{%% >>>2
   \iftoggle{sccite}{%
     \normalfont\textsc{\MakeLowercase{\FirstWord{#1}}}%
   }{%
@@ -27,49 +140,13 @@
   }%
 }%% <<<2
 
-\DeclareNameFormat{LAST}{%% >>>2
-  \ifcase\value{uniquename}%
-    \usebibmacro{name:family}%
-      {\iftoggle{sccite}%
-        {\textsc{\MakeLowercase{\namepartfamily}}}%
-  			{\MakeUppercase{\namepartfamily}}}%
-      {\namepartgiven}%
-      {\namepartprefix}%
-      {\namepartsuffix}%
-  \or%
-    \ifuseprefix%
-      {\usebibmacro{name:given-family}%
-        {\iftoggle{sccite}%
-  	    	{\textsc{\MakeLowercase{\namepartfamily}}}%
-          {\MakeUppercase{\namepartfamily}}}%
-        {\namepartgiveni}%
-        {\namepartprefix}%
-        {\namepartsuffixi}}%
-      {\usebibmacro{name:given-family}%
-        {\iftoggle{sccite}%
-  	    	{\textsc{\MakeLowercase{\namepartfamily}}}%
-  			{\MakeUppercase{\namepartfamily}}}%
-        {\namepartgiveni}%
-        {\namepartprefixi}%
-        {\namepartsuffixi}}%
-  \or%
-    \usebibmacro{name:given-family}%
-      {\iftoggle{sccite}%
-        {\textsc{\MakeLowercase{\namepartfamily}}}%
-  			{\MakeUppercase{\namepartfamily}}}%
-      {\namepartgiven}%
-      {\namepartprefix}%
-      {\namepartsuffix}%
-  \fi%
-  \usebibmacro{name:andothers}%
-}% <<<2
-
-% \DeclareDelimFormat{nameyeardelim}{\addcomma\addspace}%
 \renewcommand*{\nameyeardelim}{\addcomma\addspace}%
 
 % <<<1
 
 % Options >>>1
+
+\newtoggle{sccite}%
 
 \DeclareBibliographyOption{sccite}[true]{
   \settoggle{sccite}{#1}%
@@ -285,7 +362,7 @@
 \newbibmacro*{footcite:short}{%
   \ifnameundef{labelname}{%
     \printtext[bibhyperref]{%
-      \printfield[citetitle]{labeltitle}%
+      \printfield[firstword]{labeltitle}%
     }%
   }{%
     \printnames[LAST]{labelname}%
@@ -303,7 +380,7 @@
 \newbibmacro*{footcite:loccit}{% >>>2
   \ifnameundef{labelname}{%
     \printtext[bibhyperref]{%
-      \printfield[citetitle]{labeltitle}%
+      \printfield[firstword]{labeltitle}%
     }%
   }{%
     \printnames[LAST]{labelname}%
@@ -316,7 +393,7 @@
 \newbibmacro*{footcite:opcit}{% >>>2
   \ifnameundef{labelname}{%
     \printtext[bibhyperref]{%
-      \printfield[citetitle]{labeltitle}%
+      \printfield[firstword]{labeltitle}%
     }%
   }{%
     \printnames[LAST]{labelname}%
@@ -423,24 +500,16 @@
     \space}%
 }% <<<2
 
-\newcommand{\addand}{%% >>>2
-  \renewcommand*{\multicitedelim}{%
-    \ifnumequal{\value{multicitecount}}{\value{multicitetotal}}%
-      {\space\bibstring{and}}%
-      {\addsemicolon}%
-    \space}%
-  \renewcommand*{\textcitedelim}{%
-    \ifnumequal{\value{multicitecount}}{\value{multicitetotal}}%
-      {\addspace\bibstring{and}}%
-      {\addsemicolon}%
-    \space}%
-}% <<<2
-
-\DeclareCiteCommand{\@apud}[\mkbibfootnote]% >>>2
-	{\iffieldundef{prenote}%
-		{}%
-		{\printfield[uppercasecite]{prenote}%
-		\addspace\bibstring{apud}\addspace}}%
+\DeclareCiteCommand{\@apud}% >>>2
+	{\iffieldundef{prenote}{}{%
+      \ifnumgreater{\value{multicitetotal}}{1}{%
+        \usebibmacro{prenote}%
+      }{%
+        \printfield[uppercasecite]{prenote}%
+        \isdot\addspace\bibstring{apud}\addspace%
+      }%
+    }%
+  }%
 	{\usebibmacro{citeindex}%
 	\usebibmacro{footcite:short}}%
 	{\setunit{\multicitedelim}}%
@@ -457,7 +526,7 @@
 
 \renewbibmacro*{textcite}{% >>>2
   \ifnameundef{labelname}%
-    {\printfield[citetitle]{labeltitle}}%
+    {\printfield[firstword]{labeltitle}}%
     {\printnames{labelname}}}% <<<2
 
 \newbibmacro*{textcite:init}{% >>>2
@@ -541,6 +610,15 @@
   \AtNextMultiCite{%
     \renewbibmacro{multiprenote}{}%
     \renewbibmacro{multipostnote}{}}}{}{}% <<<2
+
+\xpretobibmacro{textcite}{% >>>3
+  \let\multinamedelim\multinamedelimorig%
+  \let\finalnamedelim\finalnamedelimorig%
+  \let\mkbibnamefamily\origmkbibnamefamily%
+  \let\mkbibnamegiven\origmkbibnamegiven%
+  \let\mkbibnameprefix\origmkbibnameprefix%
+  \let\mkbibnamesuffix\origmkbibnamesuffix%
+}{}{}% <<<3
 
 % <<<1
 
