@@ -85,10 +85,14 @@
   }%
 }% <<<3
 \renewcommand*{\mkbibnameprefix}[1]{% >>>3
-  \ifnumequal{\value{uniquename}}{2}{#1}{\NormalOrSCCite{#1}}%
+  \ifuseprefix{%
+    \UpperOrSC{#1}%
+  }{%
+    \ifnumequal{\value{uniquename}}{2}{#1}{\NormalOrSCCite{#1}}%
+  }
 }% <<<3
 \renewcommand*{\mkbibnamesuffix}[1]{% >>>3
-  \ifnumequal{\value{uniquename}}{2}{#1}{\NormalOrSCCite{#1}}%
+  \UpperOrSCCite{#1}%
 }% <<<3
 
 \DeclareNameFormat{labelname}{% >>>3
@@ -118,6 +122,22 @@
       {\namepartsuffix}%
   \fi%
   \usebibmacro{name:andothers}}% <<<3
+
+\renewbibmacro*{name:family}[4]{% >>>3
+  \ifuseprefix
+    {\usebibmacro{name:delim}{#3#1}%
+     \usebibmacro{name:hook}{#3#1}%
+     \ifdefvoid{#3}{}{%
+       \ifcapital
+         {\mkbibnameprefix{\MakeCapital{#3}}\isdot}
+         {\mkbibnameprefix{#3}\isdot}%
+       \ifprefchar{}{\bibnamedelimc}}%
+     \mkbibnamefamily{#1}\isdot
+     \ifdefvoid{#4}{}{\bibnamedelimd\mkbibnamesuffix{#4}\isdot}}
+    {\usebibmacro{name:delim}{#1}%
+     \usebibmacro{name:hook}{#1}%
+     \mkbibnamefamily{#1}\isdot
+     \ifdefvoid{#4}{}{\bibnamedelimd\mkbibnamesuffix{#4}\isdot}}}% <<<3
 
 % <<<2
 
