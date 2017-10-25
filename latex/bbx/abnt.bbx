@@ -1,4 +1,4 @@
-%% Copyright 2016 Daniel B. Marques
+%% Copyright 2016 Daniel Ballester Marques
 %%
 %% This work may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3
@@ -10,10 +10,10 @@
 %%
 %% This work has the LPPL maintenance status `maintained'.
 %%
-%% The Current Maintainer of this work is Daniel B. Marques.
+%% The Current Maintainer of this work is Daniel Ballester Marques.
 
 \ProvidesFile{abnt.bbx}%
-[2017/07/28\space v3.1\space ABNT BibLaTeX citation style]%
+[2017/10/23\space v3.2\space ABNT BibLaTeX citation style]%
 
 
 % Init >>>1
@@ -24,10 +24,12 @@
 \RequireBibliographyStyle{standard}%
 
 \ExecuteBibliographyOptions{%
-  block=none,
-  urldate=long,
-  pagetracker,
-  uniquename=false,
+  language=brazil,%
+  block=none,%
+  urldate=long,%
+  pagetracker,%
+  uniquename=false,%
+  sorting=nty,%
 }%
 
 \InitializeBibliographyStyle{\global\undef\bbx@lasthash}%
@@ -175,20 +177,32 @@
 
 % Justify text >>>2
 \DeclareBibliographyOption{justify}[true]{%
-  \ExecuteBibliographyOptions{block=space}%
+  % \ExecuteBibliographyOptions{block=space}%
   \renewcommand*{\bibsetup}{\origbibsetup}%
 }%
 % <<<2
 
 % Make it pretty >>>2
 \DeclareBibliographyOption{pretty}[true]{%
-  \ExecuteBibliographyOptions{%
-    ittitles,
-    sccite,
-    scbib,
-    indent,
-    justify,
-  }%
+  \ifstrequal{#1}{true}{%
+    \ExecuteBibliographyOptions{%
+      ittitles,%
+      sccite,%
+      scbib,%
+      indent,%
+      justify,%
+    }%
+  }{}
+}%
+% <<<2
+
+% Show count in backref >>>2
+\newtoggle{citecount}%
+\DeclareBibliographyOption{citecount}[true]{%
+  \settoggle{citecount}{#1}%
+  \ifstrequal{#1}{true}{%
+    \ExecuteBibliographyOptions{backref, citecounter}%
+  }{}
 }%
 % <<<2
 
@@ -309,23 +323,19 @@
 
 % Capitalization commands >>>2
 
-\renewcommand*{\mkbibacro}[1]{%
-  \iftoggle{scbib}{%
-    \textsc{\MakeLowercase{#1}}%
-  }{\MakeUppercase{#1}}%
-}%
-
-\newcommand\FirstWordUpper[1]{\@firstwordupper#1 \@nil}%
+\newcommand\FirstWordUpper[1]{\@firstwordupper#1 \@nil}% >>>3
 \newcommand\@firstwordupper{}%
-\def\@firstwordupper#1 #2\@nil{\MakeUppercase{#1} #2\unskip}%
+\def\@firstwordupper#1 #2\@nil{\MakeUppercase{#1} #2\unskip}% <<<3
 
-\newcommand\FirstWordSC[1]{\@firstwordsc#1 \@nil}%
+\newcommand\FirstWordSC[1]{\@firstwordsc#1 \@nil}% >>>3
 \newcommand\@firstwordsc{}%
-\def\@firstwordsc#1 #2\@nil{\textsc{#1} #2\unskip}%
+\def\@firstwordsc#1 #2\@nil{\textsc{#1} #2\unskip}% <<<3
 
-\newcommand\FirstWordLCSC[1]{\@firstwordlcsc#1 \@nil}%
+\newcommand\FirstWordLCSC[1]{\@firstwordlcsc#1 \@nil}% >>>3
 \newcommand\@firstwordlcsc{}%
-\def\@firstwordlcsc#1 #2\@nil{\textsc{\MakeLowercase{#1}} #2\unskip}%
+\def\@firstwordlcsc#1 #2\@nil{\textsc{\MakeLowercase{#1}} #2\unskip}% <<<3
+
+% Helper macros >>>3
 
 \long\def\addto#1#2{\expandafter\def\expandafter#1\expandafter{#1#2}}%
 
@@ -349,84 +359,91 @@
 }%
 \def\traceparamE\end{}%
 
-\def\smartuppercase#1{%
+% <<<3
+
+\def\smartuppercase#1{% >>>3
    \bgroup %
    \traceparam{#1}%
    \MakeUppercase{\paramL}%
    \egroup%
-}%
+}% <<<3
 
-\def\smartlowercase#1{%
+\def\smartlowercase#1{% >>>3
    \bgroup %
    \traceparam{#1}%
    \MakeLowercase{\paramL}%
    \egroup%
-}%
+}% <<<3
 
-\def\smartlcsc#1{%
+\def\smartlcsc#1{% >>>3
    \bgroup %
    \traceparam{#1}%
    \textsc{\MakeLowercase{\paramL}}%
    \egroup%
-}%
+}% <<<3
 
-\def\smartsc#1{%
+\def\smartsc#1{% >>>3
    \bgroup %
    \traceparam{#1}%
    \textsc{\paramL}%
    \egroup%
-}%
+}% <<<3
+
+\renewcommand*{\mkbibacro}[1]{% >>>3
+  \iftoggle{scbib}{%
+    \textsc{\MakeLowercase{#1}}%
+  }{\MakeUppercase{#1}}%
+}% <<<3
+
+\newcommand*{\UpperOrSC}[1]{% >>>3
+  \let\MakeCapital\relax
+  \iftoggle{scbib}{%
+    \textsc{\MakeLowercase{#1}}%
+  }{%
+    \MakeUppercase{#1}%
+  }%
+}% <<<3
+
+\newcommand*{\NormalOrSC}[1]{% >>>3
+  \iftoggle{scbib}{%
+    \textsc{\MakeLowercase{#1}}%
+  }{%
+    #1%
+  }%
+}% <<<3
 
 % <<<2
 
 % Name format >>>2
 
-% Name delimiters >>>3
-\newtoggle{byeditor+others}%
-
-\renewcommand*{\multinamedelim}{%
-  \iftoggle{byeditor+others}{%
-    \addcomma\addspace%
-  }{%
-    \addsemicolon\addspace%
-  }%
-}%
-
-\renewcommand*{\finalnamedelim}{%
-  \iftoggle{byeditor+others}{%
-    \addspace\bibstring{and}\addspace%
-  }{%
-    \addsemicolon\addspace%
-  }%
-}%
-% <<<
-
 \DeclareNameFormat{LAST-first}{%% >>>3
+  \renewcommand*{\mkbibnamefamily}[1]{\UpperOrSC{##1}}%
+  \renewcommand*{\mkbibnamegiven}[1]{\ifgiveninits{\NormalOrSC{##1}}{##1}}%
+  \renewcommand*{\mkbibnameprefix}[1]{%
+    \ifuseprefix{%
+      \UpperOrSC{##1}%
+    }{%
+      \ifgiveninits{\NormalOrSC{##1}}{##1}%
+    }
+  }%
+  \renewcommand*{\mkbibnamesuffix}[1]{\UpperOrSC{##1}}%
 	\ifgiveninits{%
-		\usebibmacro{name:family-given}{%
-			\iftoggle{scbib}{%
-				\textsc{\namepartfamily}%
-			}{%
-				\MakeUppercase{\namepartfamily}%
-			}%
-		}%
+		\usebibmacro{name:family-given}%
+    {\namepartfamily}%
 		{\namepartgiveni}%
 		{\namepartprefix}%
 		{\namepartsuffix}%
 	}{%
-		\usebibmacro{name:family-given}{%
-			\iftoggle{scbib}{%
-				\textsc{\MakeLowercase{\namepartfamily}}%
-			}{%
-				\MakeUppercase{\namepartfamily}%
-			}%
-		}%
+		\usebibmacro{name:family-given}%
+    {\namepartfamily}%
 		{\namepartgiven}%
 		{\namepartprefix}%
 		{\namepartsuffix}%
 	}%
 	\usebibmacro{name:andothers}%
 }% <<<
+
+\DeclareNameAlias{default}{LAST-first}%
 
 \DeclareNameFormat{full}{%% >>>3
   \usebibmacro{name:given-family}%
@@ -435,8 +452,6 @@
     {\namepartprefix}%
     {\namepartsuffix}%
 }% <<<
-
-\DeclareNameAlias{default}{LAST-first}%
 
 \DeclareNameAlias{byauthor}{full}%
 \DeclareNameAlias{bybookauthor}{byauthor}%
@@ -455,6 +470,29 @@
 \DeclareBibliographyAlias{legislation}{article}%
 \DeclareBibliographyAlias{jurisdiction}{article}%
 \DeclareBibliographyAlias{legal}{article}%
+
+% Name delimiters >>>3
+\newtoggle{byeditor+others}%
+
+\let\multinamedelimorig\multinamedelim
+\let\finalnamedelimorig\finalnamedelim
+
+\renewcommand*{\multinamedelim}{%
+  \iftoggle{byeditor+others}{%
+    \addcomma\addspace%
+  }{%
+    \addsemicolon\addspace%
+  }%
+}%
+
+\renewcommand*{\finalnamedelim}{%
+  \iftoggle{byeditor+others}{%
+    \addspace\bibstring{and}\addspace%
+  }{%
+    \addsemicolon\addspace%
+  }%
+}%
+% <<<
 
 % <<<2
 
@@ -1122,7 +1160,7 @@
     \printdateextra%
   }{%
     \printdate%
-  }
+  }%
   \printunit{\addperiod\addspace}%
 }%
 
@@ -1243,7 +1281,7 @@
 
 % <<<2
 
-% Misc >>>
+% Misc >>>2
 
 \renewbibmacro*{volume+number+eid}{%% >>>3
   \printfield{volume}%
@@ -1261,17 +1299,6 @@
 			\printfield[normalfont]{number}%
 			\newunit}%
 		}%
-}%% <<<3
-
-\renewbibmacro*{pageref}{%% >>>3
-  \iflistundef{pageref}%
-    {}%
-	{\printunit{\addperiod\addspace}
-  \printtext{% \printtext[parens]{%
-	  \ifnumgreater{\value{pageref}}{1}%
-	    {\bibstring{backrefpages}\ppspace}%
-	    {\bibstring{backrefpage}\ppspace}%
-	  \printlist[pageref][-\value{listtotal}]{pageref}}}%
 }%% <<<3
 
 \renewbibmacro*{url+urldate}{%% >>>3
@@ -1332,7 +1359,37 @@
       {\thefield{entrytype}}}%
 }%% <<<3
 
-% <<<
+\renewbibmacro*{pageref}{% >>>3
+  \iftoggle{citecount}{%
+    \printunit{\addperiod\addspace}%
+    \iflistundef{pageref}{%
+      \bibstring{citecountnopage}%
+    }{%
+      \printtext{%
+        \ifnumgreater{\value{pageref}}{1}{%
+          \bibstring{citecountpages}\ppspace%
+        }{%
+          \bibstring{citecountpage}\ppspace%
+        }%
+        \printlist[pageref][-\value{listtotal}]{pageref}%
+      }%
+    }
+  }{%
+    \iflistundef{pageref}{}{%
+      \printunit{\addperiod\addspace}%
+      \printtext{%
+        \ifnumgreater{\value{pageref}}{1}{%
+          \bibstring{backrefpages}\ppspace%
+        }{%
+          \bibstring{backrefpage}\ppspace%
+        }%
+        \printlist[pageref][-\value{listtotal}]{pageref}%
+      }%
+    }
+  }
+}% <<<3
+
+% <<<2
 
 % <<<1
 

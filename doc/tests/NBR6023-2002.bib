@@ -1,4 +1,4 @@
-%% Copyright 2016 Daniel B. Marques
+%% Copyright 2016 Daniel Ballester Marques
 %%
 %% This work may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3
@@ -10,7 +10,7 @@
 %%
 %% This work has the LPPL maintenance status `maintained'.
 %%
-%% The Current Maintainer of this work is Daniel B. Marques.
+%% The Current Maintainer of this work is Daniel Ballester Marques.
 
 % section 7 {{{1
 
@@ -572,7 +572,7 @@
     subtitle        = {its not just online journalism},
     journaltitle    = {APS News Online},
     location        = {Los Angeles},
-    month           = {{Nov}\adddot},
+    issue           = {{Nov}\adddot},
     year            = {1996},
     url             = {http://www.aps.org/apsnews/1196/11965.html},
     urldate         = {1998-11-25},
@@ -1124,25 +1124,32 @@
 @movie{osperigos1983a,
     keywords        = {7.10},
     title           = {Os~perigos do uso de tóxicos},
-    editora         = {Jorge Ramos de Andrade},
-    editoratype     = {producer},
+    titleaddon      = {Produção de Jorge Ramos de Andrade},
     location        = {São Paulo},
     publisher       = {CERAVI},
     date            = {1983},
     note            = {1 videocassete},
+    % editora         = {Jorge Ramos de Andrade},
+    % editoratype     = {producer},
+    % O ideal seria usar os campos `editora` e `editoratype` em vez de
+    % `titleaddon`.
 }
 
 @movie{osperigos1983b,
     keywords        = {7.10},
     title           = {Os~perigos do uso de tóxicos},
-    editora         = {Jorge Ramos de Andrade},
-    editoratype     = {producer},
-    editorb         = {Maria Izabel Azevedo},
-    editorbtype     = {coordinator},
+    titleaddon      = {Produção de Jorge Ramos de Andrade. Coordenação de
+                      Maria Izabel Azevedo.},
     location        = {São Paulo},
     publisher       = {CERAVI},
     date            = {1983},
     note            = {1 videocassete (30 min), VHS, son., color.},
+    % editora         = {Jorge Ramos de Andrade},
+    % editoratype     = {producer},
+    % editorb         = {Maria Izabel Azevedo},
+    % editorbtype     = {coordinator},
+    % O ideal seria usar os campos `editora` e `editoratype` em vez de
+    % `titleaddon`.
 }
 
 @movie{central1998,
@@ -1220,9 +1227,9 @@
     author          = {E. Amiclar II Fraipont},
     journaltitle    = {O Estado de S. Paulo},
     location        = {São Paulo},
-    month           = {30 nov.},
+    issue           = {30 nov.},
     date            = {1998},
-    note            = {Caderno 2, Visuais p. D2. 1 fotografia, p\&b.
+    note            = {Caderno 2, Visuais. p. D2. 1 fotografia, p\&b.
                        Foto apresentada no Projeto ABRA/Coca-cola},
 }
 
@@ -1236,17 +1243,20 @@
 }
 
 @image{odescobrimento1985,
-    keywords        = {7.11.2},
-    title           = {O~descobrimento do Brasil},
-    editora         = {Carmem Souza},
-    editoratype     = {photographer},
-    editorb         = {Marcos Lourenço},
-    editorbtype     = {recorder},
-    location        = {São Paulo},
-    publisher       = {CERAVI},
-    date            = {1985},
-    note            = {31 diapositivos, color. + 1
+    keywords   = {7.11.2},
+    title      = {O~descobrimento do Brasil},
+    titleaddon = {Fotografia de Carmem Souza. Gravação de Marcos Lourenço.},
+    location   = {São Paulo},
+    publisher  = {CERAVI},
+    date       = {1985},
+    note       = {31 diapositivos, color. + 1
                        cassete sonoro (15 min), mono},
+    % editora         = {Carmem Souza},
+    % editoratype     = {photographer},
+    % editorb         = {Marcos Lourenço},
+    % editorbtype     = {recorder},
+    % O ideal seria usar os campos `editora` e `editoratype` em vez de
+    % `titleaddon`.
 }
 
 @image{samu1977,
@@ -1500,16 +1510,19 @@
 }
 
 @audio{alcione1988b,
-    keywords        = {7.13},
-    author          = {Alcione},
-    title           = {Ouro e cobre},
-    editor          = {Miguel Propschi},
-    editortype      = {artdir},
-    location        = {São Paulo},
-    publisher       = {RCA Victor},
-    year            = {p1988},
-    note            = {1 disco sonoro (45 min),
+    keywords   = {7.13},
+    author     = {Alcione},
+    title      = {Ouro e cobre},
+    titleaddon = {Direção artística: Miguel Propschi},
+    location   = {São Paulo},
+    publisher  = {RCA Victor},
+    year       = {p1988},
+    note       = {1 disco sonoro (45 min),
                        33 1/3 rpm, estero., 12 pol.},
+    % editor          = {Miguel Propschi},
+    % editortype      = {artdir},
+    % O ideal seria usar os campos `editor` e `editortype` em vez de
+    % `titleaddon`.
 }
 
 @audio{silva1991,
@@ -1787,17 +1800,20 @@
 }
 
 @online{civitas1995,
-    keywords        = {7.17},
-    title           = {Civitas},
-    editora         = {Simão Pedro P. Marinho},
-    editoratype     = {coordinator},
-    year            = {1995-1998},
-    note            = {Desenvolvido pela Pontifícia Universidade Católica
+    keywords   = {7.17},
+    title      = {Civitas},
+    titleaddon = {Coordenação de Simão Pedro P. Marinho},
+    year       = {1995-1998},
+    note       = {Desenvolvido pela Pontifícia Universidade Católica
                        de Minas Gerais 1995-1998. Apresenta textos sobre
                        urbanismo e desenvolvimento de cidades},
-    url             = {http://www.gcsnet.com/oamis/civitas},
-    urldate         = {1998-11-27},
-    options         = {noslsn},
+    url        = {http://www.gcsnet.com/oamis/civitas},
+    urldate    = {1998-11-27},
+    options    = {noslsn},
+    % editora         = {Simão Pedro P. Marinho},
+    % editoratype     = {coordinator},
+    % O ideal seria usar os campos `editora` e `editoratype` em vez de
+    % `titleaddon`.
 }
 
 @online{galeria1998,
@@ -1925,28 +1941,34 @@
 }
 
 @book{dante1983,
-    keywords        = {8.1.1},
-    author          = {{Dante Alighieri}},
-    title           = {A divina comédia},
-    editor          = {Hernâni Donato},
-    editortype      = {translatoranfo},
-    location        = {São Paulo},
-    publisher       = {Círculo do Livro},
-    year            = {[1983]},
-    pagetotal       = {344},
+    keywords   = {8.1.1},
+    author     = {{Dante Alighieri}},
+    title      = {A divina comédia},
+    titleaddon = {Tradução, prefácio e notas: Hernâni Donato.},
+    location   = {São Paulo},
+    publisher  = {Círculo do Livro},
+    year       = {[1983]},
+    pagetotal  = {344},
+    % editor          = {Hernâni Donato},
+    % editortype      = {translatoranfo},
+    % O ideal seria usar os campos `editor` e `editortype` em vez de
+    % `titleaddon`.
 }
 
 @book{gomes1995,
-    keywords        = {8.1.1},
-    author          = {Orlando Gomes},
-    title           = {O direito de família},
-    editor          = {Humberto Theodoro Júnior},
-    editortype      = {updateran},
-    edition         = {11},
-    date            = {1995},
-    publisher       = {Forense},
-    location        = {Rio de Janeiro},
-    pagetotal       = {562},
+    keywords   = {8.1.1},
+    author     = {Orlando Gomes},
+    title      = {O direito de família},
+    titleaddon = {Atualização e notas de Humberto Theodoro Júnior},
+    edition    = {11},
+    date       = {1995},
+    publisher  = {Forense},
+    location   = {Rio de Janeiro},
+    pagetotal  = {562},
+    % editor     = {Humberto Theodoro Júnior},
+    % editortype = {updateran},
+    % O ideal seria usar os campos `editor` e `editortype` em vez de
+    % `titleaddon`.
 }
 
 @book{albergaria1994,
@@ -1960,8 +1982,8 @@
     publisher       = {FTD},
     date            = {1994},
     pagetotal       = {63},
-    editor          = {Paulo Lyra},
-    editortype      = {illustrator},
+    % editor          = {Paulo Lyra},
+    % editortype      = {illustrator},
     % O ideal seria usar os campos `editor` e `editortype` em vez de
     % `titleaddon`.
 }
@@ -2696,6 +2718,8 @@
     isbn            = {85-326-1087-0},
     % editora         = {Luciane Fadel},
     % editoratype     = {illustrator},
+    % O ideal seria usar os campos `editora` e `editoratype` em vez de
+    % `titleaddon`.
 }
 
 % }}}

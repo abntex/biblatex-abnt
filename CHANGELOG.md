@@ -3,6 +3,20 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [3.2] - 2017-10-23
+
+### Added
+- Add NBR 10520 tests
+- Add `citecount` option
+
+### Changed
+- Stop supporting abntex2cite
+- Improve abnt citation style (inherit from `authoryear-comp`)
+- Use small caps for authors initials with `sccite` and `scbib` options
+- Set language to portuguese automatically
+- Disable sortcites
+
+
 ## [3.1] - 2017-07-28
 
 ### Added
@@ -80,6 +94,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Add "et al." in citations
 
 
+[3.2]: https://github.com/abntex/biblatex-abnt/compare/v3.1...v3.2
 [3.1]: https://github.com/abntex/biblatex-abnt/compare/v3.0...v3.1
 [3.0.1]: https://github.com/abntex/biblatex-abnt/compare/v3.0...v3.0.1
 [3.0]: https://github.com/abntex/biblatex-abnt/compare/v2.0.1...v3.0

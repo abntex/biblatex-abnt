@@ -1,4 +1,4 @@
-%% Copyright 2016 Daniel B. Marques
+%% Copyright 2016 Daniel Ballester Marques
 %%
 %% This work may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3
@@ -10,10 +10,10 @@
 %%
 %% This work has the LPPL maintenance status `maintained'.
 %%
-%% The Current Maintainer of this work is Daniel B. Marques.
+%% The Current Maintainer of this work is Daniel Ballester Marques.
 
 \ProvidesFile{abnt-brazilian.lbx}%
-[2017/07/28\space v3.1\space ABNT BibLaTeX citation style]%
+[2017/10/23\space v3.2\space ABNT BibLaTeX citation style]%
 
 
 % Init >>>
@@ -45,7 +45,7 @@
 
 % Publication details >>>1
 
-\NewBibliographyString{%
+\NewBibliographyString{% >>>2
   apud,%
   sineloco,%
   sinenomine,%
@@ -54,9 +54,9 @@
   illustrated,%
   monography,%
   recensionof,%
-}%
+}% <<<2
 
-\DeclareBibliographyStrings{%
+\DeclareBibliographyStrings{% >>>2
   apud             = {{apud}{apud}},%
   idem             = {{idem}{id\adddot}},%
   volume           = {{volume}{v\adddot}},%
@@ -81,9 +81,50 @@
   reprintfrom      = {{separata de}{separata de}},%
   recensionof      = {{recens\~ao de}{recens\~ao de}},%
   reviewof         = {{resenha de}{resenha de}},%
-}%
+}% <<<2
 
-% <<<
+% <<<1
+
+% citecounter >>>1
+
+\NewBibliographyString{% >>>2
+  citecountpage,%
+  citecountpages,%
+  citecountnopage,%
+}% <<<2
+
+\DeclareBibliographyStrings{% >>>2
+  citecountpage = {{%
+    \ifnumgreater{\value{citecounter}}{1}{%
+      Citado \arabic{citecounter} vezes na p\'agina%
+    }{%
+      Citado \arabic{citecounter} vez na p\'agina%
+    }%
+  }{%
+    \ifnumgreater{\value{citecounter}}{1}{%
+      Citado \arabic{citecounter} vezes na p\'agina%
+    }{%
+      Citado \arabic{citecounter} vez na p\'agina%
+    }%
+  }},%
+  citecountpages = {{%
+    \ifnumgreater{\value{citecounter}}{1}{%
+      Citado \arabic{citecounter} vezes nas p\'aginas%
+    }{%
+      Citado \arabic{citecounter} vez nas p\'aginas%
+    }%
+  }{%
+    \ifnumgreater{\value{citecounter}}{1}{%
+      Citado \arabic{citecounter} vezes nas p\'aginas%
+    }{%
+      Citado \arabic{citecounter} vez nas p\'aginas%
+    }%
+  }},%
+  citecountnopage = {{Nenhuma cita\c{c}\~ao no texto}%
+                     {Nenhuma cita\c{c}\~ao no texto}}
+}% <<<2
+
+% <<<1
 
 % Languages >>>1
 
@@ -134,7 +175,9 @@
 
 % <<<
 
-% Roles expressed as functions >>>1
+% Roles >>>1
+
+% Roles expressed as functions >>>2
 
 \NewBibliographyString{%
   organizer,%
@@ -155,9 +198,9 @@
   coordinators    = {{coordenadores}{coord\adddot}},%
 }%
 
-% <<<
+% <<<2
 
-% Roles expressed as objects >>>1
+% Roles expressed as objects >>>2
 
 \DeclareBibliographyStrings{%
   withcommentator  = {{coment\'ario\addcolon}{coment\'ario\addcolon}},%
@@ -167,11 +210,11 @@
   withafterword    = {{posf\'acio\addcolon}{posf\'acio\addcolon}},%
 }%
 
-% <<<
+% <<<2
 
-% Roles expressed as actions >>>1
+% Roles expressed as actions >>>2
 
-\NewBibliographyString{% >>>2
+\NewBibliographyString{% >>>3
   byorganizer,%
   byorganizerfo,%
   bytechrev,%
@@ -192,9 +235,9 @@
   byinterpreter,%
   byillustrator,%
   bytechrev,%
-}% <<<
+}% <<<3
 
-\DeclareBibliographyStrings{% >>>2
+\DeclareBibliographyStrings{% >>>3
   bycoeditor       = {{co-edi\c{c}\~ao\addcolon}%
                      {co-edi\c{c}\~ao\addcolon}},%
   bydirector       = {{dire\c{c}\~ao\addcolon}%
@@ -327,9 +370,11 @@
                      {tradu\c{c}\~ao, notas e pref\'acio\addcolon}},%
   bytranslatoranaf = {{tradu\c{c}\~ao, notas e posf\'acio\addcolon}%
                      {tradu\c{c}\~ao, notas e posf\'acio\addcolon}},%
-}% <<<
+}% <<<3
 
-% <<<
+% <<<2
+
+% <<<1
 
 \endinput%
 
