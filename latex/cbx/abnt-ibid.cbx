@@ -524,7 +524,7 @@
 
 % textcite >>>1
 
-\renewbibmacro*{textcite}{% >>>2
+\newbibmacro*{textcite}{% >>>2
   \ifnameundef{labelname}%
     {\printfield[firstword]{labeltitle}}%
     {\printnames{labelname}}}% <<<2
