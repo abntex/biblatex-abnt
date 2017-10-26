@@ -19,6 +19,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{textcomp}
 \usepackage{microtype}
+\usepackage{etoolbox}
 \usepackage{xcolor}
 
 \usepackage[backend=biber,style=abnt]{biblatex}
@@ -26,18 +27,22 @@
 
 \addbibresource{NBR10520-2002.bib}
 
-\title{NBR 10520:2002 - Teste}
-\author{Daniel Ballester Marques}
-
 \setlength{\parskip}{\baselineskip}%
 \setlength{\parindent}{0pt}%
 \emergencystretch=1em
 
 \usepackage{hyperref}
 
+
+\newtoggle{reference}
+% \toggletrue{reference}
+
+\title{NBR 10520:2002 - \iftoggle{reference}{Referência}{Teste}}
+\author{Daniel Ballester Marques}
+
 \begin{document}
 
-\color{red!50}
+\iftoggle{reference}{}{\color{red!50}}
 
 \maketitle
 
