@@ -70,7 +70,9 @@
   }%
 }% <<<3
 
-% \IfGivenIsInit >>>3
+% \mkbibname* >>>3
+
+% \IfGivenIsInit >>>4
 
 \ExplSyntaxOn
 
@@ -81,33 +83,42 @@
 
 \ExplSyntaxOff
 
-% <<<3
+% <<<4
 
 \let\origmkbibnamefamily\mkbibnamefamily%
 \let\origmkbibnamegiven\mkbibnamegiven%
 \let\origmkbibnameprefix\mkbibnameprefix%
 \let\origmkbibnamesuffix\mkbibnamesuffix%
 
-\renewcommand*{\mkbibnamefamily}[1]{% >>>3
+\renewcommand*{\mkbibnamefamily}[1]{% >>>4
   \UpperOrSCCite{#1}%
-}% <<<3
-\renewcommand*{\mkbibnamegiven}[1]{% >>>3
+}% <<<4
+\renewcommand*{\mkbibnamegiven}[1]{% >>>4
   \ifnumequal{\value{uniquename}}{2}{%
       \IfGivenIsInit{\NormalOrSCCite{#1}}{#1}%
   }{%
       \NormalOrSCCite{#1}%
   }%
-}% <<<3
-\renewcommand*{\mkbibnameprefix}[1]{% >>>3
+}% <<<4
+\renewcommand*{\mkbibnameprefix}[1]{% >>>4
   \ifuseprefix{%
     \UpperOrSCCite{#1}%
   }{%
     \ifnumequal{\value{uniquename}}{2}{#1}{\NormalOrSCCite{#1}}%
   }
-}% <<<3
-\renewcommand*{\mkbibnamesuffix}[1]{% >>>3
+}% <<<4
+\renewcommand*{\mkbibnamesuffix}[1]{% >>>4
   \UpperOrSCCite{#1}%
-}% <<<3
+}% <<<4
+
+\AtBeginBibliography{%
+  \let\mkbibnamefamily\origmkbibnamefamily%
+  \let\mkbibnamegiven\origmkbibnamegiven%
+  \let\mkbibnameprefix\origmkbibnameprefix%
+  \let\mkbibnamesuffix\origmkbibnamesuffix%
+}
+
+% <<<3
 
 \DeclareNameFormat{labelname}{% >>>3
   % Use family-given instead of given-family

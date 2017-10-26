@@ -1,0 +1,187 @@
+%% Copyright 2016 Daniel Ballester Marques
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%%
+%% The Current Maintainer of this work is Daniel Ballester Marques.
+
+\documentclass[a4paper]{article}
+\usepackage[brazil]{babel}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{textcomp}
+\usepackage{microtype}
+\usepackage{etoolbox}
+\usepackage{xcolor}
+
+\usepackage[backend=biber,style=abnt]{biblatex}
+\usepackage[autostyle]{csquotes}
+
+\addbibresource{NBR10520-2002.bib}
+
+\setlength{\parskip}{\baselineskip}%
+\setlength{\parindent}{0pt}%
+\emergencystretch=1em
+
+\usepackage{hyperref}
+
+
+\newtoggle{reference}
+% \toggletrue{reference}
+
+\title{NBR 10520:2002 - \iftoggle{reference}{Referência}{Teste}}
+\author{Daniel Ballester Marques}
+
+\begin{document}
+
+\iftoggle{reference}{}{\color{red!50}}
+
+\maketitle
+
+Este documento imprime \textit{ipsis litteris} todas as entradas citadas na
+NBR 10520:2002 usando o sistema autor-data.
+
+\tableofcontents
+
+\clearpage
+
+\setcounter{section}{5}
+
+\section{Regras gerais de apresentação}
+
+A ironia seria assim uma forma implícita de heterogeneidade mostrada, conforme
+a classificação proposta por \textcite{authier1982}.
+
+\enquote{Apesar das aparências, a desconstrução do logocentrismo não é uma
+psicanálise da filosofia [\ldots]} \cite[293]{derrida1967}.
+
+A produção de lítio começa em Searles Lake, Califórnia, em 1928
+\cite[513]{mumford1949}.
+
+\textcite[146]{oliveira1943} dizem que a \enquote{[\ldots] relação da série
+São Roque com os granitos porfiróides pequenos é muito clara.}
+
+Meyer parte de uma passagem da crônica de \enquote{14 de maio}, de A Semana:
+\enquote{Houve sol, e grande sol, naquele domingo de 1888, em que o Senado
+votou a lei, que a regente sancionou [\ldots]} \cite[v. 3, p. 583]{assis1994}.
+
+\textcite[35]{barbour1971} descreve: \enquote{O estudo da morfologia dos
+terrenos [\ldots] ativos [\ldots]}
+
+\enquote{Não se mova, faça de conta que está morta.} \cite[72]{clarac1985}.
+
+Segundo \textcite[27]{sa1995}: \enquote{[\ldots] por meio da mesma \enquote{arte de
+conversação} que abrange tão extensa e significativa parte da nossa existência
+cotidiana [\ldots]}
+
+A teleconferência permite ao indivíduo participar de um encontro nacional ou
+regional sem a necessidade de deixar seu local de origem. Tipos comuns de
+teleconferência incluem o uso da televisão, telefone, e computador. Através de
+áudio-conferência, utilizando a companhia local de telefone, um sinal de áudio
+pode ser emitido em um salão de qualquer dimensão. \cite[181]{nichols1993}.
+
+\enquote{[\ldots] para que não tenha lugar a producção de degenerados, quer
+physicos quer moraes, misérias, verdadeiras ameaças à sociedade.} \cite[p. 46,
+grifo nosso]{souto1916}.
+
+\enquote{[\ldots] b) desejo de criar uma literatura independente, diversa, de
+vez que, aparecendo o classicismo como manifestação de passado colonial
+[\ldots]} \cite[v. 2, p. 12, grifo do autor]{candido1993}.
+
+\enquote{Ao fazê-lo pode estar envolto em culpa, perversão, ódio de si mesmo
+[\ldots] pode julgar-se pecador e identificar-se com seu pecado.} \cite[v. 4,
+p. 463, tradução nossa]{rahner1962}.
+
+
+\section{Sistema de chamada}
+
+Em \citetitle{teatro1963} relata-se a emergência do teatro do absurdo.
+
+Segundo \textcite[32]{morais1955} assinala \enquote{[\ldots] a presença de
+concreções de bauxita no Rio Cricon.}
+
+\cite{barbosa1958}
+
+\cite{barbosa1959}
+
+\cite{barbosa1965a}
+
+\cite{barbosa1965b}
+
+De acordo com \textcite{reeside1927a}
+
+\cite{reeside1927b}
+
+\cites{dreyfuss1989}{dreyfuss1991}{dreyfuss1995}
+
+\cites{cruz1998}{cruz1999}{cruz2000}
+
+Ela polariza e encaminha, sob a forma de \enquote{demanda coletiva}, as
+necessidades de todos \cites{fonseca1997}{paiva1997}{silva1997}.
+
+Diversos autores salientam a importância do \enquote{acontecimento
+desencadeador} no início de um processo de aprendizagem
+\cites{cross1984}{knox1986}{mezirow1991}.
+
+A chamada \enquote{pandectística havia sido a forma particular pela qual
+o direito romano fora integrado no século XIX na Alemanha em particular.}
+\cite[225]{lopes2000}.
+
+\textcite[30]{bobbio1995} com muita propriedade nos lembra, ao comentar esta
+situação, que os \enquote{juristas medievais justificaram formalmente
+  a validade do direito romano ponderando que este era o direito do Império
+  Romano que tinha sido reconstituído por Carlos Magno com o nome de Sacro
+Império Romano.}
+
+De fato, semelhante equacionamento do problema conteria o risco de se
+considerar a literatura meramente como uma fonte a mais de conteúdos já
+previamente disponíveis, em outros lugares, para a teologia
+\cite[3]{jossua1976}.
+
+\textcite{merriam1991} observam que a localização de recursos tem um papel
+crucial no processo de aprendizagem autodirigida.
+
+\enquote{Comunidade tem que poder ser intercambiada em qualquer circunstância,
+sem quaisquer restrições estatais, pelas moedas dos outros Estados-membros.}
+\cite[34]{comissao1992}.
+
+O mecanismo proposto para viabilizar esta concepção é o chamado Contrato de
+Gestão, que conduziria à captação de recursos privados como forma de reduzir
+os investimentos públicos no ensino superior \cite{brasil1995}.
+
+\enquote{As IES implementarão mecanismos democráticos, legítimos
+e transparentes de avaliação sistemática das suas atividades, levando em conta
+seus objetivos institucionais e seus compromissos para com a sociedade.}
+\cite[55]{anteprojeto1987}.
+
+E eles disseram \enquote{globalização}, e soubemos que era assim que chamavam
+a ordem absurda em que dinheiro é a única pátria à qual se serve e as
+fronteiras se diluem, não pela fraternidade, mas pelo sangramento que engorda
+poderosos sem nacionalidade. \cite[4]{aflor1995}.
+
+\enquote{Em Nova Londrina (PR), as crianças são levadas às lavouras a partir
+dos 5 anos.} \cite[12]{noscanaviais1995}.
+
+
+\section{Notas de rodapé}
+
+Segundo \textapud{silva1983}[3]{abreu1999} diz ser [\ldots]
+
+\enquote{[\ldots] o viés organicista da burocracia estatal e o antiliberalismo
+da cultura política de 1937, preservado de modo encapuçado na Carta de 1946.}
+\apud[172]{vianna1986}[214-215]{segatto1995}.
+
+No modelo serial de \textapud{gough1972}{nardi1993}, o ato de ler envolve um
+processamento serial que começa com uma fixação ocular sobre o texto,
+prosseguindo da esquerda para a direita de forma linear.
+
+\end{document}
+
