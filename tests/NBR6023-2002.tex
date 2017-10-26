@@ -19,22 +19,16 @@
 \usepackage[utf8]{inputenc}
 \usepackage{textcomp}
 \usepackage{microtype}
-\usepackage{hyperref}
 
-\usepackage[
-    backend=biber,
-    style=abnt,
-    sorting=none,
-    repeatfirstfields,
-    indent,
-]{biblatex}
+\usepackage{xcolor}
+
+\usepackage[style=abnt, sorting=none, repeatfirstfields]{biblatex}
 \usepackage[autostyle]{csquotes}
 
 \addbibresource{NBR6023-2002.bib}
 
-\defbibheading{bibliography}[]{
-    \subsection{#1}
-}
+\defbibheading{bibliography}[]{\subsection{#1}}
+
 \defbibenvironment{bibliography}
   {\list{}{%
      \leftmargin 6em
@@ -43,15 +37,21 @@
   {\endlist}
   {\item}
 
-\defbibheading{subbib}[]{
-    \subsubsection{#1}
-}
+\defbibheading{subbib}[]{\subsubsection{#1}}
 
-\title{NBR 6023:2002 - Testes}
+\let\origsection\section
+\renewcommand\section{\clearpage\origsection}
+
+\usepackage{hyperref}
+
+
+\title{NBR 6023:2002 - Teste}
 \author{Daniel Ballester Marques}
 
 
 \begin{document}
+
+\color{red!50}
 
 \maketitle
 
@@ -76,11 +76,8 @@ todas as entradas do manual e expondo o modo de fazê-lo. Para o uso correto do
 
 \nocite{*}
 
-\clearpage
-
 
 \setcounter{section}{6}
-
 
 \section{Modelos de referências}
 
