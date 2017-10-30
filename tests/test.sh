@@ -10,7 +10,11 @@ pdflatex NBR6023-2002_test.tex
 
 latexmk -norc -c
 
-rm -i *.bbl
+rm NBR10520-2002.bbl
 
-rm -i *.xml
+rm NBR6023-2002.bbl
+
+rm NBR10520-2002.run.xml
+
+rm NBR6023-2002.run.xml
 

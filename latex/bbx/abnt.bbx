@@ -19,6 +19,12 @@
 % Init >>>1
 
 \RequireBiber[3]%
+
+\RequirePackage{xparse}%
+\RequirePackage{xpatch}%
+\RequirePackage{expl3}%
+\RequirePackage{l3regex}%
+
 \DeclareLanguageMapping{brazil}{abnt-brazilian}%
 \DeclareLanguageMapping{brazilian}{abnt-brazilian}%
 \DeclareLanguageMapping{portuguese}{abnt-brazilian}%
@@ -42,9 +48,9 @@
 \let\origbibsetup\bibsetup%
 \appto{\bibsetup}{\raggedright}%
 
-\setcounter{biburlnumpenalty}{3000}
-\setcounter{biburllcpenalty}{6000}
-\setcounter{biburlucpenalty}{9000}
+\setcounter{biburlnumpenalty}{3000}%
+\setcounter{biburllcpenalty}{6000}%
+\setcounter{biburlucpenalty}{9000}%
 
 % <<<1
 
@@ -201,7 +207,7 @@
       indent,%
       justify,%
     }%
-  }{}
+  }{}%
 }%
 % <<<2
 
@@ -211,7 +217,7 @@
   \settoggle{citecount}{#1}%
   \ifstrequal{#1}{true}{%
     \ExecuteBibliographyOptions{backref, citecounter}%
-  }{}
+  }{}%
 }%
 % <<<2
 
@@ -405,7 +411,7 @@
 }% <<<3
 
 \newcommand*{\UpperOrSC}[1]{% >>>3
-  \let\MakeCapital\relax
+  \let\MakeCapital\relax%
   \iftoggle{scbib}{%
     \textsc{\MakeLowercase{#1}}%
   }{%
@@ -423,17 +429,37 @@
 
 % <<<2
 
+% \IfGivenIsInitial >>>2
+
+\ExplSyntaxOn%
+
+\ProvideDocumentCommand{\IfGivenIsInitial}{mm}{%
+  \regex_match:nVTF {\w\.} \namepartgiven {#1} {#2}%
+}%
+\cs_generate_variant:Nn \regex_match:nnTF { nV }%
+
+\ExplSyntaxOff%
+
+% <<<2
+
 % Name format >>>2
 
 \DeclareNameFormat{LAST-first}{%% >>>3
   \renewcommand*{\mkbibnamefamily}[1]{\UpperOrSC{##1}}%
   \renewcommand*{\mkbibnamegiven}[1]{\ifgiveninits{\NormalOrSC{##1}}{##1}}%
+  \renewcommand*{\mkbibnamegiven}[1]{%
+    \ifgiveninits{%
+      \NormalOrSC{##1}%
+    }{%
+      \IfGivenIsInitial{\NormalOrSC{##1}}{##1}%
+    }%
+  }%
   \renewcommand*{\mkbibnameprefix}[1]{%
     \ifuseprefix{%
       \UpperOrSC{##1}%
     }{%
       \ifgiveninits{\NormalOrSC{##1}}{##1}%
-    }
+    }%
   }%
   \renewcommand*{\mkbibnamesuffix}[1]{\UpperOrSC{##1}}%
 	\ifgiveninits{%
@@ -483,8 +509,8 @@
 % Name delimiters >>>3
 \newtoggle{byeditor+others}%
 
-\let\multinamedelimorig\multinamedelim
-\let\finalnamedelimorig\finalnamedelim
+\let\multinamedelimorig\multinamedelim%
+\let\finalnamedelimorig\finalnamedelim%
 
 \renewcommand*{\multinamedelim}{%
   \iftoggle{byeditor+others}{%
@@ -1382,7 +1408,7 @@
         }%
         \printlist[pageref][-\value{listtotal}]{pageref}%
       }%
-    }
+    }%
   }{%
     \iflistundef{pageref}{}{%
       \printunit{\addperiod\addspace}%
@@ -1394,8 +1420,8 @@
         }%
         \printlist[pageref][-\value{listtotal}]{pageref}%
       }%
-    }
-  }
+    }%
+  }%
 }% <<<3
 
 % <<<2
