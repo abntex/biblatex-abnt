@@ -389,7 +389,7 @@
        {\iffieldequals{namehash}{\cbx@lasthash}%
           {\setunit{\compcitedelim}%
               \usebibmacro{cite:labelyear+extrayear}}%
-          {\printnames{labelname}%
+          {\printtext[bibhyperref]{\printnames{labelname}}%
            \setunit{\printdelim{nameyeardelim}}%
            \usebibmacro{cite:labelyear+extrayear}%
            \savefield{namehash}{\cbx@lasthash}%
