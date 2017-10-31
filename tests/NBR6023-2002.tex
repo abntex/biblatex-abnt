@@ -42,6 +42,13 @@
 \let\origsection\section
 \renewcommand\section{\clearpage\origsection}
 
+\makeatletter
+\newcommand{\globalcolor}[1]{%
+  \color{#1}\global\let\default@color\current@color
+}
+\makeatother
+\AtBeginDocument{\iftoggle{reference}{}{\globalcolor{red!50}}}
+
 \usepackage{hyperref}
 
 
@@ -52,8 +59,6 @@
 \author{Daniel Ballester Marques}
 
 \begin{document}
-
-\iftoggle{reference}{}{\color{red!50}}
 
 \maketitle
 
