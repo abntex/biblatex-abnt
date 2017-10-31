@@ -360,14 +360,13 @@
 \DeclareCiteCommand{\footcite}[\mkbibfootnote]% >>>3
   {\boolfalse{cbx:parens}}%
   {\usebibmacro{citeindex}%
-   \iffirstcitekey%
-     {\setcounter{textcitetotal}{1}}%
+   \iffirstcitekey
+     {\setcounter{textcitetotal}{1}}
      {\stepcounter{textcitetotal}%
-      \ifnumequal{\value{textcitecount}}{\value{textcitetotal}-1}{%
-        \addcomma\addspace%
-      }{%
-        \addspace\bibstring{and}\addspace%
-      }}%
+      \ifnumequal{\value{multicitecount}}{\value{multicitetotal}}%
+        {\addspace\bibstring{and}}%
+        {\addcomma}%
+      \space}%
    \usebibmacro{footcite}}%
   {\ifbool{cbx:parens}%
      {\bibcloseparen\global\boolfalse{cbx:parens}}%
