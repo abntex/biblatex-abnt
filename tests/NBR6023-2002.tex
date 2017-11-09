@@ -42,18 +42,23 @@
 \let\origsection\section
 \renewcommand\section{\clearpage\origsection}
 
+\makeatletter
+\newcommand{\globalcolor}[1]{%
+  \color{#1}\global\let\default@color\current@color
+}
+\makeatother
+\AtBeginDocument{\iftoggle{reference}{}{\globalcolor{red!50}}}
+
 \usepackage{hyperref}
 
 
 \newtoggle{reference}
-% \toggletrue{reference}
+\toggletrue{reference}
 
 \title{NBR 6023:2002 - \iftoggle{reference}{Referência}{Teste}}
 \author{Daniel Ballester Marques}
 
 \begin{document}
-
-\iftoggle{reference}{}{\color{red!50}}
 
 \maketitle
 

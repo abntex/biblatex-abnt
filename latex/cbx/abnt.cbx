@@ -23,7 +23,6 @@
 \RequirePackage{xparse}%
 \RequirePackage{xpatch}%
 \RequirePackage{expl3}%
-\RequirePackage{l3regex}%
 
 \ExecuteBibliographyOptions{% >>>2
   pagetracker,%
@@ -62,7 +61,7 @@
 }% <<<3
 
 \newcommand*{\NormalOrSCCite}[1]{% >>>3
-  \let\MakeCapital\relax
+  \let\MakeCapital\relax%
   \iftoggle{sccite}{%
     \textsc{\MakeLowercase{#1}}%
   }{%
@@ -74,14 +73,14 @@
 
 % \IfGivenIsInit >>>4
 
-\ExplSyntaxOn
+\ExplSyntaxOn%
 
 \NewDocumentCommand{\IfGivenIsInit}{mm}{%
   \regex_match:nVTF {\w\.} \namepartgiven {#1} {#2}%
-}
-\cs_generate_variant:Nn \regex_match:nnTF { nV }
+}%
+\cs_generate_variant:Nn \regex_match:nnTF { nV }%
 
-\ExplSyntaxOff
+\ExplSyntaxOff%
 
 % <<<4
 
@@ -105,7 +104,7 @@
     \UpperOrSCCite{#1}%
   }{%
     \ifnumequal{\value{uniquename}}{2}{#1}{\NormalOrSCCite{#1}}%
-  }
+  }%
 }% <<<4
 \renewcommand*{\mkbibnamesuffix}[1]{% >>>4
   \UpperOrSCCite{#1}%
@@ -116,7 +115,7 @@
   \let\mkbibnamegiven\origmkbibnamegiven%
   \let\mkbibnameprefix\origmkbibnameprefix%
   \let\mkbibnamesuffix\origmkbibnamesuffix%
-}
+}%
 
 % <<<3
 
@@ -151,19 +150,19 @@
 
 \renewbibmacro*{name:family}[4]{% >>>3
   % Add the suffix too
-  \ifuseprefix
+  \ifuseprefix%
     {\usebibmacro{name:delim}{#3#1}%
      \usebibmacro{name:hook}{#3#1}%
      \ifdefvoid{#3}{}{%
-       \ifcapital
-         {\mkbibnameprefix{\MakeCapital{#3}}\isdot}
+       \ifcapital%
+         {\mkbibnameprefix{\MakeCapital{#3}}\isdot}%
          {\mkbibnameprefix{#3}\isdot}%
        \ifprefchar{}{\bibnamedelimc}}%
-     \mkbibnamefamily{#1}\isdot
-     \ifdefvoid{#4}{}{\bibnamedelimd\mkbibnamesuffix{#4}\isdot}}
+     \mkbibnamefamily{#1}\isdot%
+     \ifdefvoid{#4}{}{\bibnamedelimd\mkbibnamesuffix{#4}\isdot}}%
     {\usebibmacro{name:delim}{#1}%
      \usebibmacro{name:hook}{#1}%
-     \mkbibnamefamily{#1}\isdot
+     \mkbibnamefamily{#1}\isdot%
      \ifdefvoid{#4}{}{\bibnamedelimd\mkbibnamesuffix{#4}\isdot}}}% <<<3
 
 % <<<2
@@ -323,6 +322,60 @@
 
 % <<<2
 
+% \footcite >>>2
+
+\newbibmacro*{footcite}{% >>>3
+  \let\multinamedelim\multinamedelimorig%
+  \let\finalnamedelim\finalnamedelimorig%
+  \let\mkbibnamefamily\origmkbibnamefamily%
+  \let\mkbibnamegiven\origmkbibnamegiven%
+  \let\mkbibnameprefix\origmkbibnameprefix%
+  \let\mkbibnamesuffix\origmkbibnamesuffix%
+  \usebibmacro{prenote}%
+  \ifnameundef{labelname}%
+    {\iffieldundef{shorthand}%
+       {\usebibmacro{cite:label}%
+        \setunit{%
+          \global\booltrue{cbx:parens}%
+          \addspace\bibopenparen}%
+        \usebibmacro{cite:labelyear+extrayear}}%
+       {\usebibmacro{cite:shorthand}}}%
+    {\printtext[bibhyperref]{\printnames{labelname}}%
+     \setunit{%
+       \global\booltrue{cbx:parens}%
+       \addspace\bibopenparen}%
+     \usebibmacro{citeyear}}}% <<<3
+
+\newbibmacro*{footcite:postnote}{% >>>3
+  \iffieldundef{postnote}%
+    {\ifbool{cbx:parens}%
+       {\bibcloseparen}%
+       {}}%
+    {\ifbool{cbx:parens}%
+       {\setunit{\postnotedelim}}%
+       {\setunit{\extpostnotedelim\bibopenparen}}%
+     \printfield{postnote}\bibcloseparen}}% <<<3
+
+\DeclareCiteCommand{\footcite}[\mkbibfootnote]% >>>3
+  {\boolfalse{cbx:parens}}%
+  {\usebibmacro{citeindex}%
+   \iffirstcitekey
+     {\setcounter{textcitetotal}{1}}
+     {\stepcounter{textcitetotal}%
+      \ifnumequal{\value{multicitecount}}{\value{multicitetotal}}%
+        {\addspace\bibstring{and}}%
+        {\addcomma}%
+      \space}%
+   \usebibmacro{footcite}}%
+  {\ifbool{cbx:parens}%
+     {\bibcloseparen\global\boolfalse{cbx:parens}}%
+     {}}%
+  {\usebibmacro{footcite:postnote}}% <<<3
+
+\DeclareMultiCiteCommand{\footcites}[\mkbibfootnote]{\footcite}{}%
+
+% <<<2
+
 % \citetitle >>>2
 
 % \citetitle is pretty much a copy of authoryear-comp's \textcite that uses
@@ -389,7 +442,7 @@
        {\iffieldequals{namehash}{\cbx@lasthash}%
           {\setunit{\compcitedelim}%
               \usebibmacro{cite:labelyear+extrayear}}%
-          {\printnames{labelname}%
+          {\printtext[bibhyperref]{\printnames{labelname}}%
            \setunit{\printdelim{nameyeardelim}}%
            \usebibmacro{cite:labelyear+extrayear}%
            \savefield{namehash}{\cbx@lasthash}%
@@ -499,14 +552,6 @@
 \DeclareCiteCommand{\smartcite}[\mkbibparens]% >>>2
   {\usebibmacro{cite:init}%
    \usebibmacro{prenote}}%
-  {\usebibmacro{citeindex}%
-   \usebibmacro{cite}}%
-  {}%
-  {\usebibmacro{postnote}}% <<<2
-
-\DeclareCiteCommand{\footcite}[\mkbibfootnote]% >>>2
-  {\usebibmacro{cite:init}%
-  \usebibmacro{prenote}}%
   {\usebibmacro{citeindex}%
    \usebibmacro{cite}}%
   {}%

@@ -22,7 +22,7 @@
 \usepackage{etoolbox}
 \usepackage{xcolor}
 
-\usepackage[backend=biber,style=abnt]{biblatex}
+\usepackage[backend=biber, style=abnt]{biblatex}
 \usepackage[autostyle]{csquotes}
 
 \addbibresource{NBR10520-2002.bib}
@@ -31,18 +31,25 @@
 \setlength{\parindent}{0pt}%
 \emergencystretch=1em
 
+\makeatletter
+\newcommand{\globalcolor}[1]{%
+  \color{#1}\global\let\default@color\current@color
+}
+\makeatother
+\AtBeginDocument{\iftoggle{reference}{}{\globalcolor{red!50}}}
+
 \usepackage{hyperref}
 
 
 \newtoggle{reference}
-% \toggletrue{reference}
+\toggletrue{reference}
 
 \title{NBR 10520:2002 - \iftoggle{reference}{Referência}{Teste}}
 \author{Daniel Ballester Marques}
 
 \begin{document}
 
-\iftoggle{reference}{}{\color{red!50}}
+\frenchspacing
 
 \maketitle
 
@@ -182,6 +189,11 @@ da cultura política de 1937, preservado de modo encapuçado na Carta de 1946.}
 No modelo serial de \textapud{gough1972}{nardi1993}, o ato de ler envolve um
 processamento serial que começa com uma fixação ocular sobre o texto,
 prosseguindo da esquerda para a direita de forma linear.
+
+\setcounter{footnote}{3}
+Os pais estão sempre confrontados diante das duas alternativas: vinculação
+escolar ou vinculação profissional.\footcite[Sobre essa opção dramática, ver
+também][269--290]{morice1996}
 
 \end{document}
 
