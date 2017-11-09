@@ -18,7 +18,7 @@ Estilo para BibLaTeX compatível com as normas da ABNT.
 
 Substitui o pacote [`abntex2cite`](https://github.com/abntex/abntex2).
 
-**Requer `biblatex v3.6` e `biber v2.6`.**
+**Requer `biblatex v3.8` e `biber v2.8`.**
 
 O arquivo `biblatex-abnt.pdf` apresenta algumas informações sobre o uso do
 pacote. Os arquivos `NBR6023-2002.pdf` e `NBR10520-2002.pdf` imprimem *ipsis
@@ -45,7 +45,7 @@ e atualize o banco de dados do TeX (rodando o `texhash`, por exemplo).
   \addbibresource{outroarquivo.bib}   % bibliografia vão aqui
   ```
 
-2. Use os comandos de citação (e.g. `\cite[10]{entrada2016}`) para citar
+2. Use os comandos de citação (e.g. `\cite[10]{entrada2018}`) para citar
 suas entradas.
 
 3. Use o comando `\printbibliography` para imprimir a bibliografia.

@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Add `citecount` option
 
 ### Changed
+- Support (and require) BibLaTeX 3.8 and Biber 2.8
 - Stop supporting abntex2cite
 - Improve abnt citation style (inherit from `authoryear-comp`)
 - Use small caps for authors initials with `sccite` and `scbib` options
