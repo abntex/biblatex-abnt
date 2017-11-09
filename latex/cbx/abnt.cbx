@@ -216,20 +216,20 @@
     {\ifthenelse{\ifnameundef{labelname}\OR\iffieldundef{labelyear}}%
        {\usebibmacro{cite:label}%
         \setunit{\printdelim{nonameyeardelim}}%
-        \usebibmacro{cite:labelyear+extrayear}%
+        \usebibmacro{cite:labeldate+extradate}%
         \usebibmacro{cite:reinit}}%
        {\iffieldequals{namehash}{\cbx@lasthash}%
           {\ifthenelse{\iffieldequals{labelyear}{\cbx@lastyear}\AND%
                        \(\value{multicitecount}=0\OR\iffieldundef{postnote}\)}%
              {\setunit{\addcomma}%
-              \usebibmacro{cite:extrayear}}%
+              \usebibmacro{cite:extradate}}%
              {\setunit{\compcitedelim}%
-              \usebibmacro{cite:labelyear+extrayear}%
+              \usebibmacro{cite:labeldate+extradate}%
               \savefield{labelyear}{\cbx@lastyear}}}%
           {% Use `bibhyperref` for the `labelname`
            \printtext[bibhyperref]{\printnames{labelname}}%
            \setunit{\printdelim{nameyeardelim}}%
-           \usebibmacro{cite:labelyear+extrayear}%
+           \usebibmacro{cite:labeldate+extradate}%
            \savefield{namehash}{\cbx@lasthash}%
            \savefield{labelyear}{\cbx@lastyear}}}}%
     {\usebibmacro{cite:shorthand}%
@@ -265,9 +265,9 @@
        {\ifthenelse{\iffieldequals{labelyear}{\cbx@lastyear}\AND%
                     \(\value{multicitecount}=0\OR\iffieldundef{postnote}\)}%
           {\setunit{\addcomma}%
-           \usebibmacro{cite:extrayear}}%
+           \usebibmacro{cite:extradate}}%
           {\setunit{\compcitedelim}%
-           \usebibmacro{cite:labelyear+extrayear}%
+           \usebibmacro{cite:labeldate+extradate}%
            \savefield{labelyear}{\cbx@lastyear}}}%
        {\setunit{\compcitedelim}%
         \usebibmacro{cite:shorthand}%
@@ -281,7 +281,7 @@
            \ifnumequal{\value{citecount}}{1}%
              {\usebibmacro{prenote}}%
              {}%
-           \usebibmacro{cite:labelyear+extrayear}}%
+           \usebibmacro{cite:labeldate+extradate}}%
           {\usebibmacro{cite:shorthand}}}%
        {% Use `bibhyperref` so that the names are also hyperlinked
         \printtext[bibhyperref]{\printnames{labelname}}%
@@ -294,7 +294,7 @@
         \iffieldundef{shorthand}%
           {\iffieldundef{labelyear}%
              {\usebibmacro{cite:label}}%
-             {\usebibmacro{cite:labelyear+extrayear}}%
+             {\usebibmacro{cite:labeldate+extradate}}%
            \savefield{labelyear}{\cbx@lastyear}}%
           {\usebibmacro{cite:shorthand}%
            \global\undef\cbx@lastyear}}%
@@ -338,7 +338,7 @@
         \setunit{%
           \global\booltrue{cbx:parens}%
           \addspace\bibopenparen}%
-        \usebibmacro{cite:labelyear+extrayear}}%
+        \usebibmacro{cite:labeldate+extradate}}%
        {\usebibmacro{cite:shorthand}}}%
     {\printtext[bibhyperref]{\printnames{labelname}}%
      \setunit{%
@@ -386,7 +386,7 @@
   \setunit{\global\booltrue{cbx:parens}\addspace\bibopenparen}%
   \ifnumequal{\value{citecount}}{1}{\usebibmacro{prenote}}{}%
   \iffieldundef{shorthand}{%
-    \usebibmacro{cite:labelyear+extrayear}%
+    \usebibmacro{cite:labeldate+extradate}%
   }{%
     \usebibmacro{cite:shorthand}%
   }%
@@ -437,14 +437,14 @@
     {\ifthenelse{\ifnameundef{labelname}\OR\iffieldundef{labelyear}}%
        {\usebibmacro{cite:label}%
         \setunit{\printdelim{nonameyeardelim}}%
-        \usebibmacro{cite:labelyear+extrayear}%
+        \usebibmacro{cite:labeldate+extradate}%
         \usebibmacro{cite:reinit}}%
        {\iffieldequals{namehash}{\cbx@lasthash}%
           {\setunit{\compcitedelim}%
-              \usebibmacro{cite:labelyear+extrayear}}%
+              \usebibmacro{cite:labeldate+extradate}}%
           {\printtext[bibhyperref]{\printnames{labelname}}%
            \setunit{\printdelim{nameyeardelim}}%
-           \usebibmacro{cite:labelyear+extrayear}%
+           \usebibmacro{cite:labeldate+extradate}%
            \savefield{namehash}{\cbx@lasthash}%
            \savefield{labelyear}{\cbx@lastyear}}}}%
     {\usebibmacro{cite:shorthand}%

@@ -176,12 +176,16 @@
   }{}}%
 % <<<2
 
-% Show extrayear in bibliography >>>2
-\newtoggle{extrayear}%
+% Show extradate in bibliography >>>2
+\newtoggle{extradate}%
+\DeclareBibliographyOption{extradate}[true]{%
+  \settoggle{extradate}{#1}}%
+\DeclareEntryOption[boolean]{extradate}[true]{%
+  \settoggle{extradate}{#1}}%
 \DeclareBibliographyOption{extrayear}[true]{%
-  \settoggle{extrayear}{#1}}%
+  \settoggle{extradate}{#1}}%
 \DeclareEntryOption[boolean]{extrayear}[true]{%
-  \settoggle{extrayear}{#1}}%
+  \settoggle{extradate}{#1}}%
 % <<<2
 
 % Justify text >>>2
@@ -1185,7 +1189,7 @@
 % Publisher, location, date, issue >>>2
 
 \renewbibmacro*{date}{%
-  \iftoggle{extrayear}{%
+  \iftoggle{extradate}{%
     \printdateextra%
   }{%
     \printdate%
@@ -1380,9 +1384,9 @@
             {}}%
        \renewbibmacro*{related:init}{}%
        \DeclareNameAlias{sortname}{default}%
-       \ifbibmacroundef{date+extrayear}%
+       \ifbibmacroundef{date+extradate}%
          {}%
-         {\renewbibmacro*{date+extrayear}{}%
+         {\renewbibmacro*{date+extradate}{}%
           \renewbibmacro*{date}{\printdate}}%
        \renewbibmacro*{pageref}{}}%
       {\thefield{entrytype}}}%
