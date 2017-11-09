@@ -6,14 +6,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [3.2] - 2017-10-23
 
 ### Added
-- Add NBR 10520 tests
+- Add better tests
 - Add `citecount` option
 
 ### Changed
-- Support (and require) BibLaTeX 3.8 and Biber 2.8
+- **Support (and require) BibLaTeX 3.8 and Biber 2.8**
 - Stop supporting abntex2cite
 - Improve abnt citation style (inherit from `authoryear-comp`)
-- Use small caps for authors initials with `sccite` and `scbib` options
+- Use small caps for authors' initials with `sccite` and `scbib` options
 - Set language to portuguese automatically
 - Disable sortcites
 
