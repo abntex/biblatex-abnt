@@ -148,6 +148,35 @@
   \fi%
   \usebibmacro{name:andothers}}% <<<3
 
+\DeclareNameFormat{textlabelname}{% >>>3
+  % Use family-given instead of given-family
+  \ifcase\value{uniquename}%
+    \usebibmacro{name:family}%
+      {\namepartfamily}%
+      {\namepartgiven}%
+      {\namepartprefix}%
+      {\namepartsuffix}%
+  \or%
+    \ifuseprefix%
+      {\usebibmacro{name:given-family}%
+        {\namepartfamily}%
+        {\namepartgiven}%
+        {\namepartprefix}%
+        {\namepartsuffix}}%
+      {\usebibmacro{name:given-family}%
+        {\namepartfamily}%
+        {\namepartgiven}%
+        {\namepartprefix}%
+        {\namepartsuffix}}%
+  \or%
+    \usebibmacro{name:given-family}%
+      {\namepartfamily}%
+      {\namepartgiven}%
+      {\namepartprefix}%
+      {\namepartsuffix}%
+  \fi%
+  \usebibmacro{name:andothers}}% <<<3
+
 \renewbibmacro*{name:family}[4]{% >>>3
   % Add the suffix too
   \ifuseprefix%
@@ -284,7 +313,7 @@
            \usebibmacro{cite:labeldate+extradate}}%
           {\usebibmacro{cite:shorthand}}}%
        {% Use `bibhyperref` so that the names are also hyperlinked
-        \printtext[bibhyperref]{\printnames{labelname}}%
+        \printtext[bibhyperref]{\printnames[textlabelname]{labelname}}%
         \setunit{%
           \global\booltrue{cbx:parens}%
           \printdelim{nameyeardelim}\bibopenparen}%
