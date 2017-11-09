@@ -10,7 +10,9 @@ under the terms of the LaTeX Project Public License, version 1.3c
 (http://www.latex-project.org/lppl.txt).
 
 The current maintainer is
-Daniel Ballester Marques ([@dbmrq](https://github.com/dbmrq)).
+Daniel Ballester Marques ([@dbmrq](https://github.com/dbmrq)). With special
+thanks to [@moewew](https://github.com/moewew) and all the awesome people
+behind BibLaTeX.
 
 ---
 
