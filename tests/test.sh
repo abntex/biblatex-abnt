@@ -53,7 +53,9 @@ done < <(gs -q  -o - -sDEVICE=inkcov NBR6023-2002_test.pdf | sed -e '1d')
 
 if [ "$pass" = true ] ; then
     echo "ALL GOOD!"
+    exit 0
 else
     echo "OOPS, THERE'S SOMETHING WRONG!"
+    exit 1
 fi
 
