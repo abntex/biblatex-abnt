@@ -2,9 +2,9 @@
 
 echo "Running tests..."
 
-sed -i '' 's/\\toggletrue{reference}/% \\toggletrue{reference}/' NBR10520-2002.tex
+sed -i .bak 's/\\toggletrue{reference}/% \\toggletrue{reference}/' NBR10520-2002.tex
 
-sed -i '' 's/\\toggletrue{reference}/% \\toggletrue{reference}/' NBR6023-2002.tex
+sed -i .bak 's/\\toggletrue{reference}/% \\toggletrue{reference}/' NBR6023-2002.tex
 
 {
 latexmk -pdf -norc -interaction=nonstopmode NBR10520-2002.tex
@@ -26,9 +26,13 @@ rm NBR10520-2002.run.xml
 
 rm NBR6023-2002.run.xml
 
-sed -i '' 's/% \\toggletrue{reference}/\\toggletrue{reference}/' NBR10520-2002.tex
+sed -i .bak 's/% \\toggletrue{reference}/\\toggletrue{reference}/' NBR10520-2002.tex
 
-sed -i '' 's/% \\toggletrue{reference}/\\toggletrue{reference}/' NBR6023-2002.tex
+sed -i .bak 's/% \\toggletrue{reference}/\\toggletrue{reference}/' NBR6023-2002.tex
+
+rm NBR10520-2002.tex.bak
+
+rm NBR6023-2002.tex.bak
 
 pass=true
 
