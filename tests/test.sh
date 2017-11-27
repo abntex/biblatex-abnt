@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 echo "Running tests..."
 
 sed -i .bak 's/\\toggletrue{reference}/% \\toggletrue{reference}/' NBR10520-2002.tex
