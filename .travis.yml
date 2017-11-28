@@ -11,12 +11,11 @@ before_install:
 - which tlmgr
 #- wget http://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.sh && chmod +x update-tlmgr-latest.sh && sudo ./update-tlmgr-latest.sh
 - sudo rm -rf /usr/local/texlive/2017/texmf-dist/tex/latex/biblatex-abnt 
-- cd sudo ln -s `pwd` /usr/local/texlive/2017/texmf-dist/tex/latex/biblatex-abnt
+- sudo ln -s `pwd` /usr/local/texlive/2017/texmf-dist/tex/latex/biblatex-abnt
 - sudo env "PATH=$PATH" tlmgr update --self --all
 - ls /usr/local/texlive/2017/texmf-dist/tex/latex/biblatex-abnt
 - sudo env "PATH=$PATH" texhash
 script:
-- tlmgr --version
 - latexmk -v
 - xelatex -v
 - pdftotext -v
