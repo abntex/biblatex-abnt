@@ -6,8 +6,7 @@ rvm:
 before_install:
 - sudo apt-get update -qq
 - sudo apt-get install -y -qq ruby-full pdftk poppler-utils language-pack-pt ghostscript
-- wget https://github.com/abntex/limarka/raw/master/spec/dependencias/texlive-abntex2.profile
-- wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz && tar -xf install-tl-unx.tar.gz && cd install-tl-* && sudo ./install-tl -no-gui -profile ../dependencias/texlive-abntex2.profile -no-verify-downloads && cd ..
+- wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz && tar -xf install-tl-unx.tar.gz && cd install-tl-* && wget https://github.com/abntex/limarka/raw/master/spec/dependencias/texlive-abntex2.profile && sudo ./install-tl -no-gui -profile texlive-abntex2.profile -no-verify-downloads && cd ..
 - export PATH=$PATH:/usr/local/texlive/2017/bin/x86_64-linux
 - tlmgr update --self --all
 - rm -rf /usr/local/texlive/2017/texmf-dist/tex/latex/biblatex-abnt
