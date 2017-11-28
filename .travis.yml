@@ -10,7 +10,7 @@ before_install:
 - export PATH=$PATH:/usr/local/texlive/2017/bin/x86_64-linux
 - wget http://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.sh && chmod +x update-tlmgr-latest.sh && sudo ./update-tlmgr-latest.sh
 - which tlmgr
-- sudo tlmgr update --self --all
+- sudo env "PATH=$PATH" tlmgr update --self --all
 - sudo rm -rf /usr/local/texlive/2017/texmf-dist/tex/latex/biblatex-abnt
 - sudo ln -s `pwd` /usr/local/texlive/2017/texmf-dist/tex/latex/biblatex-abnt
 - ls /usr/local/texlive/2017/texmf-dist/tex/latex/biblatex-abnt
