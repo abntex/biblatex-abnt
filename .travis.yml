@@ -19,6 +19,7 @@ before_install:
 - sudo ln -s `pwd` /usr/local/texlive/2017/texmf-dist/tex/latex/biblatex-abnt
 - sudo env "PATH=$PATH" tlmgr update --self --all
 - ls /usr/local/texlive/2017/texmf-dist/tex/latex/biblatex-abnt
+- sudo env "PATH=$PATH" texhash
 
 script:
 - latexmk -v
