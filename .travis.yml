@@ -1,25 +1,33 @@
 dist: trusty
+
 sudo: required
+
 language: ruby
+
 rvm:
 - 2.3.1
+
 before_install:
 - sudo apt-get update -qq
 - sudo apt-get install -y -qq ruby-full pdftk poppler-utils language-pack-pt ghostscript
-- wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz && tar -xf install-tl-unx.tar.gz && cd install-tl-* && wget https://github.com/abntex/limarka/raw/master/spec/dependencias/texlive-abntex2.profile && sudo ./install-tl -no-gui -profile texlive-abntex2.profile -no-verify-downloads && cd ..
+- wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
+- tar -xf install-tl-unx.tar.gz && cd install-tl-*
+- wget https://github.com/abntex/limarka/raw/master/spec/dependencias/texlive-abntex2.profile
+- sudo ./install-tl -no-gui -profile texlive-abntex2.profile -no-verify-downloads && cd ..
 - export PATH=$PATH:/usr/local/texlive/2017/bin/x86_64-linux
-- which tlmgr
-#- wget http://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.sh && chmod +x update-tlmgr-latest.sh && sudo ./update-tlmgr-latest.sh
 - sudo rm -rf /usr/local/texlive/2017/texmf-dist/tex/latex/biblatex-abnt 
 - sudo ln -s `pwd` /usr/local/texlive/2017/texmf-dist/tex/latex/biblatex-abnt
 - sudo env "PATH=$PATH" tlmgr update --self --all
 - ls /usr/local/texlive/2017/texmf-dist/tex/latex/biblatex-abnt
-- sudo env "PATH=$PATH" texhash
+
 script:
 - latexmk -v
 - xelatex -v
 - pdftotext -v
 - gs --version
 - cd tests && ./test.sh
+
 after_failure:
-- cat /usr/local/texlive/2017/install-tl.log
+- cat NBR10520-2002.log
+- cat NBR6023-2002.log
+
