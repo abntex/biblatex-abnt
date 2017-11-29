@@ -1,4 +1,5 @@
 # biblatex-abnt
+[![Build Status](https://travis-ci.org/abntex/biblatex-abnt.svg?branch=master)](https://travis-ci.org/abntex/biblatex-abnt)
 
 BibLaTeX style for Brazil's ABNT (Brazilian Association of Technical Norms)
 rules.
@@ -18,24 +19,20 @@ behind BibLaTeX.
 
 Estilo para BibLaTeX compatível com as normas da ABNT.
 
-Substitui o pacote [`abntex2cite`](https://github.com/abntex/abntex2).
-
-**Requer `biblatex v3.8` e `biber v2.8`.**
-
-O arquivo `biblatex-abnt.pdf` apresenta algumas informações sobre o uso do
-pacote. Os arquivos `NBR6023-2002.pdf` e `NBR10520-2002.pdf` imprimem *ipsis
-litteris* todas as entradas usadas nas respectivas normas da ABNT.
+Versão 3.2
 
 
 ## Instalação
 
-O `biblatex-abnt` está incluso no TeX Live a partir de 2016.
+O biblatex-abnt está incluso no TeX Live a partir de 2016.
 
 Para instalá-lo manualmente, copie os arquivos `.bbx`, `.cbx` e `.lbx` para
 
     <TEXMFLOCAL>/tex/latex/biblatex-contrib/biblatex-abnt/
 
 e atualize o banco de dados do TeX (rodando o `texhash`, por exemplo).
+
+**O biblatex-abnt requer `biblatex v3.8` e `biber v2.8`.**
 
 ## Uso
 
