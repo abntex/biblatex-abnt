@@ -4,9 +4,6 @@ sudo: required
 
 language: bash
 
-rvm:
-- 2.3.1
-
 addons:
   apt:
     packages:
