@@ -8,11 +8,11 @@ pass=true
 
 
 sed -i.bak 's/\\toggletrue{reference}/% \\toggletrue{reference}/' NBR10520-2002.tex
-pdflatex -interaction=nonstopmode NBR10520-2002.tex
+pdflatex -draftmode -interaction=batchmode NBR10520-2002.tex
 biber NBR10520-2002
-pdflatex -interaction=nonstopmode NBR10520-2002.tex
-pdflatex -interaction=nonstopmode NBR10520-2002.tex
-pdflatex -interaction=nonstopmode NBR10520-2002_test.tex
+pdflatex -draftmode -interaction=batchmode NBR10520-2002.tex
+pdflatex -interaction=batchmode NBR10520-2002.tex
+pdflatex -interaction=batchmode NBR10520-2002_test.tex
 sed -i.bak 's/% \\toggletrue{reference}/\\toggletrue{reference}/' NBR10520-2002.tex
 
 while read -r line ; do
@@ -26,12 +26,12 @@ done < <(gs -q  -o - -sDEVICE=inkcov NBR10520-2002_test.pdf | sed -e '1d')
 
 
 sed -i.bak 's/\\toggletrue{reference}/% \\toggletrue{reference}/' NBR6023-2002.tex
-pdflatex -interaction=nonstopmode NBR6023-2002.tex
+pdflatex -draftmode -interaction=batchmode NBR6023-2002.tex
 biber NBR6023-2002
-pdflatex -interaction=nonstopmode NBR6023-2002.tex
-pdflatex -interaction=nonstopmode NBR6023-2002.tex
-pdflatex -interaction=nonstopmode NBR6023-2002.tex
-pdflatex -interaction=nonstopmode NBR6023-2002_test.tex
+pdflatex -draftmode -interaction=batchmode NBR6023-2002.tex
+pdflatex -draftmode -interaction=batchmode NBR6023-2002.tex
+pdflatex -interaction=batchmode NBR6023-2002.tex
+pdflatex -interaction=batchmode NBR6023-2002_test.tex
 sed -i.bak 's/% \\toggletrue{reference}/\\toggletrue{reference}/' NBR6023-2002.tex
 
 while read -r line ; do
