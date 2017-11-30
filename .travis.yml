@@ -13,9 +13,9 @@ before_install:
 - cd .. && ./biblatex-abnt/tests/texlive.sh
 - cd biblatex-abnt
 - mkdir /tmp/texlive/texmf-local/tex/latex/biblatex-contrib
-- sudo ln -s `pwd` /tmp/texlive/texmf-local/tex/latex/biblatex-contrib/biblatex-abnt
+- ln -s `pwd` /tmp/texlive/texmf-local/tex/latex/biblatex-contrib/biblatex-abnt
 - export PATH=/tmp/texlive/bin/x86_64-linux:$PATH
-- sudo env "PATH=$PATH" texhash
+- texhash
 
 script:
 - cd tests && ./test.sh

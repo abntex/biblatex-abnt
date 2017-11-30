@@ -20,7 +20,7 @@ EOF
 ./install-tl --profile=./texlive.profile
 export PATH=/tmp/texlive/bin/x86_64-linux:$PATH
 
-sudo env "PATH=$PATH" tlmgr update --self --all
+tlmgr update --self --all
 
-sudo env "PATH=$PATH" tlmgr install collection-latexrecommended collection-fontsrecommended collection-langportuguese biblatex biber logreq xstring xpatch csquotes substr pdfpagediff
+tlmgr install collection-latexrecommended collection-fontsrecommended collection-langportuguese biblatex biber logreq xstring xpatch csquotes substr pdfpagediff
 
