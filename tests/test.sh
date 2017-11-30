@@ -30,6 +30,7 @@ pdflatex -interaction=nonstopmode NBR6023-2002.tex
 biber NBR6023-2002
 pdflatex -interaction=nonstopmode NBR6023-2002.tex
 pdflatex -interaction=nonstopmode NBR6023-2002.tex
+pdflatex -interaction=nonstopmode NBR6023-2002.tex
 pdflatex -interaction=nonstopmode NBR6023-2002_test.tex
 sed -i.bak 's/% \\toggletrue{reference}/\\toggletrue{reference}/' NBR6023-2002.tex
 
