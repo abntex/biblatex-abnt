@@ -141,7 +141,8 @@ Use o comando \verb"\printbibliography" para imprimir a bibliografia.
 \section{Opções}% >>>2
 \label{sec:opções}
 
-As opções a seguir podem ser usadas ao chamar o \texttt{biblatex} (além daquelas descritas no manual do pacote):
+As opções a seguir podem ser usadas ao chamar o \texttt{biblatex} (além
+daquelas descritas no manual do pacote):
 
 \begin{description}[itemindent=-1em,leftmargin=3em]% >>>3
   \item [ittitles] Usa itálico para os títulos na bibliografia
@@ -151,7 +152,8 @@ As opções a seguir podem ser usadas ao chamar o \texttt{biblatex} (além daque
   \item [scbib] Imprime os nomes em versalete na bibliografia
   \item [pretty] Ativa as cinco primeiras opções citadas de uma vez
   \item [giveninits] Abrevia os primeiros nomes na bibliografia
-  \item [extrayear] Mostra os anos diferenciados com letras (e.g., 2017a) também na bibliografia
+  \item [extrayear] Diferencia os anos com letras (e.g., 2017a)
+    também na bibliografia
   \item [nosl] Oculta as abreviações [s.l.] na bibliografia
   \item [nosn] Oculta as abreviações [s.n.] na bibliografia
   \item [noslsn] Oculta as abreviações [s.l], [s.n] e [s.l.: s.n.]
@@ -161,23 +163,24 @@ As opções a seguir podem ser usadas ao chamar o \texttt{biblatex} (além daque
     mas substitui uma segunda ocorrência com traços sublineares
   \item [repeattitles] Imprime apenas os títulos repetidos na bibliografia,
     mas substitui os autores por traços sublineares
-  \item [usedashes] Usa os traços padrão do \texttt{biblatex} em vez de
-    traços sublineares nos campos repetidos
+  \item [usedashes] Usa os traços padrão do \texttt{biblatex} nos campos
+    repetidos
   \item [language=brazil] Essa opção é adicionada automaticamente. Para
     imprimir a bibliografia em outros idiomas, substitua o termo
     \texttt{brazil} pelo código da linguagem desejada
-  \item [backref] Especifica, na bibliografia, as páginas em que cada entrada
-    foi citada.
+  \item [backref] Especifica as páginas em que cada entrada foi citada.
   \item [citecount] Além das páginas, especifica quantas vezes cada entrada
     foi citada.
+  \item [comp] Abrevia a numeração no estilo numérico, imprimindo, e.g.,
+    \enquote{(1--4)} em vez de \enquote{(1, 2, 3, 4)}.
 \end{description}% <<<3
 
 \vspace{\baselineskip}
 E.g.: \verb"\usepackage[backend=biber, style=abnt, ittitles]{biblatex}"
 
 As opções \texttt{repeatfields}, \texttt{repeattitles}, \texttt{nosl},
-\texttt{nosn}, \texttt{noslsn} e \texttt{extrayear} também podem ser usadas apenas em entradas
-específicas. E.g.:
+\texttt{nosn}, \texttt{noslsn} e \texttt{extrayear} também podem ser usadas
+apenas em entradas específicas. E.g.:
 
 \begin{verbatim}
     @mvbook{assis08,
