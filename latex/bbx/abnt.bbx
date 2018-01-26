@@ -219,6 +219,14 @@
 }%
 % <<<2
 
+% Toggle backref per entry >>>2
+\newtoggle{backref}%
+\settoggle{backref}{true}%
+\DeclareEntryOption[boolean]{backref}[true]{%
+  \settoggle{backref}{#1}%
+}%
+% <<<2
+
 % <<<1
 
 
@@ -1394,33 +1402,35 @@
 }%% <<<3
 
 \renewbibmacro*{pageref}{% >>>3
-  \iftoggle{citecount}{%
-    \printunit{\addperiod\addspace}%
-    \iflistundef{pageref}{%
-      \bibstring{citecountnopage}%
-    }{%
-      \printtext{%
-        \ifnumgreater{\value{pageref}}{1}{%
-          \bibstring{citecountpages}\ppspace%
-        }{%
-          \bibstring{citecountpage}\ppspace%
-        }%
-        \printlist[pageref][-\value{listtotal}]{pageref}%
-      }%
-    }%
-  }{%
-    \iflistundef{pageref}{}{%
+  \iftoggle{backref}{%
+    \iftoggle{citecount}{%
       \printunit{\addperiod\addspace}%
-      \printtext{%
-        \ifnumgreater{\value{pageref}}{1}{%
-          \bibstring{backrefpages}\ppspace%
-        }{%
-          \bibstring{backrefpage}\ppspace%
+      \iflistundef{pageref}{%
+        \bibstring{citecountnopage}%
+      }{%
+        \printtext{%
+          \ifnumgreater{\value{pageref}}{1}{%
+            \bibstring{citecountpages}\ppspace%
+          }{%
+            \bibstring{citecountpage}\ppspace%
+          }%
+          \printlist[pageref][-\value{listtotal}]{pageref}%
         }%
-        \printlist[pageref][-\value{listtotal}]{pageref}%
+      }%
+    }{%
+      \iflistundef{pageref}{}{%
+        \printunit{\addperiod\addspace}%
+        \printtext{%
+          \ifnumgreater{\value{pageref}}{1}{%
+            \bibstring{backrefpages}\ppspace%
+          }{%
+            \bibstring{backrefpage}\ppspace%
+          }%
+          \printlist[pageref][-\value{listtotal}]{pageref}%
+        }%
       }%
     }%
-  }%
+  }{}
 }% <<<3
 
 % <<<2
