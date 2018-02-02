@@ -549,7 +549,28 @@
 
 % titles >>>4
 
-\renewcommand*{\subtitlepunct}{\addcolon\addspace}%
+\newcommand{\iffieldendswith}[4]{% >>>5
+  \IfEndWith{\strfield{title}}{#2}{#3}{#4}%
+}% <<<5
+
+\newcommand{\iftitleendswithpunct}[2]{% >>>5
+  \ifboolexpr{%
+    test {\iffieldendswith{title}{.}}%
+    or%
+    test {\iffieldendswith{title}{!}}%
+    or%
+    test {\iffieldendswith{title}{?}}%
+    or%
+    test {\iffieldendswith{title}{-}}%
+    or%
+    test {\iffieldendswith{title}{:}}%
+    or%
+    test {\iffieldendswith{title}{/}}%
+  }{#1}{#2}%
+}% <<<5
+
+\renewcommand*{\subtitlepunct}{%
+  \iftitleendswithpunct{\addspace}{\addcolon\addspace}}%
 \renewcommand*{\bibpagerefpunct}{\addcomma\addspace}%
 
 \DeclareFieldFormat{journaltitle}{%% >>>
