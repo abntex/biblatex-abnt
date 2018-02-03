@@ -4,19 +4,10 @@
 [![NBR 10520:2002 100%](https://img.shields.io/badge/NBR%2010520%3A2002-100%25-brightgreen.svg)](https://github.com/abntex/biblatex-abnt/blob/master/tests/NBR10520-2002_reference.pdf)
 
 
-BibLaTeX style for Brazil's ABNT (Brazilian Association of Technical Norms)
+BibLaTeX style for Brazil's ABNT (Brazilian Association of Technical Standards)
 rules.
 
 Version 3.2
-
-Permission is granted to copy, distribute and/or modify this software
-under the terms of the LaTeX Project Public License, version 1.3c
-(http://www.latex-project.org/lppl.txt).
-
-The current maintainer is
-Daniel Ballester Marques ([@dbmrq](https://github.com/dbmrq)). With special
-thanks to [@moewew](https://github.com/moewew) and all the awesome people
-behind BibLaTeX.
 
 ---
 
@@ -24,6 +15,14 @@ Estilo para BibLaTeX compatível com as normas da ABNT.
 
 Versão 3.2
 
+---
+
+Permission is granted to copy, distribute and/or modify this software
+under the terms of the LaTeX Project Public License, version 1.3c
+(http://www.latex-project.org/lppl.txt).
+
+The current maintainer is Daniel Ballester Marques
+([@dbmrq](https://github.com/dbmrq)).
 
 ## Instalação
 
@@ -52,5 +51,5 @@ suas entradas.
 
 3. Use o comando `\printbibliography` para imprimir a bibliografia.
 
-*Consulte [o arquivo `biblatex-abnt.pdf`](https://github.com/abntex/biblatex-abnt/raw/master/doc/biblatex-abnt.pdf) e o [manual do `biblatex`](http://mirrors.ctan.org/macros/latex/contrib/biblatex/doc/biblatex.pdf) para informações sobre as opções e comandos disponíveis.*
+*Consulte [o arquivo biblatex-abnt.pdf](https://github.com/abntex/biblatex-abnt/raw/master/doc/biblatex-abnt.pdf) e o [manual do biblatex](http://mirrors.ctan.org/macros/latex/contrib/biblatex/doc/biblatex.pdf) para informações sobre as opções e comandos disponíveis.*
 
