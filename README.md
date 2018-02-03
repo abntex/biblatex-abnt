@@ -1,5 +1,8 @@
 # biblatex-abnt
 [![Build Status](https://travis-ci.org/abntex/biblatex-abnt.svg?branch=master)](https://travis-ci.org/abntex/biblatex-abnt)
+[![NBR 6023:2002 100%](https://img.shields.io/badge/NBR%206023%3A2002-100%25-brightgreen.svg)](https://github.com/abntex/biblatex-abnt/blob/master/tests/NBR6023-2002_reference.pdf)
+[![NBR 10520:2002 100%](https://img.shields.io/badge/NBR%2010520%3A2002-100%25-brightgreen.svg)](https://github.com/abntex/biblatex-abnt/blob/master/tests/NBR10520-2002_reference.pdf)
+
 
 BibLaTeX style for Brazil's ABNT (Brazilian Association of Technical Norms)
 rules.
