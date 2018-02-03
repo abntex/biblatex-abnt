@@ -341,23 +341,21 @@
 % <<<1
 
 
-% Formatting >>>1
+% Helper commands >>>1
 
-% Capitalization commands >>>2
-
-\newcommand\FirstWordUpper[1]{\@firstwordupper#1 \@nil}% >>>3
+\newcommand\FirstWordUpper[1]{\@firstwordupper#1 \@nil}% >>>2
 \newcommand\@firstwordupper{}%
-\def\@firstwordupper#1 #2\@nil{\MakeUppercase{#1} #2\unskip}% <<<3
+\def\@firstwordupper#1 #2\@nil{\MakeUppercase{#1} #2\unskip}% <<<2
 
-\newcommand\FirstWordSC[1]{\@firstwordsc#1 \@nil}% >>>3
+\newcommand\FirstWordSC[1]{\@firstwordsc#1 \@nil}% >>>2
 \newcommand\@firstwordsc{}%
-\def\@firstwordsc#1 #2\@nil{\textsc{#1} #2\unskip}% <<<3
+\def\@firstwordsc#1 #2\@nil{\textsc{#1} #2\unskip}% <<<2
 
-\newcommand\FirstWordLCSC[1]{\@firstwordlcsc#1 \@nil}% >>>3
+\newcommand\FirstWordLCSC[1]{\@firstwordlcsc#1 \@nil}% >>>2
 \newcommand\@firstwordlcsc{}%
-\def\@firstwordlcsc#1 #2\@nil{\textsc{\MakeLowercase{#1}} #2\unskip}% <<<3
+\def\@firstwordlcsc#1 #2\@nil{\textsc{\MakeLowercase{#1}} #2\unskip}% <<<2
 
-% Helper macros >>>3
+% Helper macros >>>2
 
 \long\def\addto#1#2{\expandafter\def\expandafter#1\expandafter{#1#2}}%
 
@@ -381,60 +379,83 @@
 }%
 \def\traceparamE\end{}%
 
-% <<<3
+% <<<2
 
-\def\smartuppercase#1{% >>>3
+\def\smartuppercase#1{% >>>2
    \bgroup %
    \traceparam{#1}%
    \MakeUppercase{\paramL}%
    \egroup%
-}% <<<3
+}% <<<2
 
-\def\smartlowercase#1{% >>>3
+\def\smartlowercase#1{% >>>2
    \bgroup %
    \traceparam{#1}%
    \MakeLowercase{\paramL}%
    \egroup%
-}% <<<3
+}% <<<2
 
-\def\smartlcsc#1{% >>>3
+\def\smartlcsc#1{% >>>2
    \bgroup %
    \traceparam{#1}%
    \textsc{\MakeLowercase{\paramL}}%
    \egroup%
-}% <<<3
+}% <<<2
 
-\def\smartsc#1{% >>>3
+\def\smartsc#1{% >>>2
    \bgroup %
    \traceparam{#1}%
    \textsc{\paramL}%
    \egroup%
-}% <<<3
+}% <<<2
 
-\renewcommand*{\mkbibacro}[1]{% >>>3
+\renewcommand*{\mkbibacro}[1]{% >>>2
   \iftoggle{scbib}{%
     \textsc{\MakeLowercase{#1}}%
   }{\MakeUppercase{#1}}%
-}% <<<3
+}% <<<2
 
-\newcommand*{\UpperOrSC}[1]{% >>>3
+\newcommand*{\UpperOrSC}[1]{% >>>2
   \let\MakeCapital\relax%
   \iftoggle{scbib}{%
     \textsc{\MakeLowercase{#1}}%
   }{%
     \MakeUppercase{#1}%
   }%
-}% <<<3
+}% <<<2
 
-\newcommand*{\NormalOrSC}[1]{% >>>3
+\newcommand*{\NormalOrSC}[1]{% >>>2
   \iftoggle{scbib}{%
     \textsc{\MakeLowercase{#1}}%
   }{%
     #1%
   }%
-}% <<<3
+}% <<<2
 
-% <<<2
+\newcommand{\iffieldendswith}[4]{% >>>2
+  \IfEndWith{\strfield{#1}}{#2}{#3}{#4}%
+}% <<<2
+
+\newcommand{\iffieldendswithpunct}[3]{% >>>2
+  \ifboolexpr{%
+    test {\iffieldendswith{#1}{.}}%
+    or%
+    test {\iffieldendswith{#1}{!}}%
+    or%
+    test {\iffieldendswith{#1}{?}}%
+    or%
+    test {\iffieldendswith{#1}{-}}%
+    or%
+    test {\iffieldendswith{#1}{:}}%
+    or%
+    test {\iffieldendswith{#1}{/}}%
+  }{#2}{#3}%
+}% <<<2
+
+% <<<1
+
+
+% Formatting >>>1
 
 % \IfGivenIsInitial >>>2
 
@@ -549,28 +570,7 @@
 
 % titles >>>4
 
-\newcommand{\iffieldendswith}[4]{% >>>5
-  \IfEndWith{\strfield{title}}{#2}{#3}{#4}%
-}% <<<5
-
-\newcommand{\iftitleendswithpunct}[2]{% >>>5
-  \ifboolexpr{%
-    test {\iffieldendswith{title}{.}}%
-    or%
-    test {\iffieldendswith{title}{!}}%
-    or%
-    test {\iffieldendswith{title}{?}}%
-    or%
-    test {\iffieldendswith{title}{-}}%
-    or%
-    test {\iffieldendswith{title}{:}}%
-    or%
-    test {\iffieldendswith{title}{/}}%
-  }{#1}{#2}%
-}% <<<5
-
-\renewcommand*{\subtitlepunct}{%
-  \iftitleendswithpunct{\addspace}{\addcolon\addspace}}%
+\renewcommand*{\subtitlepunct}{\addcolon\addspace}%
 \renewcommand*{\bibpagerefpunct}{\addcomma\addspace}%
 
 \DeclareFieldFormat{journaltitle}{%% >>>
@@ -907,9 +907,15 @@
           }%
 						{\printfield[titlecase]{title}}%
 						{\printfield[normalfont]{title}}}%
-				\normalfont{\setunit*{\subtitlepunct}%
-				\printfield[normalfont]{subtitle}%
-				\setunit{\addperiod\addspace}}}%
+				\normalfont{%
+          \iffieldendswithpunct{title}{%
+            \setunit*{\addspace}%
+          }{%
+            \setunit*{\subtitlepunct}%
+          }
+          \printfield[normalfont]{subtitle}%
+          \setunit{\addperiod\addspace}%
+        }}%
 		\newunit}}%
 	\printfield{titleaddon}%
 }%% <<<3
@@ -945,7 +951,11 @@
       }{%
         \printfield[titlecase]{booktitle}%
       }%
-      \normalfont{\setunit*{\subtitlepunct}}%
+      \iffieldendswithpunct{booktitle}{%
+        \normalfont{\setunit*{\addspace}}%
+      }{%
+        \normalfont{\setunit*{\subtitlepunct}}%
+      }
       \printfield[normalfont]{booksubtitle}}%
       \newunit}%
   \printfield{booktitleaddon}%
@@ -964,7 +974,11 @@
       }{%
         \printfield[titlecase]{maintitle}%
       }%
-      \normalfont{\setunit*{\subtitlepunct}}%
+      \iffieldendswithpunct{maintitle}{%
+        \normalfont{\setunit*{\addspace}}%
+      }{%
+        \normalfont{\setunit*{\subtitlepunct}}%
+      }
       \printfield[normalfont]{mainsubtitle}}%
       \newunit}%
   \printfield{maintitleaddon}%
@@ -1006,7 +1020,11 @@
     {}%
     {\printtext[journaltitle]{%
        \printfield[titlecase]{journaltitle}%
-       \setunit{\subtitlepunct}%
+       \iffieldendswithpunct{journaltitle}{%
+          \setunit{\addspace}%
+       }{%
+          \setunit{\subtitlepunct}%
+       }
        \printfield[normalfont]{journalsubtitle}}}%
 }%% <<<3
 
@@ -1031,18 +1049,22 @@
 }%% <<<3
 
 \renewbibmacro*{periodical}{%% >>>3
-  \iffieldundef{title}%
-    {}%
-    {\iffieldundef{issue}{%
-		\printtext[title]{%
-	       \unspace\printfield[upperfirst]{title}%
-		\normalfont{\setunit*{\subtitlepunct}%
-	       \printfield[normalfont]{subtitle}}}%
-	}%
-	{\printtext[title]{%
-       \printfield[titlecase]{title}%
-	   \normalfont{\setunit*{\subtitlepunct}%
-       \printfield[normalfont]{subtitle}}}}%
+  \iffieldundef{title}{}{%
+    \printtext[title]{%
+      \iffieldundef{issue}{%
+        \unspace\printfield[upperfirst]{title}%
+      }{%
+        \printfield[titlecase]{title}%
+      }
+      \normalfont{%
+        \iffieldendswithpunct{title}{%
+          \setunit*{\addspace}%
+        }{%
+          \setunit*{\subtitlepunct}%
+        }
+        \printfield[normalfont]{subtitle}%
+      }%
+    }%
 	}%
 }%% <<<3
 
@@ -1292,7 +1314,11 @@
     {}%
     {\printtext[issuetitle]{%
        \printfield[upperfirst]{issuetitle}%
-       \setunit*{\subtitlepunct}%
+        \iffieldendswithpunct{issuetitle}{%
+          \setunit*{\addspace}%
+        }{%
+          \setunit*{\subtitlepunct}%
+        }
        \printfield[normalfont]{issuesubtitle}}}%
 }%% <<<3
 
