@@ -462,7 +462,7 @@
 \ExplSyntaxOn%
 
 \ProvideDocumentCommand{\IfGivenIsInitial}{mm}{%
-  \regex_match:nVTF {\w\.} \namepartgiven {#1} {#2}%
+  \regex_match:nVTF {\w\w} \namepartgiven {#2} {#1}%
 }%
 \cs_generate_variant:Nn \regex_match:nnTF { nV }%
 
