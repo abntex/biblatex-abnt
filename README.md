@@ -7,13 +7,13 @@
 BibLaTeX style for Brazil's ABNT (Brazilian Association of Technical Standards)
 rules.
 
-Version 3.2
+Version 3.3
 
 ---
 
 Estilo para BibLaTeX compatível com as normas da ABNT.
 
-Versão 3.2
+Versão 3.3
 
 ---
 

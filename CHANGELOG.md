@@ -3,10 +3,13 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [Unreleased]
+## [3.3] - 2018-04-04
 
 ### Added
 - Add `comp` option to numeric style
+
+### Fixed
+- Fix problem with English translation
 
 
 ## [3.2] - 2017-10-23
@@ -101,7 +104,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Add "et al." in citations
 
 
-[Unreleased]: https://github.com/abntex/biblatex-abnt/compare/v3.2...HEAD
+[3.3]: https://github.com/abntex/biblatex-abnt/compare/v3.2...v3.3
 [3.2]: https://github.com/abntex/biblatex-abnt/compare/v3.1...v3.2
 [3.1]: https://github.com/abntex/biblatex-abnt/compare/v3.0...v3.1
 [3.0.1]: https://github.com/abntex/biblatex-abnt/compare/v3.0...v3.0.1

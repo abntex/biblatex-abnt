@@ -80,7 +80,7 @@
   \printbibliography[heading=none,check=key#1]%
 }% <<<2
 
-\newcommand{\version}{3.2}
+\newcommand{\version}{3.3}
 \newcommand{\requirements}{\texttt{biblatex 3.8} e \texttt{biber 2.8}}
 
 \title{biblatex-abnt \version}
@@ -178,12 +178,11 @@ daquelas descritas no manual do pacote):
 \vspace{\baselineskip}
 E.g.: \verb"\usepackage[backend=biber, style=abnt, ittitles]{biblatex}"
 
-{
-\emergencystretch 3em
-As opções \texttt{repeatfields}, \texttt{repeattitles}, \texttt{backref},
-\texttt{nosl}, \texttt{nosn}, \texttt{noslsn} e \texttt{extrayear} também
-podem ser usadas apenas em entradas específicas. E.g.:
-}
+\begin{sloppypar}
+  As opções \texttt{repeatfields}, \texttt{repeattitles}, \texttt{backref},
+  \texttt{nosl}, \texttt{nosn}, \texttt{noslsn} e \texttt{extrayear} também
+  podem ser usadas apenas em entradas específicas. E.g.:
+\end{sloppypar}
 
 \begin{verbatim}
     @mvbook{assis08,
