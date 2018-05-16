@@ -49,6 +49,8 @@ if [ "$pass" = true ] ; then
     exit 0
 else
     echo "OOPS, THERE'S SOMETHING WRONG!"
+    gs -q  -o - -sDEVICE=inkcov NBR10520-2002_test.pdf
+    gs -q  -o - -sDEVICE=inkcov NBR6023-2002_test.pdf
     exit 1
 fi
 
