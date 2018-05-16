@@ -48,6 +48,7 @@ if [ "$pass" = true ] ; then
     echo "ALL GOOD!"
     exit 0
 else
+    echo ""
     echo "OOPS, THERE'S SOMETHING WRONG!"
     echo ""
     echo "NBR10520-2002_test.pdf"
@@ -57,6 +58,7 @@ else
     gs -q  -o - -sDEVICE=inkcov NBR6023-2002_test.pdf
     echo ""
     curl --upload-file ./NBR6023-2002_test.pdf https://transfer.sh/
+    echo ""
     curl --upload-file ./NBR10520-2002_test.pdf https://transfer.sh/
     exit 1
 fi
