@@ -457,6 +457,41 @@
 
 % Formatting >>>1
 
+% Use \refname for headings >>>2
+\ifcase\abx@classtype\relax % article
+\or % book/report
+  \defbibheading{bibliography}[\refname]{%
+    \chapter*{#1}%
+    \@mkboth{\abx@MakeMarkcase{#1}}{\abx@MakeMarkcase{#1}}}
+\or % scrartcl
+\or % scrbook/scrreprt
+  \defbibheading{bibliography}[\refname]{%
+    \ifcsundef{bibliography@heading}
+      {\ifkomabibtotocnumbered
+         {\chapter{#1}}
+         {\ifkomabibtotoc
+            {\addchap{#1}}
+            {\chapter*{#1}
+             \ifcsundef{@mkdouble}
+               {\@mkboth{\abx@MakeMarkcase{#1}}{\abx@MakeMarkcase{#1}}}
+               {\@mkdouble{\abx@MakeMarkcase{#1}}}}}}
+      {\bibliography@heading{#1}}}
+\or % memoir (article)
+\or % memoir (book)
+  \ifcsundef{memUChead}{}{\def\abx@MakeMarkcase{\memUChead}}%
+  \defbibheading{bibliography}[\refname]{%
+    \chapter*{#1}%
+    \if@twoside
+      \markboth{\abx@MakeMarkcase{#1}}{\abx@MakeMarkcase{#1}}%
+    \else
+      \markright{\abx@MakeMarkcase{#1}}%
+    \fi
+    \ifmemoirbibintoc
+      {\phantomsection
+       \addcontentsline{toc}{chapter}{#1}}
+      {}}
+% <<<2
+
 % \IfGivenIsInitial >>>2
 
 \ExplSyntaxOn%
