@@ -349,6 +349,93 @@
   \let\mkbibnamesuffix\origmkbibnamesuffix%
 }{}{}% <<<3
 
+\newbibmacro*{textcitestar}{% >>>3
+  \iffieldequals{namehash}{\cbx@lasthash}%
+    {\iffieldundef{shorthand}%
+       {\ifthenelse{\iffieldequals{labelyear}{\cbx@lastyear}\AND%
+                    \(\value{multicitecount}=0\OR\iffieldundef{postnote}\)}%
+          {\setunit{\addcomma}%
+           \usebibmacro{cite:extradate}}%
+          {\setunit{\compcitedelim}%
+           \usebibmacro{cite:labeldate+extradate}%
+           \savefield{labelyear}{\cbx@lastyear}}}%
+       {\setunit{\compcitedelim}%
+        \usebibmacro{cite:shorthand}%
+        \global\undef\cbx@lastyear}}%
+    {\ifnameundef{labelname}%
+       {\iffieldundef{shorthand}%
+          {\usebibmacro{cite:label}%
+           \setunit{%
+             % \global\booltrue{cbx:parens}%
+             \printdelim{nonameyeardelim}}%
+           \ifnumequal{\value{citecount}}{1}%
+             {\usebibmacro{prenote}}%
+             {}%
+           \usebibmacro{cite:labeldate+extradate}}%
+          {\usebibmacro{cite:shorthand}}}%
+       {% Use `bibhyperref` so that the names are also hyperlinked
+        \printtext[bibhyperref]{\printnames[textlabelname]{labelname}}%
+        \setunit{%
+          % \global\booltrue{cbx:parens}%
+          \printdelim{nameyeardelim}}%
+        \ifnumequal{\value{citecount}}{1}%
+          {\usebibmacro{prenote}}%
+          {}%
+        \iffieldundef{shorthand}%
+          {\iffieldundef{labelyear}%
+             {\usebibmacro{cite:label}}%
+             {\usebibmacro{cite:labeldate+extradate}}%
+           \savefield{labelyear}{\cbx@lastyear}}%
+          {\usebibmacro{cite:shorthand}%
+           \global\undef\cbx@lastyear}}%
+     \stepcounter{textcitecount}%
+     \savefield{namehash}{\cbx@lasthash}}%
+  \setunit{%
+    \ifbool{cbx:parens}%
+      {\bibcloseparen\global\boolfalse{cbx:parens}}%
+      {}%
+    % Use `\bibstring{and}` before the last name and commas before the rest
+    \ifnumequal{\value{textcitecount}}{\value{textcitetotal}-1}{%
+      \finalnamedelim%
+    }{%
+      \multinamedelim%
+    }}}% <<<3
+
+\xpretobibmacro{textcitestar}{% >>>3
+  \let\multinamedelim\multinamedelimorig%
+  \let\finalnamedelim\finalnamedelimorig%
+  \let\mkbibnamefamily\origmkbibnamefamily%
+  \let\mkbibnamegiven\origmkbibnamegiven%
+  \let\mkbibnameprefix\origmkbibnameprefix%
+  \let\mkbibnamesuffix\origmkbibnamesuffix%
+}{}{}% <<<3
+
+\DeclareCiteCommand{\cbx@textcitestar}% >>>3
+  {\usebibmacro{cite:init}}
+  {\usebibmacro{citeindex}%
+   \usebibmacro{textcitestar}}
+  {}
+{\usebibmacro{textcite:postnote}}% <<<3
+
+\DeclareCiteCommand*{\textcite}[\cbx@textcite@init\cbx@textcitestar]% >>>3
+  {\gdef\cbx@savedkeys{}%
+   \citetrackerfalse%
+   \pagetrackerfalse%
+   \DeferNextCitekeyHook%
+   \usebibmacro{cite:init}}
+  {\ifthenelse{\iffirstcitekey\AND\value{multicitetotal}>0}
+     {\protected@xappto\cbx@savedcites{()(\thefield{multipostnote})}%
+      \global\clearfield{multipostnote}}
+     {}%
+   \xappto\cbx@savedkeys{\thefield{entrykey},}%
+   \iffieldequals{namehash}{\cbx@lasthash}
+     {}
+     {\stepcounter{textcitetotal}%
+      \savefield{namehash}{\cbx@lasthash}}}
+  {}
+  {\protected@xappto\cbx@savedcites{%
+[\thefield{prenote}][\thefield{postnote}]{\cbx@savedkeys}}}% <<<3
+
 % <<<2
 
 % \footcite >>>2
