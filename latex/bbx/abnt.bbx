@@ -20,7 +20,6 @@
 
 \RequireBiber[3]%
 
-\RequirePackage{xstring}%
 \RequirePackage{xparse}%
 \RequirePackage{xpatch}%
 \RequirePackage{expl3}%
@@ -433,27 +432,32 @@
   }%
 }% <<<2
 
-\newcommand{\iffieldendswith}[4]{% >>>2
-  \IfEndWith{\strfield{#1}}{#2}{#3}{#4}%
-}% <<<2
 
-\newcommand{\iffieldendswithpunct}[3]{% >>>2
-  \ifboolexpr{%
-    test {\iffieldendswith{#1}{.}}%
-    or%
-    test {\iffieldendswith{#1}{!}}%
-    or%
-    test {\iffieldendswith{#1}{?}}%
-    or%
-    test {\iffieldendswith{#1}{-}}%
-    or%
-    test {\iffieldendswith{#1}{:}}%
-    or%
-    test {\iffieldendswith{#1}{/}}%
-  }{#2}{#3}%
-}% <<<2
+% auxiliary commands
+\ExplSyntaxOn
+% {<string>}{<regex>}
+\NewDocumentCommand { \abntblx@regex@match } { mm } {
+  \regex_match:nnTF { #2 } { #1 }
+}
+\ExplSyntaxOff
 
-% <<<1
+% define \iffieldregex{<field>}{<regex>}
+\newcommand*{\blx@imc@iffieldregex}{}
+\newcommand*{\iffieldregex}{}
+
+\protected\def\blx@imc@iffieldregex#1#2{%
+  \blx@imc@iffieldundef{#1}
+    {\@secondoftwo}
+    {\expandafter\expandafter
+     \expandafter\abntblx@regex@match
+     \expandafter\expandafter
+     \expandafter{\csname abx@field@#1\endcsname}{#2}}}
+
+\blx@regimcs{\iffieldregex}
+
+\newcommand*{\iffieldendswithpunct}[1]{%
+  \iffieldregex{#1}{(\.|\!|\?|\-|\:|\/)\Z}%
+}
 
 
 % Formatting >>>1
