@@ -21,8 +21,8 @@ before_install:
 - bundle update
 
 script:
-- cd tests && ./test.sh
 - rake cucumber
+- cd tests && ./test.sh
 
 after_failure:
 - cat NBR10520-2002.log
