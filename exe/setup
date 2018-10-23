@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+set -vx
+
+bundle install
+
+# Do any other automated setup that you need to do here
+
+export SOURCE_DIR=`pwd`
+mkdir -p /tmp/texlive-download && cd /tmp/texlive-download
+wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz && tar -xzf install-tl-unx.tar.gz
+cd install-tl-20*
+cp "$SOURCE_DIR/spec/data/texlive-scheme-minimal-for-biblatex-abnt.profile" .
+
+./install-tl --no-verify-downloads --profile="./texlive-scheme-minimal-for-biblatex-abnt.profile"
+
+# apaga tmp files
+cp $SOURCE_DIR && rm -rf /tmp/texlive-download
+
+# Esse diretório está configurado no scheme
+export PATH=/tmp/texlive/bin/x86_64-linux:$PATH
+export TEXDIR=/tmp/texlive
+
+tlmgr --no-verify-downloads install latex-bin lm ec biblatex biber babel babel-portuges \
+    hyphen-portuguese logreq xstring xpatch csquotes substr pdfpagediff \
+    microtype graphics etoolbox xcolor oberdiek url l3packages hyperref \
+    geometry l3kernel nopageno
+
+cd $SOURCE_DIR
+mkdir $TEXDIR/texmf-local/tex/latex/biblatex-contrib
+ln -s $SOURCE_DIR $TEXDIR/texmf-local/tex/latex/biblatex-contrib/biblatex-abnt
+texhash

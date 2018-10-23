@@ -1,0 +1,2 @@
+export PATH=/tmp/texlive/bin/x86_64-linux:$PATH
+export TEXDIR=/tmp/texlive

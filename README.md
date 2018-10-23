@@ -53,3 +53,23 @@ suas entradas.
 
 *Consulte [o arquivo biblatex-abnt.pdf](https://github.com/abntex/biblatex-abnt/raw/master/doc/biblatex-abnt.pdf) e o [manual do biblatex](http://mirrors.ctan.org/macros/latex/contrib/biblatex/doc/biblatex.pdf) para informações sobre as opções e comandos disponíveis.*
 
+# Desenvolvimento
+
+- Instale ruby, bundle
+
+Faça uma instalação separa do texlive para testes:
+
+    ./exe/setup
+
+Para utilizar a versão do texlive configure o PATH (faça isso sempre quando for desenvolver).
+
+    source ./exe/source
+
+Para executar as features do cucumber:
+
+    rake
+
+Para executar os testes com ghostscript:
+
+    rake gs
+

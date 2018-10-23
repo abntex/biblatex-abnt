@@ -14,3 +14,10 @@
 *.listing
 .DS_Store
 .dialect.*
+tmp/
+tests/NBR10520-2002.pdf
+tests/NBR10520-2002_test.pdf
+tests/NBR10520-2002.tex.bak
+tests/NBR6023-2002.pdf
+tests/NBR6023-2002.tex.bak
+tests/NBR6023-2002_test.pdf
