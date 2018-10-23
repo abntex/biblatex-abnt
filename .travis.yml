@@ -16,9 +16,11 @@ before_install:
 - ln -s `pwd` /tmp/texlive/texmf-local/tex/latex/biblatex-contrib/biblatex-abnt
 - export PATH=/tmp/texlive/bin/x86_64-linux:$PATH
 - texhash
+- bundle update
 
 script:
 - cd tests && ./test.sh
+- rake cucumber
 
 after_failure:
 - cat NBR10520-2002.log
