@@ -27,3 +27,6 @@ script:
 after_failure:
 - cat NBR10520-2002.log
 - cat NBR6023-2002.log
+- cat tmp/aruba/texto.log
+- cat tmp/aruba/texto.txt
+
