@@ -8,7 +8,11 @@ task :gs do
   Dir.chdir('tests') do
     sh './test.sh'
   end
+end
 
+desc "Publica as features no site"
+task :relish do
+    sh "relish push pandoc-abnt"
 end
 
 task :default => 'cucumber'

@@ -73,3 +73,7 @@ Para executar os testes com ghostscript:
 
     rake gs
 
+Para ver as demais tarefas:
+
+    rake -T
+
