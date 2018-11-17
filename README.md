@@ -7,13 +7,13 @@
 BibLaTeX style for Brazil's ABNT (Brazilian Association of Technical Standards)
 rules.
 
-Version 3.3
+Version 3.4
 
 ---
 
 Estilo para BibLaTeX compatível com as normas da ABNT.
 
-Versão 3.3
+Versão 3.4
 
 ---
 
@@ -34,7 +34,9 @@ Para instalá-lo manualmente, copie os arquivos `.bbx`, `.cbx` e `.lbx` para
 
 e atualize o banco de dados do TeX (rodando o `texhash`, por exemplo).
 
-**O biblatex-abnt requer `biblatex v3.8` e `biber v2.8`.**
+**O biblatex-abnt requer as últimas versões do Biber e do BibLaTeX.
+Se você estiver com algum problema, verifique se esses pacotes estão
+atualizados.**
 
 ## Uso
 

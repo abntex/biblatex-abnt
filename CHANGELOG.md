@@ -3,6 +3,21 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [3.4] - 2018-11-17
+
+### Added
+- Allow different English varieties
+- Add `\textcite*` command
+
+### Fixed
+- Clear some harmless warnings
+- Never abbreviate prefix in citations
+
+### Changed
+- Use `uniquename=minfull` for citations
+- Replace xstring with l3regex
+
+
 ## [3.3] - 2018-04-04
 
 ### Added
@@ -104,6 +119,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Add "et al." in citations
 
 
+[3.4]: https://github.com/abntex/biblatex-abnt/compare/v3.3...v3.4
 [3.3]: https://github.com/abntex/biblatex-abnt/compare/v3.2...v3.3
 [3.2]: https://github.com/abntex/biblatex-abnt/compare/v3.1...v3.2
 [3.1]: https://github.com/abntex/biblatex-abnt/compare/v3.0...v3.1
