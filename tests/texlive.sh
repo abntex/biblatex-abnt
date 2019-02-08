@@ -21,7 +21,7 @@ EOF
 export PATH=/tmp/texlive/bin/x86_64-linux:$PATH
 
 tlmgr --no-verify-downloads install latex-bin lm ec biblatex biber babel babel-portuges \
-    hyphen-portuguese logreq xstring xpatch csquotes substr pdfpagediff pdfpages \
+    hyphen-portuguese logreq xstring xpatch csquotes substr pdfpagediff \
     microtype graphics etoolbox xcolor oberdiek url l3packages hyperref \
     geometry l3kernel
 
