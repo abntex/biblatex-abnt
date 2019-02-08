@@ -497,6 +497,27 @@
 % \citetitle is pretty much a copy of authoryear-comp's \textcite that uses
 % labeltitle instead of labelname
 
+\newbibmacro*{citetitlestar}{% >>>3
+  \printtext[bibhyperref]{\printfield[labeltitle]{labeltitle}}%
+  \setunit{\global\booltrue{cbx:parens}\addspace\bibopenparen}%
+  \ifnumequal{\value{citecount}}{1}{\usebibmacro{prenote}}{}%
+  \iffieldundef{shorthand}{%
+    \usebibmacro{cite:labeldate+extradate}%
+  }{%
+    \usebibmacro{cite:shorthand}%
+  }%
+  \stepcounter{textcitecount}%
+  \setunit{%
+    \ifbool{cbx:parens}{\bibcloseparen\global\boolfalse{cbx:parens}}{}%
+    % Use `\bibstring{and}` before the last name and commas before the rest
+    \ifnumequal{\value{textcitecount}}{\value{textcitetotal}-1}{%
+      \finalnamedelim%
+    }{%
+      \multinamedelim%
+    }%
+  }%
+}% <<<3
+
 \newbibmacro*{citetitle}{% >>>3
   \printtext[bibhyperref]{\textit{\printfield[labeltitle]{labeltitle}}}%
   \setunit{\global\booltrue{cbx:parens}\addspace\bibopenparen}%
@@ -525,7 +546,33 @@
   {}%
   {\usebibmacro{textcite:postnote}}% <<<3
 
+\DeclareCiteCommand{\cbx@citetitlestar}% >>>3
+  {\usebibmacro{cite:init}}%
+  {\usebibmacro{citeindex}%
+   \usebibmacro{citetitle}}%
+  {}%
+  {\usebibmacro{textcite:postnote}}% <<<3
+
 \DeclareCiteCommand{\citetitle}[\cbx@textcite@init\cbx@citetitle]% >>>3
+  {\gdef\cbx@savedkeys{}%
+   \citetrackerfalse%
+   \pagetrackerfalse%
+   \DeferNextCitekeyHook%
+   \usebibmacro{cite:init}}%
+  {\ifthenelse{\iffirstcitekey\AND\value{multicitetotal}>0}%
+     {\protected@xappto\cbx@savedcites{()(\thefield{multipostnote})}%
+      \global\clearfield{multipostnote}}%
+     {}%
+   \xappto\cbx@savedkeys{\thefield{entrykey},}%
+   \iffieldequals{namehash}{\cbx@lasthash}%
+     {}%
+     {\stepcounter{textcitetotal}%
+      \savefield{namehash}{\cbx@lasthash}}}%
+  {}%
+  {\protected@xappto\cbx@savedcites{%
+     [\thefield{prenote}][\thefield{postnote}]{\cbx@savedkeys}}}% <<<3
+
+\DeclareCiteCommand*{\citetitle}[\cbx@textcite@init\cbx@citetitlestar]% >>>3
   {\gdef\cbx@savedkeys{}%
    \citetrackerfalse%
    \pagetrackerfalse%
