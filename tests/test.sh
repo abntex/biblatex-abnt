@@ -43,7 +43,6 @@ while read -r line ; do
     fi
 done < <(gs -q  -o - -sDEVICE=inkcov NBR6023-2002_test.pdf | sed -e '1d')
 
-pdflatex -interaction=batchmode results.tex
 
 if [ "$pass" = true ] ; then
     echo "ALL GOOD!"
@@ -58,7 +57,9 @@ else
     echo "NBR6023-2002_test.pdf"
     gs -q  -o - -sDEVICE=inkcov NBR6023-2002_test.pdf
     echo ""
-    curl --upload-file ./results.pdf https://transfer.sh/
+    curl --upload-file ./NBR6023-2002_test.pdf https://transfer.sh/
+    echo ""
+    curl --upload-file ./NBR10520-2002_test.pdf https://transfer.sh/
     exit 1
 fi
 
