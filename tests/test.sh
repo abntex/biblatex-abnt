@@ -54,12 +54,12 @@ else
     echo "NBR10520-2002_test.pdf"
     gs -q  -o - -sDEVICE=inkcov NBR10520-2002_test.pdf
     echo ""
+    curl --upload-file ./NBR10520-2002_test.pdf https://transfer.sh/
+    echo ""
     echo "NBR6023-2002_test.pdf"
     gs -q  -o - -sDEVICE=inkcov NBR6023-2002_test.pdf
     echo ""
     curl --upload-file ./NBR6023-2002_test.pdf https://transfer.sh/
-    echo ""
-    curl --upload-file ./NBR10520-2002_test.pdf https://transfer.sh/
     exit 1
 fi
 
