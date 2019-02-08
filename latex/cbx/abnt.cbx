@@ -498,7 +498,7 @@
 % labeltitle instead of labelname
 
 \newbibmacro*{citetitle}{% >>>3
-  \printtext[bibhyperref]{\printfield[labeltitle]{labeltitle}}%
+  \printtext[bibhyperref]{\textit{\printfield[labeltitle]{labeltitle}}}%
   \setunit{\global\booltrue{cbx:parens}\addspace\bibopenparen}%
   \ifnumequal{\value{citecount}}{1}{\usebibmacro{prenote}}{}%
   \iffieldundef{shorthand}{%
