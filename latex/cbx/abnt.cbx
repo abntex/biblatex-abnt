@@ -497,7 +497,7 @@
 % \citetitle is pretty much a copy of authoryear-comp's \textcite that uses
 % labeltitle instead of labelname
 
-\newbibmacro*{citetitlestar}{% >>>3
+\newbibmacro*{citetitle}{% >>>3
   \printtext[bibhyperref]{\printfield[labeltitle]{labeltitle}}%
   \setunit{\global\booltrue{cbx:parens}\addspace\bibopenparen}%
   \ifnumequal{\value{citecount}}{1}{\usebibmacro{prenote}}{}%
@@ -518,7 +518,7 @@
   }%
 }% <<<3
 
-\newbibmacro*{citetitle}{% >>>3
+\newbibmacro*{citetitlestar}{% >>>3
   \printtext[bibhyperref]{\textit{\printfield[labeltitle]{labeltitle}}}%
   \setunit{\global\booltrue{cbx:parens}\addspace\bibopenparen}%
   \ifnumequal{\value{citecount}}{1}{\usebibmacro{prenote}}{}%
@@ -549,7 +549,7 @@
 \DeclareCiteCommand{\cbx@citetitlestar}% >>>3
   {\usebibmacro{cite:init}}%
   {\usebibmacro{citeindex}%
-   \usebibmacro{citetitle}}%
+   \usebibmacro{citetitlestar}}%
   {}%
   {\usebibmacro{textcite:postnote}}% <<<3
 
