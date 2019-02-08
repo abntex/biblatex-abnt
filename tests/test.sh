@@ -41,7 +41,7 @@ while read -r line ; do
     if [ "$C" != 0.00000 ] || [ "$Y" != 0.00000 ] || [ "$M" != 0.00000 ] ; then
         pass=false
     fi
-done < <(gs -q  -o - -sDEVICE=inkcov NBR6023-2002_test.pdf | sed -e '1d')
+done < <(gs -q  -o - -sDEVICE=inkcov NBR6023-2002_test.pdf | sed -e '3d')
 
 
 if [ "$pass" = true ] ; then
