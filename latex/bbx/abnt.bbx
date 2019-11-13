@@ -273,7 +273,7 @@
   }%
 }% <<<2
 
-\DeclareSourcemap{%% >>>2
+\DeclareStyleSourcemap{%% >>>2
   % This maps some fields used in abntex2cite to biblatex fields.
   \maps[datatype=bibtex]{%
     \map{%
@@ -614,7 +614,7 @@
 % titles >>>4
 
 \renewcommand*{\subtitlepunct}{\addcolon\addspace}%
-\renewcommand*{\bibpagerefpunct}{\addcomma\addspace}%
+\renewcommand*{\bibpagerefpunct}{\addperiod\space}%
 
 \DeclareFieldFormat{journaltitle}{%% >>>
   \iftoggle{ittitles}{%
@@ -718,7 +718,7 @@
 \DeclareFieldFormat{illustrated}{\addspace #1\isdot}%
 
 %\DeclareFieldFormat{url}{\bibstring{urlfrom}\addcolon\addspace<\url{#1}>}%
-\DeclareFieldFormat{url}{\bibstring{urlfrom}\addcolon\addspace \url{#1}}% remove <> em urls de acordo com abnt-6023:2018
+\DeclareFieldFormat{url}{\bibstring{urlfrom}\addcolon\addspace \url{#1}}% remove <> em urls de acordo com abnt-6023:2018	
 \DeclareFieldFormat{urldate}{\bibstring{urlseen}\addcolon\addspace #1}%
 
 \DeclareFieldFormat*{note}{\addspace #1}%
@@ -1495,7 +1495,6 @@
 \renewbibmacro*{pageref}{% >>>3
   \iftoggle{backref}{%
     \iftoggle{citecount}{%
-      \printunit{\addperiod\addspace}%
       \iflistundef{pageref}{%
         \bibstring{citecountnopage}%
       }{%
@@ -1510,7 +1509,6 @@
       }%
     }{%
       \iflistundef{pageref}{}{%
-        \printunit{\addperiod\addspace}%
         \printtext{%
           \ifnumgreater{\value{pageref}}{1}{%
             \bibstring{backrefpages}\ppspace%
@@ -1582,7 +1580,7 @@
   \newunit%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{addendum+pubstate}%
-  \setunit*{\bibpagerefpunct}%
+  \setunit{\bibpagerefpunct}%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{pageref}%
   \setunit*{\addperiod\addspace}%
@@ -1652,7 +1650,7 @@
   \newunit%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{addendum+pubstate}%
-  \setunit*{\bibpagerefpunct}%
+  \setunit{\bibpagerefpunct}%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{pageref}%
   \setunit*{\addperiod\addspace}%
@@ -1710,7 +1708,7 @@
   \newunit%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{addendum+pubstate}%
-  \setunit*{\bibpagerefpunct}%
+  \setunit{\bibpagerefpunct}%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{pageref}%
   \setunit*{\addperiod\addspace}%
@@ -1778,7 +1776,7 @@
   \newunit%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{addendum+pubstate}%
-  \setunit*{\bibpagerefpunct}%
+  \setunit{\bibpagerefpunct}%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{pageref}%
   \setunit*{\addperiod\addspace}%
@@ -1840,7 +1838,7 @@
   \newunit%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{addendum+pubstate}%
-  \setunit*{\bibpagerefpunct}%
+  \setunit{\bibpagerefpunct}%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{pageref}%
   \setunit*{\addperiod\addspace}%
@@ -1910,7 +1908,7 @@
   \newunit%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{addendum+pubstate}%
-  \setunit*{\bibpagerefpunct}%
+  \setunit{\bibpagerefpunct}%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{pageref}%
   \setunit*{\addperiod\addspace}%
@@ -1966,7 +1964,7 @@
   \newunit%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{addendum+pubstate}%
-  \setunit*{\bibpagerefpunct}%
+  \setunit{\bibpagerefpunct}%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{pageref}%
   \setunit*{\addperiod\addspace}%
@@ -2034,7 +2032,7 @@
   \newunit%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{addendum+pubstate}%
-  \setunit*{\bibpagerefpunct}%
+  \setunit{\bibpagerefpunct}%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{pageref}%
   \setunit*{\addperiod\addspace}%
@@ -2096,7 +2094,7 @@
   \newunit%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{addendum+pubstate}%
-  \setunit*{\bibpagerefpunct}%
+  \setunit{\bibpagerefpunct}%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{pageref}%
   \setunit*{\addperiod\addspace}%
@@ -2148,7 +2146,7 @@
   \newunit%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{addendum+pubstate}%
-  \setunit*{\bibpagerefpunct}%
+  \setunit{\bibpagerefpunct}%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{pageref}%
   \setunit*{\addperiod\addspace}%
@@ -2226,7 +2224,7 @@
   \newunit%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{addendum+pubstate}%
-  \setunit*{\bibpagerefpunct}%
+  \setunit{\bibpagerefpunct}%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{pageref}%
   \setunit*{\addperiod\addspace}%
@@ -2277,7 +2275,7 @@
   \newunit%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{addendum+pubstate}%
-  \setunit*{\bibpagerefpunct}%
+  \setunit{\bibpagerefpunct}%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{pageref}%
   \setunit*{\addperiod\addspace}%
@@ -2345,7 +2343,7 @@
   \newunit%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{addendum+pubstate}%
-  \setunit*{\bibpagerefpunct}%
+  \setunit{\bibpagerefpunct}%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{pageref}%
   \setunit*{\addperiod\addspace}%
@@ -2408,7 +2406,7 @@
   \newunit%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{addendum+pubstate}%
-  \setunit*{\bibpagerefpunct}%
+  \setunit{\bibpagerefpunct}%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{pageref}%
   \setunit*{\addperiod\addspace}%
@@ -2493,7 +2491,7 @@
   \newunit%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{addendum+pubstate}%
-  \setunit*{\bibpagerefpunct}%
+  \setunit{\bibpagerefpunct}%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{pageref}%
   \setunit*{\addperiod\addspace}%
@@ -2558,7 +2556,7 @@
   \newunit%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{addendum+pubstate}%
-  \setunit*{\bibpagerefpunct}%
+  \setunit{\bibpagerefpunct}%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{pageref}%
   \setunit*{\addperiod\addspace}%
@@ -2610,7 +2608,7 @@
   \newunit%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{addendum+pubstate}%
-  \setunit*{\bibpagerefpunct}%
+  \setunit{\bibpagerefpunct}%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{pageref}%
   \setunit*{\addperiod\addspace}%
@@ -2681,7 +2679,7 @@
   \newunit%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{addendum+pubstate}%
-  \setunit*{\bibpagerefpunct}%
+  \setunit{\bibpagerefpunct}%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{pageref}%
   \setunit*{\addperiod\addspace}%
