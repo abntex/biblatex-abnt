@@ -139,6 +139,7 @@
     \renewbibmacro*{bbx:savesubtitle}{\savefield{subtitle}{\bbx@lastsubtitle}}%
   }%
 }%
+\ExecuteBibliographyOptions{repeatfields}
 \DeclareEntryOption[boolean]{repeatfields}[true]{%
   \settoggle{repeatfields}{#1}%
 }%
