@@ -1296,19 +1296,19 @@
 
 \newbibmacro*{publisher}{%% >>>3
   \iflistundef{publisher}%
-    {\iftoggle{nosn}{}{\printtext[brackets]{\bibstring{sinenomine}}}}%
+    {\iftoggle{nosn}{}{\printtext[brackets]{\mkbibemph{\bibstring{sinenomine}}}}}%
       {\printlist{publisher}}%
 }%% <<<3
 
 \newbibmacro*{location}{%% >>>3
   \iflistundef{location}%
-    {\iftoggle{nosl}{}{\printtext[brackets]{\bibstring{sineloco}}}}%
+    {\iftoggle{nosl}{}{\printtext[brackets]{\mkbibemph{\bibstring{sineloco}}}}}%
       {\printlist{location}}%
 }%% <<<3
 
 \newbibmacro*{venue}{%% >>>3
   \iffieldundef{venue}%
-    {\iftoggle{nosl}{}{\printtext[brackets]{\bibstring{sineloco}}}}%
+    {\iftoggle{nosl}{}{\printtext[brackets]{\mkbibemph{\bibstring{sineloco}}}}}%
       {\printfield{venue}}%
 }%% <<<3
 
@@ -1329,9 +1329,9 @@
     and%
     not test {\iftoggle{nosn}}%
   }{%
-    \printtext[brackets]{\bibstring{sineloco}%
+    \printtext[brackets]{\mkbibemph{\bibstring{sineloco}}%
     \setunit{\addcolon\addnbspace}%
-    \bibstring{sinenomine}}%
+    \mkbibemph{\bibstring{sinenomine}}}%
   }{%
     \ifboolexpr{%
       test {\ifnameundef{author}}%
@@ -1386,9 +1386,9 @@
     and%
     not test {\iftoggle{nosn}}%
   }{%
-    \printtext[brackets]{\bibstring{sineloco}%
+    \printtext[brackets]{\mkbibemph{\bibstring{sineloco}}%
     \setunit{\addcolon\addnbspace}%
-    \bibstring{sinenomine}}%
+    \mkbibemph{\bibstring{sinenomine}}}%
   }{%
     \ifboolexpr{%
       test {\ifnameundef{author}}%
