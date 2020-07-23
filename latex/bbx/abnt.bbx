@@ -40,13 +40,14 @@
 \InitializeBibliographyStyle{\global\undef\bbx@lasthash}%
 
 \let\origbibsetup\bibsetup%
-\appto{\bibsetup}{\raggedright}%
+\appto{\bibsetup}{\raggedright%
+  \linespread{1}%
+  \setlength{\bibitemsep}{\baselineskip}%
+}%
 
 \setcounter{biburlnumpenalty}{3000}%
 \setcounter{biburllcpenalty}{6000}%
 \setcounter{biburlucpenalty}{9000}%
-
-\setlength{\bibitemsep}{\baselineskip}
 
 % <<<1
 
