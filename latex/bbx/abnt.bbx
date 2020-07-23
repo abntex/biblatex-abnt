@@ -39,12 +39,6 @@
 
 \InitializeBibliographyStyle{\global\undef\bbx@lasthash}%
 
-\let\origbibsetup\bibsetup%
-\appto{\bibsetup}{\raggedright%
-  \linespread{1}%
-  \setlength{\bibitemsep}{\baselineskip}%
-}%
-
 \setcounter{biburlnumpenalty}{3000}%
 \setcounter{biburllcpenalty}{6000}%
 \setcounter{biburlucpenalty}{9000}%
@@ -192,11 +186,25 @@
 % <<<2
 
 % Justify text >>>2
-\DeclareBibliographyOption{justify}[true]{%
+\DeclareBibliographyOption{justify}[false]{%
   % \ExecuteBibliographyOptions{block=space}%
-  \renewcommand*{\bibsetup}{\origbibsetup}%
+  \appto{\bibsetup}{%
+    \raggedright%
+  }
 }%
 % <<<2
+
+% apply NBR 6023 2018 spacing >>>2
+\DeclareBibliographyOption{2018spacing}[true]{%
+  \appto{\bibsetup}{%
+    \linespread{1}%
+    \setlength{\bibitemsep}{\baselineskip}%
+  }
+}%
+% <<<2
+
+% this option is default from 2018 on
+\ExecuteBibliographyOptions{2018spacing}
 
 % Make it pretty >>>2
 \DeclareBibliographyOption{pretty}[true]{%
