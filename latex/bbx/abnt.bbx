@@ -39,9 +39,6 @@
 
 \InitializeBibliographyStyle{\global\undef\bbx@lasthash}%
 
-\let\origbibsetup\bibsetup%
-\appto{\bibsetup}{\raggedright}%
-
 \setcounter{biburlnumpenalty}{3000}%
 \setcounter{biburllcpenalty}{6000}%
 \setcounter{biburlucpenalty}{9000}%
@@ -189,10 +186,27 @@
   \settoggle{extradate}{#1}}%
 % <<<2
 
-% Justify text >>>2
+% Commands that append things to \bibsetup >>>2
+% Justify text >>>3
+\newtoggle{justify}
 \DeclareBibliographyOption{justify}[true]{%
-  % \ExecuteBibliographyOptions{block=space}%
-  \renewcommand*{\bibsetup}{\origbibsetup}%
+  \settoggle{justify}{#1}%
+}%
+% <<<3
+
+% don't apply NBR 6023 2018 spacing >>>3
+\newtoggle{oldspacing}
+\DeclareBibliographyOption{oldspacing}[true]{%
+  \settoggle{oldspacing}{#1}%
+}%
+% <<<3
+
+\appto{\bibsetup}{%
+  \nottoggle{justify}{\raggedright}{}%
+  \nottoggle{oldspacing}{%
+    \setlength{\bibitemsep}{\baselineskip}%
+    \linespread{1}%
+  }{}%
 }%
 % <<<2
 
@@ -718,8 +732,8 @@
 
 \DeclareFieldFormat{illustrated}{\addspace #1\isdot}%
 
-%\DeclareFieldFormat{url}{\bibstring{urlfrom}\addcolon\addspace<\url{#1}>}%
-\DeclareFieldFormat{url}{\bibstring{urlfrom}\addcolon\addspace \url{#1}}% remove <> em urls de acordo com abnt-6023:2018	
+% remove <> in URLs according to abnt-6023:2018
+\DeclareFieldFormat{url}{\bibstring{urlfrom}\addcolon\addspace \url{#1}}
 \DeclareFieldFormat{urldate}{\bibstring{urlseen}\addcolon\addspace #1}%
 
 \DeclareFieldFormat*{note}{\addspace #1}%
