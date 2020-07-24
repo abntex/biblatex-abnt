@@ -185,26 +185,29 @@
   \settoggle{extradate}{#1}}%
 % <<<2
 
-% Justify text >>>2
-\DeclareBibliographyOption{justify}[false]{%
-  % \ExecuteBibliographyOptions{block=space}%
-  \appto{\bibsetup}{%
-    \raggedright%
-  }
+% Commands that append things to \bibsetup >>>2
+% Justify text >>>3
+\newtoggle{justify}
+\DeclareBibliographyOption{justify}[true]{%
+  \settoggle{justify}{#1}%
 }%
-% <<<2
+% <<<3
 
-% apply NBR 6023 2018 spacing >>>2
-\DeclareBibliographyOption{2018spacing}[true]{%
-  \appto{\bibsetup}{%
-    \linespread{1}%
+% don't apply NBR 6023 2018 spacing >>>3
+\newtoggle{oldspacing}
+\DeclareBibliographyOption{oldspacing}[true]{%
+  \settoggle{oldspacing}{#1}%
+}%
+% <<<3
+
+\appto{\bibsetup}{%
+  \nottoggle{justify}{\raggedright}{}%
+  \nottoggle{oldspacing}{%
     \setlength{\bibitemsep}{\baselineskip}%
-  }
+    \linespread{1}%
+  }{}%
 }%
 % <<<2
-
-% this option is default from 2018 on
-\ExecuteBibliographyOptions{2018spacing}
 
 % Make it pretty >>>2
 \DeclareBibliographyOption{pretty}[true]{%
