@@ -44,6 +44,25 @@ while read -r line ; do
 done < <(gs -q  -o - -sDEVICE=inkcov NBR6023-2002_test.pdf | sed -e '1,3d')
 
 
+sed -i.bak 's/\\toggletrue{reference}/% \\toggletrue{reference}/' NBR6023-2018.tex
+pdflatex -draftmode -interaction=batchmode NBR6023-2018.tex
+biber NBR6023-2018
+pdflatex -draftmode -interaction=batchmode NBR6023-2018.tex
+pdflatex -draftmode -interaction=batchmode NBR6023-2018.tex
+pdflatex -interaction=batchmode NBR6023-2018.tex
+pdflatex -interaction=batchmode NBR6023-2018_test.tex
+sed -i.bak 's/% \\toggletrue{reference}/\\toggletrue{reference}/' NBR6023-2018.tex
+
+while read -r line ; do
+    C=$(echo $line | awk '{print $1}')
+    Y=$(echo $line | awk '{print $2}')
+    M=$(echo $line | awk '{print $3}')
+    if [ "$C" != 0.00000 ] || [ "$Y" != 0.00000 ] || [ "$M" != 0.00000 ] ; then
+        pass=false
+    fi
+done < <(gs -q  -o - -sDEVICE=inkcov NBR6023-2018_test.pdf | sed -e '1,3d')
+
+
 if [ "$pass" = true ] ; then
     echo "ALL GOOD!"
     exit 0
