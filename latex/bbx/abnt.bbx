@@ -1431,6 +1431,12 @@
 
 % Misc >>>2
 
+\xpatchbibmacro{name:andothers}{%% >>>3
+  \bibstring{andothers}%
+}{%
+  \mkbibemph{\bibstring{andothers}}%
+}{}{}%% <<<3
+
 \renewbibmacro*{in:}{%% >>>3
   \mkbibemph{\bibstring{in}}
 }%% <<<3
