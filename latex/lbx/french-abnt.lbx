@@ -1,0 +1,184 @@
+%% Copyright 2021 Daniel Ballester Marques
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%%
+%% The Current Maintainer of this work is Daniel Ballester Marques.
+%%
+%% Tradução para o espanhol de Leonardo Araujo. Obrigado!
+
+\ProvidesFile{french-abnt.lbx}%
+[2021-02-04\space v3.4\space ABNT BibLaTeX citation style]%
+
+
+% Init >>>
+
+\InheritBibliographyExtras{french}%
+\InheritBibliographyStrings{french}
+\DeclareBibliographyStrings{%
+  inherit = {french},%
+}%
+
+% <<<
+
+% No preposition between month and year >>>1
+
+\DeclareBibliographyExtras{%
+  \protected\def\mkbibdatelong#1#2#3{%
+    \iffieldundef{#3}%
+          {}%
+          {\stripzeros{\thefield{#3}}%
+       \iffieldundef{#2}{}{\addspace}}%
+    \iffieldundef{#2}%
+          {}%
+          {\mkbibmonth{\thefield{#2}}%
+       \iffieldundef{#1}{}{\addspace}}%
+    \thefield{#1}}%
+}%
+
+% <<<
+
+% Publication details >>>1
+
+\NewBibliographyString{%
+  apud,%
+  sineloco,%
+  sinenomine,%
+  sheet,%
+  sheets,%
+  illustrated,%
+  monography,%
+  recensionof,%
+}%
+
+\DeclareBibliographyStrings{%
+  apud             = {{apud}{apud}},%
+  idem             = {{idem}{id\adddot}},%
+  volume           = {{volume}{v\adddot}},%
+  volumes          = {{volumes}{v\adddot}},%
+  number           = {{num\'ero}{n\adddot}},%
+  pages            = {{pages}{p\adddot}},%
+  involumes        = {{in}{in}},%
+  in               = {{in}{in}},%
+  inseries         = {{in}{in}},%
+  sineloco         = {{sine loco}{s\adddot l\adddot}},%
+  sinenomine       = {{sine nomine}{s\adddot n\adddot}},%
+  sheet            = {{feuille}{f\adddot}},%
+  sheets           = {{feuilles}{f\adddot}},%
+  illustrated      = {{illustr\'e}{il\adddot}},%
+  monography       = {{monographie}{monographie}},%
+  recensionof      = {{recension de}{recension de}},%
+  reviewof         = {{revue de}{revue de}},%
+}%
+
+% <<<
+
+% Roles expressed as functions >>>1
+
+\NewBibliographyString{%
+  organizer,%
+  organizers,%
+  coordinator,%
+  coordinators,%
+}%
+
+\DeclareBibliographyStrings{%
+  organizer       = {{organisateur}{org\adddot}},%
+  organizers      = {{organisateurs}{org\adddot}},%
+  coordinator     = {{coordinateur}{coord\adddot}},%
+  coordinators    = {{coordinateurs}{coord\adddot}},%
+}%
+
+% <<<
+
+% Roles expressed as objects >>>1
+
+\DeclareBibliographyStrings{%
+  withcommentator  = {{commentaire\addcolon}{commentaire\addcolon}},%
+  withannotator    = {{notes\addcolon}{notes\addcolon}},%
+  withintroduction = {{introduction\addcolon}{introduction\addcolon}},%
+  withforeword     = {{avant-propos\addcolon}{avant-propos\addcolon}},%
+  withafterword    = {{postface\addcolon}{postface\addcolon}},%
+}%
+
+% <<<
+
+% Roles expressed as actions >>>1
+
+\NewBibliographyString{% >>>2
+  byorganizer,%
+  byorganizerfo,%
+  bytechrev,%
+  byupdater,%
+  byupdateran,%
+  byphotographer,%
+  byartdir,%
+  byrecorder,%
+  byinterviewer,%
+  bygenorg,%
+  bygenorgfo,%
+  bycoordinator,%
+  bycoeditor,%
+  bydirector,%
+  bygendir,%
+  byproducer,%
+  byscreenwriter,%
+  byinterpreter,%
+  byillustrator,%
+  bytechrev,%
+}% <<<
+
+\DeclareBibliographyStrings{% >>>2
+  byorganizer    = {{organis\'e par\addcolon}%
+                    {organis\'e par\addcolon}},%
+  byorganizerfo  = {{organis\'e, avec un avant-propos, par\addcolon}%
+                    {organis\'e, avec un avant-propos, par\addcolon}},%
+  bytechrev      = {{r\'evision technique par\addcolon}%
+                    {r\'evision technique par\addcolon}},%
+  byupdater      = {{mis \`a jour par\addcolon}%
+                    {mis \`a jour par\addcolon}},%
+  byupdateran    = {{mis \`a jour et annot\'e par\addcolon}%
+                    {mis \`a jour et annot\'e par\addcolon}},%
+  byphotographer = {{photographie par\addcolon}%
+                    {photographie par\addcolon}},%
+  byartdir       = {{direction artistique par\addcolon}%
+                    {direction artistique par\addcolon}},%
+  byrecorder     = {{enregistr\'e par\addcolon}%
+                    {enregistr\'e par\addcolon}},%
+  byinterviewer  = {{interview\'e par\addcolon}%
+                    {interview\'e par\addcolon}},%
+  bygenorg       = {{organisation g\'en\'erale par\addcolon}%
+                    {organisation g\'en\'erale par\addcolon}},%
+  bygenorgfo     = {{organisation g\'en\'erale et avant-propos par\addcolon}%
+                    {organisation g\'en\'erale et avant-propos par\addcolon}},%
+  bycoordinator  = {{coordonn\'e par\addcolon}%
+                    {coordonn\'e par\addcolon}},%
+  bycoeditor     = {{co\'edit\'e par\addcolon}%
+                    {co\'edit\'e par\addcolon}},%
+  bydirector     = {{dirig\'e par\addcolon}%
+                    {dirig\'e par\addcolon}},%
+  bygendir       = {{direction g\'en\'erale par\addcolon}%
+                    {direction g\'en\'erale par\addcolon}},%
+  byproducer     = {{produit par\addcolon}%
+                    {produit par\addcolon}},%
+  byscreenwriter = {{script \'ecrit par\addcolon}%
+                    {script \'ecrit par\addcolon}},%
+  byinterpreter  = {{interpr\'et\'e par\addcolon}%
+                    {interpr\'et\'e par\addcolon}},%
+  byillustrator  = {{illustr\'e par\addcolon}%
+                    {illustr\'e par\addcolon}},%
+}% <<<
+
+% <<<
+
+\endinput%
+
+% vim: set foldmarker=\ >>>,\ <<< :
+
