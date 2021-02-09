@@ -1,0 +1,220 @@
+%% Copyright 2016 Daniel Ballester Marques
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%%
+%% The Current Maintainer of this work is Daniel Ballester Marques.
+
+\documentclass[a4paper]{article}
+\usepackage[brazil]{babel}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{textcomp}
+\usepackage{microtype}
+\usepackage{etoolbox}
+\usepackage{xcolor}
+
+\usepackage[style=abnt, sorting=none, repeatfirstfields]{biblatex}
+\usepackage[autostyle]{csquotes}
+
+\addbibresource{../bibtex/bib/biblatex-abnt/NBR6023-2018.bib}
+
+\defbibheading{bibliography}[]{\subsection{#1}}
+
+\defbibenvironment{bibliography}
+  {\list{}{%
+     \leftmargin 6em
+     \itemsep\bibitemsep
+     \parsep\bibparsep}}
+  {\endlist}
+  {\item}
+
+\defbibheading{subbib}[]{\subsubsection{#1}}
+
+\let\origsection\section
+\renewcommand\section{\clearpage\origsection}
+
+\makeatletter
+\newcommand{\globalcolor}[1]{%
+  \color{#1}\global\let\default@color\current@color
+}
+\makeatother
+\AtBeginDocument{\iftoggle{reference}{}{\globalcolor{red!50}}}
+
+
+\newtoggle{reference}
+\toggletrue{reference}
+
+\title{NBR 6023:2018 - \iftoggle{reference}{Referência}{Teste}}
+\author{Daniel Ballester Marques}
+
+\begin{document}
+
+\maketitle
+
+Este documento imprime \textit{ipsis litteris} todas as entradas citadas na
+NBR 6023:2018, da ABNT.
+
+Para expor as diferentes maneiras como cada campo pode ser usado, a ABNT
+imprime-os de modo diferente a cada entrada. A vantagem dos sistemas como
+o \texttt{biblatex}, por outro lado, é \emph{uniformizar} a bibliografia,
+imprimindo os campos do mesmo modo em todas as entradas. Para reproduzir
+fielmente o texto do manual, este documento faz \emph{mau uso} dos recursos do
+\texttt{biblatex}, aproveitando-se frequentemente de campos que devem ser
+evitados, como \texttt{note}, \texttt{addendum}, \texttt{nameaddon},
+\texttt{titleaddon} et al. Ele não deve ser usado, portanto, como referência
+para o uso do \texttt{biblatex-abnt}, mas apenas como exemplo de suas
+capacidades, mostrando que é possível (embora não seja recomendado) reproduzir
+todas as entradas do manual e expondo o modo de fazê-lo. Para o uso correto do
+\texttt{biblatex-abnt}, conferir o manual do estilo e o manual do próprio
+\texttt{biblatex}.
+
+\tableofcontents
+
+\nocite{*}
+
+
+\setcounter{section}{6}
+
+\section{Modelos de referências}
+
+
+	\printbibliography[keyword=7.1, title={Monografia no todo}]
+
+	\printbibliography[keyword=7.2,
+    title={Monografia no todo em meio eletrônico}]
+
+	\printbibliography[keyword=7.3, title={Parte de monografia}]
+
+	\printbibliography[keyword=7.4,
+    title={Parte de monografia em meio eletrônico}]
+
+	\subsection{Publicação periódica}
+
+	  \printbibliography[heading=subbib, keyword=7.5.1,
+      title={Publicação periódica como um todo}]
+	  \printbibliography[heading=subbib, keyword=7.5.2,
+      title={Partes de revista, boletim etc.}]
+	  \printbibliography[heading=subbib, keyword=7.5.3,
+      title={Artigo e/ou matéria de revista, boletim etc.}]
+	  \printbibliography[heading=subbib, keyword=7.5.4,
+      title={Artigo e/ou matéria de revista,
+             boletim etc.\ em meio eletrônico}]
+	  \printbibliography[heading=subbib, keyword=7.5.5,
+      title={Artigo e/ou matéria de jornal}]
+
+	   \printbibliography[heading=subbib, keyword=7.5.6,
+      title={Artigo e/ou matéria de jornal em meio eletrônico}]
+
+	\subsection{Evento como um todo}
+
+    \printbibliography[heading=subbib, keyword=7.6.1,
+      title={Elementos essenciais}]
+    \printbibliography[heading=subbib, keyword=7.6.2,
+      title={Elementos complementares}]
+    \printbibliography[heading=subbib, keyword=7.6.3,
+      title={Evento como um todo em meio eletrônico}]
+
+	\subsection{Trabalho apresentado em evento}
+
+    \printbibliography[heading=subbib, keyword=7.7.1,
+      title={Elementos essenciais}]
+    \printbibliography[heading=subbib, keyword=7.7.2,
+      title={Elementos complementares}]
+    \printbibliography[heading=subbib, keyword=7.7.3,
+      title={Trabalho apresentado em evento em meio eletrônico}]
+
+	\printbibliography[keyword=7.8, title={Patente}]
+
+	\subsection{Documento jurídico}
+
+    \printbibliography[heading=subbib, keyword=7.9.1, title={Legislação}]
+    \printbibliography[heading=subbib, keyword=7.9.2,
+      title={Jurisprudência (decisões judiciais)}]
+    \printbibliography[heading=subbib, keyword=7.9.3, title={Doutrina}]
+    \printbibliography[heading=subbib, keyword=7.9.4,
+      title={Documento jurídico em meio eletrônico}]
+
+	\printbibliography[keyword=7.10, title={Imagem em movimento}]
+
+	\subsection{Documento iconográfico}
+
+    \printbibliography[heading=subbib, keyword=7.11.1,
+      title={Elementos essenciais}]
+    \printbibliography[heading=subbib, keyword=7.11.2,
+      title={Elementos complementares}]
+    \printbibliography[heading=subbib, keyword=7.11.3,
+      title={Documento iconográfico em meio eletrônico}]
+
+	\subsection{Documento cartográfico}
+
+    \printbibliography[heading=subbib, keyword=7.12.1,
+      title={Elementos essenciais}]
+    \printbibliography[heading=subbib, keyword=7.12.2,
+      title={Elementos complementares}]
+    \printbibliography[heading=subbib, keyword=7.12.3,
+      title={Documento cartográfico em meio eletrônico}]
+
+	\printbibliography[keyword=7.13, title={Documento sonoro no todo}]
+
+	\printbibliography[keyword=7.14, title={Documento sonoro em parte}]
+
+	\subsection{Partitura}
+
+    \printbibliography[heading=subbib, keyword=7.15.1,
+      title={Elementos essenciais}]
+    \printbibliography[heading=subbib, keyword=7.15.2,
+      title={Elementos complementares}]
+    \printbibliography[heading=subbib, keyword=7.15.3,
+      title={Partitura em meio eletrônico}]
+
+	\printbibliography[keyword=7.16, title={Documento tridimensional}]
+
+	\printbibliography[keyword=7.17,
+    title={Documento de acesso exclusivo em meio eletrônico}]
+
+	\section{Transcrição dos elementos}
+
+	\subsection{Autoria}
+
+    \printbibliography[heading=subbib, keyword=8.1.1, title={Autor pessoal}]
+    \printbibliography[heading=subbib, keyword=8.1.2, title={Autor entidade}]
+    \printbibliography[heading=subbib, keyword=8.1.3,
+      title={Autoria desconhecida}]
+
+	\printbibliography[keyword=8.2, title={Título e subtítulo}]
+
+	\printbibliography[keyword=8.3, title={Edição}]
+
+	\printbibliography[keyword=8.4, title={Local}]
+
+	\printbibliography[keyword=8.5, title={Editora}]
+
+	\printbibliography[keyword=8.6, title={Data}]
+
+	\printbibliography[keyword=8.7, title={Descrição física}]
+
+	\printbibliography[keyword=8.8, title={Ilustrações}]
+
+	\printbibliography[keyword=8.9, title={Dimensões}]
+
+	\printbibliography[keyword=8.10, title={Séries e coleções}]
+
+	\printbibliography[keyword=8.11, title={Notas}]
+
+	\section{Ordenação das referências}
+
+	\printbibliography[keyword=9.1, title={Sistema alfabético}]
+
+	\printbibliography[keyword=9.2, title={Sistema numérico}]
+
+
+\end{document}

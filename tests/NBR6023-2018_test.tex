@@ -12,10 +12,12 @@
 %%
 %% The Current Maintainer of this work is Daniel Ballester Marques.
 
-\ProvidesFile{brazil-abnt.lbx}
-[2018-11-17\space v3.4\space ABNT BibLaTeX citation style]%
+\documentclass{article}
 
-\InheritBibliographyExtras{brazilian}
-\InheritBibliographyStrings{brazilian}
+\usepackage{pdfpagediff}
 
-\endinput
+\begin{document}
+
+\layerPages{NBR6023-2018.pdf}{NBR6023-2018_reference.pdf}
+
+\end{document}
