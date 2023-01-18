@@ -1420,10 +1420,12 @@
 \DeclareFieldFormat[% number >>>
   book,%
   collection,%
-  proceedings,%
-  inproceedings,%
   misc%
 ]{number}{\addcomma\addspace #1}%% <<<
+\DeclareFieldFormat[% number >>>
+  proceedings,%
+  inproceedings,%
+]{number}{\addspace #1}%% <<<
 % <<<
 
 \DeclareFieldFormat*{volume}{%% >>>4
