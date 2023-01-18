@@ -763,10 +763,6 @@
   }{}
 }% <<<3
 
-\xpatchbibmacro{finentry}% >>>3
-  {\finentry}
-  {\adddot}{}{}% <<<3
-  
 % <<<2
 
 % <<<1
@@ -966,6 +962,13 @@
 \DeclareEntryOption[boolean]{backref}[true]{%
   \settoggle{backref}{#1}%
 }%
+% <<<2
+
+% Add a period at the end of every reference >>>2
+\DeclareBibliographyOption[boolean]{periodatend}[true]{%
+\xpatchbibmacro{finentry}%
+{\finentry}%
+{\adddot}{}{}}
 % <<<2
 
 % <<<1
