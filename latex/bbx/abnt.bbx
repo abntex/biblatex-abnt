@@ -1447,8 +1447,9 @@
 }%% <<<
 
 \DeclareFieldFormat*{pages}{%% >>>4
-  \MakeLowercase{\mkpageprefix[bookpagination]{#1}}%
+  \midsentence \MakeLowercase{\mkpageprefix[bookpagination]{#1}}%
 }%% <<<
+% \xpretofieldformat{pages}{\midsentence}{}{} % Fix the capitalization of the page label
 
 \DeclareFieldFormat*{pagetotal}{%% >>>4
   \MakeLowercase{\mkpagetotal[bookpagination]{#1}}%
