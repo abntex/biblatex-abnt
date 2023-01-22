@@ -1016,6 +1016,16 @@
   }%
 }% <<<2
 
+\DeclareSortingTemplate{citeorder}{%% >>>2
+  \sort{%
+    \field{presort}%
+  }%
+  \sort[final]{%
+    \field{sortkey}%
+  }%
+  \sort{\citeorder}%
+}% <<<2
+
 \DeclareStyleSourcemap{%% >>>2
   % This maps some fields used in abntex2cite to biblatex fields.
   \maps[datatype=bibtex]{%
