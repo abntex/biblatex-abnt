@@ -169,6 +169,7 @@ daquelas descritas no manual do pacote):
     mas substitui os autores por traços sublineares
   \item [usedashes] Usa os traços padrão do \texttt{biblatex} nos campos
     repetidos
+  \item [slashdaterange] Utiliza uma barra ao invés do caractere padrão para separar períodos de datas. Sua utilização é mais recomendada para apenas entradas específicas
   \item [language=brazil] Essa opção é adicionada automaticamente. Para
     imprimir a bibliografia em outros idiomas, substitua o termo
     \texttt{brazil} pelo código da linguagem desejada
@@ -182,11 +183,9 @@ daquelas descritas no manual do pacote):
 \vspace{\baselineskip}
 E.g.: \verb"\usepackage[backend=biber, style=abnt, ittitles]{biblatex}"
 
-\subsection{Opções em entradas específicas}
-
 \begin{sloppypar}
   As opções \texttt{repeatfields}, \texttt{repeattitles}, \texttt{backref},
-  \texttt{nosl}, \texttt{nosn}, \texttt{noslsn} e \texttt{extrayear} também
+  \texttt{nosl}, \texttt{nosn}, \texttt{noslsn}, \texttt{extrayear} e \texttt{slashdaterange} também
   podem ser usadas apenas em entradas específicas. E.g.:
 \end{sloppypar}
 
@@ -199,10 +198,9 @@ E.g.: \verb"\usepackage[backend=biber, style=abnt, ittitles]{biblatex}"
     }
 \end{verbatim}
 
-    Além disso, também existe a opção \texttt{slashdaterangesep}, exclusiva para utilização em entradas. Ela permite definir para uma entrada utilizar a barra como o  separador de período de datas. E.g.:
-
+Ou, um exemplo de uso do \texttt{slashdaterange}:
 \begin{verbatim}
-    @article{artigo:lucca-2009,
+    @article{lucca2009,
         author            = {Gabriella {De Lucca}},
         title             = {Notas curtas},
         journaltitle      = {Getulio},
@@ -210,12 +208,12 @@ E.g.: \verb"\usepackage[backend=biber, style=abnt, ittitles]{biblatex}"
         volume            = {ano 3},
         pages             = {9},
         date              = {2009-07/2009-08},  
-        options           = {slashdaterangesep}
+        options           = {slashdaterange}
     }
 \end{verbatim}
 
     Que resulta em:
-    \singlecite{artigo:lucca-2009}
+    \singlecite{lucca2009}
     
 % <<<2
 
