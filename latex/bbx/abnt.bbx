@@ -964,10 +964,13 @@
 }%
 % <<<2
 
-% Option per entry to use a slash / as the daterangesep >>>2
-\DeclareEntryOption[boolean]{slashdaterange}[true]{
-  \renewrobustcmd*{\bibdaterangesep}{\slash}%
-}
+% Option to use a slash / as the daterangesep >>>2
+\DeclareBibliographyOption[boolean]{slashdaterange}[true]{%
+\renewrobustcmd*{\bibdaterangesep}{\slash}%
+}%
+\DeclareEntryOption[boolean]{slashdaterange}[true]{%
+\renewrobustcmd*{\bibdaterangesep}{\slash}%
+}%
 % <<<2
 
 % <<<1
