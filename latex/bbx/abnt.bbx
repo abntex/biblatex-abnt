@@ -974,14 +974,42 @@
 % <<<2
 
 % Options to define type of date per entrytype >>>2
-% Para utilizar as options, utilize \ExecuteBibliographyOptions[entrytype], e. g.:
-% \ExecuteBibliographyOptions[article]{datemonth}
-\DeclareTypeOption[boolean]{dateyear}[true]{%
-\xpretobibmacro{date}{\clearfield{day}\clearfield{month}}{}{}%
+% Options to show only years
+\DeclareBiblatexOption{global, type, entry}[boolean]{dateyear}[true]{%
+\renewbibmacro*{date}{\mkdaterangeyear{}}%
 }%
-\DeclareTypeOption[boolean]{datemonth}[true]{%
-\xpretobibmacro{date}{\clearfield{day}}{}{}%
+
+% Options to show years and months
+% O comando abaixo é o \mkdaterangeyear adaptado para não remover o mês
+\newrobustcmd*{\mkdaterangeyearmonth}[1]{%
+\begingroup
+  \clearfield{yeardivision}%
+  % \clearfield{#1month}%
+  \clearfield{day}%
+  \clearfield{hour}%
+  \clearfield{minute}%
+  \clearfield{second}%
+  \clearfield{timezone}%
+  \clearfield{endyeardivision}%
+  % \clearfield{#1endmonth}%
+  \clearfield{endday}%
+  \clearfield{endhour}%
+  \clearfield{endminute}%
+  \clearfield{endsecond}%
+  \clearfield{endtimezone}%
+  \ifdaterangesequal{#1}{#1end}
+    {\clearfield{#1endmonth}
+      \clearfield{#1endyear}}
+    {\ifdateyearsequal{#1}{#1end}
+      {\blx@imc@clearfield{#1endyear}}
+      {}%
+    }%
+  \mkdaterangefull{long}{#1}%
+\endgroup}
+\DeclareBiblatexOption{global, type, entry}[boolean]{datemonth}[true]{%
+\renewbibmacro*{date}{\mkdaterangeyearmonth{}}%
 }%
+% <<<2
 
 % <<<1
 
