@@ -158,6 +158,8 @@ daquelas descritas no manual do pacote):
   \item [giveninits] Abrevia os primeiros nomes na bibliografia
   \item [extrayear] Diferencia os anos com letras (e.g., 2017a)
     também na bibliografia
+  \item [dateyear] Imprime apenas o ano das entradas, descartando todas as outras partes da data. Se utilizada como uma opção global, recomenda-se o uso da opção \texttt{date=year} em seu lugar (menor risco de bugs)
+  \item [datemonth] Imprime apenas o mês e ano das entradas, descartando todas as outras partes da data
   \item [nosl] Oculta as abreviações [s.l.] na bibliografia
   \item [nosn] Oculta as abreviações [s.n.] na bibliografia
   \item [noslsn] Oculta as abreviações [s.l], [s.n] e [s.l.: s.n.]
@@ -185,7 +187,7 @@ E.g.: \verb"\usepackage[backend=biber, style=abnt, ittitles]{biblatex}"
 
 \begin{sloppypar}
   As opções \texttt{repeatfields}, \texttt{repeattitles}, \texttt{backref},
-  \texttt{nosl}, \texttt{nosn}, \texttt{noslsn}, \texttt{extrayear} e \texttt{slashdaterange} também
+  \texttt{nosl}, \texttt{nosn}, \texttt{noslsn}, \texttt{extrayear}, \texttt{dateyear}, \texttt{datemonth} e \texttt{slashdaterange} também
   podem ser usadas apenas em entradas específicas. E.g.:
 \end{sloppypar}
 
@@ -214,6 +216,13 @@ Ou, um exemplo de uso do \texttt{slashdaterange}:
 
     Que resulta em:
     \singlecite{lucca2009}
+
+As opções \texttt{dateyear} e \texttt{datemonth} também podem ser aplicadas apenas para tipos específicos de entradas, através do comando \verb|\ExecuteBibliographyOptions|. E. g.:
+
+\begin{verbatim}
+    \ExecuteBibliographyOptions[book]{dateyear}
+    \ExecuteBibliographyOptions[article]{datemonth}
+\end{verbatim}
     
 % <<<2
 
