@@ -2676,8 +2676,8 @@
   \usebibmacro{date}%
   \newunit%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \usebibmacro{chapter+pages}%
-  \newunit%
+  % \usebibmacro{chapter+pages}%
+  % \newunit%
   \printfield{pagetotal}%
   \newunit%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2691,6 +2691,8 @@
   \setunit*{\addcomma\addspace}%
   \printeventdate%
   \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \printfield{pages}%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{note}%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
