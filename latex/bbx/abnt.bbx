@@ -1413,6 +1413,7 @@
   incollection,%
   bookinbook,%
   inproceedings,%
+  inthesis,%
   unpublished%
 ]{title}{\addspace #1\isdot}%% <<<
 
@@ -2657,6 +2658,66 @@
     {}%
   \usebibmacro{finentry}%
 }%% <<<2
+
+\DeclareBibliographyDriver{inthesis}{%% >>>2
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/editor+others}%
+  \setunit{\labelnamepunct}%
+  \usebibmacro{title}%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \usebibmacro{in:bookauthor+others}%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \usebibmacro{maintitle/booktitle}%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \usebibmacro{date}%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % \usebibmacro{chapter+pages}%
+  % \newunit%
+  \printfield{pagetotal}%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \printfield{type}%
+  \setunit*{\addspace\textendash\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \printlist{institution}%
+  \setunit*{\addcomma\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \printlist{location}%
+  \setunit*{\addcomma\addspace}%
+  \printeventdate%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \printfield{pages}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \printfield{note}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \printunit{\addperiod\addspace}%
+  \iftoggle{bbx:isbn}%
+    {\printfield{isbn}}%
+    {}%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \usebibmacro{doi+eprint+url}%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \usebibmacro{pageref}%
+  \setunit*{\addperiod\addspace}%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \iftoggle{bbx:related}%
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}%
+    {}%
+  \usebibmacro{finentry}%
+}%% >>>2
 
 \DeclareBibliographyDriver{misc}{%% >>>2
   \usebibmacro{bibindex}%
