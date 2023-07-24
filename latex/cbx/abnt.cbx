@@ -46,6 +46,11 @@
   \settoggle{sccite}{#1}%
 }% <<<2
 
+\newtoggle{accite}% >>>2
+\DeclareBibliographyOption{accite}[true]{%
+  \settoggle{accite}{#1}%
+}% <<<2
+
 % <<<1
 
 % Format >>>1
@@ -66,6 +71,18 @@
     \textsc{\MakeLowercase{#1}}%
   }{%
     #1%
+  }%
+}% <<<3
+
+\newcommand*{\NormalOrACCiteOrSCCite}[1]{% >>>3
+  \iftoggle{accite}{%
+    \MakeUppercase{#1}%
+  }{%
+    \iftoggle{sccite}{%
+      \textsc{\MakeLowercase{#1}}%
+    }{%
+      \MakeCapital{#1}%
+    }%
   }%
 }% <<<3
 
@@ -90,7 +107,7 @@
 \let\origmkbibnamesuffix\mkbibnamesuffix%
 
 \renewcommand*{\mkbibnamefamily}[1]{% >>>4
-  \UpperOrSCCite{#1}%
+  \NormalOrACCiteOrSCCite{#1}%
 }% <<<4
 \renewcommand*{\mkbibnamegiven}[1]{% >>>4
   \ifnumequal{\value{uniquename}}{2}{%
@@ -101,13 +118,13 @@
 }% <<<4
 \renewcommand*{\mkbibnameprefix}[1]{% >>>4
   \ifuseprefix{%
-    \UpperOrSCCite{#1}%
+    \NormalOrACCiteOrSCCite{#1}%
   }{%
     \ifnumequal{\value{uniquename}}{2}{#1}{\NormalOrSCCite{#1}}%
   }%
 }% <<<4
 \renewcommand*{\mkbibnamesuffix}[1]{% >>>4
-  \UpperOrSCCite{#1}%
+  \NormalOrACCiteOrSCCite{#1}%
 }% <<<4
 
 \AtBeginBibliography{%

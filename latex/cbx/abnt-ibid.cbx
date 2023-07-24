@@ -20,8 +20,6 @@
 \RequirePackage{xparse}%
 \RequirePackage{xpatch}%
 \RequirePackage{expl3}%
-%\RequirePackage{l3regex}% DEPRECATED
-\RequirePackage{expl3}%
 
 % <<<1
 
@@ -42,6 +40,17 @@
     #1%
   }%
 }% <<<2
+
+\newcommand*{\NormalOrACCiteOrSCCite}[1]{% >>>2
+  \iftoggle{accite}{%
+    \MakeUppercase{#1}}%
+  }{%
+    \iftoggle{sccite}{%
+      \textsc{\MakeLowercase{#1}}%
+    }{%
+      #1%
+  }%
+}% <<<2 
 
 % \IfInitial >>>2
 
@@ -113,7 +122,7 @@
 \let\origmkbibnamesuffix\mkbibnamesuffix%
 
 \renewcommand*{\mkbibnamefamily}[1]{% >>>2
-  \UpperOrSCCite{#1}%
+  \NormalOrACCiteOrSCCite{#1}%
 }% <<<2
 \renewcommand*{\mkbibnamegiven}[1]{% >>>2
   \ifnumequal{\value{uniquename}}{2}{%
@@ -130,7 +139,7 @@
   }
 }% <<<2
 \renewcommand*{\mkbibnamesuffix}[1]{% >>>2
-  \UpperOrSCCite{#1}%
+  \NormalOrACCiteOrSCCite{#1}%
 }% <<<2
 
 \DeclareFieldFormat{firstword}{%% >>>2
