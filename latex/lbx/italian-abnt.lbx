@@ -1,0 +1,41 @@
+%% Copyright 2016 Daniel Ballester Marques
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%%
+%% The Current Maintainer of this work is Daniel Ballester Marques.
+
+\ProvidesFile{italian-abnt.lbx}
+[2018-11-17\space v3.4\space ABNT BibLaTeX citation style]%
+
+\InheritBibliographyExtras{italian}
+\InheritBibliographyStrings{italian}
+\DeclareBibliographyStrings{%
+  inherit = {italian},%
+}%
+
+% Months abbreviations >>>1
+\DeclareBibliographyStrings{%
+  january          = {{gennaio}{genn\adddot}},
+  february         = {{febbraio}{febbr\adddot}},
+  march            = {{marzo}{mar\adddot}},
+  april            = {{aprile}{apr\adddot}},
+  may              = {{maggio}{magg\adddot}},
+  june             = {{giugno}{giugno}},
+  july             = {{luglio}{luglio}},
+  august           = {{agosto}{ag\adddot}},
+  september        = {{settembre}{sett\adddot}},
+  october          = {{ottobre}{ott\adddot}},
+  november         = {{novembre}{nov\adddot}},
+  december         = {{dicembre}{dic\adddot}},
+}
+% <<<1
+
+\endinput
