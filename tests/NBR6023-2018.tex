@@ -38,6 +38,8 @@
   {\item}
 
 \defbibheading{subbib}[]{\subsubsection{#1}}
+\setcounter{secnumdepth}{4}
+\defbibheading{subsubbib}[]{\paragraph{#1}}
 
 \let\origsection\section
 \renewcommand\section{\clearpage\origsection}
