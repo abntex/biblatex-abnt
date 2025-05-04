@@ -38,6 +38,8 @@
   {\item}
 
 \defbibheading{subbib}[]{\subsubsection{#1}}
+\setcounter{secnumdepth}{4}
+\defbibheading{subsubbib}[]{\paragraph{#1}}
 
 \let\origsection\section
 \renewcommand\section{\clearpage\origsection}
@@ -97,89 +99,114 @@ todas as entradas do manual e expondo o modo de fazê-lo. Para o uso correto do
 	\printbibliography[keyword=7.4,
     title={Parte de monografia em meio eletrônico}]
 
-	\subsection{Publicação periódica}
+   \printbibliography[keyword=7.5, title={Correspondência}]
 
-	  \printbibliography[heading=subbib, keyword=7.5.1,
-      title={Publicação periódica como um todo}]
-	  \printbibliography[heading=subbib, keyword=7.5.2,
-      title={Partes de revista, boletim etc.}]
-	  \printbibliography[heading=subbib, keyword=7.5.3,
-      title={Artigo e/ou matéria de revista, boletim etc.}]
-	  \printbibliography[heading=subbib, keyword=7.5.4,
-      title={Artigo e/ou matéria de revista,
-             boletim etc.\ em meio eletrônico}]
-	  \printbibliography[heading=subbib, keyword=7.5.5,
-      title={Artigo e/ou matéria de jornal}]
+   \printbibliography[keyword=7.6,
+   title={Correspondência disponível em meio eletrônico}]
 
-	   \printbibliography[heading=subbib, keyword=7.5.6,
-      title={Artigo e/ou matéria de jornal em meio eletrônico}]
+   \subsection{Publicação periódica}
 
-	\subsection{Evento como um todo}
+   \printbibliography[heading=subbib, keyword=7.7.1,
+   title={Coleção de publicação periódica}]
 
-    \printbibliography[heading=subbib, keyword=7.6.1,
-      title={Elementos essenciais}]
-    \printbibliography[heading=subbib, keyword=7.6.2,
-      title={Elementos complementares}]
-    \printbibliography[heading=subbib, keyword=7.6.3,
-      title={Evento como um todo em meio eletrônico}]
+   \printbibliography[heading=subbib, keyword=7.7.2,
+   title={Coleção de publicação periódica em meio eletrônico}]
 
-	\subsection{Trabalho apresentado em evento}
+   \printbibliography[heading=subbib, keyword=7.7.3,
+   title={Parte de coleção de publicação periódica}]
 
-    \printbibliography[heading=subbib, keyword=7.7.1,
-      title={Elementos essenciais}]
-    \printbibliography[heading=subbib, keyword=7.7.2,
-      title={Elementos complementares}]
-    \printbibliography[heading=subbib, keyword=7.7.3,
-      title={Trabalho apresentado em evento em meio eletrônico}]
+   \printbibliography[heading=subbib, keyword=7.7.4,
+   title={Fascículo, suplemento e outros}]
 
-	\printbibliography[keyword=7.8, title={Patente}]
+   \printbibliography[heading=subbib, keyword=7.7.5,
+   title={Artigo, seção e/ou matéria de publicação periódica}]
+
+   \printbibliography[heading=subbib, keyword=7.7.6,
+   title={Artigo, seção e/ou matéria de publicação periódica em meio eletrônico}]
+
+   \printbibliography[heading=subbib, keyword=7.7.7,
+   title={Artigo e/ou matéria de jornal}]
+
+   \printbibliography[heading=subbib, keyword=7.7.8,
+   title={Artigo e/ou matéria de jornal em meio eletrônico}]
+
+   \subsection{Evento}
+
+   \printbibliography[heading=subbib, keyword=7.8.1,
+   title={Evento no todo em monografia}]
+
+   \printbibliography[heading=subbib, keyword=7.8.2,
+   title={Evento no todo em publicação periódica}]
+
+   \printbibliography[heading=subbib, keyword=7.8.3,
+   title={Evento no todo em meio eletrônico}]
+
+   \subsubsection{Parte de evento}
+
+   \printbibliography[heading=subsubbib, keyword=7.8.4.1,
+   title={Parte de evento em monografia}]
+
+   \printbibliography[heading=subsubbib, keyword=7.8.4.2,
+   title={Parte de evento em publicação periódica}]
+
+   \printbibliography[heading=subbib, keyword=7.8.5,
+   title={Parte de evento em publicação periódica}]
+
+   \printbibliography[keyword=7.9, title={Patente}]
+
+	\printbibliography[keyword=7.10, title={Patente em meio eletrônico}]
 
 	\subsection{Documento jurídico}
 
-    \printbibliography[heading=subbib, keyword=7.9.1, title={Legislação}]
-    \printbibliography[heading=subbib, keyword=7.9.2,
-      title={Jurisprudência (decisões judiciais)}]
-    \printbibliography[heading=subbib, keyword=7.9.3, title={Doutrina}]
-    \printbibliography[heading=subbib, keyword=7.9.4,
-      title={Documento jurídico em meio eletrônico}]
-
-	\printbibliography[keyword=7.10, title={Imagem em movimento}]
-
-	\subsection{Documento iconográfico}
-
     \printbibliography[heading=subbib, keyword=7.11.1,
-      title={Elementos essenciais}]
+      title={Legislação}]
     \printbibliography[heading=subbib, keyword=7.11.2,
-      title={Elementos complementares}]
+      title={Legislação em meio eletrônico}]
     \printbibliography[heading=subbib, keyword=7.11.3,
-      title={Documento iconográfico em meio eletrônico}]
+      title={Jurisprudência}]
+    \printbibliography[heading=subbib, keyword=7.11.4,
+      title={Jurisprudência em meio eletrônico}]
+    \printbibliography[heading=subbib, keyword=7.11.5,
+      title={Atos administrativos normativos}]
+    \printbibliography[heading=subbib, keyword=7.11.6,
+      title={Atos administrativos normativos em meio eletrônico}]
 
-	\subsection{Documento cartográfico}
+    \printbibliography[keyword=7.12, title={Documentos civis e de cartórios}]
 
-    \printbibliography[heading=subbib, keyword=7.12.1,
-      title={Elementos essenciais}]
-    \printbibliography[heading=subbib, keyword=7.12.2,
-      title={Elementos complementares}]
-    \printbibliography[heading=subbib, keyword=7.12.3,
-      title={Documento cartográfico em meio eletrônico}]
+    \subsection{Documento audiovisual}
 
-	\printbibliography[keyword=7.13, title={Documento sonoro no todo}]
+    \printbibliography[heading=subbib, keyword=7.13.1,
+      title={Filmes, vídeos, entre outros}]
+    \printbibliography[heading=subbib, keyword=7.13.2,
+      title={Filmes, vídeos, entre outros em meio eletrônico}]
+    \printbibliography[heading=subbib, keyword=7.13.3,
+      title={Documento sonoro no todo}]
+    \printbibliography[heading=subbib, keyword=7.13.4,
+      title={Parte de documento sonoro}]
+    \printbibliography[heading=subbib, keyword=7.13.5,
+      title={Documento sonoro em meio eletrônico}]
 
-	\printbibliography[keyword=7.14, title={Documento sonoro em parte}]
+   \subsection{Partitura}
 
-	\subsection{Partitura}
-
-    \printbibliography[heading=subbib, keyword=7.15.1,
-      title={Elementos essenciais}]
-    \printbibliography[heading=subbib, keyword=7.15.2,
-      title={Elementos complementares}]
-    \printbibliography[heading=subbib, keyword=7.15.3,
+    \printbibliography[heading=subbib, keyword=7.14.1,
+      title={Partitura impressa}]
+    \printbibliography[heading=subbib, keyword=7.14.2,
       title={Partitura em meio eletrônico}]
 
-	\printbibliography[keyword=7.16, title={Documento tridimensional}]
+   \printbibliography{keyword=7.15, title={Documento iconográfico}}
 
-	\printbibliography[keyword=7.17,
-    title={Documento de acesso exclusivo em meio eletrônico}]
+	\printbibliography[keyword=7.16,
+   title={Documento iconográfico em meio eletrônico}]
+
+	\printbibliography[keyword=7.17, title={Documento cartográfico}]
+
+	\printbibliography[keyword=7.18,
+   title={Documento cartográfico em meio eletrônico}]
+
+	\printbibliography[keyword=7.19, title={Documento tridimensional}]
+
+	\printbibliography[keyword=7.20,
+   title={Documento de acesso exclusivo em meio eletrônico}]
 
 	\section{Transcrição dos elementos}
 
