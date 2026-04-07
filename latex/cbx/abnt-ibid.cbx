@@ -501,12 +501,12 @@
 \newcommand{\addapud}{%% >>>2
   \renewcommand*{\multicitedelim}{%
     \ifnumequal{\value{multicitecount}}{\value{multicitetotal}}%
-      {\space\bibstring{apud}}%
+      {\space\mkbibitalic{\bibstring{apud}}}%
       {\addsemicolon}%
     \space}%
   \renewcommand*{\textcitedelim}{%
     \ifnumequal{\value{multicitecount}}{\value{multicitetotal}}%
-      {\addspace\bibstring{apud}}%
+      {\space\mkbibitalic{\bibstring{apud}}}%
       {\addsemicolon}%
     \space}%
 }% <<<2
@@ -517,7 +517,7 @@
         \usebibmacro{prenote}%
       }{%
         \printfield[uppercasecite]{prenote}%
-        \isdot\addspace\bibstring{apud}\addspace%
+        \isdot\addspace\mkbibitalic{\bibstring{apud}}\addspace%
       }%
     }%
   }%
