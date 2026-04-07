@@ -634,17 +634,17 @@
 \newcommand{\addapud}{%% >>>3
   \renewcommand*{\compcitedelim}{%
     \ifnumequal{\value{multicitecount}}{\value{multicitetotal}}%
-      {\space\bibstring{apud}}%
+      {\space\mkbibitalic{\bibstring{apud}}}%
       {\addsemicolon}%
     \space}%
   \renewcommand*{\multicitedelim}{%
     \ifnumequal{\value{multicitecount}}{\value{multicitetotal}}%
-      {\space\bibstring{apud}}%
+      {\space\mkbibitalic{\bibstring{apud}}}%
       {\addsemicolon}%
     \space}%
   \renewcommand*{\textcitedelim}{%
     \ifnumequal{\value{multicitecount}}{\value{multicitetotal}}%
-      {\addspace\bibstring{apud}}%
+      {\addspace\mkbibitalic{\bibstring{apud}}}%
       {\addsemicolon}%
     \space}%
 }% <<<3
@@ -656,7 +656,7 @@
         \usebibmacro{prenote}%
       }{%
         \printfield[uppercasecite]{prenote}%
-        \isdot\addspace\bibstring{apud}\addspace%
+        \isdot\addspace\mkbibitalic{\bibstring{apud}}\addspace%
       }%
     }%
   }%
@@ -709,12 +709,12 @@
       }\addspace%
       \IfNoValueTF{#5}{%
           \IfNoValueTF{#4}{%
-            \plaincite[\blx@imc@bibxstring{apud}][]{#6}%
+            \plaincite[\mkbibitalic{\blx@imc@bibxstring{apud}}][]{#6}%
           }{%
-            \plaincite[\blx@imc@bibxstring{apud}][#4]{#6}%
+            \plaincite[\mkbibitalic{\blx@imc@bibxstring{apud}}][#4]{#6}%
           }%
       }{%
-          \cite[\blx@imc@bibxstring{apud} #4][#5]{#6}%
+          \cite[\mkbibitalic{\blx@imc@bibxstring{apud}} #4][#5]{#6}%
       }%
   }%
 }%% <<<3
