@@ -1,0 +1,81 @@
+\documentclass[a4paper]{article}
+
+\usepackage[brazilian]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[style=abnt,sorting=none]{biblatex}
+\usepackage[autostyle]{csquotes}
+
+\addbibresource{NBR6023-2025-regressions.bib}
+
+\begin{document}
+
+\section*{NBR 6023:2025 -- regressões}
+
+\subsection*{Cidade do evento opcional}
+
+\nocite{event-without-venue,event-with-venue}
+\printbibliography[
+  heading=none,
+  type=proceedings,
+]
+
+\subsection*{\textit{e-location} em artigo de periódico}
+
+\nocite{article-with-elocation}
+\printbibliography[
+  heading=none,
+  type=article,
+  keyword=elocation,
+]
+
+\subsection*{Data de julgamento}
+
+\nocite{judgment-with-date}
+\printbibliography[
+  heading=none,
+  type=jurisdiction,
+]
+
+\subsection*{Documento exclusivamente eletrônico}
+
+\nocite{exclusively-electronic,unknown-print-publication}
+\printbibliography[
+  heading=none,
+  type=book,
+]
+
+\subsection*{Suplemento após a data}
+
+\nocite{periodical-supplement}
+\printbibliography[
+  heading=none,
+  keyword=supplement,
+]
+
+\subsection*{Entrevistado como autor}
+
+\nocite{interview-with-interviewee-as-author}
+\printbibliography[
+  heading=none,
+  keyword=interview,
+]
+
+\subsection*{ISSN opcional}
+
+\nocite{periodical-with-issn,periodical-without-issn}
+\printbibliography[
+  heading=none,
+  type=periodical,
+]
+
+\subsection*{DOI e ORCID como elementos complementares}
+
+\nocite{article-with-doi-and-orcid}
+\printbibliography[
+  heading=none,
+  keyword=identifiers,
+]
+
+\end{document}
