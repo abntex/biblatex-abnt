@@ -3,6 +3,14 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [Unreleased]
+
+### Changed
+- Make the event city optional, as required by NBR 6023:2025
+- Omit unknown publisher and location markers from online documents
+- Add a dedicated `jurisdiction` driver with an abbreviated judgment date
+
+
 ## [3.4] - 2018-11-17
 
 ### Added

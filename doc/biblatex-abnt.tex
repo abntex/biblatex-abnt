@@ -113,6 +113,22 @@ Para instalá-lo manualmente, copie os arquivos \texttt{.bbx}, \texttt{.cbx} e
 e atualize o banco de dados do TeX (rodando o `texhash`, por exemplo).
 % <<<2
 
+\section{Base normativa}% >>>2
+
+O desenvolvimento atual do estilo adota como referência principal a terceira
+edição da norma:
+
+\begin{quote}
+  ASSOCIAÇÃO BRASILEIRA DE NORMAS TÉCNICAS. \textbf{ABNT NBR 6023:2025:
+  Informação e documentação --- Referências --- Elaboração}. 3. ed.
+  Rio de Janeiro: ABNT, 2025. 68 p.
+\end{quote}
+
+Os documentos de teste das edições de 2002 e 2018 são preservados para
+compatibilidade histórica. As alterações introduzidas em 2025 são cobertas
+por casos de regressão específicos no diretório \texttt{tests}.
+% <<<2
+
 \section{Uso}% >>>2
 
 Para usar o {biblatex-abnt}, adicione as seguintes linhas ao preâmbulo do seu
@@ -224,6 +240,11 @@ As opções \texttt{dateyear} e \texttt{datemonth} também podem ser aplicadas a
     \ExecuteBibliographyOptions[book]{dateyear}
     \ExecuteBibliographyOptions[article]{datemonth}
 \end{verbatim}
+
+De acordo com a NBR 6023:2025, as indicações de local e editora desconhecidos
+não são impressas quando a entrada possui o campo \texttt{url}. Para documentos
+impressos, as indicações continuam sendo impressas e podem ser controladas
+manualmente pelas opções \texttt{nosl}, \texttt{nosn} e \texttt{noslsn}.
     
 % <<<2
 
@@ -734,6 +755,29 @@ Um artigo científico/acadêmico:
 \end{verbatim}
 
 \singlecite{negrão14}
+% <<<3
+
+\subsection{@jurisdiction}% >>>3
+
+Para jurisprudência, o campo \texttt{eventdate} registra a data do julgamento,
+enquanto \texttt{date} registra a data da publicação. A expressão
+\enquote{julgado em} e a data abreviada são geradas automaticamente:
+
+\begin{verbatim}
+    @jurisdiction{stf2005,
+        author       = {{Brasil}},
+        nameaddon    = {Supremo Tribunal Federal (2. Turma)},
+        title        = {Recurso Extraordinário 313060/SP.
+                        Relatora: Min. Ellen Gracie},
+        eventdate    = {2005-11-29},
+        journaltitle = {Lex},
+        location     = {São Paulo},
+        volume       = {28},
+        number       = {327},
+        pages        = {226-230},
+        date         = {2006},
+    }
+\end{verbatim}
 % <<<3
 
 \subsection{@thesis}% >>>3
