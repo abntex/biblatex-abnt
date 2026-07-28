@@ -533,22 +533,39 @@
   \printunit{\addperiod\addspace}%
 }%
 
+\newbibmacro*{judgmentdate}{%% >>>3
+  \iffieldundef{eventyear}%
+    {}%
+    {\printtext{\bibstring{judgedon}\addspace}%
+     \printeventdate}%
+}%% <<<3
+
 \newbibmacro*{publisher}{%% >>>3
   \iflistundef{publisher}%
-    {\iftoggle{nosn}{}{\printtext[brackets]{\mkbibemph{\bibstring{sinenomine}}}}}%
+    {\ifboolexpr{%
+       test {\iftoggle{nosn}}%
+       or%
+       not test {\iffieldundef{url}}%
+     }%
+       {}%
+       {\printtext[brackets]{\mkbibemph{\bibstring{sinenomine}}}}}%
       {\printlist{publisher}}%
 }%% <<<3
 
 \newbibmacro*{location}{%% >>>3
   \iflistundef{location}%
-    {\iftoggle{nosl}{}{\printtext[brackets]{\mkbibemph{\bibstring{sineloco}}}}}%
+    {\ifboolexpr{%
+       test {\iftoggle{nosl}}%
+       or%
+       not test {\iffieldundef{url}}%
+     }%
+       {}%
+       {\printtext[brackets]{\mkbibemph{\bibstring{sineloco}}}}}%
       {\printlist{location}}%
 }%% <<<3
 
 \newbibmacro*{venue}{%% >>>3
-  \iffieldundef{venue}%
-    {\iftoggle{nosl}{}{\printtext[brackets]{\mkbibemph{\bibstring{sineloco}}}}}%
-      {\printfield{venue}}%
+  \printfield{venue}%
 }%% <<<3
 
 \renewbibmacro*{location+date}{%% >>>3
@@ -567,6 +584,8 @@
     not test {\iftoggle{nosl}}%
     and%
     not test {\iftoggle{nosn}}%
+    and%
+    test {\iffieldundef{url}}%
   }{%
     \printtext[brackets]{\mkbibemph{\bibstring{sineloco}}%
     \setunit{\addcolon\addnbspace}%
@@ -624,6 +643,8 @@
     not test {\iftoggle{nosl}}%
     and%
     not test {\iftoggle{nosn}}%
+    and%
+    test {\iffieldundef{url}}%
   }{%
     \printtext[brackets]{\mkbibemph{\bibstring{sineloco}}%
     \setunit{\addcolon\addnbspace}%
@@ -1370,7 +1391,6 @@
 \DeclareNameAlias{withafterword}{given-family}%
 
 \DeclareBibliographyAlias{legislation}{article}%
-\DeclareBibliographyAlias{jurisdiction}{article}%
 \DeclareBibliographyAlias{legal}{article}%
 
 % Name delimiters >>>3
@@ -1623,6 +1643,73 @@
   \usebibmacro{author/organization}%
   \setunit{\labelnamepunct}%
   \usebibmacro{title}\newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \printlist{language}%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \usebibmacro{byauthor}%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \usebibmacro{byeditor+others}\newunit%
+  \usebibmacro{bytranslator+others}%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \printfield{version}%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \iffieldundef{relatedtype}{}{%
+    \bibstring{\strfield{relatedtype}}}%
+  \setunit*{\addcolon\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \usebibmacro{journal+section}%
+  \setunit*{\addcomma\addspace}%
+  \printlist{publisher}%
+  \setunit*{\addcomma\addspace}%
+  \printlist{location}%
+  \setunit*{\addcomma\addspace}%
+  \usebibmacro{volume+number+eid}%
+  \setunit{\addcomma\addspace}%
+  \printfield{pages}%
+  \setunit*{\addcomma\addspace}%
+  \printfield{pagetotal}%
+  \setunit{\addcomma\addspace}%
+  \usebibmacro{issue+date}%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \printfield{note}%
+  \printunit{\addperiod\addspace}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \iftoggle{bbx:isbn}%
+    {\printfield{issn}}%
+    {}%
+    \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \usebibmacro{doi+eprint+url}%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \usebibmacro{pageref}%
+  \setunit*{\addperiod\addspace}%
+  \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \iftoggle{bbx:related}%
+    {\usebibmacro{related:init}%
+    \usebibmacro{related}}%
+    {}%
+  \usebibmacro{finentry}%
+}%% <<<2
+
+\DeclareBibliographyDriver{jurisdiction}{%% >>>2
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/organization}%
+  \setunit{\labelnamepunct}%
+  \usebibmacro{title}%
+  \setunit{\addcomma\addspace}%
+  \usebibmacro{judgmentdate}%
+  \newunit%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printlist{language}%
   \newunit%
