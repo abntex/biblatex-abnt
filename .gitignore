@@ -18,3 +18,5 @@ tests/**/build/
 __pycache__/
 *.bak
 *_bibertool.bib
+
+doc/build/
