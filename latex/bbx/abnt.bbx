@@ -191,6 +191,7 @@
           }%
             {\printfield[titlecase]{title}}%
             {\printfield[normalfont]{title}}}%
+        \abntIfYearEndsWithBracketTF{\strfield{title}}{\nopunct\printtext{.}}{}%
         \normalfont{%
           \iffieldendswithpunct{title}{%
             \setunit*{\addspace}%
@@ -240,7 +241,8 @@
       }{%
         \normalfont{\setunit*{\subtitlepunct}}%
       }
-      \printfield[normalfont]{booksubtitle}}%
+      \printfield[normalfont]{booksubtitle}%
+      \abntIfYearEndsWithBracketTF{\strfield{booktitle}}{\nopunct\printtext{.}}{}}%
       \newunit}%
   \printfield{booktitleaddon}%
 }%% <<<3
@@ -263,7 +265,8 @@
       }{%
         \normalfont{\setunit*{\subtitlepunct}}%
       }
-      \printfield[normalfont]{mainsubtitle}}%
+      \printfield[normalfont]{mainsubtitle}%
+      \abntIfYearEndsWithBracketTF{\strfield{maintitle}}{\nopunct\printtext{.}}{}}%
       \newunit}%
   \printfield{maintitleaddon}%
 }%% <<<3
@@ -481,6 +484,16 @@
   }%
 }%% <<<3
 
+\newbibmacro*{in:bookauthor+editor+others}{%% >>>3
+  \ifnameundef{bookauthor}%
+    {\usebibmacro{in:editor+others}}%
+    {\usebibmacro{in:}%
+     \printnames{bookauthor}%
+     \setunit*{\addspace}%
+     \usebibmacro{authorstrg}%
+     \iffieldundef{nameaddon}{}{\nopunct\printtext{.}\printfield{nameaddon}}}%
+}%% <<<3
+
 \newbibmacro*{in:editor+others}{%% >>>3
   \usebibmacro{in:}%
   \addspace%
@@ -524,13 +537,42 @@
 
 % Publisher, location, date, issue >>>2
 
+\ExplSyntaxOn
+\prg_new_conditional:Npnn \abnt_if_year_ends_with_bracket:n #1 { p, T, F, TF }
+  {
+    \regex_match:nnTF { \]\s*$ } {#1}
+      { \prg_return_true: }
+      { \prg_return_false: }
+  }
+\NewDocumentCommand{\abntIfYearEndsWithBracketTF}{mmm}
+  { \exp_args:Ne \abnt_if_year_ends_with_bracket:nTF {#1} {#2} {#3} }
+\prg_new_conditional:Npnn \abnt_if_date_is_open_range:n #1 { p, T, F, TF }
+  {
+    \regex_match:nnTF { /\s*$ } {#1}
+      { \prg_return_true: }
+      { \prg_return_false: }
+  }
+\NewDocumentCommand{\abntIfDateIsOpenRangeTF}{mmm}
+  { \exp_args:Ne \abnt_if_date_is_open_range:nTF {#1} {#2} {#3} }
+\ExplSyntaxOff
+
 \renewbibmacro*{date}{%
   \iftoggle{extradate}{%
     \printdateextra%
   }{%
     \printdate%
   }%
-  \printunit{\addperiod\addspace}%
+  \iffieldundef{year}{%
+    \printunit{\addperiod\addspace}%
+  }{%
+    \abntIfYearEndsWithBracketTF{\strfield{year}}%
+      {\nopunct\printtext{.}}%
+      {\ifcsdef{abx@field@endyear}%
+        {\ifcsvoid{abx@field@endyear}%
+          {\space\printunit{\addperiod\addspace}}%
+          {\printunit{\addperiod\addspace}}}%
+        {\printunit{\addperiod\addspace}}}%
+  }%
 }%
 
 \newbibmacro*{judgmentdate}{%% >>>3
@@ -557,7 +599,11 @@
     {\ifboolexpr{%
        test {\iftoggle{nosl}}%
        or%
-       not test {\iffieldundef{url}}%
+       (%
+         not test {\iffieldundef{url}}%
+         and%
+         test {\iflistundef{publisher}}%
+       )%
      }%
        {}%
        {\printtext[brackets]{\mkbibemph{\bibstring{sineloco}}}}}%
@@ -575,7 +621,7 @@
   \newunit%
 }%% <<<3
 
-\renewbibmacro*{publisher+location+date}{%% >>>3
+\newbibmacro*{publisher+location}{%% >>>3
   \ifboolexpr{%
     test {\iflistundef{publisher}}%
     and%
@@ -607,6 +653,10 @@
       \usebibmacro{publisher}%
     }%
   }%
+}%% <<<3
+
+\renewbibmacro*{publisher+location+date}{%% >>>3
+  \usebibmacro{publisher+location}%
   \setunit*{\addcomma\addspace}%
   \usebibmacro{date}%
   \newunit%
@@ -666,6 +716,10 @@
       \usebibmacro{publisher}%
     }%
   }%
+  \setunit*{\addcomma\addspace}%
+  \printfield{volume}%
+  \setunit*{\addcomma\addspace}%
+  \printfield{number}%
   \setunit*{\addcomma\addspace}%
   \printfield[number]{issue}%
   \setunit*{\addcomma\addspace}%
@@ -1132,6 +1186,7 @@
   illustrated,%
   dimensions,%
   reprinted-text,%
+  holderrole,%
 }% <<<2
 
 \DeclareDatamodelEntryfields[monography]{%% >>>2
@@ -1526,8 +1581,15 @@
     {\addspace #1\isdot}%
 }%% <<<
 
+\DeclareFieldFormat[article]{edition}{%% >>>4
+  \bibstring{edition}\addspace #1%
+}%% <<<
+
 \DeclareFieldFormat*{pages}{%% >>>4
-  \midsentence \MakeLowercase{\mkpageprefix[bookpagination]{#1}}%
+  \midsentence
+  \ifboolexpr{test {\iffieldequalstr{bookpagination}{none}}}%
+    {\bibstring{page}\addspace #1}%
+    {\mkpageprefix[bookpagination]{#1}}%
 }%% <<<
 % \xpretofieldformat{pages}{\midsentence}{}{} % Fix the capitalization of the page label
 
@@ -1657,10 +1719,6 @@
   \printfield{version}%
   \newunit%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \iffieldundef{relatedtype}{}{%
-    \bibstring{\strfield{relatedtype}}}%
-  \setunit*{\addcolon\addspace}%
-  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{journal+section}%
   \setunit*{\addcomma\addspace}%
   \printlist{publisher}%
@@ -1668,6 +1726,8 @@
   \printlist{location}%
   \setunit*{\addcomma\addspace}%
   \usebibmacro{volume+number+eid}%
+  \setunit*{\addcomma\addspace}%
+  \printfield{edition}%
   \setunit{\addcomma\addspace}%
   \printfield{pages}%
   \setunit*{\addcomma\addspace}%
@@ -1724,15 +1784,9 @@
   \printfield{version}%
   \newunit%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \iffieldundef{relatedtype}{}{%
-    \bibstring{\strfield{relatedtype}}}%
-  \setunit*{\addcolon\addspace}%
-  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{journal+section}%
   \setunit*{\addcomma\addspace}%
-  \printlist{publisher}%
-  \setunit*{\addcomma\addspace}%
-  \printlist{location}%
+  \usebibmacro{publisher+location}%
   \setunit*{\addcomma\addspace}%
   \usebibmacro{volume+number+eid}%
   \setunit{\addcomma\addspace}%
@@ -1804,10 +1858,11 @@
   \printfield{dimensions}%
   \newunit%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \usebibmacro{series+number}%
-  \newunit%
+  \iffieldundef{howpublished}{}{%
+    \printfield{howpublished}%
+    \nopunct\printtext{.}\addspace}%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \printfield{howpublished}%
+  \usebibmacro{series+number}%
   \newunit%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{language}%
@@ -1847,7 +1902,7 @@
   \usebibmacro{title}%
   \newunit%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \usebibmacro{in:bookauthor+others}%
+  \usebibmacro{in:bookauthor+editor+others}%
   \newunit%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{maintitle/booktitle}%
@@ -2104,7 +2159,7 @@
   \usebibmacro{title}%
   \newunit%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \usebibmacro{in:editor+others}%
+  \usebibmacro{in:bookauthor+editor+others}%
   \newunit%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{maintitle/booktitle}%
@@ -2121,14 +2176,14 @@
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{volume}%
   \printfield{part}%
+  \setunit{\addcomma\addspace}%
+  \usebibmacro{chapter+pages}%
   \newunit%
   \usebibmacro{series+number}%
   \newunit%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{note}%
   \printunit{\addperiod\addspace}%
-  \usebibmacro{chapter+pages}%
-  \newunit%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \iftoggle{bbx:isbn}%
     {\printfield{isbn}}%
@@ -2334,51 +2389,43 @@
   \usebibmacro{finentry}%
 }%% <<<2
 
+\DeclareNameFormat{holder}{%% >>>3
+  \begingroup
+  \let\mkbibnamefamily\@firstofone
+  \let\mkbibnamegiven\@firstofone
+  \let\mkbibnameprefix\@firstofone
+  \let\mkbibnamesuffix\@firstofone
+  \usebibmacro{name:given-family}%
+    {\namepartfamily}%
+    {\namepartgiven}%
+    {\namepartprefix}%
+    {\namepartsuffix}%
+  \endgroup
+  \usebibmacro{name:andothers}%
+}%% <<<3
+
 \DeclareBibliographyDriver{patent}{%% >>>2
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
-  \ifnameundef{holder}{%
-    \iflistundef{organization}{%
-      \usebibmacro{author/editor+others}%
-    }{%
-      \usebibmacro{organization}%
-      \ifnameundef{author}{%
-        \printnames[given-family]{editor}%
-      }{%
-        \printnames[given-family]{author}%
-      }%
-      \newunit%
-      \printfield{nameaddon}%
-      \newunit%
-    }%
-  }{%
-      \printnames{holder}%
-      \newunit%
-      \printfield{nameaddon}%
-      \newunit%
-      \ifnameundef{author}{%
-        \printnames[given-family]{editor}%
-      }{%
-        \printnames[given-family]{author}%
-      }%
-  }%
+  \ifnameundef{author}%
+    {\usebibmacro{editor+others}}%
+    {\printnames{author}%
+     \setunit*{\addspace}%
+     \usebibmacro{authorstrg}}%
   \setunit{\labelnamepunct}%
   \usebibmacro{title}%
   \newunit%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \printlist{language}%
+  \ifnameundef{holder}{}{%
+    \iffieldundef{holderrole}%
+      {Titular}%
+      {\printfield{holderrole}}%
+    \setunit{\addcolon\addspace}%
+    \printnames[holder]{holder}%
+    \newunit%
+    \printfield{nameaddon}%
+  }%
   \newunit%
-  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \usebibmacro{byauthor}%
-  \newunit%
-  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \usebibmacro{byeditor+others}%
-  \newunit%
-  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \printlist{location}%
-  \setunit*{\addcomma\addspace}%
-  \usebibmacro{date}%
-  \setunit*{\addcomma\addspace}%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{number}%
   \setunit*{\addcomma\addspace}%
@@ -2407,7 +2454,7 @@
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \iftoggle{bbx:related}%
     {\usebibmacro{related:init}%
-     \usebibmacro{related}}%
+    \usebibmacro{related}}%
     {}%
   \usebibmacro{finentry}%
 }%% <<<2
@@ -2438,13 +2485,13 @@
   \printfield{pagetotal}%
   \newunit%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \printfield{note}%
-  \printunit{\addperiod\addspace}%
-  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \iftoggle{bbx:isbn}%
     {\printfield{issn}}%
     {}%
   \newunit%
+  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \printfield{note}%
+  \printunit{\addperiod\addspace}%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \usebibmacro{doi+eprint+url}%
   \newunit%
@@ -2549,13 +2596,14 @@
   \usebibmacro{byeditor+others}%
   \newunit%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \usebibmacro{publisher+location+date}%
-  \newunit%
-  \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \usebibmacro{publisher+location}%
+  \setunit*{\addcomma\addspace}%
   \iffieldundef{maintitle}%
     {\printfield{volume}%
      \printfield{part}}%
     {}%
+  \setunit{\addcomma\addspace}%
+  \usebibmacro{date}%
   \newunit%
   \newblock%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \printfield{volumes}%

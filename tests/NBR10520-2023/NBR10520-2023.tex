@@ -1,0 +1,37 @@
+%% NBR 10520:2023 citation conformance test.
+%% Each example is prefixed with @@key@@ so the runner can compare citations
+%% individually.  The tests exercise author-date citations; note styles are
+%% covered by tests/abnt-ibid.
+\documentclass{article}
+\usepackage[paperwidth=120cm,paperheight=120cm,margin=1cm]{geometry}
+\usepackage[brazil]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[style=abnt]{biblatex}
+\usepackage[autostyle]{csquotes}
+
+\addbibresource{NBR10520-2023.bib}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+@@cite-1@@ \cite{authier1982}\par
+@@textcite-1@@ \textcite{authier1982}\par
+@@cite-2@@ \cite{clarac1985}\par
+@@textcite-2@@ \textcite{clarac1985}\par
+@@cite-3@@ \cite{three2017}\par
+@@textcite-3@@ \textcite{three2017}\par
+@@cite-4@@ \cite{four2019}\par
+@@textcite-4@@ \textcite{four2019}\par
+@@cite-same-surname@@ \cite{barbosaC1958} / \cite{barbosaO1958}\par
+@@textcite-same-surname@@ \textcite{barbosaC1958} / \textcite{barbosaO1958}\par
+@@cite-same-author-year@@ \textcite{reeside1927a} / \cite{reeside1927b}\par
+@@cite-same-author-years@@ \cites{dreyfuss1989}{dreyfuss1991}{dreyfuss1995}\par
+@@cite-page@@ \cite[293]{derrida1967}\par
+@@cite-corporate@@ \cite{brasil1995}\par
+@@cite-acronym@@ \cite{ibge2011}\par
+@@cite-no-author@@ \cite{ingles2012}\par
+@@apud@@ \apud[104]{cagliari1986}[55]{suassuna1995}\par
+@@textapud@@ \textapud[104]{cagliari1986}[55]{suassuna1995}\par
+\end{document}

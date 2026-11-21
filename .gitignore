@@ -14,3 +14,7 @@
 *.listing
 .DS_Store
 .dialect.*
+tests/**/build/
+__pycache__/
+*.bak
+*_bibertool.bib
