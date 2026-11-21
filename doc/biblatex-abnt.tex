@@ -80,8 +80,8 @@
   \printbibliography[heading=none,check=key#1]%
 }% <<<2
 
-\newcommand{\version}{3.4}
-\newcommand{\requirements}{\texttt{biblatex 3.8} e \texttt{biber 2.8}}
+\newcommand{\version}{5.0}
+\newcommand{\requirements}{\texttt{biblatex 3.22} e \texttt{biber 2.22}}
 
 \title{biblatex-abnt \version}
 \author{Daniel Ballester Marques}
@@ -124,9 +124,9 @@ edição da norma:
   Rio de Janeiro: ABNT, 2025. 68 p.
 \end{quote}
 
-Os documentos de teste das edições de 2002 e 2018 são preservados para
-compatibilidade histórica. As alterações introduzidas em 2025 são cobertas
-por casos de regressão específicos no diretório \texttt{tests}.
+As citações seguem a ABNT NBR 10520:2023. A suíte de testes cobre todos os
+modelos da seção 7 da NBR 6023:2025 e os principais exemplos autor-data da
+NBR 10520:2023.
 % <<<2
 
 \section{Uso}% >>>2
@@ -241,10 +241,11 @@ As opções \texttt{dateyear} e \texttt{datemonth} também podem ser aplicadas a
     \ExecuteBibliographyOptions[article]{datemonth}
 \end{verbatim}
 
-De acordo com a NBR 6023:2025, as indicações de local e editora desconhecidos
-não são impressas quando a entrada possui o campo \texttt{url}. Para documentos
-impressos, as indicações continuam sendo impressas e podem ser controladas
-manualmente pelas opções \texttt{nosl}, \texttt{nosn} e \texttt{noslsn}.
+Em documentos online, a editora desconhecida não é impressa. O local
+desconhecido só é impresso como \texttt{[S. l.]} quando a editora é conhecida.
+Para documentos impressos, as indicações continuam sendo impressas e podem ser
+controladas manualmente pelas opções \texttt{nosl}, \texttt{nosn} e
+\texttt{noslsn}.
     
 % <<<2
 

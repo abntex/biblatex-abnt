@@ -13,7 +13,7 @@
 %% The Current Maintainer of this work is Daniel Ballester Marques.
 
 \ProvidesFile{abnt.bbx}%
-[2018-11-17\space v3.4\space ABNT BibLaTeX citation style]%
+[2026-11-21\space v5.0\space ABNT BibLaTeX citation style]%
 
 
 % Init >>>1
@@ -31,6 +31,9 @@
 \DeclareLanguageMapping{british}{british-abnt}
 \DeclareLanguageMapping{canadian}{canadian-abnt}
 \DeclareLanguageMapping{english}{english-abnt}
+\DeclareLanguageMapping{french}{french-abnt}
+\DeclareLanguageMapping{german}{german-abnt}
+\DeclareLanguageMapping{italian}{italian-abnt}
 \DeclareLanguageMapping{portuges}{portuges-abnt}
 \DeclareLanguageMapping{portuguese}{portuguese-abnt}
 \DeclareLanguageMapping{spanish}{spanish-abnt}
@@ -546,14 +549,6 @@
   }
 \NewDocumentCommand{\abntIfYearEndsWithBracketTF}{mmm}
   { \exp_args:Ne \abnt_if_year_ends_with_bracket:nTF {#1} {#2} {#3} }
-\prg_new_conditional:Npnn \abnt_if_date_is_open_range:n #1 { p, T, F, TF }
-  {
-    \regex_match:nnTF { /\s*$ } {#1}
-      { \prg_return_true: }
-      { \prg_return_false: }
-  }
-\NewDocumentCommand{\abntIfDateIsOpenRangeTF}{mmm}
-  { \exp_args:Ne \abnt_if_date_is_open_range:nTF {#1} {#2} {#3} }
 \ExplSyntaxOff
 
 \renewbibmacro*{date}{%

@@ -1,57 +1,52 @@
+# Testes
 
-# biblatex-abnt/tests
+A suíte atual usa comparação **textual** e determinística, não comparação de
+pixels. Cada exemplo normativo é compilado pelo estilo e o texto extraído do
+PDF é comparado, registro por registro, com o texto da norma.
 
-- The files `NBR10520-2002.tex`, `NBR6023-2002.tex`, and
-  `NBR6023-2018.tex` use the biblatex-abnt style to print every entry
-  mentioned in the respective ABNT standards.
+## Executar
 
-- The files `NBR10520-2002_reference.pdf`, `NBR6023-2002_reference.pdf`, and
-  `NBR6023-2018_reference.pdf` are the latest compilations of the files above
-  that were manually checked against ABNT's rules and confirmed to be
-  accurate. They contain generated test output, not copies of the standards.
+Na raiz do repositório:
 
-- The files `NBR10520-2002_test.tex`, `NBR6023-2002_test.tex`, and
-  `NBR6023-2018_test.tex` compare the reference files with a current
-  compilation (which has to be generated from the original tex files), making
-  it easy to check if the style has strayed from the rules.
+```sh
+tests/run-tests.sh
+```
 
-- The `test.sh` script automates that last step.
-  It sets `TEXINPUTS` explicitly so the tests use the style files from the
-  working tree instead of a globally installed version.
+Requisitos: `pdflatex`, `biber`, `latexmk`, `pdftotext` e Python 3. O script
+usa os arquivos `.bbx`, `.cbx` e `.lbx` desta árvore de trabalho, não a cópia
+instalada no TeX Live.
 
-- The files `NBR6023-2025-regressions.tex` and
-  `NBR6023-2025-regressions.bib` contain focused regression cases for changes
-  introduced by NBR 6023:2025. They currently cover an event with no city and
-  the electronic article identifier (`eid`, or e-location), judgment dates,
-  online documents without publication details, periodical supplements,
-  interviewees as authors, optional ISSN, and DOI/ORCID identifiers.
+## Suítes
 
----
+| Diretório | Cobertura |
+|---|---|
+| `NBR6023-2025` | todos os modelos da seção 7 da NBR 6023:2025 (165 registros) |
+| `NBR10520-2023` | principais exemplos autor-data da NBR 10520:2023 |
+| `abnt-ibid` | abreviações page-local, primeira citação da página e `apud` |
+| `abnt-numeric` | citações numéricas |
+| `issues` | regressões de problemas relatados |
 
-- Os arquivos `NBR10520-2002.tex`, `NBR6023-2002.tex` e
-  `NBR6023-2018.tex` usam o biblatex-abnt para imprimir todas as entradas
-  citadas nas respectivas normas.
+Cada caso usa um marcador `@@chave@@` antes da citação ou da entrada
+bibliográfica. O runner extrai esses registros com `pdftotext` e compara com
+os arquivos `expected.txt`/`cases/*.expected`. Espaços, hifenização e alguns
+artefatos de extração são normalizados em `lib/compare_records.py`; o conteúdo
+e a pontuação são comparados de forma sensível a maiúsculas e minúsculas.
 
-- Os arquivos `NBR10520-2002_reference.pdf`, `NBR6023-2002_reference.pdf` e
-  `NBR6023-2018_reference.pdf` são as compilações mais recentes dos arquivos
-  acima que foram manualmente comparadas às normas da ABNT com um resultado
-  favorável. Eles contêm saídas de teste geradas, não cópias das normas.
+## Fixtures da NBR 6023:2025
 
-- Os arquivos `NBR10520-2002_test.tex`, `NBR6023-2002_test.tex` e
-  `NBR6023-2018_test.tex` comparam os arquivos de referência com uma
-  compilação atual (que deve ser gerada a partir dos arquivos tex originais),
-  permitindo visualizar facilmente os pontos em que o estilo distanciou-se
-  da norma.
+Os arquivos em `NBR6023-2025/cases/` são divididos por faixa de seção. Cada
+entrada usa a chave
 
-- O script `test.sh` automatiza esse último passo.
-  Ele define `TEXINPUTS` explicitamente para que os testes usem os arquivos
-  de estilo da árvore de trabalho, em vez de uma versão instalada globalmente.
+```
+nbr6023-2025-<seção>-<exemplo><e|c>
+```
 
-- Os arquivos `NBR6023-2025-regressions.tex` e
-  `NBR6023-2025-regressions.bib` contêm casos de regressão focados nas
-  alterações introduzidas pela NBR 6023:2025. No momento, eles cobrem um
-  evento sem cidade e o identificador eletrônico de artigo (`eid`, ou
-  e-location), datas de julgamento, documentos online sem dados de publicação
-  e suplementos de periódicos, entrevistados como autores, ISSN opcional e
-  identificadores DOI/ORCID.
+onde `e` é um bloco “elementos essenciais” e `c` um bloco “elementos
+complementares”. Consulte `NBR6023-2025/cases/README.md`.
 
+## Testes antigos
+
+Os testes de 2002/2018 baseados em PDF de referência foram movidos para
+`legacy/`. Eles não são executados: dependem de versões antigas do TeX Live e
+de comparação de pixels, que não é reproduzível. Servem apenas como registro
+histórico.

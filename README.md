@@ -1,25 +1,20 @@
 # biblatex-abnt
-[![Build Status](https://travis-ci.org/abntex/biblatex-abnt.svg?branch=master)](https://travis-ci.org/abntex/biblatex-abnt)
-[![NBR 6023:2025](https://img.shields.io/badge/NBR%206023%3A2025-adequa%C3%A7%C3%A3o%20inicial-yellow.svg)](doc/NBR6023-2025.md)
-[![NBR 6023:2018 100%](https://img.shields.io/badge/NBR%206023%3A2018-100%25-brightgreen.svg)](https://github.com/abntex/biblatex-abnt/blob/master/tests/NBR6023-2018_reference.pdf)
-[![NBR 6023:2002 100%](https://img.shields.io/badge/NBR%206023%3A2002-100%25-brightgreen.svg)](https://github.com/abntex/biblatex-abnt/blob/master/tests/NBR6023-2002_reference.pdf)
-[![NBR 10520:2002 100%](https://img.shields.io/badge/NBR%2010520%3A2002-100%25-brightgreen.svg)](https://github.com/abntex/biblatex-abnt/blob/master/tests/NBR10520-2002_reference.pdf)
 
+[![CI](https://github.com/abntex/biblatex-abnt/actions/workflows/ci.yml/badge.svg)](https://github.com/abntex/biblatex-abnt/actions/workflows/ci.yml)
+[![CTAN](https://img.shields.io/badge/CTAN-biblatex--abnt-blue.svg)](https://ctan.org/pkg/biblatex-abnt)
+[![NBR 6023:2025](https://img.shields.io/badge/NBR%206023%3A2025-testado-brightgreen.svg)](tests/NBR6023-2025)
+[![NBR 10520:2023](https://img.shields.io/badge/NBR%2010520%3A2023-testado-brightgreen.svg)](tests/NBR10520-2023)
 
 BibLaTeX style for Brazil's ABNT (Brazilian Association of Technical Standards)
 rules.
 
-Version 3.4
+Version 5.0
 
 ---
 
 Estilo para BibLaTeX compatível com as normas da ABNT.
 
-O desenvolvimento atual adota como referência a **ABNT NBR 6023:2025**,
-terceira edição da norma de elaboração de referências. As alterações em
-relação à edição de 2018 possuem casos de regressão próprios.
-
-Versão 3.4
+Versão 5.0
 
 ---
 
@@ -32,17 +27,14 @@ The current maintainer is Daniel Ballester Marques
 
 ## Instalação
 
-O biblatex-abnt está incluso no TeX Live a partir de 2016.
+O biblatex-abnt está incluso no TeX Live. A versão 5.0 exige
+`biblatex` 3.22 ou mais recente e `biber` 2.22 ou mais recente.
 
 Para instalá-lo manualmente, copie os arquivos `.bbx`, `.cbx` e `.lbx` para
 
     <TEXMFLOCAL>/tex/latex/biblatex-contrib/biblatex-abnt/
 
 e atualize o banco de dados do TeX (rodando o `texhash`, por exemplo).
-
-**O biblatex-abnt requer as últimas versões do Biber e do BibLaTeX.
-Se você estiver com algum problema, verifique se esses pacotes estão
-atualizados.**
 
 ## Uso
 
@@ -59,31 +51,59 @@ suas entradas.
 
 3. Use o comando `\printbibliography` para imprimir a bibliografia.
 
-*Consulte [o arquivo biblatex-abnt.pdf](https://github.com/abntex/biblatex-abnt/raw/master/doc/biblatex-abnt.pdf) e o [manual do biblatex](http://mirrors.ctan.org/macros/latex/contrib/biblatex/doc/biblatex.pdf) para informações sobre as opções e comandos disponíveis.*
+*Consulte [o arquivo biblatex-abnt.pdf](doc/biblatex-abnt.pdf) e o
+[manual do biblatex](http://mirrors.ctan.org/macros/latex/contrib/biblatex/doc/biblatex.pdf)
+para informações sobre as opções e comandos disponíveis.*
 
 ## Base normativa
 
-A referência normativa principal do estilo é:
+As referências normativas principais do estilo são:
 
 > ASSOCIAÇÃO BRASILEIRA DE NORMAS TÉCNICAS. **ABNT NBR 6023:2025:
 > Informação e documentação — Referências — Elaboração**. 3. ed.
 > Rio de Janeiro: ABNT, 2025. 68 p.
 
+> ASSOCIAÇÃO BRASILEIRA DE NORMAS TÉCNICAS. **ABNT NBR 10520:2023:
+> Informação e documentação — Citações em documentos — Apresentação**.
+> 2. ed. Rio de Janeiro: ABNT, 2023. 19 p.
+
 Consulte [a nota de implementação da NBR 6023:2025](doc/NBR6023-2025.md)
 para conhecer o escopo, os campos BibLaTeX adotados e os testes relacionados.
-A norma pode ser adquirida ou consultada pelos meios autorizados no
-[Catálogo da ABNT](https://www.abntcatalogo.com.br/).
+As normas podem ser adquiridas ou consultadas pelos meios autorizados no
+[Catálogo da ABNT](https://www.abntcatalogo.com.br/). O texto integral não é
+distribuído neste repositório.
 
-O texto integral da norma não é distribuído neste repositório.
+## Testes
 
-## Testes normativos
+O projeto usa testes de saída textual, não comparação de pixels. Cada exemplo
+normativo é compilado pelo estilo e comparado, entrada por entrada, com o texto
+da norma:
 
-- NBR 6023:2002: exemplos normativos e
-  [PDF de saída validada](tests/NBR6023-2002_reference.pdf).
-- NBR 6023:2018: exemplos normativos e
-  [PDF de saída validada](tests/NBR6023-2018_reference.pdf).
-- NBR 6023:2025: regressões das alterações da terceira edição em
-  [`tests/NBR6023-2025-regressions.tex`](tests/NBR6023-2025-regressions.tex)
-  e
-  [`tests/NBR6023-2025-regressions.bib`](tests/NBR6023-2025-regressions.bib).
+```sh
+tests/run-tests.sh
+```
 
+A suíte cobre:
+
+- todos os modelos da seção 7 da NBR 6023:2025 (165 registros);
+- os principais exemplos autor-data da NBR 10520:2023;
+- os estilos `abnt-ibid` e `abnt-numeric`;
+- regressões de problemas relatados (por exemplo, `\textapud`, editores em
+  `@inbook`, `relatedtype=reviewof` e datas desconhecidas).
+
+Consulte [`tests/README.md`](tests/README.md) para detalhes.
+
+## Overleaf
+
+O Overleaf usa uma versão congelada do TeX Live. Se a versão disponível ainda
+for anterior à 5.0, faça o upload dos arquivos `.bbx`, `.cbx` e `.lbx` para uma
+pasta do projeto e acrescente ao `latexmkrc`:
+
+```perl
+$ENV{'TEXINPUTS'}='./abnt//:' . $ENV{'TEXINPUTS'};
+```
+
+## Licença
+
+LPPL 1.3c ou posterior. Veja `README.md` e os cabeçalhos dos arquivos de
+estilo.
