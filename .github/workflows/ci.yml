@@ -22,7 +22,7 @@ jobs:
       - name: Install TeX packages
         run: |
           tlmgr install \
-            biblatex biber latexmk babel-portugues csquotes xpatch \
+            biblatex biber latexmk babel-portuges csquotes xpatch \
             l3packages l3kernel etoolbox logreq url microtype graphics \
             xcolor hyperref geometry lm
 
