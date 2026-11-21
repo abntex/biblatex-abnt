@@ -1,0 +1,771 @@
+% NBR 6023:2025 -- models 7.5 to 7.10.
+%
+% The expected strings are the norm's examples verbatim (whitespace collapsed).
+% Fields are semantic; where a model cannot be represented cleanly with the
+% current fields, the entry carries a TODO(style) note instead of a formatting
+% hack.
+%
+% Some URLs wrap across lines in the printed norm.  The .expected file keeps
+% the single spaces produced by that wrap (as required by the fixture rules);
+% tests/lib/compare_records.py rejoins them when comparing.
+
+% 7.5 Correspondência
+
+@letter{nbr6023-2025-7.5-1e,
+  keywords   = {7.5},
+  author     = {Pilla, Luiz},
+  title      = {[Correspondência]},
+  titleaddon = {Destinatário: Moysés Vellinho},
+  location   = {Porto Alegre},
+  date       = {1979-06-06},
+  note       = {1 cartão pessoal},
+  options    = {nosn},
+}
+
+% Same author/title as 7.5-1e: repeatfields keeps the author from becoming a
+% dash in the second entry.
+@letter{nbr6023-2025-7.5-1c,
+  keywords   = {7.5},
+  author     = {Pilla, Luiz},
+  title      = {[Correspondência]},
+  titleaddon = {Destinatário: Moysés Vellinho},
+  location   = {Porto Alegre},
+  date       = {1979-06-06},
+  note       = {1 cartão pessoal. Autografado},
+  options    = {nosn, repeatfields},
+}
+
+@letter{nbr6023-2025-7.5-2e,
+  keywords   = {7.5},
+  author     = {Aznar, José Camón},
+  title      = {[Correspondência]},
+  titleaddon = {Destinatário: Manoelito de Ornellas},
+  date       = {1957},
+  note       = {1 bilhete},
+  options    = {nosn},
+}
+
+% 7.6 Correspondência disponível em meio eletrônico
+
+@letter{nbr6023-2025-7.6-1e,
+  keywords   = {7.6},
+  author     = {Lispector, Clarice},
+  title      = {[Carta enviada para suas irmãs]},
+  titleaddon = {Destinatário: Elisa e Tânia Lispector},
+  location   = {Lisboa},
+  date       = {1944-08-04},
+  note       = {1 carta},
+  url        = {http://www.claricelispector.com.br/manuscrito_minhasqueridas.aspx},
+  urldate    = {2010-09-04},
+  options    = {nosn},
+}
+
+% 7.7.1 Coleção de publicação periódica
+
+@periodical{nbr6023-2025-7.7.1-1e,
+  keywords  = {7.7.1},
+  title     = {Revista Brasileira de Geografia},
+  location  = {Rio de Janeiro},
+  publisher = {IBGE},
+  date      = {1939/},
+}
+
+@periodical{nbr6023-2025-7.7.1-1c,
+  keywords  = {7.7.1},
+  title     = {Revista Brasileira de Geografia},
+  location  = {Rio de Janeiro},
+  publisher = {IBGE},
+  date      = {1939/},
+  issn      = {0034-723X},
+  note      = {Trimestral. Absorveu Boletim Geográfico, do IBGE. Índice acumulado, 1939-1983},
+}
+
+@periodical{nbr6023-2025-7.7.1-2e,
+  keywords  = {7.7.1},
+  title     = {Nursing},
+  location  = {São Paulo},
+  publisher = {Ferreira \& Bento},
+  date      = {1998/},
+}
+
+@periodical{nbr6023-2025-7.7.1-3c,
+  keywords  = {7.7.1},
+  title     = {Nursing},
+  location  = {Bruxelles},
+  publisher = {Association Nationale Catholique du Nursing},
+  date      = {1929/1975},
+  issn      = {0029-6457},
+  note      = {Bimestral},
+}
+
+% 7.7.2 Coleção de publicação periódica em meio eletrônico
+
+@periodical{nbr6023-2025-7.7.2-1e,
+  keywords  = {7.7.2},
+  title     = {Acta Cirúrgica Brasileira},
+  location  = {São Paulo},
+  publisher = {Sociedade Brasileira para o Desenvolvimento da Pesquisa em Cirurgia},
+  date      = {1997/},
+  url       = {http://www.scielo.br/scielo.php?script=sci_serial&pid=0102-8650&lng=pt&nrm=iso},
+  urldate   = {2013-08-22},
+}
+
+@periodical{nbr6023-2025-7.7.2-1c,
+  keywords  = {7.7.2},
+  title     = {Acta Cirúrgica Brasileira},
+  location  = {São Paulo},
+  publisher = {Sociedade Brasileira para o Desenvolvimento da Pesquisa em Cirurgia},
+  date      = {1997/},
+  issn      = {1678-2674 versão online},
+  note      = {Bimestral. A versão impressa iniciou em 1986},
+  url       = {http://www.scielo.br/scielo.php?script=sci_serial&pid=0102-8650&lng=pt&nrm=iso},
+  urldate   = {2013-08-22},
+}
+
+@periodical{nbr6023-2025-7.7.2-2c,
+  keywords  = {7.7.2},
+  title     = {Caderno Brasileiro de Ensino de Física},
+  location  = {Florianópolis},
+  publisher = {Universidade Federal de Santa Catarina},
+  date      = {2008/},
+  issn      = {2175-7941},
+  doi       = {10.5007/2175-7941},
+  url       = {https://periodicos.ufsc.br/index.php/fisica/index},
+  urldate   = {2014-05-20},
+}
+
+% 7.7.3 Parte de coleção de publicação periódica
+
+% "1982-1992" is the consulted period, which has no dedicated field.
+@periodical{nbr6023-2025-7.7.3-2e,
+  keywords  = {7.7.3},
+  title     = {Revista Brasileira de Geografia},
+  location  = {Rio de Janeiro},
+  publisher = {IBGE},
+  date      = {1939/},
+  note      = {1982-1992},
+}
+
+% 7.7.4 Fascículo, suplemento e outros
+
+@periodical{nbr6023-2025-7.7.4-1e,
+  keywords  = {7.7.4},
+  title     = {Dinheiro},
+  subtitle  = {revista semanal de negócios},
+  location  = {São Paulo},
+  publisher = {Três},
+  number    = {148},
+  date      = {2000-06-28},
+}
+
+@periodical{nbr6023-2025-7.7.4-2e,
+  keywords  = {7.7.4},
+  title     = {Revista Trimensal do Instituto Histórico e Geographico Brazileiro},
+  location  = {Rio de Janeiro},
+  publisher = {Companhia Typographica do Brazil},
+  % TODO(style): tomo and parte have no separate output in the periodical
+  % driver; `issue` carries "t. 64, pt. 1".
+  issue     = {t. 64, pt. 1},
+  date      = {1901},
+}
+
+@periodical{nbr6023-2025-7.7.4-3e,
+  keywords  = {7.7.4},
+  title     = {Conjuntura Econômica},
+  location  = {Rio de Janeiro},
+  publisher = {Ed. FGV},
+  volume    = {38},
+  number    = {9},
+  date      = {1984-09},
+  note      = {Edição especial: As 500 maiores empresas do Brasil},
+}
+
+@periodical{nbr6023-2025-7.7.4-4e,
+  keywords  = {7.7.4},
+  title     = {Pesquisa Nacional por Amostra de Domicílios},
+  location  = {Rio de Janeiro},
+  publisher = {IBGE},
+  volume    = {7},
+  date      = {1983},
+  note      = {Suplemento: Mão-de-obra e previdência},
+}
+
+@periodical{nbr6023-2025-7.7.4-5c,
+  keywords  = {7.7.4},
+  title     = {Acta Scietiae Veterinariae},
+  location  = {Porto Alegre},
+  publisher = {UFRGS, Faculdade de Veterinária},
+  volume    = {46},
+  date      = {2018},
+  note      = {Suplemento 1: Case reports. ISSN 1679-9216},
+}
+
+% 7.7.5 Artigo, seção e/ou matéria de publicação periódica
+
+@article{nbr6023-2025-7.7.5-1e,
+  keywords  = {7.7.5},
+  author    = {De Lucca, Gabriella},
+  title     = {Notas curtas},
+  journaltitle = {Getulio},
+  location  = {São Paulo},
+  volume    = {ano 3},
+  pages     = {9},
+  date      = {2009-07/2009-08},
+  options   = {slashdaterange},
+}
+
+@article{nbr6023-2025-7.7.5-2e,
+  keywords  = {7.7.5},
+  author    = {Dorea, R. D. and Costa, J. N. and Batita, J. M. and
+               Ferreira, M. M. and Menezes, R. V. and Souza, T. S.},
+  title     = {Reticuloperitonite traumática associada à esplenite e hepatite em bovino},
+  subtitle  = {relato de caso},
+  journaltitle = {Veterinária e Zootecnia},
+  location  = {São Paulo},
+  volume    = {18},
+  number    = {4},
+  pages     = {199-202},
+  date      = {2011},
+  note      = {Suplemento 3},
+  options   = {maxnames=10},
+}
+
+@article{nbr6023-2025-7.7.5-3e,
+  keywords  = {7.7.5},
+  author    = {Sekeff, Gisela},
+  title     = {O emprego dos sonhos},
+  journaltitle = {Domingo},
+  location  = {Rio de Janeiro},
+  volume    = {ano 26},
+  number    = {1344},
+  pages     = {30-36},
+  date      = {2002-02-03},
+}
+
+@article{nbr6023-2025-7.7.5-4e,
+  keywords  = {7.7.5},
+  author    = {Rocke, Hans and Ross, Johanna C.},
+  title     = {Online catalogs for and by librarians},
+  journaltitle = {Technical Services Quarterly},
+  location  = {Greeley},
+  volume    = {2},
+  number    = {3/4},
+  pages     = {1-9},
+  issue     = {Spring/Summer},
+  date      = {1985},
+}
+
+@article{nbr6023-2025-7.7.5-5e,
+  keywords  = {7.7.5},
+  author    = {Teich, D. H.},
+  title     = {A solução veio dos emergentes},
+  journaltitle = {Exame},
+  location  = {São Paulo},
+  volume    = {ano 43},
+  number    = {9},
+  edition   = {943},
+  pages     = {66-67},
+  date      = {2009-05-20},
+}
+
+@article{nbr6023-2025-7.7.5-6c,
+  keywords   = {7.7.5},
+  author     = {Bakker, Mitchekk},
+  title      = {Como obter sucesso na era do código aberto},
+  titleaddon = {Entrevistadores: Lenny Mendonça; Robert Sutton},
+  journaltitle = {HSM Management},
+  location   = {São Paulo},
+  volume     = {ano 12, v. 5},
+  number     = {70},
+  pages      = {102-106},
+  issue      = {set./out.},
+  date       = {2008},
+}
+
+% TODO(style): the article driver has no separate tomo field; "t. 101" is
+% carried in `volume` together with "v. 155".
+@article{nbr6023-2025-7.7.5-7e,
+  keywords  = {7.7.5},
+  author    = {Tavares, Raul},
+  title     = {O combate naval do Monte Santiago},
+  journaltitle = {Revista do Instituto Histórico e Geográfico Brasileiro},
+  location  = {Rio de Janeiro},
+  volume    = {v. 155, t. 101},
+  pages     = {168-203},
+  date      = {1953},
+}
+
+@article{nbr6023-2025-7.7.5-8e,
+  keywords     = {7.7.5},
+  author       = {Costa, V. R.},
+  title        = {À margem da lei},
+  subtitle     = {o Programa Comunidade Solidária},
+  journaltitle = {Em Pauta},
+  journalsubtitle = {revista da Faculdade de Serviço Social da UERJ},
+  location     = {Rio de Janeiro},
+  number       = {12},
+  pages        = {131-148},
+  date         = {1998},
+}
+
+% 7.7.6 Artigo e/ou matéria de publicação periódica em meio eletrônico
+
+@article{nbr6023-2025-7.7.6-1e,
+  keywords  = {7.7.6},
+  author    = {Vieira, Cássio Leite and Lopes, Marcelo},
+  title     = {A queda do cometa},
+  journaltitle = {Neo Interativa},
+  location  = {Rio de Janeiro},
+  number    = {2},
+  issue     = {inverno},
+  date      = {1994},
+  note      = {1 CD-ROM},
+}
+
+@article{nbr6023-2025-7.7.6-2e,
+  keywords  = {7.7.6},
+  author    = {Silva, M. M. L.},
+  title     = {Crimes da era digital},
+  journaltitle = {Net},
+  location  = {Rio de Janeiro},
+  date      = {1998-11},
+  note      = {Seção Ponto de Vista},
+  url       = {http://www.brazilnet.com.br/contexts/brasilrevistas.htm},
+  urldate   = {1998-11-28},
+}
+
+@article{nbr6023-2025-7.7.6-3e,
+  keywords  = {7.7.6},
+  author    = {Ribeiro, P. S. G.},
+  title     = {Adoção à brasileira},
+  subtitle  = {uma análise sociojurídica},
+  journaltitle = {Dataveni@},
+  location  = {São Paulo},
+  volume    = {ano 3},
+  number    = {18},
+  date      = {1998-08},
+  url       = {http://www.datavenia.inf.br/frame.artig.html},
+  urldate   = {1998-09-10},
+}
+
+@article{nbr6023-2025-7.7.6-4e,
+  keywords  = {7.7.6},
+  title     = {Windows 98},
+  subtitle  = {o melhor caminho para atualização},
+  journaltitle = {PC World},
+  location  = {São Paulo},
+  number    = {75},
+  date      = {1998-09},
+  url       = {http://www.idg.com.br/abre.htm},
+  urldate   = {1998-09-10},
+}
+
+@article{nbr6023-2025-7.7.6-5e,
+  keywords  = {7.7.6},
+  author    = {Alexandrescu, D. T.},
+  title     = {Melanoma costs},
+  subtitle  = {a dynamic model comparing estimated overall costs of various clinical stages},
+  journaltitle = {Dermatology Online Journal},
+  volume    = {15},
+  number    = {11},
+  pages     = {1},
+  issue     = {Nov.},
+  date      = {2009},
+  url       = {http://dermatology.cdlib.org/1511/originals/melanoma_costs/alexandrescu.html},
+  urldate   = {2009-11-03},
+}
+
+% TODO(style): there is no field for a dual Hebrew/Gregorian date; the
+% Hebrew part is carried in `issue` so that it prints before the Gregorian
+% date.
+@article{nbr6023-2025-7.7.6-6e,
+  keywords  = {7.7.6},
+  author    = {Paim, Zaken Sidinei},
+  title     = {No princípio},
+  journaltitle = {Boletim Ouve Israel},
+  location  = {Curitiba},
+  issue     = {26 Tishrei 5766 =},
+  date      = {2005-10-29},
+  url       = {http://www.israelitas.com.br/boletim/boletimVer.php?%20id=48&nomerosh=},
+  urldate   = {2012-06-21},
+}
+
+@article{nbr6023-2025-7.7.6-7e,
+  keywords  = {7.7.6},
+  author    = {Dantas, José Alves and others},
+  title     = {Regulação da auditoria em sistemas bancários},
+  subtitle  = {análise do cenário internacional e fatores determinantes},
+  journaltitle = {Revista Contabilidade \& Finanças},
+  location  = {São Paulo},
+  volume    = {25},
+  number    = {64},
+  pages     = {7-18},
+  issue     = {jan./abr.},
+  date      = {2014},
+  doi       = {http://dx.doi.org/10.1590/S1519-70772014000100002},
+  url       = {http://www.scielo.br/scielo.php?script=sci_arttext&pid=S1519-70772014000100002&lng=en&nrm=iso},
+  urldate   = {2014-05-20},
+}
+
+@article{nbr6023-2025-7.7.6-8e,
+  keywords  = {7.7.6},
+  author    = {Moura, L. R. and Torres, L. M. and Cadete, M. M. M. and Cunha, C. F.},
+  title     = {Fatores associados aos comportamentos de risco à saúde entre adolescentes brasileiros},
+  subtitle  = {uma revisão integrativa},
+  journaltitle = {Revista da Escola de Enfermagem da USP},
+  location  = {São Paulo},
+  volume    = {52},
+  eid       = {e03304},
+  date      = {2018},
+  doi       = {https://doi.org/10.1590/S1980-220X2017020403304},
+  url       = {https://www.scielo.br/j/reeusp/a/JvyjzY4B4b7f9P5TLyLpPFK/abstract/?lang=pt},
+  urldate   = {2023-04-07},
+  options   = {maxnames=10},
+}
+
+% 7.7.7 Artigo e/ou matéria de jornal
+
+@article{nbr6023-2025-7.7.7-1e,
+  keywords  = {7.7.7},
+  author    = {Otta, Lu Aiko},
+  title     = {Parcela do tesouro nos empréstimos do BNDES cresce 566 \% em oito anos},
+  journaltitle = {O Estado de S. Paulo},
+  location  = {São Paulo},
+  volume    = {ano 131},
+  number    = {42656},
+  date      = {2010-08-01},
+  note      = {Economia \& Negócios, p. B1},
+}
+
+@article{nbr6023-2025-7.7.7-2e,
+  keywords  = {7.7.7},
+  title     = {Crédito à agropecuária será de R\$ 156 bilhões até 2015},
+  journaltitle = {Jornal do Commercio},
+  location  = {Rio de Janeiro},
+  volume    = {ano 97},
+  number    = {156},
+  pages     = {A3},
+  bookpagination = {none},
+  date      = {2014-05-20},
+}
+
+% 7.7.8 Artigo e/ou matéria de jornal em meio eletrônico
+
+@article{nbr6023-2025-7.7.8-1e,
+  keywords  = {7.7.8},
+  author    = {Veríssimo, L. F.},
+  title     = {Um gosto pela ironia},
+  journaltitle = {Zero Hora},
+  location  = {Porto Alegre},
+  volume    = {ano 47},
+  number    = {16.414},
+  pages     = {2},
+  date      = {2010-08-12},
+  url       = {http://www.clicrbs.com.br/zerohora/jsp/default.jspx?uf=1&action=flip},
+  urldate   = {2010-08-12},
+}
+
+@article{nbr6023-2025-7.7.8-2e,
+  keywords  = {7.7.8},
+  title     = {Professores terão exame para ingressar na carreira},
+  journaltitle = {Diário do Vale},
+  location  = {Volta Redonda},
+  volume    = {18},
+  number    = {5877},
+  date      = {2010-05-27},
+  note      = {Caderno Educação, p. 41},
+  url       = {http://www.bancadigital.com.br/diariodovale/reader2/Default.aspx?pID=1&eID=495&lP=38&rP=39&lT=page},
+  urldate   = {2010-09-29},
+}
+
+% 7.8.1 Evento no todo em monografia
+
+
+@proceedings{nbr6023-2025-7.8.1-1e,
+  keywords  = {7.8.1},
+  eventtitle = {International Symposium on Chemical Changes During Food Processing},
+  number    = {2},
+  eventdate = {1984},
+  venue     = {Valencia},
+  title     = {Proceedings [...]},
+  location  = {Valencia},
+  publisher = {Instituto de Agroquímica y Tecnología de Alimentos},
+  date      = {1984},
+}
+
+% TODO(style): biblatex has only one eventtitle/number pair; the first event's
+% number is carried inside `eventtitle`.
+@proceedings{nbr6023-2025-7.8.1-2c,
+  keywords  = {7.8.1},
+  eventtitle = {Congresso Internacional do INES, 8.; Seminário Nacional do INES},
+  number    = {14},
+  eventdate = {2009},
+  venue     = {Rio de Janeiro},
+  title     = {Anais [...]},
+  location  = {Rio de Janeiro},
+  publisher = {Instituto Nacional de Educação de Surdos},
+  date      = {2009},
+  pagetotal = {160},
+  addendum  = {Tema: Múltiplos Atores e Saberes na Educação de Surdos. Inclui bibliografia.},
+}
+
+% 7.8.2 Evento no todo em publicação periódica
+
+% TODO(style): the event's papers were published as a journal supplement;
+% proceedings has no journaltitle/supplement structure, so the journal title
+% is carried in `title`. The second event's number is inside `eventtitle`.
+@proceedings{nbr6023-2025-7.8.2-1e,
+  keywords  = {7.8.2},
+  eventtitle = {Congresso do Centro-Oeste de Clínicos Veterinários de Pequenos Animais, 3.;
+                Feira do Centro-Oeste do Mercado Pet},
+  number    = {3},
+  eventdate = {2006},
+  venue     = {[Brasília, DF]},
+  title     = {[Trabalhos científicos e casos clínicos]. Ciência Animal Brasileira},
+  location  = {Goiânia},
+  publisher = {UFG},
+  date      = {2006-11},
+  note      = {Suplemento 1},
+}
+
+% Proceedings has a single `number` for the event numbering; the journal
+% issue number is therefore carried in `volume` together with "v. 19".
+% The journal title is carried in `title` (see 7.8.2-1e).
+@proceedings{nbr6023-2025-7.8.2-2c,
+  keywords  = {7.8.2},
+  eventtitle = {Congresso Brasileiro de Olericultura, 41.;
+                Encontro sobre Plantas Medicinais, Aromáticas e Condimentares},
+  number    = {1},
+  eventdate = {2001},
+  venue     = {Brasília, DF},
+  title     = {Apresentação, artigos, palestras, instruções. Horticultura Brasileira},
+  location  = {Brasília, DF},
+  publisher = {Sociedade de Olericultura do Brasil},
+  date      = {2001-07},
+  volume    = {v. 19, n. 2},
+  note      = {Suplemento: Dos orgânicos aos transgênicos},
+}
+
+% 7.8.3 Evento no todo em meio eletrônico
+
+@proceedings{nbr6023-2025-7.8.3-1e,
+  keywords  = {7.8.3},
+  eventtitle = {Congresso de Iniciação Científica da UFPE},
+  number    = {4},
+  eventdate = {1996},
+  venue     = {Recife},
+  title     = {Anais eletrônicos [...]},
+  location  = {Recife},
+  publisher = {UFPE},
+  date      = {1996},
+  url       = {http://www.propesq.ufpe.br/anais/anais.htm},
+  urldate   = {1997-01-21},
+}
+
+% The norm prints an inferred date in brackets; biblatex's `date` does not
+% parse "[2004]", so `year` carries the bracketed value.
+@proceedings{nbr6023-2025-7.8.3-2e,
+  keywords  = {7.8.3},
+  eventtitle = {Conferência de Gestão Hoteleira do Brasil},
+  number    = {2},
+  eventdate = {2004},
+  venue     = {Rio de Janeiro},
+  title     = {Hotel management II},
+  location  = {Rio de Janeiro},
+  publisher = {Senac/CPRTV},
+  year      = {[2004]},
+  note      = {4 fitas de vídeo, VHS, NTSC},
+}
+
+% TODO(style): two events with independent numbering are carried as one
+% eventtitle plus `number` for the second event.
+@proceedings{nbr6023-2025-7.8.3-3c,
+  keywords  = {7.8.3},
+  eventtitle = {Congresso Brasileiro de Soja, 5.; Congresso de Soja do Mercosul},
+  eventdate = {2009},
+  venue     = {Goiânia},
+  title     = {Anais [...]},
+  location  = {Brasília, DF},
+  publisher = {Embrapa},
+  date      = {2009},
+  note      = {1 CD-ROM. Siglas dos eventos: CBSOJA e MERCOSOJA. Tema: Soja: fator de desenvolvimento do Cone Sul},
+}
+
+% 7.8.4.1 Trabalho apresentado em evento
+
+@inproceedings{nbr6023-2025-7.8.4.1-1e,
+  keywords  = {7.8.4.1},
+  author    = {Brayner, A. R. A. and Medeiros, C. B.},
+  title     = {Incorporação do tempo em SGBD orientado a objetos},
+  eventtitle = {Simpósio Brasileiro de Banco de Dados},
+  number    = {9},
+  eventdate = {1994},
+  venue     = {São Paulo},
+  booktitle = {Anais [...]},
+  location  = {São Paulo},
+  publisher = {USP},
+  date      = {1994},
+  pages     = {16-29},
+}
+
+@inproceedings{nbr6023-2025-7.8.4.1-2e,
+  keywords  = {7.8.4.1},
+  author    = {Zuben, A. V. and Casanova, C. and Baldini, M. B. D. and
+               Rangel, O. and Angerami, R. N. and Rodrigues, R. C. A. and
+               Presotto, D.},
+  title     = {Vigilância epidemiológica da leishmaniose visceral americana (LVA) em cães no município de Campinas, São Paulo},
+  eventtitle = {Reunião de Pesquisa Aplicada em Doenças de Chagas, 26.;
+                Reunião de Pesquisa Aplicada em Leishmanioses},
+  number    = {14},
+  eventdate = {2010},
+  venue     = {Uberaba},
+  booktitle = {Anais [...]},
+  location  = {Uberaba},
+  publisher = {Universidade Federal do Triangulo Mineiro},
+  date      = {2010},
+  pages     = {135-175},
+  options   = {maxnames=10},
+}
+
+@inproceedings{nbr6023-2025-7.8.4.1-3c,
+  keywords  = {7.8.4.1},
+  author    = {Martin Neto, L. and Bayer, C. and Mielniczuk, J.},
+  title     = {Alterações qualitativas da matéria orgânica e os fatores determinantes da sua estabilidade num solo podzólico vermelho-escuro em diferentes sistemas de manejo},
+  eventtitle = {Congresso Brasileiro de Ciência do Solo},
+  number    = {26},
+  eventdate = {1997},
+  venue     = {Rio de Janeiro},
+  booktitle = {Resumos [...]},
+  location  = {Rio de Janeiro},
+  publisher = {Sociedade Brasileira de Ciência do Solo},
+  date      = {1997},
+  pages     = {443, ref. 6-141},
+  bookpagination = {none},
+}
+
+% 7.8.4.2 Trabalho apresentado em evento e publicado em publicação periódica
+
+@article{nbr6023-2025-7.8.4.2-3e,
+  keywords  = {7.8.4.2},
+  author    = {Gonçalves, R. P. M. and others},
+  title     = {Aspectos hematológicos de cães parasitados por Babesia canis na cidade de Niterói, RJ entre os anos de 1994 a 2005},
+  subtitle  = {parte 1: eritrograma},
+  journaltitle = {Ciência Animal Brasileira},
+  location  = {Goiânia},
+  pages     = {271-273},
+  date      = {2006-11},
+  note      = {Suplemento 1. Trabalho apresentado no 3º Congresso do Centro-Oeste de Clínicos Veterinários de Pequenos Animais, 2006, [Brasília, DF]},
+}
+
+% 7.8.5 Trabalho apresentado em evento em meio eletrônico
+
+@inproceedings{nbr6023-2025-7.8.5-1e,
+  keywords  = {7.8.5},
+  author    = {Guncho, M. R.},
+  title     = {A educação à distância e a biblioteca universitária},
+  eventtitle = {Seminário de Bibliotecas Universitárias},
+  number    = {10},
+  eventdate = {1998},
+  venue     = {Fortaleza},
+  booktitle = {Anais [...]},
+  location  = {Fortaleza},
+  publisher = {Tec Treina},
+  date      = {1998},
+  note      = {1 CD-ROM},
+}
+
+@inproceedings{nbr6023-2025-7.8.5-2e,
+  keywords  = {7.8.5},
+  author    = {Paletta, F. A. C. and others},
+  title     = {Biblioteca Digital de Teses e Dissertações da Biblioteca do Conjunto das Químicas/USP},
+  subtitle  = {digitalização retrospectiva: estudo de caso},
+  eventtitle = {Seminário Nacional de Bibliotecas Universitárias, 16.;
+                Seminário Internacional de Bibliotecas Digitais},
+  number    = {2},
+  eventdate = {2010},
+  venue     = {Rio de Janeiro},
+  booktitle = {Anais [...].},
+  location  = {Rio de Janeiro: UFRJ \addsemicolon\addspace São Paulo: CRUESP},
+  options   = {nosn},
+  date      = {2010},
+  note      = {1 pen drive},
+}
+
+@inproceedings{nbr6023-2025-7.8.5-3e,
+  keywords  = {7.8.5},
+  author    = {Badke, T. and Zacarias, R.},
+  title     = {Certificação e assinatura digital},
+  eventtitle = {Interlogos},
+  eventdate = {2006},
+  venue     = {Vitória},
+  booktitle = {[Anais]},
+  location  = {Vitória},
+  publisher = {AARQUES},
+  date      = {2006},
+  note      = {1 CD-ROM. Diretório: \textbackslash Palestrates\textbackslash Palestras de 24 de Agosto},
+}
+
+@inproceedings{nbr6023-2025-7.8.5-4c,
+  keywords  = {7.8.5},
+  author    = {Gonçalves, Carmen Diego},
+  title     = {Estilo de pensamento na produção de conhecimento científico},
+  eventtitle = {Congresso Português de Sociologia},
+  number    = {4},
+  eventdate = {2000},
+  venue     = {Coimbra},
+  booktitle = {Actas do [...]},
+  location  = {Lisboa},
+  publisher = {Associação Portuguesa de Sociologia},
+  date      = {2000},
+  note      = {Tema: Sociedade portuguesa: passados recentes, futuros próximos. Eixo temático: Reorganização dos saberes, ciência e educação, p. 1-18},
+  url       = {http://aps.pt/wp-content/uploads/2017/08/DPR462de12f4bb03_1.pdf},
+  urldate   = {2010-05-03},
+}
+
+% 7.9 Patente
+
+% TODO(style): there is no dedicated procurator field; `nameaddon` carries
+% "Procurador: ..." after the holder.
+@patent{nbr6023-2025-7.9-1e,
+  keywords  = {7.9},
+  author    = {Bertazzoli, Rodnei and others},
+  title     = {Eletrodos de difusão gasosa modificados com catalisadores redox, processo e reator eletroquímico de síntese de peróxido de hidrogênio utilizando os mesmos},
+  holder     = {{Universidade Estadual de Campinas}},
+  holderrole = {Depositante},
+  nameaddon  = {Procurador: Maria Cristina Valim Lourenço Gomes},
+  number    = {BR n. PI0600460-1A},
+  note      = {Depósito: 27 jan. 2006. Concessão: 25 mar. 2008},
+}
+
+@patent{nbr6023-2025-7.9-2e,
+  keywords  = {7.9},
+  author    = {Vicente, Marcos Fernandes},
+  title     = {Reservatório para sabão em pó com suporte para escova},
+  holder     = {{Marcos Fernandes Vicente}},
+  holderrole = {Depositante},
+  number    = {MU8802281-1U2},
+  note      = {Depósito: 15 out. 2008. Concessão: 29 jun. 2010},
+}
+
+@patent{nbr6023-2025-7.9-3c,
+  keywords  = {7.9},
+  author    = {Oliveira, Luiz Cláudio Marangoni de and Ferreira, Luiz Otávio Saraiva},
+  title     = {Scanner ressonante planar com atuação indutiva fortemente acoplada},
+  holder     = {{Universidade Estadual de Campinas}},
+  holderrole = {Titular},
+  number     = {BR n. PI0801780-8 A2},
+  note      = {Depósito: 12 fev. 2008. Concessão: 29 set. 2009. Int. Ci. G02B 26/10 (2009.01), G02F 1/29 (2009.01)},
+}
+
+% 7.10 Patente em meio eletrônico
+
+@patent{nbr6023-2025-7.10-3e,
+  keywords  = {7.10},
+  author    = {Galembeck, Fernando and Souza, Maria de Fátima Brito},
+  title     = {Process to obtain an Intercalated or exfoliated polyester with clay hybrid nanocomposite material},
+  holder     = {{Universidade Estadual de Campinas} and {Rhodia Ster S/A}},
+  holderrole = {Depositante},
+  number    = {WO2005/030850 A1, Depósito: 1 Oct. 2003, Concessão: 7 Apr. 2005},
+  url       = {http://www.iprvillage.Info/portal/servlet/DIIDirect?CC=WO&PN=2005030850&DT=A1&SrcAuth=Wila&Token=UtWHB3Mmc98t05i1AVPmaGE5dYhs00Nlt38dpA3EfnOosue2.GSz63ySsIiukTB8VQWW32lISV87n4_naNBY8lhYY30Rw1UeDo_8Yo8UVD0},
+  urldate   = {2010-08-27},
+}

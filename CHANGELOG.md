@@ -2,6 +2,63 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.0] - 2026-11-21
+
+### Added
+
+- Conformance with ABNT NBR 6023:2025, including optional event city,
+  `eid`/e-location, judgment dates for jurisprudence, interviewee as author,
+  ISSN as a complementary element, supplements after the publication date,
+  and `holderrole` for patents.
+- Conformance with ABNT NBR 10520:2023 citations, including author names in
+  title case in citations, `accite`/`sccite` options, `Id.`, `Ibid.`,
+  `op. cit.` and `loc. cit.`, and page-local abbreviations.
+- A text-based golden test suite covering all section 7 models of
+  NBR 6023:2025 (165 records), the main author-date examples of
+  NBR 10520:2023, `abnt-ibid`, `abnt-numeric`, and focused regressions.
+- GitHub Actions CI.
+- French, German and Italian language mappings.
+
+### Changed
+
+- First citations on a new page are printed in full in `abnt-ibid`.
+- Patent references print the inventor first, followed by the holder,
+  `nameaddon`, number and notes.
+- `@inbook` and `@incollection` use the editor/organizer formatting required
+  by the norm, with `bookauthor` fallback.
+- `uniquename=mininit` is used for disambiguating authors with the same
+  surname and year.
+- Version headers and documentation updated to 5.0.
+
+### Fixed
+
+- `\textapud` no longer repeats the author name for multiple keys.
+- No `Id.`/`Ibid.` is emitted immediately after `\apud`.
+- Duplicate “Resenha de:” in `@article` entries with `relatedtype=reviewof`.
+- Punctuation after unknown years such as `[2000?]`.
+- Spacing after open-ended dates such as `1939- .`.
+- Obsolete `l3regex` dependency in `abnt-ibid`.
+- `abnt-ibid` no longer fails when loaded because of undefined
+  `sccite`/`accite` toggles.
+- `abnt-numeric` has an explicit regression test; stale Overleaf copies are
+  documented in the README.
+
+### Removed
+
+- Travis CI configuration and the old PDF pixel-diff reference workflow.
+
+## [4.0] - 2024-07-04
+
+### Added
+- Compliance with NBR 10520:2023
+- Added tests for NBR 6023:2018
+
+### Fixed
+- Fix `-abnt-abnt` suffix warning
+
+### Changed
+- Removed chevron from URLs
+- Italicizes “S. l.”, “s. n.”, “In” and “et al”
 
 ## [3.4] - 2018-11-17
 
@@ -119,6 +176,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Add "et al." in citations
 
 
+[5.0]: https://github.com/abntex/biblatex-abnt/compare/v4.0...v5.0
+[4.0]: https://github.com/abntex/biblatex-abnt/compare/v3.4...v4.0
 [3.4]: https://github.com/abntex/biblatex-abnt/compare/v3.3...v3.4
 [3.3]: https://github.com/abntex/biblatex-abnt/compare/v3.2...v3.3
 [3.2]: https://github.com/abntex/biblatex-abnt/compare/v3.1...v3.2
@@ -128,4 +187,3 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 [2.0.1]: https://github.com/abntex/biblatex-abnt/compare/v2.0...v2.0.1
 [2.0]: https://github.com/abntex/biblatex-abnt/compare/v1.0.1...v2.0
 [1.0.1]: https://github.com/abntex/biblatex-abnt/compare/v1.0...v1.0.1
-

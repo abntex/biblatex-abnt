@@ -1,33 +1,52 @@
+# Testes
 
-# biblatex-abnt/tests
+A suíte atual usa comparação **textual** e determinística, não comparação de
+pixels. Cada exemplo normativo é compilado pelo estilo e o texto extraído do
+PDF é comparado, registro por registro, com o texto da norma.
 
-- The files `NBR10520-2002.tex` and `NBR6023-2002.tex` use the biblatex-abnt
-  style to print every entry mentioned on the respective ABNT rules.
+## Executar
 
-- The files `NBR10520-2002_reference.pdf` and `NBR6023-2002_reference.pdf` are
-  the latest compilation of the files above that was manually checked against
-  ABNT's rules and confirmed to be accurate.
+Na raiz do repositório:
 
-- The files `NBR10520-2002_test.tex` and `NBR6023-2002_test.tex` compare the
-  reference files with a current compilation (which has to be generated from
-  the original tex files), making it easy to check if the style has strayed
-  from the rules.
+```sh
+tests/run-tests.sh
+```
 
-- The `test.sh` script automates that last step.
+Requisitos: `pdflatex`, `biber`, `latexmk`, `pdftotext` e Python 3. O script
+usa os arquivos `.bbx`, `.cbx` e `.lbx` desta árvore de trabalho, não a cópia
+instalada no TeX Live.
 
----
+## Suítes
 
-- Os arquivos `NBR10520-2002.tex` e `NBR6023-2002.tex` usam o biblatex-abnt
-  para imprimir todas as entradas citadas nas respectivas normas.
+| Diretório | Cobertura |
+|---|---|
+| `NBR6023-2025` | todos os modelos da seção 7 da NBR 6023:2025 (165 registros) |
+| `NBR10520-2023` | principais exemplos autor-data da NBR 10520:2023 |
+| `abnt-ibid` | abreviações page-local, primeira citação da página e `apud` |
+| `abnt-numeric` | citações numéricas |
+| `issues` | regressões de problemas relatados |
 
-- Os arquivos `NBR10520-2002_reference.pdf` e `NBR6023-2002_reference.pdf` são
-  a última compilação dos arquivos acima que foi manualmente comparada à norma
-  da ABNT com um resultado favorável.
+Cada caso usa um marcador `@@chave@@` antes da citação ou da entrada
+bibliográfica. O runner extrai esses registros com `pdftotext` e compara com
+os arquivos `expected.txt`/`cases/*.expected`. Espaços, hifenização e alguns
+artefatos de extração são normalizados em `lib/compare_records.py`; o conteúdo
+e a pontuação são comparados de forma sensível a maiúsculas e minúsculas.
 
-- Os arquivos `NBR10520-2002_test.tex` e `NBR6023-2002_test.tex` comparam os
-  arquivos de referência com uma compilação atual (que deve ser gerada
-  a partir dos arquivos tex originais), permitindo visualizar facilmente os
-  pontos em que o estilo distanciou-se da norma.
+## Fixtures da NBR 6023:2025
 
-- O script `test.sh` automatiza esse último passo.
+Os arquivos em `NBR6023-2025/cases/` são divididos por faixa de seção. Cada
+entrada usa a chave
 
+```
+nbr6023-2025-<seção>-<exemplo><e|c>
+```
+
+onde `e` é um bloco “elementos essenciais” e `c` um bloco “elementos
+complementares”. Consulte `NBR6023-2025/cases/README.md`.
+
+## Testes antigos
+
+Os testes de 2002/2018 baseados em PDF de referência foram movidos para
+`legacy/`. Eles não são executados: dependem de versões antigas do TeX Live e
+de comparação de pixels, que não é reproduzível. Servem apenas como registro
+histórico.

@@ -2,9 +2,19 @@
 
 set -e
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+export TEXINPUTS="$REPO_DIR/latex/bbx//:$REPO_DIR/latex/cbx//:$REPO_DIR/latex/lbx//:${TEXINPUTS:-}"
+
 echo "Running tests..."
 
 pass=true
+
+
+pdflatex -draftmode -interaction=batchmode NBR6023-2025-regressions.tex
+biber NBR6023-2025-regressions
+pdflatex -draftmode -interaction=batchmode NBR6023-2025-regressions.tex
+pdflatex -draftmode -interaction=batchmode NBR6023-2025-regressions.tex
 
 
 sed -i.bak 's/\\toggletrue{reference}/% \\toggletrue{reference}/' NBR10520-2002.tex

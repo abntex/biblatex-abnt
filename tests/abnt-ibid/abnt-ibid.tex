@@ -1,0 +1,35 @@
+%% abnt-ibid regression test: page-local abbreviations, first citation on a
+%% new page, and the reset after an apud.
+\documentclass{article}
+\usepackage[paperwidth=20cm,paperheight=25cm,margin=2cm]{geometry}
+\usepackage[brazil]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[style=abnt-ibid]{biblatex}
+\usepackage[autostyle]{csquotes}
+
+\addbibresource{abnt-ibid.bib}
+\pagestyle{empty}
+\newcounter{citecase}
+\AtEveryCitekey{%
+  \stepcounter{citecase}%
+  \printtext{@@ibid-\thecitecase@@ }%
+}
+
+\begin{document}
+Página 1.\footcite{doe2004}
+
+\newpage
+Página 2 primeira.\footcite{doe2004}
+
+Página 2 segunda.\footcite{doe2004}
+
+\newpage
+Página 3.\footcite{doe2004}
+
+\newpage
+Página 4 apud.\apud{roe2008}{poe2010}
+
+Página 4 depois do apud.\footcite{poe2010}
+\end{document}

@@ -1,0 +1,576 @@
+%% NBR 6023:2025, sections 7.11--7.14.
+%%
+%% Ordinals and the degree sign are set in TS1 so that the text layer
+%% contains º and ° (T1 would extract them as ž and ř).  En dashes are
+%% written as --, as usual in BibTeX.
+
+% 7.11.1 Legislação
+
+@book{nbr6023-2025-7.11.1-1e,
+    keywords     = {7.11.1},
+    author       = {{Rio Grande do Sul}},
+    nameaddon    = {[Constituição (1989)]},
+    title        = {Constituição do Estado do Rio Grande do Sul},
+    edition      = {4. ed. atual.},
+    location     = {Porto Alegre},
+    publisher    = {Assembléia Legislativa do Estado do Rio Grande do Sul},
+    date         = {1995},
+}
+
+% @book so that the edition is printed; @legislation uses the article
+% driver, which has no edition field.
+@book{nbr6023-2025-7.11.1-2c,
+    keywords     = {7.11.1},
+    author       = {{Brasil}},
+    nameaddon    = {[Constituição (1988)]},
+    title        = {Constituição da República Federativa do Brasil},
+    editor       = {Cláudio Brandão de Oliveira},
+    % Literal so that the style prints "Organizado por" instead of
+    % "Organização:" (the default byorganizer string).
+    editortype   = {Organizado por},
+    location     = {Rio de Janeiro},
+    publisher    = {Roma Victor},
+    date         = {2002},
+    pagetotal    = {320},
+}
+
+@legislation{nbr6023-2025-7.11.1-3c,
+    keywords     = {7.11.1},
+    author       = {{Brasil}},
+    title        = {Lei n{\fontencoding{TS1}\selectfont º} 10.406, de 10 de janeiro de 2002. Institui o Código Civil},
+    journaltitle = {Diário Oficial da União},
+    journalsubtitle = {seção 1},
+    location     = {Brasília, DF},
+    volume       = {ano 139},
+    number       = {8},
+    pages        = {1-74},
+    date         = {2002-01-11},
+    note         = {PL 634/1975},
+}
+
+% 7.11.2 Legislação em meio eletrônico
+
+@book{nbr6023-2025-7.11.2-1e,
+    keywords     = {7.11.2},
+    author       = {{Brasil}},
+    nameaddon    = {[Constituição (1988)]},
+    title        = {Constituição da República Federativa do Brasil de 1988},
+    location     = {Brasília, DF},
+    publisher    = {Presidência da República},
+    % Bracketed inferred year: date = {2016} would print without brackets.
+    year         = {[2016]},
+    sortyear     = {2016},
+    url          = {http://www.planalto.gov.br/ccivil_03/Constituicao/Constituicao.htm},
+    urldate      = {2017-01-01},
+}
+
+@book{nbr6023-2025-7.11.2-2e,
+    keywords     = {7.11.2},
+    author       = {{Curitiba}},
+    title        = {Lei n{\fontencoding{TS1}\selectfont º} 12.092, de 21 de dezembro de 2006. Estima a receita e fixa a despesa do município de Curitiba para o exercício financeiro de 2007},
+    location     = {Curitiba},
+    publisher    = {Câmara Municipal},
+    year         = {[2007]},
+    sortyear     = {2007},
+    url          = {http://domino.cmc.pr.gov.br/contlei.nsf/98454e416897038b052568fc004fc180/e5df879ac6353e7f032572800061df72},
+    urldate      = {2007-03-22},
+}
+
+@inbook{nbr6023-2025-7.11.2-3e,
+    keywords     = {7.11.2},
+    author       = {{Brasil}},
+    title        = {Decreto-lei n{\fontencoding{TS1}\selectfont º} 200, de 25 de fevereiro de 1967. Dispõe sobre a organização da Administração Federal, estabelece diretrizes para a Reforma Administrativa, e dá outras providências},
+    booktitle    = {VADE mecum},
+    location     = {Porto Alegre},
+    publisher    = {Verbo Jurídico},
+    date         = {2007},
+    note         = {1 CD-ROM (p. 1-90).},
+}
+
+% 7.11.3 Jurisprudência
+
+@jurisdiction{nbr6023-2025-7.11.3-1c,
+    keywords     = {7.11.3},
+    options = {nosn},
+    author       = {{Brasil}},
+    nameaddon    = {Supremo Tribunal Federal (2. Turma)},
+    title        = {Recurso Extraordinário 313060/SP. Leis 10.927/91 e 11.262 do município de São Paulo. Seguro obrigatório contra furto e roubo de automóveis. Shopping centers, lojas de departamento, supermercados e empresas com estacionamento para mais de cinqüenta veículos. Inconstitucionalidade. Recorrente: Banco do Estado de São Paulo S/A -- BANESPA. Recorrido: Município de São Paulo. Relatora: Min. Ellen Gracie},
+    eventdate    = {2005-11-29},
+    journaltitle = {Lex},
+    journalsubtitle = {jurisprudência do Supremo Tribunal Federal},
+    location     = {São Paulo},
+    volume       = {28},
+    number       = {327},
+    pages        = {226-230},
+    date         = {2006},
+}
+
+@jurisdiction{nbr6023-2025-7.11.3-2e,
+    keywords     = {7.11.3},
+    options = {nosn},
+    author       = {{Brasil}},
+    nameaddon    = {Superior Tribunal de Justiça (1. Seção)},
+    title        = {Súmula n{\fontencoding{TS1}\selectfont\textdegree} 333. Cabe mandado de segurança contra ato praticado em licitação promovida por sociedade de economia mista ou empresa pública},
+    journaltitle = {Diário da Justiça},
+    journalsubtitle = {seção 1},
+    location     = {Brasília, DF},
+    volume       = {ano 82},
+    number       = {32},
+    pages        = {246},
+    date         = {2007-02-14},
+}
+
+% 7.11.4 Jurisprudência em meio eletrônico
+
+% TODO(style): @jurisdiction prints publisher before location, so the
+% publication data comes out as "Superior Tribunal de Justiça, Brasília,
+% DF" instead of "Brasília, DF: Superior Tribunal de Justiça".
+@jurisdiction{nbr6023-2025-7.11.4-1c,
+    keywords     = {7.11.4},
+    options = {nosn},
+    author       = {{Brasil}},
+    nameaddon    = {Supremo Tribunal Federal (2. Turma)},
+    title        = {Recurso Extraordinário 313060/SP. Leis 10.927/91 e 11.262 do município de São Paulo. Seguro obrigatório contra furto e roubo de automóveis. Shopping centers, lojas de departamento, supermercados e empresas com estacionamento para mais de cinqüenta veículos. Inconstitucionalidade. Recorrente: Banco do Estado de São Paulo S/A -- BANESPA. Recorrido: Município de São Paulo. Relatora: Min. Ellen Gracie},
+    eventdate    = {2005-11-29},
+    publisher    = {Superior Tribunal de Justiça},
+    location     = {Brasília, DF},
+    year         = {[2006]},
+    sortyear     = {2006},
+    url          = {http://redir.stf.jus.br/paginadorpub/paginador.jsp?docTP=AC&docID=260670},
+    urldate      = {2011-08-19},
+}
+
+@jurisdiction{nbr6023-2025-7.11.4-2e,
+    keywords     = {7.11.4},
+    options = {nosn},
+    author       = {{Brasil}},
+    nameaddon    = {Superior Tribunal de Justiça (1. Seção)},
+    title        = {Súmula n{\fontencoding{TS1}\selectfont\textdegree} 333. Cabe mandado de segurança contra ato praticado em licitação promovida por sociedade de economia mista ou empresa pública},
+    publisher    = {Superior Tribunal de Justiça},
+    location     = {Brasília, DF},
+    year         = {[2007]},
+    sortyear     = {2007},
+    url          = {http://www.stj.jus.br/SCON/sumanot/toc.jsp?&b=TEMA&p=true&t=&l=10&i=340#TIT333TEMA0},
+    urldate      = {2011-08-19},
+}
+
+@jurisdiction{nbr6023-2025-7.11.4-3e,
+    keywords     = {7.11.4},
+    options = {nosn},
+    author       = {{Brasil}},
+    nameaddon    = {Supremo Tribunal Federal},
+    title        = {Recurso Extraordinário 628137 RG/RJ -- Rio de Janeiro. Repercussão geral no Recurso Extraordinário. Administrativo. Incidência dos juros progressivos sobre conta vinculada de Fundo de Garantia por Tempo de Serviço -- FGTS. Aplicação dos efeitos da ausência de repercussão geral tendo em vista tratar-se de divergência solucionável pela aplicação da legislação federal. Inexistência de repercussão geral. Relatora: Min. Ellen Gracie},
+    eventdate    = {2010-10-21},
+    publisher    = {Superior Tribunal de Justiça},
+    location     = {Brasília, DF},
+    date         = {2010},
+    url          = {http://www.stf.jus.br/portal/jurisprudencia/listarJurisprudencia.asp?s1=fgts&base=baseRepercussao},
+    urldate      = {2011-08-20},
+}
+
+% 7.11.5 Atos administrativos normativos
+
+@legislation{nbr6023-2025-7.11.5-1e,
+    keywords     = {7.11.5},
+    author       = {{Rio de Janeiro}},
+    authortype   = {Estado},
+    nameaddon    = {Corregedoria Geral de Justiça},
+    title        = {Aviso n{\fontencoding{TS1}\selectfont º} 309, de 28 de junho de 2005. [Dispõe sobre a suspensão do expediente na 6. Vara de Órfãos e Sucessões da Comarca da Capital nos dias 01, 08, 15, 22 e 29 de julho de 2005]},
+    journaltitle = {Diário Oficial do Estado do Rio de Janeiro},
+    journalsubtitle = {parte 3: seção 2: Poder Judiciário},
+    location     = {Rio de Janeiro},
+    volume       = {ano 31},
+    number       = {19},
+    pages        = {71},
+    date         = {2005-06-30},
+}
+
+@legislation{nbr6023-2025-7.11.5-2e,
+    keywords     = {7.11.5},
+    author       = {{Banco Central do Brasil}},
+    nameaddon    = {Diretoria Colegiada},
+    title        = {Circular n{\fontencoding{TS1}\selectfont º} 3.348, de 3 de maio de 2007. Altera o Regulamento do Mercado de Câmbio e Capitais Internacionais (RMCCI)},
+    journaltitle = {Diário Oficial da União},
+    journalsubtitle = {seção 1},
+    location     = {Brasília, DF},
+    volume       = {ano 144},
+    number       = {85},
+    pages        = {32},
+    date         = {2007-05-04},
+}
+
+@legislation{nbr6023-2025-7.11.5-3e,
+    keywords     = {7.11.5},
+    author       = {{Conselho Estadual de Saúde}},
+    authortype   = {Rio de Janeiro},
+    title        = {Deliberação n{\fontencoding{TS1}\selectfont º} 05/CES/SES, de 6 de junho de 1997. Aprova o Regimento Interno do Conselho Estadual de Saúde},
+    journaltitle = {Diário Oficial [do] Estado do Rio de Janeiro},
+    journalsubtitle = {parte 1: Poder Executivo},
+    location     = {Niterói},
+    volume       = {ano 23},
+    number       = {139},
+    pages        = {29-31},
+    date         = {1997-07-30},
+}
+
+% "Varginha: órgão oficial do município" is the local plus the gazette
+% name; modeled as a journal title and subtitle so that the repeated
+% location still follows it.
+@legislation{nbr6023-2025-7.11.5-4e,
+    keywords     = {7.11.5},
+    author       = {{Varginha}},
+    authortype   = {MG},
+    title        = {Edital de licitação n{\fontencoding{TS1}\selectfont º} 189/2007. Pregão n{\fontencoding{TS1}\selectfont º} 151/2007. [Aquisição de leite pasteurizado]},
+    journaltitle = {Varginha},
+    journalsubtitle = {órgão oficial do município},
+    location     = {Varginha},
+    volume       = {ano 7},
+    number       = {494},
+    pages        = {15},
+    date         = {2007-05-31},
+}
+
+@legislation{nbr6023-2025-7.11.5-5e,
+    keywords     = {7.11.5},
+    author       = {{Rádio Roquete Pinto}},
+    title        = {Estatuto da Rádio Roquete Pinto - ROQUETE. Anexo ao Decreto n{\fontencoding{TS1}\selectfont º} 22.604, de 1 de novembro de 1996, que aprova o estatuto da empresa pública Rádio Roquete Pinto -- ROQUETE},
+    journaltitle = {Diário Oficial [do] Estado do Rio de Janeiro},
+    journalsubtitle = {parte 1: Poder Executivo},
+    location     = {Niterói},
+    volume       = {22},
+    number       = {211},
+    pages        = {3-6},
+    date         = {1996-11-04},
+}
+
+% @misc: there is no journal here, and @legislation (article driver)
+% prints publisher before location.
+@misc{nbr6023-2025-7.11.5-6e,
+    keywords     = {7.11.5},
+    author       = {{Brasil}},
+    nameaddon    = {Ministério da Educação},
+    title        = {Ofício circular 017/MEC},
+    location     = {Brasília, DF},
+    publisher    = {Ministério da Educação},
+    date         = {2006-01-26},
+    note         = {Assunto: FUNDEB.},
+}
+
+% 7.11.6 Atos administrativos normativos em meio eletrônico
+
+% @misc for the same reason as 7.11.5-6e.
+@misc{nbr6023-2025-7.11.6-1e,
+    keywords     = {7.11.6},
+    author       = {{Brasil}},
+    nameaddon    = {Ministério da Fazenda. Secretaria de Acompanhamento Econômico},
+    title        = {Parecer técnico n{\fontencoding{TS1}\selectfont º} 06370/2006/RJ},
+    location     = {Rio de Janeiro},
+    publisher    = {Ministério da Fazenda},
+    date         = {2006-09-13},
+    url          = {http://www.cade.gov.br/Plenario/Sessao_386/Pareceres/ParecerSeae-AC-2006-08012.008423-International_BusInes_MachIne.PDF},
+    urldate      = {2010-10-04},
+}
+
+@misc{nbr6023-2025-7.11.6-2e,
+    keywords     = {7.11.6},
+    author       = {{Universidade Federal de Uberlândia}},
+    nameaddon    = {Conselho Universitário},
+    title        = {Resolução n{\fontencoding{TS1}\selectfont º} 01/2007, de 29 de março de 2007. Dispõe sobre a criação da modalidade Bacharelado do Curso de Graduação em Educação Física},
+    location     = {Uberlândia},
+    publisher    = {Conselho Universitário},
+    date         = {2007},
+    url          = {http://www.reitoria.ufu.br/consultaAtaResolucao.php?tipoDocumento=resolucao&conselho=TODOS&anoInicioBusca=2007&anoFimBusca=2007&entrada=&pag=1},
+    urldate      = {2007-09-20},
+}
+
+% 7.12 Documentos civis e de cartórios
+
+% TODO(style): no dedicated driver for civil records; the registration
+% statement is carried in note.
+@misc{nbr6023-2025-7.12-1e,
+    keywords     = {7.12},
+    author       = {{São Carlos}},
+    authortype   = {SP},
+    nameaddon    = {Cartório de Registro Civil das Pessoas Naturais do 1{\fontencoding{TS1}\selectfont º} Subdistrito de São Carlos},
+    title        = {Certidão de nascimento [de] Maria da Silva},
+    note         = {Registro em: 9 ago. 1979.},
+    options      = {noslsn},
+}
+
+@misc{nbr6023-2025-7.12-1c,
+    keywords     = {7.12},
+    author       = {{São Carlos}},
+    authortype   = {SP},
+    nameaddon    = {Cartório de Registro Civil das Pessoas Naturais do 1{\fontencoding{TS1}\selectfont º} Subdistrito de São Carlos},
+    title        = {Certidão de nascimento [de] Maria da Silva},
+    note         = {Registro em: 9 ago. 1979. Certidão registrada às fls. 178 do livro n. 243 de assentamento de nascimento n. 54709. Data de nascimento: 7 ago. 1979.},
+    options      = {noslsn},
+}
+
+% 7.13.1 Filmes, vídeos, entre outros
+
+% TODO(style): no dedicated audiovisual driver; the physical description
+% is carried in note.
+@misc{nbr6023-2025-7.13.1-1e,
+    keywords     = {7.13.1},
+    title        = {OS PERIGOS do uso de tóxicos},
+    titleaddon   = {Produção de Jorge Ramos de Andrade},
+    location     = {São Paulo},
+    publisher    = {CERAVI},
+    date         = {1983},
+    note         = {1 fita de vídeo (30 min), VHS, son., color.},
+}
+
+@misc{nbr6023-2025-7.13.1-2c,
+    keywords     = {7.13.1},
+    title        = {CENTRAL do Brasil},
+    titleaddon   = {Direção: Walter Salles Júnior. Produção: Martire de Clermont-Tonnerre e Arthur Cohn. Intérpretes: Fernanda Montenegro, Marilia Pera, Vinicius de Oliveira, Sônia Lira, Othon Bastos, Matheus Nachtergaele et al. Roteiro: Marcos Bernstein, João Emanuel Carneiro e Walter Salles Júnior},
+    location     = {[S. l.]},
+    publisher    = {Le Studio Canal; Riofilme; MACT Productions},
+    date         = {1998},
+    note         = {5 rolos de filme (106 min), son., color., 35 mm.},
+}
+
+@misc{nbr6023-2025-7.13.1-3c,
+    keywords     = {7.13.1},
+    title        = {O DESCOBRIMENTO do Brasil},
+    titleaddon   = {Fotografia de Carmem Souza. Gravação de Marcos Lourenço},
+    location     = {São Paulo},
+    publisher    = {CERAVI},
+    date         = {1985},
+    note         = {31 diapositivos, color. + 1 fita cassete (15 min), mono.},
+}
+
+% 7.13.2 Filmes, vídeos, entre outros em meio eletrônico
+
+@misc{nbr6023-2025-7.13.2-1e,
+    keywords     = {7.13.2},
+    title        = {JOHN Mayall \& The Bluesbreakers and friends},
+    subtitle     = {Eric Clapton, Chris Barber, Mick Taylor: 70th birthday concert},
+    location     = {[London]},
+    publisher    = {Eagle Rock Entertainment},
+    date         = {2003},
+    note         = {1 disco blu-ray (ca. 159 min).},
+}
+
+@misc{nbr6023-2025-7.13.2-2c,
+    keywords     = {7.13.2},
+    title        = {BLADE Runner},
+    titleaddon   = {Direção: Ridley Scott. Produção: Michael Deeley. Intérpretes: Harrison Ford; Rutger Hauer; Sean Young; Edward James Olmos e outros. Roteiro: Hampton Fancher e David Peoples. Música: Vangelis},
+    location     = {Los Angeles},
+    publisher    = {Warner Brothers},
+    year         = {c1991},
+    sortyear     = {1991},
+    note         = {1 DVD (117 min), widescreen, color. Baseado na novela ``Do androids dream of electric sheep?'', de Philip K. Dick.},
+}
+
+@misc{nbr6023-2025-7.13.2-3e,
+    keywords     = {7.13.2},
+    title        = {BREAKING bad},
+    subtitle     = {the complete second season},
+    titleaddon   = {Creator and executive produced by Vince Gilligan. Executive Producer: Mark Johnson},
+    location     = {Washington, DC},
+    publisher    = {Sony Pictures},
+    date         = {2009},
+    note         = {3 discos blu-ray (615 min).},
+}
+
+% TODO(style): the norm prints the combined "[S. l.: s. n.]"; the style
+% keeps the colon outside the brackets: "[S. l.]: [s. n.]".
+@misc{nbr6023-2025-7.13.2-4c,
+    keywords     = {7.13.2},
+    title        = {BOOK},
+    location = {[S. l.: s. n.]},
+    options = {nosn},
+    date         = {2010},
+    note         = {1 vídeo (3 min). Publicado pelo canal Leerestademoda.},
+    url          = {http://www.youtube.com/watch?v=iwPj0qgvfIs},
+    urldate      = {2011-08-25},
+}
+
+% TODO(style): see 7.13.2-4c; the combined "[S. l.: s. n.]" is split.
+@misc{nbr6023-2025-7.13.2-5c,
+    keywords     = {7.13.2},
+    title        = {UM MANIFESTO 2.0 do bibliotecário},
+    titleaddon   = {Mash up por Laura Cohen. Tradução: Maria José Vicentini Jorente},
+    location = {[S. l.: s. n.]},
+    options = {nosn},
+    date         = {2007},
+    note         = {1 vídeo (4 min).},
+    url          = {http://www.youtube.com/watch?vYj1p0A8DMrE},
+    urldate      = {2010-05-12},
+}
+
+% 7.13.3 Documento sonoro no todo
+
+@misc{nbr6023-2025-7.13.3-1e,
+    keywords     = {7.13.3},
+    title        = {MOSAICO},
+    titleaddon   = {[Compositor e intérprete]: Toquinho},
+    location     = {Rio de Janeiro},
+    publisher    = {Biscoito Fino},
+    date         = {2005},
+    note         = {1 CD (37 min).},
+}
+
+@misc{nbr6023-2025-7.13.3-2c,
+    keywords     = {7.13.3},
+    title        = {THE NINE symphonies},
+    titleaddon   = {Compositor: Ludwig van Beethoven. Orquestra: Wiener Philharmoniker. Regente: Leonard Bernstein. Soprano: Gwyneth Jones. Contralto: Hanna Schwarz. Tenor: René Kollo. Baixo: Kurt Moll. Coro: Konzertvereinigung Wiener Staatsopernchor},
+    location     = {Hamburg},
+    publisher    = {Deutsche Gramophon},
+    date         = {1980},
+    note         = {5 CD.},
+}
+
+@misc{nbr6023-2025-7.13.3-3c,
+    keywords     = {7.13.3},
+    title        = {RIO},
+    subtitle     = {trilha sonora original do filme},
+    location     = {[S. l.]},
+    publisher    = {Universal Music},
+    date         = {2011},
+    note         = {1 CD (40 min). Vários intérpretes.},
+}
+
+@misc{nbr6023-2025-7.13.3-4e,
+    keywords     = {7.13.3},
+    title        = {BÍBLIA em áudio},
+    subtitle     = {novo testamento},
+    titleaddon   = {Intérprete: Cid Moreira},
+    location     = {Brasília, DF},
+    publisher    = {Sociedade Bíblica do Brasil},
+    date         = {2010},
+    note         = {1 disco blue-ray.},
+}
+
+@misc{nbr6023-2025-7.13.3-5c,
+    keywords     = {7.13.3},
+    author       = {Laurentino Gomes},
+    title        = {1822},
+    titleaddon   = {Na voz de Pedro Bial},
+    location     = {[S. l.]},
+    publisher    = {Plugme},
+    date         = {2011},
+    note         = {1 audiolivro (CD-ROM).},
+}
+
+@misc{nbr6023-2025-7.13.3-6c,
+    keywords     = {7.13.3},
+    author       = {L. F. Baum},
+    title        = {The wonderful land of Oz},
+    titleaddon   = {Ledor: Roy Trumbull},
+    location     = {[S. l.]},
+    publisher    = {Project Gutenberg},
+    date         = {2005},
+    note         = {1 audiolivro (CD-ROM), extensão MP3 (4 MB).},
+}
+
+% 7.13.4 Parte de documento sonoro
+
+@inbook{nbr6023-2025-7.13.4-1e,
+    keywords     = {7.13.4},
+    title        = {JURA secreta},
+    titleaddon   = {Intérprete: Simone. Compositores: S. Costa e A. Silva},
+    booktitle    = {FACE a face},
+    booktitleaddon = {Intérprete: Simone},
+    location     = {[S. l.]},
+    publisher    = {Emi-Odeon Brasil},
+    date         = {1977},
+    note         = {1 CD, faixa 7.},
+}
+
+@inbook{nbr6023-2025-7.13.4-2c,
+    keywords     = {7.13.4},
+    title        = {TOQUE macio},
+    titleaddon   = {Intérprete: Alcione. Compositor: A. Gino},
+    booktitle    = {OURO e cobre},
+    booktitleaddon = {Intérprete: Alcione},
+    location     = {São Paulo},
+    publisher    = {RCA Victor},
+    date         = {1988},
+    note         = {1 disco vinil, lado A, faixa 1 (4 min).},
+}
+
+% 7.13.5 Documento sonoro em meio eletrônico
+
+@misc{nbr6023-2025-7.13.5-1e,
+    keywords     = {7.13.5},
+    title        = {PODCAST LXX},
+    subtitle     = {Brasil: parte 3: a república},
+    titleaddon   = {[Locução de]: Christian Gutner},
+    location     = {[S. l.]},
+    publisher    = {Escriba Café},
+    date         = {2010-03-19},
+    note         = {Podcast.},
+    url          = {http://www.escribacafe.com/podcast-lxx-brasil-parte-3-a-republica/},
+    urldate      = {2010-10-04},
+}
+
+@misc{nbr6023-2025-7.13.5-2c,
+    keywords     = {7.13.5},
+    author       = {Luciana Martha Silveira},
+    title        = {Anticast 66},
+    subtitle     = {as histórias e teorias das cores},
+    titleaddon   = {Entrevistadores: Ivan Mizanzuk, Rafael Ancara e Marcos Beccari},
+    location     = {[S. l.]},
+    publisher    = {Braimstorm9},
+    date         = {2013-01-31},
+    note         = {Podcast.},
+    url          = {https://soundcloud.com/anticastdesign/anticast-66-as-hist-rias-e/s-OImz9},
+    urldate      = {2014-08-22},
+}
+
+% 7.14.1 Partitura impressa
+
+% TODO(style): no dedicated score driver; the physical description is
+% carried in note and the instrumentation in titleaddon.
+@misc{nbr6023-2025-7.14.1-1e,
+    keywords     = {7.14.1},
+    author       = {Iannis Xenakis},
+    title        = {Aïs},
+    titleaddon   = {Pour baryton amplifié, percussion solo et grand orchestre},
+    location     = {Paris},
+    publisher    = {Salabert},
+    date         = {1980},
+    note         = {1 partitura.},
+}
+
+@misc{nbr6023-2025-7.14.1-2e,
+    keywords     = {7.14.1},
+    author       = {Johannes Brahms},
+    title        = {Sonate für Klavier und Violoncello},
+    subtitle     = {e-mol opus 38},
+    location     = {München},
+    publisher    = {G. Henle},
+    date         = {1977},
+    note         = {1 partitura.},
+}
+
+% 7.14.2 Partitura em meio eletrônico
+
+@misc{nbr6023-2025-7.14.2-1e,
+    keywords     = {7.14.2},
+    author       = {Beethoven, Ludwig van},
+    title        = {Neunte symphonie},
+    subtitle     = {op. 125},
+    titleaddon   = {Orquestra},
+    location     = {Leipzig},
+    publisher    = {Breitkopf \& Härtel},
+    date         = {1863},
+    note         = {1 partitura.},
+    url          = {http://imslp.org/wiki/File:TN-Beethoven_Breitkopf_Serie_1_Band_3_B_9.jpg},
+    urldate      = {2012-06-20},
+}
+
+@misc{nbr6023-2025-7.14.2-2c,
+    keywords     = {7.14.2},
+    author       = {Chiquinha Gonzaga},
+    title        = {Gaúcho},
+    subtitle     = {o corta-jaca de cá e lá},
+    titleaddon   = {Piano},
+    date         = {1997},
+    note         = {1 partitura. Acervo digital Chiquinha Gonzaga.},
+    url          = {http://www.chiquinhagonzaga.com/acervo/partituras/gaucho_ca-e-la_piano.pdf},
+    urldate      = {2012-06-20},
+}
