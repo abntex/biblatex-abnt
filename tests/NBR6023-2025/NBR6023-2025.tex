@@ -1,0 +1,33 @@
+%% NBR 6023:2025 bibliography conformance test.
+%%
+%% Every bibliography entry is prefixed with @@key@@ by the test harness so
+%% that the runner can compare entries individually.  See README.md in this
+%% directory for the fixture format.
+\documentclass{article}
+\usepackage[paperwidth=200cm,paperheight=200cm,margin=1cm]{geometry}
+\usepackage[brazil]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[style=abnt,sorting=none]{biblatex}
+\usepackage[autostyle]{csquotes}
+
+\addbibresource{cases/7.1-7.4.bib}
+\addbibresource{cases/7.5-7.10.bib}
+\addbibresource{cases/7.11-7.14.bib}
+\addbibresource{cases/7.15-7.20.bib}
+
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+\tolerance=9999
+\emergencystretch=10em
+\pagestyle{empty}
+
+\AtEveryBibitem{%
+  \printtext{@@\thefield{entrykey}@@ }%
+}
+
+\begin{document}
+\nocite{*}
+\printbibliography[heading=none]
+\end{document}

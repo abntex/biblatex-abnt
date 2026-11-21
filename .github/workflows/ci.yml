@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [dev, master]
+  pull_request:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install poppler
+        run: sudo apt-get update && sudo apt-get install -y poppler-utils
+
+      - name: Install TinyTeX
+        run: |
+          wget -qO- "https://yihui.org/tinytex/install-bin-unix.sh" | sh
+          echo "$HOME/.TinyTeX/bin/x86_64-linux" >> "$GITHUB_PATH"
+
+      - name: Install TeX packages
+        run: |
+          tlmgr install \
+            biblatex biber latexmk babel-portugues csquotes xpatch \
+            l3packages l3kernel etoolbox logreq url microtype graphics \
+            xcolor hyperref geometry lm
+
+      - name: Run conformance tests
+        run: tests/run-tests.sh
+
+      - name: Upload test logs on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-logs
+          path: |
+            tests/**/build/*.log
+            tests/**/build/*.out
+            tests/**/build/*.txt
+          if-no-files-found: ignore

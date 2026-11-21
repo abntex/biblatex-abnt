@@ -1,0 +1,18 @@
+%% abnt-numeric smoke/regression test.
+\documentclass{article}
+\usepackage[paperwidth=20cm,paperheight=25cm,margin=2cm]{geometry}
+\usepackage[brazil]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[style=abnt-numeric]{biblatex}
+\usepackage[autostyle]{csquotes}
+
+\addbibresource{abnt-numeric.bib}
+\pagestyle{empty}
+
+\begin{document}
+@@cite-a@@ \cite{alpha2000}\par
+@@cite-b@@ \cite{beta2001}\par
+@@cite-a-again@@ \cite{alpha2000}\par
+\end{document}

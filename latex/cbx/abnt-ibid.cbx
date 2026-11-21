@@ -13,14 +13,16 @@
 %% The Current Maintainer of this work is Daniel Ballester Marques.
 
 \ProvidesFile{abnt-ibid.cbx}%
-[2018-11-17\space v3.4\space ABNT BibLaTeX citation style]%
+[2026-11-21\space v5.0\space ABNT BibLaTeX citation style]%
 
 % Init >>>1
 
 \RequirePackage{xparse}%
 \RequirePackage{xpatch}%
 \RequirePackage{expl3}%
-\RequirePackage{l3regex}%
+
+\newtoggle{sccite}%
+\newtoggle{accite}%
 
 % <<<1
 
@@ -44,14 +46,15 @@
 
 \newcommand*{\NormalOrACCiteOrSCCite}[1]{% >>>2
   \iftoggle{accite}{%
-    \MakeUppercase{#1}}%
+    \MakeUppercase{#1}%
   }{%
     \iftoggle{sccite}{%
       \textsc{\MakeLowercase{#1}}%
     }{%
       #1%
+    }%
   }%
-}% <<<2 
+}% <<<2
 
 % \IfInitial >>>2
 
@@ -157,10 +160,11 @@
 
 % Options >>>1
 
-\newtoggle{sccite}%
-
-\DeclareBibliographyOption{sccite}[true]{
+\DeclareBibliographyOption{sccite}[true]{%
   \settoggle{sccite}{#1}%
+}
+\DeclareBibliographyOption{accite}[true]{%
+  \settoggle{accite}{#1}%
 }
 
 \InitializeCitationStyle{\numgdef{\cbx@resetcount}{\cbx@resetcount+1}}%
@@ -179,6 +183,7 @@
   \ifnumequal{\value{textcitecount}}{\value{textcitetotal}-1}}%
 
 \newtoggle{cbx:loccit}%
+\newtoggle{cbx:afterapud}%
 
 \newbibmacro*{footcite:citepages}{}%
 \newbibmacro*{footcite:full:citepages}{}%
@@ -278,43 +283,22 @@
   \usebibmacro{footcite:citepages}%
   \global\togglefalse{cbx:loccit}%
   \ifciteseen{%
-    \iffieldundef{shorthand}{%
-      \ifboolexpr{%
-        test {\ifciteibid}%
-        and%
-        not test {\iffirstonpage}%
-      }{%
-        \usebibmacro{footcite:ibid}%
-      }{%
-        \ifboolexpr{%
-          test {\ifciteidem}%
-          and%
-          not test {\iffirstonpage}%
-        }{%
-          \usebibmacro{footcite:idem}%
-        }{%
-          \ifboolexpr{%
-            test {\ifloccit}%
-            and%
-            not test {\iffirstonpage}%
-          }{%
-            \usebibmacro{footcite:loccit}%
-          }{%
-            \ifboolexpr{%
-              test {\ifopcit}%
-              and%
-              not test {\iffirstonpage}%
-            }{%
-              \usebibmacro{footcite:opcit}%
-            }{%
-              \usebibmacro{footcite:short}%
-            }%
-          }%
-        }%
-      }%
-    }{%
-      \usebibmacro{footcite:shorthand}%
-    }%
+    \iftoggle{cbx:afterapud}%
+      {\global\togglefalse{cbx:afterapud}%
+       \usebibmacro{footcite:full}}%
+      {\iffieldundef{shorthand}%
+         {\iffirstonpage
+            {\usebibmacro{footcite:full}}
+            {\ifboolexpr{test {\ifciteibid}}
+               {\usebibmacro{footcite:ibid}}
+               {\ifboolexpr{test {\ifciteidem}}
+                  {\usebibmacro{footcite:idem}}
+                  {\ifboolexpr{test {\ifloccit}}
+                     {\usebibmacro{footcite:loccit}}
+                     {\ifboolexpr{test {\ifopcit}}
+                        {\usebibmacro{footcite:opcit}}
+                        {\usebibmacro{footcite:short}}}}}}}%
+         {\usebibmacro{footcite:shorthand}}}%
   }{%
     \usebibmacro{footcite:full}%
   }%
@@ -501,12 +485,12 @@
 \newcommand{\addapud}{%% >>>2
   \renewcommand*{\multicitedelim}{%
     \ifnumequal{\value{multicitecount}}{\value{multicitetotal}}%
-      {\space\bibstring{apud}}%
+      {\space\mkbibitalic{\bibstring{apud}}}%
       {\addsemicolon}%
     \space}%
   \renewcommand*{\textcitedelim}{%
     \ifnumequal{\value{multicitecount}}{\value{multicitetotal}}%
-      {\addspace\bibstring{apud}}%
+      {\space\mkbibitalic{\bibstring{apud}}}%
       {\addsemicolon}%
     \space}%
 }% <<<2
@@ -517,14 +501,15 @@
         \usebibmacro{prenote}%
       }{%
         \printfield[uppercasecite]{prenote}%
-        \isdot\addspace\bibstring{apud}\addspace%
+        \isdot\addspace\mkbibitalic{\bibstring{apud}}\addspace%
       }%
     }%
   }%
 	{\usebibmacro{citeindex}%
 	\usebibmacro{footcite:short}}%
 	{\setunit{\multicitedelim}}%
-	{\usebibmacro{postnote}}% <<<2
+	{\usebibmacro{postnote}%
+	 \global\toggletrue{cbx:afterapud}}% <<<2
 
 \DeclareMultiCiteCommand{\apud}[\addapud\mkbibfootnote]% >>>2
 	{\@apud}%
