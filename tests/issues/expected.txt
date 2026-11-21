@@ -1,0 +1,8 @@
+@@textapud@@ Doe (2004; 2006 apud Collier, 2009)
+@@unknown-year-cite@@ (Florida Museum of Natural History, [2000?])
+@@bib-rego1991@@ REGO, L. L. B. O desenvolvimento cognitivo e a prontidão para a alfabetização. In: CARRARO, T. N. (org.). Aprender pensando. 6. ed. Petrópolis: Vozes, 1991. p. 31-40.
+@@bib-stokes2006@@ STOKES, Nicola. TREC: Experiment and Evaluation in Information Retrieval. Computational Linguistics, v. 32, n. 4, p. 563-567, 2006. Resenha de: VOORHEES, Ellen M.; HARMAN, Donna K. (ed.). TREC: Experiment and Evaluation in Information Retrieval. Cambridge: MIT Press, 2005.
+@@bib-florida2000@@ FLORIDA MUSEUM OF NATURAL HISTORY. 1931-2000 Brazil’s confirmed unprovoked shark attacks. Gainesville, [2000?]. 1 mapa, color. Disponível em: http://example.org/map. Acesso em: 15 jan. 2002.
+@@bib-collier2009@@ COLLIER, C. Terceira obra. Revista, 2009.
+@@bib-doe2004@@ DOE, John. Primeira obra. Revista, 2004.
+@@bib-doe2006@@ DOE, John. Segunda obra. Revista, 2006.

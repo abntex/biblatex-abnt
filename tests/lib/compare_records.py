@@ -53,7 +53,15 @@ def parse_records(text: str) -> dict[str, str]:
         key = match.group(1)
         start = match.end()
         end = matches[index + 1].start() if index + 1 < len(matches) else len(text)
-        records[key] = normalize(text[start:end])
+        # Footnotes are printed at the bottom of the page; stop the record at
+        # the page break so following body text is not appended to it.
+        segment = text[start:end].split("\f", 1)[0]
+        value = normalize(segment)
+        if key.startswith("ibid-"):
+            # The footnote number of the next note is printed just before its
+            # @@key@@ marker.
+            value = re.sub(r"\s+\d+$", "", value)
+        records[key] = value
     return records
 
 

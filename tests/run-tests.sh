@@ -59,5 +59,8 @@ run_text_test() {
 
 run_text_test "$TESTS/NBR6023-2025"
 run_text_test "$TESTS/NBR10520-2023"
+run_text_test "$TESTS/abnt-ibid"
+run_text_test "$TESTS/abnt-numeric"
+run_text_test "$TESTS/issues"
 
 echo "All tests passed."

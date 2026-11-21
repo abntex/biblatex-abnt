@@ -1,0 +1,22 @@
+%% Focused regressions for reported issues.
+\documentclass{article}
+\usepackage[paperwidth=120cm,paperheight=80cm,margin=1cm]{geometry}
+\usepackage[brazil]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[style=abnt]{biblatex}
+\usepackage[autostyle]{csquotes}
+
+\addbibresource{issues.bib}
+\pagestyle{empty}
+
+\AtEveryBibitem{\printtext{@@bib-\thefield{entrykey}@@ }}
+
+\begin{document}
+@@textapud@@ \textapud{doe2004,doe2006}{collier2009}\par
+@@unknown-year-cite@@ \cite{florida2000}\par
+
+\nocite{rego1991,stokes2006,florida2000}
+\printbibliography[heading=none]
+\end{document}
