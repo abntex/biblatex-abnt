@@ -8,10 +8,10 @@ rendered text is compared with the corresponding example from the norm.
 
 Fixtures are split into section ranges under `cases/`:
 
-- `7.1-7.4.bib` / `7.1-7.4.expected`
-- `7.5-7.10.bib` / `7.5-7.10.expected`
-- `7.11-7.14.bib` / `7.11-7.14.expected`
-- `7.15-7.20.bib` / `7.15-7.20.expected`
+- `nbr6023-2025-7.1-7.4.bib` / `nbr6023-2025-7.1-7.4.expected`
+- `nbr6023-2025-7.5-7.10.bib` / `nbr6023-2025-7.5-7.10.expected`
+- `nbr6023-2025-7.11-7.14.bib` / `nbr6023-2025-7.11-7.14.expected`
+- `nbr6023-2025-7.15-7.20.bib` / `nbr6023-2025-7.15-7.20.expected`
 
 Each `.bib` entry uses a key of the form
 

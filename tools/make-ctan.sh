@@ -21,6 +21,7 @@ find "$STAGE" -type d -name build -prune -exec rm -rf {} +
 find "$STAGE" -type d -name __pycache__ -prune -exec rm -rf {} +
 find "$STAGE" -name '*.bak' -delete
 find "$STAGE" -name '*_bibertool.bib' -delete
+find "$STAGE" -type f \( -name '*.aux' -o -name '*.bbl' -o -name '*.bcf' -o -name '*.blg' -o -name '*.log' -o -name '*.out' -o -name '*.run.xml' -o -name '*.fdb_latexmk' -o -name '*.fls' -o -name '*.toc' \) -delete
 
 ( cd "$STAGE" && zip -qr "$OUT" "$NAME" )
 echo "wrote $OUT"
